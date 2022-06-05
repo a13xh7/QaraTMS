@@ -1,0 +1,27 @@
+
+html код новых шагов находится в 4-х местах - формы создать, обновить(if,else) и в js коде case_viewer
+
+
+composer dumpautoload
+
+
+
+
+https://github.com/staudenmeir/laravel-adjacency-list
+
+
+
+git reset --hard HEAD~1
+
+php artisan db:seed --class=UserSeeder
+
+
+
+
+php artisan make:migration create_repositories_table
+
+php artisan make:controller DashboardController
+
+php artisan make:controller RepositoryController --resource --model=Repository
+
+php artisan make:model TestPlan

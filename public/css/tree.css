@@ -1,0 +1,61 @@
+
+.selected_case {
+    background-color: #8badb7
+}
+
+/*************************************************************************************
+* Repository - TEST SUITES / CASES TREE
+*************************************************************************************/
+
+#tree {
+    margin-left: -30px;
+    overflow-y: auto;
+    max-height: calc(100vh - 120px)
+}
+
+.tree_suite {
+    padding-left: 30px;
+}
+
+
+.tree_test_suite_content {
+    background: #d9dfe3;
+    padding-left: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.tree_suite_test_cases {
+    margin-bottom: 10px;
+}
+
+.tree_test_case_content {
+    border-bottom: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.tree_test_case_click {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    width: 90%;
+}
+
+.tree_test_case_controls {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+}
+
+.tree_test_case_content:hover {
+    background: #7c87911c;
+}
+
+.test_case_id {
+    display: inline-block;
+    width: 110px;
+}
+
+.test_suite_cbx {
+    margin-top: 10px;
+}

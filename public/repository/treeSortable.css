@@ -1,0 +1,322 @@
+*,
+::after,
+::before {
+    box-sizing: border-box;
+}
+html {
+    -moz-tab-size: 4;
+    tab-size: 4;
+    line-height: 1.15;
+    -webkit-text-size-adjust: 100%;
+}
+
+body,
+input,
+select,
+textarea,
+button,
+#admin .redactor-styles {
+    font-family: "Inter", system-ui, -apple-system, segoe ui, Roboto, Helvetica, Arial, sans-serif, apple color emoji,
+        segoe ui emoji;
+}
+hr {
+    height: 0;
+    color: inherit;
+}
+abbr[title] {
+    text-decoration: underline dotted;
+}
+b,
+strong {
+    font-weight: bolder;
+}
+code,
+kbd,
+pre,
+samp {
+    font-family: ui-monospace, SFMono-Regular, Consolas, liberation mono, Menlo, monospace;
+    font-size: 1em;
+}
+small {
+    font-size: 80%;
+}
+sub,
+sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}
+sub {
+    bottom: -0.25em;
+}
+sup {
+    top: -0.5em;
+}
+table {
+    text-indent: 0;
+    border-color: inherit;
+}
+button,
+input,
+optgroup,
+select,
+textarea {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    margin: 0;
+}
+button,
+select {
+    text-transform: none;
+}
+[type="button"],
+[type="reset"],
+[type="submit"],
+button {
+    -webkit-appearance: button;
+}
+::-moz-focus-inner {
+    border-style: none;
+    padding: 0;
+}
+:-moz-focusring {
+    outline: 1px dotted ButtonText;
+}
+:-moz-ui-invalid {
+    box-shadow: none;
+}
+legend {
+    padding: 0;
+}
+progress {
+    vertical-align: baseline;
+}
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+    height: auto;
+}
+[type="search"] {
+    -webkit-appearance: textfield;
+    outline-offset: -2px;
+}
+::-webkit-search-decoration {
+    -webkit-appearance: none;
+}
+::-webkit-file-upload-button {
+    -webkit-appearance: button;
+    font: inherit;
+}
+summary {
+    display: list-item;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    background: #f4f6f9;
+    font-family: "Inter", system-ui, -apple-system, segoe ui, Roboto, Helvetica, Arial, sans-serif, apple color emoji,
+        segoe ui emoji;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.form-input {
+    width: 100%;
+    border: 1px solid #ddd;
+    outline: none;
+    padding: 8px;
+    border-radius: 6px;
+}
+
+.button {
+    background: #fff;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: 0.3s;
+    padding: 5px;
+}
+
+.button:hover {
+    transform: scale(1.2);
+}
+
+.tree-branch .branch-editor {
+    display: none;
+}
+
+#tree,
+#tree-level-1 {
+    padding: 0.1em 0;
+    list-style: none;
+    margin: 0;
+}
+
+.tree-branch,
+.tree-branch {
+    margin-bottom: 0;
+    position: relative;
+    user-select: none;
+}
+
+.tree-branch > .contents .branch-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background: #fff;
+    border: 1px solid #fff;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15);
+    border-radius: 3px;
+    min-height: 20px;
+    max-width: 450px;
+    width: 100%;
+    position: relative;
+    padding: 10px 15px;
+    height: auto;
+    gap: 12px;
+
+    line-height: 2.3076923;
+    overflow: hidden;
+    word-wrap: break-word;
+}
+
+.tree-branch > .contents .branch-wrapper .left-sidebar {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    max-width: 280px;
+    width: 100%;
+}
+
+.right-sidebar {
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.branch-wrapper:hover .right-sidebar {
+    opacity: 1;
+}
+
+.tree-branch > .contents .branch-wrapper .left-sidebar {
+    cursor: pointer;
+}
+
+.tree-branch > .contents {
+    clear: both;
+    line-height: 1.5;
+    position: relative;
+    margin: 10px 0 0;
+}
+
+.contents .branch-drag-handler {
+    cursor: move;
+}
+
+.branch-drag-handler .icon {
+    color: #504e4e;
+    margin-right: 5px;
+}
+
+.sortable-placeholder {
+    border: 1px dashed rgb(63, 63, 63);
+    height: 35px;
+    max-width: 450px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.tree-branch.ui-sortable-helper .contents {
+    margin-top: 0;
+}
+
+.tree-branch.ui-sortable-helper .children-bus .contents {
+    margin-top: 10px;
+}
+
+.tree-branch .children-bus:empty {
+    display: none;
+}
+
+.branch-level-1 {
+    margin-left: 0px;
+}
+.branch-level-2 {
+    margin-left: 30px;
+}
+.branch-level-3 {
+    margin-left: 60px;
+}
+.branch-level-4 {
+    margin-left: 90px;
+}
+.branch-level-5 {
+    margin-left: 120px;
+}
+.branch-level-6 {
+    margin-left: 150px;
+}
+.branch-level-7 {
+    margin-left: 180px;
+}
+.branch-level-8 {
+    margin-left: 210px;
+}
+.branch-level-9 {
+    margin-left: 240px;
+}
+.branch-level-10 {
+    margin-left: 270px;
+}
+
+.branch-level-1 .children-bus {
+    margin-left: 0px;
+}
+.branch-level-2 .children-bus {
+    margin-left: -30px;
+}
+.branch-level-3 .children-bus {
+    margin-left: -60px;
+}
+.branch-level-4 .children-bus {
+    margin-left: -90px;
+}
+.branch-level-5 .children-bus {
+    margin-left: -120px;
+}
+.branch-level-6 .children-bus {
+    margin-left: -150px;
+}
+.branch-level-7 .children-bus {
+    margin-left: -180px;
+}
+.branch-level-8 .children-bus {
+    margin-left: -210px;
+}
+.branch-level-9 .children-bus {
+    margin-left: -240px;
+}
+.branch-level-10 .children-bus {
+    margin-left: -270px;
+}
+
+.branch-path {
+    display: block;
+    position: absolute;
+    width: 30px;
+    height: 98px;
+    bottom: 50%;
+    left: -12px;
+    border: 2px solid #565656;
+    border-top: 0;
+    border-right: 0;
+    padding: 4px 0 0;
+    padding-top: 3px;
+    border-bottom-left-radius: 6px;
+    z-index: -1;
+}

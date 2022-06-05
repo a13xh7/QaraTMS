@@ -1,0 +1,137 @@
+@import "tree.css";
+
+
+body {
+    overflow-x: hidden;
+    font-family: 'roboto', 'arial', serif;
+}
+
+:root {
+    --header_height: 56px;
+}
+
+/*full height*/
+.fh {
+    height: calc(100vh - var(--header_height));
+    max-height: 100vh - var(--header_height);
+}
+
+h3.page_title {
+    font-family: 'roboto', sans-serif;
+    font-weight: 300;
+}
+
+a {
+    text-decoration: none;
+}
+
+/*************************************************************************************
+* Editor
+*************************************************************************************/
+
+#editor {
+    border: 1px solid lightgray;
+    min-height: 300px
+}
+
+
+/*************************************************************************************
+* Header
+*************************************************************************************/
+
+header {
+    background: #15293e;
+    color: white;
+    height: var(--header_height);
+    max-height: var(--header_height);
+}
+
+header a{
+    color: white;
+}
+
+/*************************************************************************************
+* Sidebar
+*************************************************************************************/
+
+.sidebar {
+    background: #193654;
+    color: white !important;
+    width: 200px;
+    min-width: 200px;
+}
+
+.sidebar_project_title {
+    width: 190px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+/*************************************************************************************
+Scrollbar
+*************************************************************************************/
+
+::-webkit-scrollbar {
+    height: 6px;
+    width: 7px;
+}
+::-webkit-scrollbar-thumb {
+    background-color: rgba(27, 27, 27, .4);
+    border-radius: 5px;
+}
+::-webkit-scrollbar-track{
+    background: transparent;
+}
+
+::-webkit-scrollbar-corner {
+    background: rgba(0,0,0,0);
+}
+
+
+
+
+/*************************************************************************************
+REPOSITORY PAGE
+*************************************************************************************/
+
+.test_suites_col {
+    overflow-y: auto;
+}
+
+#test_case_col {
+    margin: 0;
+    max-width: 50%;
+}
+
+#test_case_block {
+    min-width: 700px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#test_case_content {
+    overflow-y: auto;
+    max-height: calc(100vh - 120px)
+}
+
+[data-badge]:after {
+    background: #6c757d;
+    border-radius: 50px;
+    color: white;
+    content: attr(data-badge);
+    font-size: 11px;
+    /*margin-top: -10px;*/
+    min-width: 20px;
+    padding: 2px;
+    position: absolute;
+    text-align: center;
+    font-weight: bolder;
+    left: 2px;
+}
+
+#steps_container b {
+    font-weight: 600;
+}
+

@@ -4,8 +4,6 @@
 
 This is beta, there may be bugs. 
 
-:rocket: Join our telegram channel - [https://t.me/qaratms](https://t.me/qaratms).
-
 ## Languages and Tools:
 
 <a href="https://php.net/" title="PHP"><img src="https://github.com/get-icon/geticon/raw/master/icons/php.svg" alt="PHP" width="60px" height="60px"></a>

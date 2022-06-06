@@ -78,7 +78,7 @@ function TreeSortable() {
                 return v.toString(16);
             });
         },
-        createBranch({ id, parent_id, title, level }) {
+        createBranch({ id, parent_id, title, level, mid, pid }) {
             const {
                 options: {
                     branchSelector,
@@ -93,27 +93,43 @@ function TreeSortable() {
             return `
 		<li class="${cleanSelector(
             branchSelector
-        )} ${levelPrefix}-${level}" data-${idAttr}="${id}" data-${parentAttr}="${parent_id}" data-${levelAttr}="${level}">
+        )} ${levelPrefix}-${level}"
+		id="${mid ? mid : id}"
+		data-${idAttr}="${id}"
+		data-${parentAttr}="${parent_id}"
+		data-${levelAttr}="${level}"
+		data-mid="${mid ? mid : id}"
+		data-pid ="${pid ? pid : parent_id}">
+
             <div class="contents">
                 <span class="${cleanSelector(branchPathSelector)}"></span>
                 <div class="branch-wrapper">
+
                     <div class="left-sidebar">
                         <div class="${cleanSelector(dragHandlerSelector)}">
-                            <ion-icon name="move-outline"></ion-icon>
+                            <i class="bi bi-arrows-move text-muted"></i>
                         </div>
-                        <span class="branch-title">${title}</span>
+                        <span class="branch-title" title="${title}">${title}</span>
                     </div>
-                    <div class="right-sidebar">
-                        <button type="button" class="button add-child" title="Add a new child">
-                            <ion-icon name="person-add-outline"></ion-icon>
+
+                    <div class="right-sidebar d-flex justify-content-end">
+                        <button id="toogle_collaple_expand" type="button" class="button" title="Expland / Collapse">
+                           <i class="bi bi-chevron-bar-expand"></i>
                         </button>
-                        <button type="button" class="button add-sibling" title="Add a new sibling">
-                            <ion-icon name="people-outline"></ion-icon>
+
+                        <button id="edit_suite_btn" type="button" class="button" title="Edit test suite">
+                            <i class="bi bi-pencil"></i>
                         </button>
-                        <button type="button" class="button remove-branch" title="Remove Branch">
-                            <ion-icon name="trash-outline"></ion-icon>
+
+                        <button id="add_child_suite_btn"  type="button" class="button" title="Add shild test suite">
+                            <i class="bi bi-folder-plus"></i>
+                        </button>
+
+                        <button  id="delete_suite_btn"  type="button" class="button remove-branch" title="Remove Branch">
+                            <i class="bi bi-trash3"></i>
                         </button>
                     </div>
+
                 </div>
             </div>
             <div class="${cleanSelector(childrenBusSelector)}"></div>
@@ -323,7 +339,7 @@ function TreeSortable() {
                                 const distance = getDistance($(this).get(0), $sibling.get(0));
                                 $sibling
                                     .find(branchPathSelector)
-                                    .css("height", `${Math.max(distance.distanceY + 8, 55)}px`);
+                                    .css("height", `${Math.max(distance.distanceY + 0, 0)}px`); // 8, 55
                             } else {
                                 /**
                                  * If no sibling exists to a branch then find the child.
@@ -335,7 +351,7 @@ function TreeSortable() {
                                 const isChild = $nextBranch.length > 0 && nextBranchLevel > level;
 
                                 if (isChild) {
-                                    $nextBranch.find(branchPathSelector).css("height", "55px");
+                                    //$nextBranch.find(branchPathSelector).css("height", "55px");
                                 }
                             }
                         } else {
@@ -343,7 +359,7 @@ function TreeSortable() {
                         }
                     });
                 },
-                addChildBranch() {
+                addChildBranch(mid, pid) {
                     const {
                         options: {
                             treeSelector,
@@ -365,11 +381,11 @@ function TreeSortable() {
                     const uid = generateUUID();
                     const parent_id = $branch.data(id);
                     const level = Math.min(maxLevel, parseInt($branch.getBranchLevel()) + 1);
-                    const title = "New Branch " + uid;
+                    const title = $('#test_suite_title_input').val();
 
                     $lastChild = $branch.getLastChild();
 
-                    const $element = createBranch({ id: uid, parent_id, title, level });
+                    const $element = createBranch({ id: uid, parent_id, title, level, mid, pid});
 
                     if ($lastChild.length) {
                         $lastChild.after($element);
@@ -381,7 +397,7 @@ function TreeSortable() {
                     updateBranchZIndex();
                 },
 
-                addSiblingBranch() {
+                addSiblingBranch(mid, pid) {
                     const {
                         options: {
                             treeSelector,
@@ -397,7 +413,7 @@ function TreeSortable() {
                     const uid = generateUUID();
                     const parent_id = $branch.data(parent);
                     const level = $branch.getBranchLevel();
-                    const title = "New Branch " + uid;
+                    const title = $('#test_suite_title_input').val();
                     const $lastSibling = $branch.getLastSibling();
                     let $lastChild = $lastSibling.getLastChild();
 
@@ -411,7 +427,7 @@ function TreeSortable() {
                         }
                     }
 
-                    const $element = createBranch({ id: uid, parent_id, level, title });
+                    const $element = createBranch({ id: uid, parent_id, level, title, mid, pid });
 
                     if ($lastChild.length) {
                         $lastChild.after($element);

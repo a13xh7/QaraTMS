@@ -1,3 +1,11 @@
+.branch-title {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+
+
 *,
 ::after,
 ::before {
@@ -112,14 +120,6 @@ summary {
     display: list-item;
 }
 
-body {
-    padding: 0;
-    margin: 0;
-    background: #f4f6f9;
-    font-family: "Inter", system-ui, -apple-system, segoe ui, Roboto, Helvetica, Arial, sans-serif, apple color emoji,
-        segoe ui emoji;
-}
-
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -174,27 +174,26 @@ body {
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15);
     border-radius: 3px;
     min-height: 20px;
-    max-width: 450px;
-    width: 100%;
     position: relative;
-    padding: 0 0 0 15px;
+    padding: 0 0 0 5px;
     height: auto;
     gap: 12px;
 
-    line-height: 2.3076923;
+    /*line-height: 2.3076923;*/
     overflow: hidden;
     word-wrap: break-word;
 }
 
 .tree-branch > .contents .branch-wrapper .left-sidebar {
     display: flex;
-    gap: 12px;
+    gap: 5px;
     align-items: center;
-    max-width: 280px;
+    max-width: 320px;
     width: 100%;
 }
 
 .right-sidebar {
+    width: 105px;
     opacity: 0;
     transition: 0.3s;
 }
@@ -306,17 +305,17 @@ body {
 }
 
 .branch-path {
+    /*display: none !important;*/
     display: block;
     position: absolute;
     width: 30px;
-    height: 98px;
+    height: 100%;
     bottom: 50%;
-    left: -12px;
-    border: 2px solid #565656;
+    left: -16px;
+    border: 1px dotted #565656;
     border-top: 0;
     border-right: 0;
     padding: 4px 0 0;
     padding-top: 3px;
-    border-bottom-left-radius: 6px;
     z-index: -1;
 }

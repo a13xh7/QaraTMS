@@ -21,7 +21,7 @@ class AjaxDataController extends Controller
 //        $repository_id = $request->repository_id;
 
         $repository = Repository::firstOrFail();
-        $suitesTree = Suite::where('repository_id', $repository->id)->tree()->get()->toTree();
+        $suitesTree = Suite::where('repository_id', $repository->id)->orderBy('order')->tree()->get()->toTree();
 
         $jsSuitesTree = [];
 
@@ -29,7 +29,6 @@ class AjaxDataController extends Controller
             $this->recursiveGetData($suite, $jsSuitesTree);
         }
 
-        //return json_encode($jsSuitesTree);
         return $jsSuitesTree;
     }
 

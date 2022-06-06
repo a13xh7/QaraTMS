@@ -10,6 +10,26 @@ use Illuminate\Http\Request;
 
 class TestSuiteController extends Controller
 {
+    /******************************************
+     *  AJAX and html elements
+     *****************************************/
+
+    public function updateParent(Request $request)
+    {
+        $testSuite = Suite::findOrFail($request->id);
+        $testSuite->parent_id = $request->parent_id;
+        $testSuite->save();
+    }
+
+    public function updateOrder(Request $request)
+    {
+        foreach($request->order as $data){
+            $testSuite = Suite::findOrFail($data['id']);
+            $testSuite->order = $data['order'];
+            $testSuite->save();
+        }
+    }
+
     public function loadEditor($operation, $repository_id, $test_suite_id=null)
     {
         $repository = Repository::findOrFail($repository_id);
@@ -67,4 +87,6 @@ class TestSuiteController extends Controller
         $testSuite = Suite::findOrFail($request->id);
         $testSuite->descendantsAndSelf()->delete();
     }
+
+
 }

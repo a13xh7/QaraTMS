@@ -25,7 +25,9 @@ class VerifyCsrfToken extends Middleware
 
         '/get-repository-suites',
         '/get-test-suite',
-        '/trcs'
+        '/trcs',
+        'tsup',
+        'tsuo'
     ];
 
 

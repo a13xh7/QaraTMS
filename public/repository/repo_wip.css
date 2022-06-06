@@ -1,0 +1,35 @@
+#suites_tree_col {
+    /*background: #4c535d;*/
+    /*color: white;*/
+
+    height: calc(100vh - var(--header_height));
+
+    min-width: 500px;
+    max-width: 50%;
+
+    background:  #f4f6f9;
+    overflow: hidden;
+}
+
+#tree {
+    padding-bottom: 40px !important;
+}
+
+#test_cases_col {
+
+}
+
+
+
+
+
+.overlay {
+    display: none;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    background-color: #00000038;
+}

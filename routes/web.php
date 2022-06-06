@@ -18,16 +18,20 @@ Route::post('ck-editor/imgupload', [\App\Http\Controllers\CkeditorController::cl
 // test
  ***********************************************************************/
 Route::get('/test', function () {
-    return view('test');
+    return view('wip.test');
 });
 
-Route::get('/repowip',[\App\Http\Controllers\TestController::class, 'index']);
+Route::get('/repo',[\App\Http\Controllers\TestController::class, 'index']);
 
 /**********************************************************************
 // AJAX
  ***********************************************************************/
 
 Route::get('/repo/{id}',[\App\Http\Controllers\AjaxDataController::class, 'getSuitesTree']);
+
+Route::post('/tsup',[TestSuiteController::class, 'updateParent']);
+Route::post('/tsuo',[TestSuiteController::class, 'updateOrder']);
+
 
 
 /**********************************************************************

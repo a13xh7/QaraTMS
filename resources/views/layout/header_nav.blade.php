@@ -12,13 +12,30 @@
         <div class="collapse navbar-collapse">
 
 {{--            DO NOT DISABE UL because form will be at start--}}
-            <ul class="navbar-nav nav-pills me-auto mb-2 mb-lg-0">
-{{--                <li class="nav-item">--}}
-{{--                    <a href="/" class="nav-link text-white">--}}
-{{--                        Projects--}}
+            <div class="navbar-nav nav-pills me-auto mb-2 mb-lg-0">
+
+{{--                @if(str_contains(url()->current(),'repo$'))--}}
+{{--                    <a href="{{route("repository_list_page", $project->id)}}" class="nav-link text-white">--}}
+{{--                        <i class="bi bi-server"></i>--}}
+{{--                        Repository--}}
 {{--                    </a>--}}
-{{--                </li>--}}
-            </ul>
+
+{{--                    <a href="{{route("test_plan_list_page", $project->id)}}" class="nav-link text-white">--}}
+{{--                        <i class="bi bi-journals"></i> Test Plans--}}
+{{--                    </a>--}}
+
+{{--                    <a href="{{route("test_run_list_page", $project->id)}}" class="nav-link text-white">--}}
+{{--                        <i class="bi bi-play-circle"></i> Test Runs--}}
+{{--                    </a>--}}
+
+{{--                    <hr>--}}
+
+{{--                    <a href="{{route("project_documents_list_page", $project->id)}}" class="nav-link text-white">--}}
+{{--                        <i class="bi bi-file-text-fill"></i> Documents--}}
+{{--                    </a>--}}
+{{--                @endif--}}
+
+            </div>
 
             <div>
                 <a class="navbar-brand link-light" href="https://github.com/a13xh7/QaraTMS"  target="_blank">

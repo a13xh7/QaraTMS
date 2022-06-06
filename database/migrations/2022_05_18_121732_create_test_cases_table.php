@@ -19,6 +19,7 @@ class CreateTestCasesTable extends Migration
             $table->string("title");
             $table->boolean("automated")->default(false);
             $table->longText("data")->nullable();
+            $table->integer("order")->nullable();
             $table->timestamps();
         });
     }

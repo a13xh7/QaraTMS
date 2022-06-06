@@ -84,6 +84,9 @@ Route::post('/repository/update', [RepositoryController::class, 'update'])->name
 Route::post('/repository/delete', [RepositoryController::class, 'destroy'])->name("repository_delete");
 
 
+Route::get('/tscl/{test_suite_id}', [TestSuiteController::class, 'loadCasesList'])
+    ->where('test_suite_id', '[0-9]+');
+
 /**********************************************************************
 // TEST SUITE
  ***********************************************************************/
@@ -103,6 +106,10 @@ Route::post('/test-suite/delete', [TestSuiteController::class, 'destroy'])->name
 /**********************************************************************
 // TEST CASE
  ***********************************************************************/
+
+Route::get('/tc/create/{repository_id}/{parent_test_suite_id?}/', [TestCaseController::class, 'loadCreateForm2'])
+    ->where('repository_id', '[0-9]+')
+    ->where('parent_test_suite_id', '[0-9]+');
 
 Route::get('/tc/{test_case_id}', [TestCaseController::class, 'loadShowBlock'])
     ->where('test_case_id', '[0-9]+');

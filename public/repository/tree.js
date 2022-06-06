@@ -105,11 +105,11 @@ function TreeSortable() {
                 <span class="${cleanSelector(branchPathSelector)}"></span>
                 <div class="branch-wrapper">
 
-                    <div class="left-sidebar">
+                    <div class="left-sidebar" onclick="loadCasesList(${mid ? mid : id}, this)">
                         <div class="${cleanSelector(dragHandlerSelector)}">
                             <i class="bi bi-arrows-move text-muted"></i>
                         </div>
-                        <span class="branch-title" title="${title}">${title}</span>
+                        <span id="suite_title_${mid ? mid : id}" class="branch-title" title="${title}">${title}</span>
                     </div>
 
                     <div class="right-sidebar d-flex justify-content-end">
@@ -117,15 +117,15 @@ function TreeSortable() {
                            <i class="bi bi-chevron-bar-expand"></i>
                         </button>
 
-                        <button id="edit_suite_btn" type="button" class="button" title="Edit test suite">
+                        <button id="edit_suite_btn" type="button" class="button" title="Edit">
                             <i class="bi bi-pencil"></i>
                         </button>
 
-                        <button id="add_child_suite_btn"  type="button" class="button" title="Add shild test suite">
+                        <button id="add_child_suite_btn"  type="button" class="button" title="Add child test suite">
                             <i class="bi bi-folder-plus"></i>
                         </button>
 
-                        <button  id="delete_suite_btn"  type="button" class="button remove-branch" title="Remove Branch">
+                        <button  id="delete_suite_btn"  type="button" class="button remove-branch" title="Delete">
                             <i class="bi bi-trash3"></i>
                         </button>
                     </div>

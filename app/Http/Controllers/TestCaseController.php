@@ -8,6 +8,7 @@ use App\TestCase;
 use App\Suite;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use mysql_xdevapi\Exception;
 
 class TestCaseController extends Controller
 {
@@ -74,6 +75,23 @@ class TestCaseController extends Controller
     public function loadCreateForm($parent_test_suite_id)
     {
         $parentTestSuite = Suite::findOrFail($parent_test_suite_id);
+        $repository = Repository::findOrFail($parentTestSuite->repository_id);
+        $project = Project::findOrFail($repository->project_id);
+
+        return view('test_case.create_form')
+            ->with('project', $project)
+            ->with('repository', $repository)
+            ->with('parentTestSuite', $parentTestSuite);
+    }
+
+    public function loadCreateForm2($repository_id, $parent_test_suite_id=null)
+    {
+        if($parent_test_suite_id != null) {
+            $parentTestSuite = Suite::where('id', $parent_test_suite_id)->first();
+        } else {
+            $parentTestSuite = Suite::where('repository_id', $repository_id)->first();
+        }
+
         $repository = Repository::findOrFail($parentTestSuite->repository_id);
         $project = Project::findOrFail($repository->project_id);
 

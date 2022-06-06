@@ -4,9 +4,10 @@ let treeData = [];
 const sortable = new TreeSortable();
 
 // Suite variables
-let id = null
+let suite_id = null
 let parent_id = null
 let treeItem = null;
+let title = null;
 suiteTitleInput = $('#test_suite_title_input');
 
 function showCreateSuiteForm() {
@@ -92,6 +93,18 @@ function loadTree() {
     });
 }
 
+function loadCasesList(id, element) {
+    suite_id = id;
+    title = $(`#suite_title_${id}`).text();
+
+    $('#tree .branch-wrapper').removeClass("selected")
+    $($(element).parent().addClass('selected'));
+
+    $('#test_cases_list_site_title').text(title);
+
+    $('#test_cases_list').load(`/tscl/${suite_id}`, function() { });
+}
+
 $('body').on("click", "#toogle_collaple_expand", function (e) {
     let suite_id = $(this).parent().parent().parent().parent().data('mid');
     //
@@ -138,14 +151,12 @@ $(document).ready(function () {
 
 
     sortable.onSortCompleted(async (event, ui) => {
-        id = ui.item.attr('data-mid');
+        suite_id = ui.item.attr('data-mid');
         parent_id = ui.item.getParent().attr('data-mid');
 
-        updateSuiteParent(id, parent_id);
+        updateSuiteParent(suite_id, parent_id);
 
         var order = [];
-
-        console.log(order)
         $('#tree li').each(function(index,element) {
             order.push({
                 id: $(this).attr('data-mid'),
@@ -175,9 +186,9 @@ $(document).ready(function () {
         }
 
         treeItem = $(this);
-        id = treeItem.parent().parent().parent().parent().data('mid');
+        suite_id = treeItem.parent().parent().parent().parent().data('mid');
 
-        deleteSuite(id);
+        deleteSuite(suite_id);
     });
 });
 

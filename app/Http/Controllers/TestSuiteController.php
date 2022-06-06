@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Repository;
 use App\Suite;
 use App\Project;
+use App\TestCase;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
@@ -42,6 +43,18 @@ class TestSuiteController extends Controller
             ->with('repository', $repository)
             ->with('editableSuite', $editableSuite)
             ->with('suitesTree', $suitesTree);
+    }
+
+    public function loadCasesList($test_suite_id)
+    {
+        $suite = Suite::findOrFail($test_suite_id);
+        $repository = Repository::findOrFail($suite->repository_id);
+        $project = Project::findOrFail($repository->project_id);
+        $testCases = TestCase::where('suite_id', $test_suite_id)->orderBy('order')->get();
+
+        return view('wip.test_cases_list')
+            ->with('testCases', $testCases)
+            ->with('project', $project);
     }
 
     /******************************************

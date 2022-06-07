@@ -21,11 +21,20 @@ function loadSuitesTree() {
             sortable.run();
 
         }, complete: function (data) {
-            $('#tree li .left-sidebar').first().click();
+            selectFirstSuite();
         }
     });
 }
 
+function selectFirstSuite() {
+
+    if($('#tree li .left-sidebar').length > 0) {
+        $('#tree li .left-sidebar').first().click();
+    } else {
+        $('#test_cases_list').empty();
+        closeTestCaseEditor();
+    }
+}
 /**************************************************
  * SUITE FORM - create / edit
  *************************************************/
@@ -113,6 +122,7 @@ function createSuite() {
                 activeTreeSuiteItem.addRootChild(newSuite.id, newSuite.parent_id)
             }
             closeSuiteForm();
+            updateOrder();
         }
     });
 }
@@ -136,6 +146,7 @@ function updateSuite() {
 
         success: function (data) {
             $(`#suite_title_${activeTreeSuiteItem.getId()}`).text(suiteFormTitleInput.val());
+            $('#test_cases_list_site_title').text(suiteFormTitleInput.val())
             closeSuiteForm();
         }
     });
@@ -168,6 +179,7 @@ function deleteSuite(id) {
     }
 
     activeTreeSuiteItem.setId(id)
+    let was_selected = activeTreeSuiteItem.isElementSelected(id);
 
     $.ajax({
         url: "/test-suite/delete",
@@ -177,6 +189,20 @@ function deleteSuite(id) {
         },
         success: function (data) {
             activeTreeSuiteItem.removeSelfFromTree();
+
+            if(was_selected) {
+                selectFirstSuite();
+            }
+
+            if(isTestCaseCreateOrEditFormLoaded()) {
+                $(`#tce_test_suite_select option[value='${id}']`).remove();
+            }
+
+            if(isTestCaseViewFormLoaded() && $('#tce_suite_id').val() == id) {
+                console.log('close eddddd')
+                closeTestCaseEditor();
+            }
+
         }
     });
 }
@@ -211,6 +237,10 @@ let activeTreeSuiteItem = {
 
     findElement(id) {
         return $(`#tree li[data-mid=${id}]`);
+    },
+
+    isElementSelected(id) {
+        return $(`#tree li[data-mid=${id}] .branch-wrapper`).hasClass("selected");
     },
 
     addChild(id, parent_id) {

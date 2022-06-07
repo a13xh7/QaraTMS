@@ -18,15 +18,7 @@ html {
     -webkit-text-size-adjust: 100%;
 }
 
-body,
-input,
-select,
-textarea,
-button,
-#admin .redactor-styles {
-    font-family: "Inter", system-ui, -apple-system, segoe ui, Roboto, Helvetica, Arial, sans-serif, apple color emoji,
-        segoe ui emoji;
-}
+
 hr {
     height: 0;
     color: inherit;
@@ -175,7 +167,7 @@ summary {
     border-radius: 3px;
     min-height: 20px;
     position: relative;
-    padding: 0 0 0 5px;
+    padding: 3px 0 5px 3px;
     height: auto;
     gap: 12px;
 
@@ -188,7 +180,7 @@ summary {
     display: flex;
     gap: 5px;
     align-items: center;
-    max-width: 320px;
+    /*max-width: 300px;*/
     width: 100%;
 }
 

@@ -82,17 +82,14 @@ class TestSuiteController extends Controller
         $testSuite = Suite::findOrFail($request->id);
 
         $testSuite->title = $request->title;
-        $testSuite->parent_id = $request->parent_id;
         $testSuite->save();
 
-        return redirect()->route('repository_show_page', [$request->project_id, $testSuite->repository_id]);
-
-//        return [
-//            'html' => view('tree.repository_test_suite')
-//                ->with('testSuite', $testSuite)
-//                ->with('project', $project)->render(),
-//            'json' => $testSuite->toJson()
-//        ];
+        // Remove this later
+        if($request->parent_id) {
+            $testSuite->parent_id = $request->parent_id;
+            $testSuite->save();
+            return redirect()->route('repository_show_page', [$request->project_id, $testSuite->repository_id]);
+        }
     }
 
     public function destroy(Request $request)

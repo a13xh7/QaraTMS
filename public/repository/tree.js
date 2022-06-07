@@ -117,15 +117,15 @@ function TreeSortable() {
                            <i class="bi bi-chevron-bar-expand"></i>
                         </button>
 
-                        <button id="edit_suite_btn" type="button" class="button" title="Edit">
+                        <button id="edit_suite_btn" type="button" class="button" title="Edit" onclick="showSuiteForm('edit', ${mid ? mid : id})">
                             <i class="bi bi-pencil"></i>
                         </button>
 
-                        <button id="add_child_suite_btn"  type="button" class="button" title="Add child test suite">
+                        <button id="add_child_suite_btn"  type="button" class="button" title="Add child test suite" onclick="showSuiteForm('create', ${mid ? mid : id})">
                             <i class="bi bi-folder-plus"></i>
                         </button>
 
-                        <button  id="delete_suite_btn"  type="button" class="button remove-branch" title="Delete">
+                        <button  id="delete_suite_btn"  type="button" class="button remove-branch" title="Delete" onclick="deleteSuite(${mid ? mid : id})">
                             <i class="bi bi-trash3"></i>
                         </button>
                     </div>

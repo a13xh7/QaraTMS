@@ -57,9 +57,14 @@
                     <textarea class="form-control" name="description" maxlength="255">{{$repository->description}}</textarea>
                 </div>
 
+
                 <button type="submit" class="btn btn-warning px-5">
                     <b>Update</b>
                 </button>
+
+                <a href="{{ url()->previous() }}" class="btn btn-outline-dark px-5">
+                    <b>Cancel</b>
+                </a>
             </form>
         </div>
 

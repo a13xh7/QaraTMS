@@ -89,7 +89,7 @@
 
             </div>
 
-            <div class="row border mt-3 p-3 rounded">
+            <div class="row border mt-3 p-3 rounded d-flex justify-content-between" >
                 <div class="col">
                     <button type="button" class="btn btn-primary" onclick="addStep()">
                         <i class="bi bi-plus-circle"></i>
@@ -99,9 +99,14 @@
 
 
                 <div class="col">
-                    <button id="tccf_save_btn" type="button" class="btn btn-success w-100" onclick="createTestCase()">
+                    <button id="tccf_save_btn" type="button" class="btn btn-success" onclick="createTestCase()">
                         <i class="bi bi-check-lg"></i>
-                        Save Test Case
+                        Create
+                    </button>
+
+                    <button id="tccf_save_btn" type="button" class="btn btn-success" onclick="createTestCase(true)">
+                        <i class="bi bi-plus-lg"></i>
+                        Create and add another
                     </button>
                 </div>
             </div>

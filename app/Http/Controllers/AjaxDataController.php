@@ -38,7 +38,7 @@ class AjaxDataController extends Controller
             'id' => $suite->id,
             'level' => $suite->depth + 1,
             'parent_id' => $suite->parent_id,
-            'title' => $suite->title . '_id=_'.$suite->id
+            'title' => $suite->title
         ];
 
         foreach($suite->children as $suiteChild) {

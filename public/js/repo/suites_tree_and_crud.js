@@ -190,10 +190,6 @@ function deleteSuite(id) {
         success: function (data) {
             activeTreeSuiteItem.removeSelfFromTree();
 
-            if(was_selected) {
-                selectFirstSuite();
-            }
-
             if(isTestCaseCreateOrEditFormLoaded()) {
                 $(`#tce_test_suite_select option[value='${id}']`).remove();
             }
@@ -201,6 +197,11 @@ function deleteSuite(id) {
             if(isTestCaseViewFormLoaded() && $('#tce_suite_id').val() == id) {
                 console.log('close eddddd')
                 closeTestCaseEditor();
+            }
+
+            if(was_selected) {
+                selectFirstSuite();
+                console.log('choose first')
             }
 
         }
@@ -257,5 +258,9 @@ let activeTreeSuiteItem = {
 
     removeSelfFromTree() {
         this.getElement().removeBranch();
+    },
+
+    addSelectedClass() {
+        this.getElement().find('.branch-wrapper').addClass('selected');
     }
 };

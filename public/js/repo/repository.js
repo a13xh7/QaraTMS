@@ -25,7 +25,7 @@ function loadCasesList(id, element) {
 
     // Add selected class
     $('#tree .branch-wrapper').removeClass("selected")
-    $($(element).parent().addClass('selected'));
+    activeTreeSuiteItem.addSelectedClass();
 
     $('#test_cases_list_site_title').text(activeTreeSuiteItem.getTitle()); // set title in test cases list area
     $('#test_cases_list').load(`/tscl/${activeTreeSuiteItem.getId()}`, function() { }); // load test cases

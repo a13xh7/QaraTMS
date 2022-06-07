@@ -1,4 +1,11 @@
 
+sort cases
+new editor
+registration / users
+priority field
+
+
+
 html код новых шагов находится в 4-х местах - формы создать, обновить(if,else) и в js коде case_viewer
 
 

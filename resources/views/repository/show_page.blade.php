@@ -91,11 +91,6 @@
     </div>
 @endsection
 
-{{--<i class=" fs-3 bi bi-chevron-double-up text-danger"></i>--}}
-{{--<i class=" fs-3 bi bi-chevron-double-down text-warning"></i>--}}
-{{--<i class=" fs-3 bi bi-list text-success"></i>--}}
-
-
 
 @section('footer')
     <script>

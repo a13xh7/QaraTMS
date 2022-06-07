@@ -10,6 +10,7 @@ function getTestCaseDataFromForm() {
     testCase.title = $("#tce_title_input").val();
     testCase.suite_id = $("#tce_test_suite_select").val();
     testCase.automated = $("#tce_automated_select").val();
+    testCase.priority = $("#tce_priority_select").val();
 
     testCase.data = {};
     testCase.data['preconditions'] = $("#tce_preconditions_input").val();
@@ -50,6 +51,7 @@ function createTestCase(addAnother=false) {
             'title': newTestCase.title,
             'suite_id': newTestCase.suite_id,
             'automated': newTestCase.automated,
+            'priority': newTestCase.priority,
             'data': JSON.stringify(newTestCase.data)
         },
 
@@ -87,6 +89,7 @@ function updateTestCase() {
             'title': updatingTestCase.title,
             'suite_id': updatingTestCase.suite_id,
             'automated': updatingTestCase.automated,
+            'priority': updatingTestCase.priority,
             'data': JSON.stringify(updatingTestCase.data)
         },
         success: function (data) {  // response is case html and json

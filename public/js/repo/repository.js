@@ -49,20 +49,22 @@ $("body").on('click', 'button', function () {
 });
 
 
-// $('body').on("click", "#toogle_collaple_expand", function (e) {
-//     let suite_id = $(this).parent().parent().parent().parent().data('mid');
-// });
-//
-// function rec(element) {
-//     let suite_id = element.parent().parent().parent().parent().data('mid');
-//
-//     if($(`li[data-pid="${suite_id}"]`).length > 0) {
-//         rec(element)
-//     } else {
-//         element.toggle();
-//     }
-//
-// }
+/**************************************************
+ * Collapse / expand children
+ **************************************************/
+
+$('body').on("click", "#toogle_collaple_expand", function (e) {
+    let suite_id = $(this).parent().parent().parent().parent().data('mid');
+    rec(suite_id)
+});
+
+function rec(suite_id) {
+    let child_li = $(`li[data-pid='${suite_id}']`).hide();
+
+    if($(`li[data-pid='${child_li.attr('data-mid')}']` ).length > 0) {
+        rec(child_li.attr('data-mid'))
+    }
+}
 
 
 

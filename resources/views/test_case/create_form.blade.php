@@ -37,10 +37,18 @@
                         </select>
                     </div>
 
+                    {{--<i class=" fs-3 bi bi-chevron-double-up text-danger"></i>--}}
+                    {{--<i class=" fs-3 bi bi-chevron-double-down text-warning"></i>--}}
+                    {{--<i class=" fs-3 bi bi-list text-success"></i>--}}
+
 
                     <div class="mx-5">
-                        <label class="form-label"><b>Priority</b></label>
-                        <select name="priority" class="form-select border-secondary" id="tce_priority_select">
+                        <label class="form-label">
+                            <b>Priority</b>
+                            <i class="bi bi-chevron-double-up text-danger"></i>|<i class="bi bi-list text-info"></i>|<i class="bi bi-chevron-double-down text-warning"></i>
+                        </label>
+
+                        <select id="tce_priority_select" name="priority" class="form-select border-secondary">
                             <option value="{{\App\Enums\CasePriority::NORMAL}}" selected> Normal</option>
                             <option value="{{\App\Enums\CasePriority::HIGH}}">High</option>
                             <option value="{{\App\Enums\CasePriority::LOW}}">Low</option>

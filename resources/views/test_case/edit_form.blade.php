@@ -37,6 +37,33 @@
                         </select>
                     </div>
 
+
+                    <div class="mx-5">
+
+                        <label class="form-label">
+                            <b>Priority</b>
+                            <i class="bi bi-chevron-double-up text-danger"></i>|<i class="bi bi-list text-info"></i>|<i class="bi bi-chevron-double-down text-warning"></i>
+                        </label>
+
+                        <select id="tce_priority_select" name="priority" class="form-select border-secondary" id="tce_priority_select">
+
+                            @if($testCase->priority == \App\Enums\CasePriority::NORMAL)
+                                <option value="{{\App\Enums\CasePriority::NORMAL}}" selected> Normal</option>
+                                <option value="{{\App\Enums\CasePriority::HIGH}}">High</option>
+                                <option value="{{\App\Enums\CasePriority::LOW}}">Low</option>
+                            @elseif($testCase->priority == \App\Enums\CasePriority::HIGH)
+                                <option value="{{\App\Enums\CasePriority::NORMAL}}"> Normal</option>
+                                <option value="{{\App\Enums\CasePriority::HIGH}}" selected>High</option>
+                                <option value="{{\App\Enums\CasePriority::LOW}}">Low</option>
+                            @else
+                                <option value="{{\App\Enums\CasePriority::NORMAL}}"> Normal</option>
+                                <option value="{{\App\Enums\CasePriority::HIGH}}">High</option>
+                                <option value="{{\App\Enums\CasePriority::LOW}}" selected>Low</option>
+                            @endif
+
+                        </select>
+                    </div>
+
                     <div class="mx-5">
                         <label class="form-label">Type <i class="bi bi-person"></i> | <i class="bi bi-robot"></i></label>
                         <select name="automated" class="form-select border-secondary" id="tce_automated_select">

@@ -18,6 +18,7 @@ class TestCaseController extends Controller
 
         $testCase->title = $request->title;
         $testCase->automated = (bool)$request->automated;
+        $testCase->priority = $request->priority;
         $testCase->suite_id = $request->suite_id;
         $testCase->data = $request->data;
 
@@ -43,6 +44,7 @@ class TestCaseController extends Controller
 
         $testCase->title = $request->title;
         $testCase->automated = (bool)$request->automated;
+        $testCase->priority = $request->priority;
         $testCase->suite_id = $request->suite_id;
         $testCase->data = $request->data;
 

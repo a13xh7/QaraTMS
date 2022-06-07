@@ -4,7 +4,14 @@
 
             <div class="d-flex justify-content-start test_case_clickable_area" onclick="renderTestCase('{{$testCase->id}}')">
                 <div class="me-1 test_case_info">
-                    <i class="bi bi-chevron-double-up text-danger"></i>
+
+                    @if($testCase->priority == \App\Enums\CasePriority::NORMAL)
+                        <i class="bi bi-list text-info"></i>
+                    @elseif($testCase->priority == \App\Enums\CasePriority::HIGH)
+                        <i class="bi bi-chevron-double-up text-danger"></i>
+                    @else
+                        <i class="bi bi-chevron-double-down text-warning"></i>
+                    @endif
 
                     <span>
                         @if($testCase->automated)

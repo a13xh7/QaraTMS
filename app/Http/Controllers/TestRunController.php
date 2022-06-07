@@ -47,7 +47,7 @@ class TestRunController extends Controller
 
         $testSuitesTree = Suite::whereIn('id', $testSuitesIds)->tree()->get()->toTree();
 
-//        $testRun->removeDeletedCasesFromResults();
+        $testRun->removeDeletedCasesFromResults();
 
         $results = $testRun->getResults();
 

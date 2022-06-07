@@ -53,9 +53,13 @@
                 </div>
 
 
-                <button type="submit" class="btn btn-warning px-5">
+                <button type="submit" class="btn btn-warning px-5 me-2">
                     <b>Update</b>
                 </button>
+
+                <a href=" {{ url()->previous() }}" class="btn btn-outline-dark px-5">
+                    <b>Cancel</b>
+                </a>
             </form>
         </div>
 

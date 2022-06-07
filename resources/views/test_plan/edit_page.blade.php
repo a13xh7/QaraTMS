@@ -82,7 +82,13 @@
                     </div>
 
                     <div class="d-flex justify-content-end">
-                        <button type="submit" class="btn btn-warning w-100"><b>Update</b></button>
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" class="btn btn-warning px-5"><b>Update</b></button>
+                        </div>
+
+                        <a href="{{ url()->previous() }}" class="btn btn-outline-dark px-5 ms-2">
+                            <b>Cancel</b>
+                        </a>
                     </div>
 
                 </form>

@@ -42,6 +42,10 @@
                 <button type="submit" class="btn btn-success px-5">
                     Save
                 </button>
+
+                <a href="{{ url()->previous() }}" class="btn btn-outline-dark px-5 ms-2">
+                    <b>Cancel</b>
+                </a>
             </form>
         </div>
 

@@ -60,7 +60,15 @@
                         <textarea class="form-control" name="description" maxlength="255" rows="7"> </textarea>
                     </div>
 
-                    <button type="submit" class="btn btn-success w-100"><b>Save</b></button>
+                    <div class="d-flex justify-content-end">
+                        <button type="submit" class="btn btn-success px-5">
+                            <b>Save</b>
+                        </button>
+
+                        <a href="{{ url()->previous() }}" class="btn btn-outline-dark px-5 ms-2">
+                            <b>Cancel</b>
+                        </a>
+                    </div>
 
                 </form>
 

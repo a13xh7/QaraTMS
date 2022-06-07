@@ -52,7 +52,7 @@ class TestSuiteController extends Controller
         $project = Project::findOrFail($repository->project_id);
         $testCases = TestCase::where('suite_id', $test_suite_id)->orderBy('order')->get();
 
-        return view('wip.test_cases_list')
+        return view('repository.test_cases_list')
             ->with('testCases', $testCases)
             ->with('project', $project);
     }

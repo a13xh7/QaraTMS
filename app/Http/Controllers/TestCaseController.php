@@ -72,19 +72,23 @@ class TestCaseController extends Controller
      *  PAGES / FORMS / HTML BLOCKS
      *****************************************/
 
-    public function loadCreateForm($parent_test_suite_id)
-    {
-        $parentTestSuite = Suite::findOrFail($parent_test_suite_id);
+    public function show($test_case_id) {
+        $testCase = TestCase::findOrFail($test_case_id);
+        $data = json_decode($testCase->data);
+
+        $parentTestSuite = Suite::findOrFail($testCase->suite_id);
         $repository = Repository::findOrFail($parentTestSuite->repository_id);
         $project = Project::findOrFail($repository->project_id);
 
-        return view('test_case.create_form')
+        return view('test_case.show_page')
             ->with('project', $project)
             ->with('repository', $repository)
-            ->with('parentTestSuite', $parentTestSuite);
+            ->with('parentTestSuite', $parentTestSuite)
+            ->with('testCase', $testCase)
+            ->with('data', $data);
     }
 
-    public function loadCreateForm2($repository_id, $parent_test_suite_id=null)
+    public function loadCreateForm($repository_id, $parent_test_suite_id=null)
     {
         if($parent_test_suite_id != null) {
             $parentTestSuite = Suite::where('id', $parent_test_suite_id)->first();
@@ -101,7 +105,7 @@ class TestCaseController extends Controller
             ->with('parentTestSuite', $parentTestSuite);
     }
 
-    public function loadShowBlock($test_case_id)
+    public function loadShowForm($test_case_id)
     {
         $testCase = TestCase::findOrFail($test_case_id);
         $data = json_decode($testCase->data);
@@ -110,7 +114,7 @@ class TestCaseController extends Controller
         $repository = Repository::findOrFail($parentTestSuite->repository_id);
         $project = Project::findOrFail($repository->project_id);
 
-        return view('test_case.show_block')
+        return view('test_case.show_form')
             ->with('project', $project)
             ->with('repository', $repository)
             ->with('parentTestSuite', $parentTestSuite)

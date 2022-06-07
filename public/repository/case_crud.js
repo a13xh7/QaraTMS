@@ -1,3 +1,4 @@
+
 /****************************************************************************
  * Get data from CREATE and UPDATE test case form. Save data in object
  ****************************************************************************/
@@ -5,13 +6,13 @@
 function getTestCaseDataFromForm() {
     let testCase = {};
 
-    testCase.id = $("#tccf_case_id").val()
-    testCase.title = $("#tccf_title_input").val();
-    testCase.suite_id = $("#tccf_test_suite_select").val();
-    testCase.automated = $("#tccf_automated_select").val();
+    testCase.id = $("#tce_case_id").val()
+    testCase.title = $("#tce_title_input").val();
+    testCase.suite_id = $("#tce_test_suite_select").val();
+    testCase.automated = $("#tce_automated_select").val();
 
     testCase.data = {};
-    testCase.data['preconditions'] = $("#tccf_preconditions_input").val();
+    testCase.data['preconditions'] = $("#tce_preconditions_input").val();
     testCase.data.steps = [];
 
     $( $(".step") ).each( function(index) {
@@ -108,8 +109,11 @@ function deleteTestCase(id) {
         },
         success: function (data) {
             $("[data-case_id=" + id +"]").remove();
+
+            if($('#tce_case_id').val() == id || $('#tce_case_id').text() == id) {
+                closeTestCaseEditor();
+            }
         }
     });
 }
-
 

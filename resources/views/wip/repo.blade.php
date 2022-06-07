@@ -104,8 +104,6 @@
 </div>
 
 @section('footer')
-
-
         <script>
             let repository_id = {{$repository->id}}
         </script>
@@ -113,7 +111,5 @@
         <script src="{{asset('repository/tree.js')}}"></script>
 
         <script src="{{asset('repository/repository.js')}}"></script>
-
-
 
 @endsection

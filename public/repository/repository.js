@@ -1,5 +1,3 @@
-let caseEditorOpened = false;
-
 /**************************************************
  * LOAD SCRIPTS
  *************************************************/
@@ -23,7 +21,6 @@ $(document).ready(function () {
  *************************************************/
 
 function loadCasesList(id, element) {
-
     activeTreeSuiteItem.setId(id);
 
     // Add selected class
@@ -32,16 +29,15 @@ function loadCasesList(id, element) {
 
     $('#test_cases_list_site_title').text(activeTreeSuiteItem.getTitle()); // set title in test cases list area
     $('#test_cases_list').load(`/tscl/${activeTreeSuiteItem.getId()}`, function() { }); // load test cases
-
-  //  $('#test_cases_list_col').addClass('col-9').removeClass('col')
 }
 
-function suitesList() {
-
+function expandSuitesList() {
+    $('#test_cases_list_col').addClass('col-9').removeClass('col')
 }
 
-
-
+function collapseSuitesList() {
+    $('#test_cases_list_col').addClass('col').removeClass('col-9')
+}
 
 
 

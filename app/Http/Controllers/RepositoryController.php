@@ -36,7 +36,7 @@ class RepositoryController extends Controller
     {
         $project = Project::findOrFail($project_id);
         $repository = Repository::findOrFail($repository_id);
-        $suitesTree = Suite::where('repository_id', $repository_id)->tree()->get()->toTree();
+        $suitesTree = Suite::where('repository_id', $repository_id)->orderBy('order')->tree()->get()->toTree();
 
         return view('repository.show_page')
             ->with('project', $project)

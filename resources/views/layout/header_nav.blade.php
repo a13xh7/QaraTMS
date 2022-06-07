@@ -14,26 +14,26 @@
 {{--            DO NOT DISABE UL because form will be at start--}}
             <div class="navbar-nav nav-pills me-auto mb-2 mb-lg-0">
 
-{{--                @if(str_contains(url()->current(),'repo$'))--}}
-{{--                    <a href="{{route("repository_list_page", $project->id)}}" class="nav-link text-white">--}}
-{{--                        <i class="bi bi-server"></i>--}}
-{{--                        Repository--}}
-{{--                    </a>--}}
+                @if(str_contains(url()->current(),'repository'))
+                    <a href="{{route("repository_list_page", $project->id)}}" class="nav-link text-white">
+                        <i class="bi bi-server"></i>
+                        Repositories
+                    </a>
 
-{{--                    <a href="{{route("test_plan_list_page", $project->id)}}" class="nav-link text-white">--}}
-{{--                        <i class="bi bi-journals"></i> Test Plans--}}
-{{--                    </a>--}}
+                    <a href="{{route("test_plan_list_page", $project->id)}}" class="nav-link text-white">
+                        <i class="bi bi-journals"></i> Test Plans
+                    </a>
 
-{{--                    <a href="{{route("test_run_list_page", $project->id)}}" class="nav-link text-white">--}}
-{{--                        <i class="bi bi-play-circle"></i> Test Runs--}}
-{{--                    </a>--}}
+                    <a href="{{route("test_run_list_page", $project->id)}}" class="nav-link text-white">
+                        <i class="bi bi-play-circle"></i> Test Runs
+                    </a>
 
-{{--                    <hr>--}}
+                    <hr>
 
-{{--                    <a href="{{route("project_documents_list_page", $project->id)}}" class="nav-link text-white">--}}
-{{--                        <i class="bi bi-file-text-fill"></i> Documents--}}
-{{--                    </a>--}}
-{{--                @endif--}}
+                    <a href="{{route("project_documents_list_page", $project->id)}}" class="nav-link text-white">
+                        <i class="bi bi-file-text-fill"></i> Documents
+                    </a>
+                @endif
 
             </div>
 

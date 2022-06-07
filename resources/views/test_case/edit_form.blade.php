@@ -1,4 +1,4 @@
-<div id="test_case_block">
+<div id="test_case_editor">
 
     <div class="d-flex justify-content-between border-bottom mt-2 pb-2 mb-2">
         <div>
@@ -21,7 +21,7 @@
 
                     <div>
                         <label for="test_suite_id" class="form-label">Test Suite</label>
-                        <select name="suite_id" id="tccf_test_suite_select" class="form-select border-secondary">
+                        <select name="suite_id" id="tce_test_suite_select" class="form-select border-secondary">
 
                             @foreach($repository->suites as $repoTestSuite)
 
@@ -39,7 +39,7 @@
 
                     <div class="mx-5">
                         <label class="form-label">Type <i class="bi bi-person"></i> | <i class="bi bi-robot"></i></label>
-                        <select name="automated" class="form-select border-secondary" id="tccf_automated_select">
+                        <select name="automated" class="form-select border-secondary" id="tce_automated_select">
 
                             @if($testCase->automated)
                                 <option value="0"> Manual</option>
@@ -54,19 +54,19 @@
 
                 </div>
 
-                <input type="hidden" id="tccf_case_id" value="{{$testCase->id}}">
+                <input type="hidden" id="tce_case_id" value="{{$testCase->id}}">
 
                 <div class="mb-3">
                     <label for="title" class="form-label"><b>Title</b></label>
-                    <input name="title" id="tccf_title_input" type="text" class="form-control border-secondary" value="{{$testCase->title}}" >
+                    <input name="title" id="tce_title_input" type="text" class="form-control border-secondary" value="{{$testCase->title}}" >
                 </div>
 
                 <div class="col">
                     <label class="form-label"><b>Preconditions</b></label>
                     @if(isset($data->preconditions))
-                        <textarea name="pre_conditions" class="form-control border-secondary" id="tccf_preconditions_input" rows="3">{{ $data->preconditions }}</textarea>
+                        <textarea name="pre_conditions" class="form-control border-secondary" id="tce_preconditions_input" rows="3">{{ $data->preconditions }}</textarea>
                     @else
-                        <textarea name="pre_conditions" class="form-control border-secondary" id="tccf_preconditions_input" rows="3"></textarea>
+                        <textarea name="pre_conditions" class="form-control border-secondary" id="tce_preconditions_input" rows="3"></textarea>
                     @endif
                 </div>
 
@@ -144,7 +144,7 @@
 
 
                 <div class="col">
-                    <button id="tccf_save_btn" type="button" class="btn btn-warning w-100" onclick="updateTestCase()">
+                    <button id="tce_save_btn" type="button" class="btn btn-warning w-100" onclick="updateTestCase()">
                         <i class="bi bi-save"></i>
                         Update Test Case
                     </button>

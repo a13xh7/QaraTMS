@@ -21,11 +21,15 @@ function loadSuitesTree() {
             sortable.run();
 
         }, complete: function (data) {
-            $('#tree li .left-sidebar').first().click();
+            selectFirstSuite();
         }
     });
 }
 
+function selectFirstSuite() {
+    $('#tree li .left-sidebar').first().click();
+    console.log('select first')
+}
 /**************************************************
  * SUITE FORM - create / edit
  *************************************************/
@@ -113,6 +117,7 @@ function createSuite() {
                 activeTreeSuiteItem.addRootChild(newSuite.id, newSuite.parent_id)
             }
             closeSuiteForm();
+            updateOrder();
         }
     });
 }
@@ -168,6 +173,7 @@ function deleteSuite(id) {
     }
 
     activeTreeSuiteItem.setId(id)
+    let was_selected = activeTreeSuiteItem.isElementSelected(id);
 
     $.ajax({
         url: "/test-suite/delete",
@@ -177,6 +183,12 @@ function deleteSuite(id) {
         },
         success: function (data) {
             activeTreeSuiteItem.removeSelfFromTree();
+
+            if(was_selected) {
+                selectFirstSuite();
+                closeTestCaseEditor();
+            }
+
         }
     });
 }
@@ -211,6 +223,10 @@ let activeTreeSuiteItem = {
 
     findElement(id) {
         return $(`#tree li[data-mid=${id}]`);
+    },
+
+    isElementSelected(id) {
+        return $(`#tree li[data-mid=${id}] .branch-wrapper`).hasClass("selected");
     },
 
     addChild(id, parent_id) {

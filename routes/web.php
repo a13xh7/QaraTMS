@@ -107,19 +107,19 @@ Route::post('/test-suite/delete', [TestSuiteController::class, 'destroy'])->name
 // TEST CASE
  ***********************************************************************/
 
-Route::get('/tc/create/{repository_id}/{parent_test_suite_id?}/', [TestCaseController::class, 'loadCreateForm2'])
+Route::get('/tc/create/{repository_id}/{parent_test_suite_id?}/', [TestCaseController::class, 'loadCreateForm'])
     ->where('repository_id', '[0-9]+')
-    ->where('parent_test_suite_id', '[0-9]+');
-
-Route::get('/tc/{test_case_id}', [TestCaseController::class, 'loadShowBlock'])
-    ->where('test_case_id', '[0-9]+');
-
-Route::get('/tc/{parent_test_suite_id}/create', [TestCaseController::class, 'loadCreateForm'])
     ->where('parent_test_suite_id', '[0-9]+');
 
 Route::get('/tc/{test_case_id}/edit', [TestCaseController::class, 'loadEditForm'])
     ->where('test_case_id', '[0-9]+');
 
+Route::get('/tc/{test_case_id}', [TestCaseController::class, 'loadShowForm'])
+    ->where('test_case_id', '[0-9]+');
+
+Route::get('/test-case/{test_case_id}', [TestCaseController::class, 'show'])
+    ->where('test_case_id', '[0-9]+')
+    ->name('test_case_show_page');
 
 
 Route::post('/test-case/create', [TestCaseController::class, 'store'])->name("test_case_create");

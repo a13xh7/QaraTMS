@@ -3,7 +3,7 @@
         <div class="test_case border-bottom d-flex ps-1 py-2 justify-content-between" data-case_id="{{$testCase->id}}">
 
             <div class="d-flex justify-content-start test_case_clickable_area" onclick="renderTestCase('{{$testCase->id}}')">
-                <div style="width: 140px" class="me-1">
+                <div class="me-1 test_case_info">
                     <i class="bi bi-chevron-double-up text-danger"></i>
 
                     <span>

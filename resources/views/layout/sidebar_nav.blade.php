@@ -10,7 +10,7 @@
 
         <a href="{{route("repository_list_page", $project->id)}}" class="nav-link text-white">
             <i class="bi bi-server"></i>
-            Repository
+            Repositories
         </a>
 
         <a href="{{route("test_plan_list_page", $project->id)}}" class="nav-link text-white">

@@ -1,13 +1,11 @@
-
-
 /****************************************************************************
  * TEST CASE AREA in repository. Load TEST CASE forms
  ****************************************************************************/
 
+
 let testCaseAreaLocator = "#test_case_area";
 
 function loadTestCaseCreateForm() {
-
     if($('#tree li').length <= 0) {
         alert('Create at least one test suite.')
         return;
@@ -17,7 +15,7 @@ function loadTestCaseCreateForm() {
 
     $(testCaseAreaLocator).load(url, function() {
         $('textarea').autoResize();
-        //  $('#test_cases_list_col').addClass('col').removeClass('col-9')
+        collapseSuitesList();
     });
 }
 
@@ -26,6 +24,8 @@ function renderTestCase(test_case_id) {
 
         $(`.test_case`).removeClass("selected");
         $(`.test_case[data-case_id='${test_case_id}']`).addClass('selected');
+
+        collapseSuitesList();
     });
 }
 
@@ -34,12 +34,24 @@ function renderTestCaseEditForm(test_case_id) {
     $(testCaseAreaLocator).load(`/tc/${test_case_id}/edit`, function() {
         $('textarea').autoResize();
         oldParentId = $("#tccf_test_suite_select").val();
+        collapseSuitesList();
     });
 }
 
-function closeTestCaseViewer() {
-    $('#test_case_block').remove();
+function closeTestCaseEditor() {
+    $('#test_case_editor').remove();
+    expandSuitesList();
 }
+
+
+function isTestCaseCreateOrEditFormLoaded() {
+    return $("#tce_title_input").length > 0;
+}
+
+function isTestCaseViewFormLoaded() {
+    return $("#tce_title_input").length > 0;
+}
+
 
 /****************************************************************************
  * STEPS

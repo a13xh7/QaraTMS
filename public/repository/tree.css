@@ -18,15 +18,7 @@ html {
     -webkit-text-size-adjust: 100%;
 }
 
-body,
-input,
-select,
-textarea,
-button,
-#admin .redactor-styles {
-    font-family: "Inter", system-ui, -apple-system, segoe ui, Roboto, Helvetica, Arial, sans-serif, apple color emoji,
-        segoe ui emoji;
-}
+
 hr {
     height: 0;
     color: inherit;

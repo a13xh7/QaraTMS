@@ -2,18 +2,18 @@
  * LOAD SCRIPTS
  *************************************************/
 
-$.getScript('/repository/suites_tree_and_crud.js', function() {});
-$.getScript('/repository/case_crud.js', function() {});
-$.getScript('/repository/case_editor.js', function() {});
-
+$.getScript('/js/repo/tree.js', function() {});
+$.getScript('/js/repo/suites_tree_and_crud.js', function() {});
+$.getScript('/js/repo/case_crud.js', function() {});
 /**************************************************
  * RENDER SUITES TREE
  * and select first available suite
+ * when all scripts are loaded
  *************************************************/
-
-$(document).ready(function () {
+$.getScript('/js/repo/case_editor.js', function() {
     loadSuitesTree();
 });
+
 
 
 /**************************************************
@@ -39,6 +39,14 @@ function collapseSuitesList() {
     $('#test_cases_list_col').addClass('col').removeClass('col-9')
 }
 
+// BLOCK ANY BUTTON AFTER CLICK to prevent ajax errors
+
+$("body").on('click', 'button', function () {
+    let button = $(this).prop('disabled', true);
+    setTimeout(function() {
+        button.prop('disabled', false);
+    }, 500);
+});
 
 
 // $('body').on("click", "#toogle_collaple_expand", function (e) {

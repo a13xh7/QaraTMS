@@ -167,7 +167,7 @@ summary {
     border-radius: 3px;
     min-height: 20px;
     position: relative;
-    padding: 0 0 0 5px;
+    padding: 3px 0 5px 3px;
     height: auto;
     gap: 12px;
 
@@ -180,7 +180,7 @@ summary {
     display: flex;
     gap: 5px;
     align-items: center;
-    max-width: 320px;
+    /*max-width: 300px;*/
     width: 100%;
 }
 

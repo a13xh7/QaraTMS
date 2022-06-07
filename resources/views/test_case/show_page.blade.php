@@ -9,49 +9,36 @@
 
         <div class="border-bottom my-3">
             <h3 class="page_title">
+
+                <i class="bi bi-chevron-double-up text-danger"></i>
+
+                <span>
+                    @if($testCase->automated)
+                        <i class="bi bi-robot mx-1"></i>
+                    @else
+                        <i class="bi bi-person mx-1"></i>
+                    @endif
+                    </span>
+
+                    <span class="text-primary">
+                         {{$project->prefix}}-<span id="tce_case_id">{{$testCase->id}}</span>
+                    </span>
+
+
                 {{$testCase->title}}
+
+
             </h3>
+
+
+                <button type="button" class="btn btn-outline-dark btn-sm"
+                        onclick="renderTestCaseEditForm({{$testCase->id}})">
+                    <i class="bi bi-pencil"></i>
+                </button>
+
         </div>
 
         <div id="test_case_editor">
-
-            <div class="d-flex justify-content-between border-bottom mt-2 pb-2 mb-2">
-
-                <div style="min-width: 140px">
-
-                    <i class="bi bi-chevron-double-up text-danger"></i>
-
-                    <span>
-                    @if($testCase->automated)
-                            <i class="bi bi-robot mx-1"></i>
-                        @else
-                            <i class="bi bi-person mx-1"></i>
-                        @endif
-                </span>
-
-                    <span class="text-primary">
-                {{$project->prefix}}-
-                <span id="tce_case_id">{{$testCase->id}}</span>
-             </span>
-
-                </div>
-
-                <div class="test_case_title">
-                    <b>{{$testCase->title}}</b>
-                </div>
-
-                <div style="min-width: 70px" class="justify-content-end ">
-                    <button type="button" class="btn btn-outline-dark btn-sm"
-                            onclick="renderTestCaseEditForm({{$testCase->id}})">
-                        <i class="bi bi-pencil"></i>
-                    </button>
-
-                    <button type="button" class="btn btn-outline-dark btn-sm" onclick="closeTestCaseEditor()">
-                        <i class="bi bi-x-lg"></i>
-                    </button>
-                </div>
-
-            </div>
 
             <div id="test_case_content" class="position-relative">
                 <div class="p-4 pt-0">

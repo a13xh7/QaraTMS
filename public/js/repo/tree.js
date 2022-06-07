@@ -103,7 +103,7 @@ function TreeSortable() {
 
             <div class="contents">
                 <span class="${cleanSelector(branchPathSelector)}"></span>
-                <div class="branch-wrapper">
+                <div class="branch-wrapper position-relative">
 
                     <div class="left-sidebar" onclick="loadCasesList(${mid ? mid : id}, this)">
                         <div class="${cleanSelector(dragHandlerSelector)}">
@@ -112,7 +112,7 @@ function TreeSortable() {
                         <span id="suite_title_${mid ? mid : id}" class="branch-title" title="${title}">${title}</span>
                     </div>
 
-                    <div class="right-sidebar d-flex justify-content-end">
+                    <div class="right-sidebar d-flex justify-content-end position-absolute end-0">
                         <button id="toogle_collaple_expand" type="button" class="button" title="Expland / Collapse">
                            <i class="bi bi-chevron-bar-expand"></i>
                         </button>

@@ -49,7 +49,7 @@ function isTestCaseCreateOrEditFormLoaded() {
 }
 
 function isTestCaseViewFormLoaded() {
-    return $("#tce_title_input").length > 0;
+    return $("#tce_suite_id").length > 0;
 }
 
 

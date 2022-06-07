@@ -45,14 +45,6 @@ $( document ).ready(function() {
     }
 
 
-    // BLOCK ANY BUTTON AFTER CLICK to prevent ajax errors
-
-    // $("body").on('click', 'button', function () {
-    //     let button = $(this).prop('disabled', true);
-    //     setTimeout(function() {
-    //         button.prop('disabled', false);
-    //     }, 500);
-    // });
 
 
 });

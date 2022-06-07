@@ -27,8 +27,13 @@ function loadSuitesTree() {
 }
 
 function selectFirstSuite() {
-    $('#tree li .left-sidebar').first().click();
-    console.log('select first')
+
+    if($('#tree li .left-sidebar').length > 0) {
+        $('#tree li .left-sidebar').first().click();
+    } else {
+        $('#test_cases_list').empty();
+        closeTestCaseEditor();
+    }
 }
 /**************************************************
  * SUITE FORM - create / edit
@@ -141,6 +146,7 @@ function updateSuite() {
 
         success: function (data) {
             $(`#suite_title_${activeTreeSuiteItem.getId()}`).text(suiteFormTitleInput.val());
+            $('#test_cases_list_site_title').text(suiteFormTitleInput.val())
             closeSuiteForm();
         }
     });
@@ -186,6 +192,14 @@ function deleteSuite(id) {
 
             if(was_selected) {
                 selectFirstSuite();
+            }
+
+            if(isTestCaseCreateOrEditFormLoaded()) {
+                $(`#tce_test_suite_select option[value='${id}']`).remove();
+            }
+
+            if(isTestCaseViewFormLoaded() && $('#tce_suite_id').val() == id) {
+                console.log('close eddddd')
                 closeTestCaseEditor();
             }
 

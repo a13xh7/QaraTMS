@@ -1,9 +1,7 @@
 @extends('layout.base_layout')
 
 @section('head')
-    <link rel="stylesheet" href="{{asset('repository/tree.css')}}">
-
-    <link rel="stylesheet" href="{{asset('repository/repo_wip.css')}}">
+    <link rel="stylesheet" href="{{asset('css/suites_tree.css')}}">
 @endsection
 
 @section('content')
@@ -24,7 +22,7 @@
                 </button>
 
                 <a href="{{route('repository_edit_page', [$project->id, $repository->id])}}"
-                   class="btn px-2 btn-outline-dark me-1"
+                   class="btn btn-sm btn-outline-dark me-1"
                    title="Repository Settings">
                     <i class="bi bi-gear"></i>
                 </a>
@@ -48,7 +46,7 @@
             <div class="d-flex justify-content-between">
 
                 <div>
-                    <span class="fs-5 text-muted me-2">Suite: </span>
+                    <span class="fs-5 text-muted">Suite: </span>
                     <span id="test_cases_list_site_title" class="fs-5">
                     Select Test Suite
                 </span>
@@ -70,6 +68,27 @@
         <div id="test_case_area"></div>
     </div>
 
+
+    <div id="test_suite_form_overlay" class="overlay" style="display: none">
+        <div class="card position-absolute top-50 start-50 translate-middle border-secondary" style="width: 500px">
+            <form class="px-5 pt-3">
+                <h4 id="tsf_title">
+                    Create Test Suite
+                </h4>
+                <hr>
+                <input id="repository_id" type="hidden" value="{{$repository->id}}">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Suite name</label>
+                    <input type="title" class="form-control" id="test_suite_title_input" placeholder="New test suite">
+                </div>
+                <div class="d-flex justify-content-end mb-3">
+                    <button id="tsf_update_btn" type="button" class="btn btn-success mx-3" style="display: none" onclick="updateSuite()">Update</button>
+                    <button id="tsf_create_btn" type="button" class="btn btn-success mx-3" onclick="createSuite()">Create</button>
+                    <button type="button" class="btn btn-danger" onclick="closeSuiteForm()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
 @endsection
 
 {{--<i class=" fs-3 bi bi-chevron-double-up text-danger"></i>--}}
@@ -78,34 +97,13 @@
 
 
 
-<div id="test_suite_form_overlay" class="overlay" style="display: none">
-    <div class="card position-absolute top-50 start-50 translate-middle border-secondary" style="width: 500px">
-        <form class="px-5 pt-3">
-            <h4 id="tsf_title">
-                Create Test Suite
-            </h4>
-            <hr>
-            <input id="repository_id" type="hidden" value="{{$repository->id}}">
-            <div class="mb-3">
-                <label for="title" class="form-label">Suite name</label>
-                <input type="title" class="form-control" id="test_suite_title_input" placeholder="New test suite">
-            </div>
-            <div class="d-flex justify-content-end">
-                <button id="tsf_update_btn" type="button" class="btn btn-success mx-3" style="display: none" onclick="updateSuite()">Update</button>
-                <button id="tsf_create_btn" type="button" class="btn btn-success mx-3" onclick="createSuite()">Create</button>
-                <button type="button" class="btn btn-danger" onclick="closeSuiteForm()">Cancel</button>
-            </div>
-        </form>
-    </div>
-</div>
-
 @section('footer')
     <script>
         let repository_id = {{$repository->id}}
     </script>
 
-    <script src="{{asset('repository/tree.js')}}"></script>
+{{--    <script src="{{asset('repository/tree.js')}}"></script>--}}
 
-    <script src="{{asset('repository/repository.js')}}"></script>
+    <script src="{{asset('/js/repo/repository.js')}}"></script>
 
 @endsection

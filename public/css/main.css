@@ -8,6 +8,7 @@ body {
 
 :root {
     --header_height: 56px;
+    --test_case_controls_opacity: 0;
 }
 
 /*full height*/
@@ -25,6 +26,20 @@ a {
     text-decoration: none;
 }
 
+/****************************************************
+* Overlay
+****************************************************/
+.overlay {
+    display: none;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    background-color: #00000038;
+}
+
 /*************************************************************************************
 * Editor
 *************************************************************************************/
@@ -33,7 +48,6 @@ a {
     border: 1px solid lightgray;
     min-height: 300px
 }
-
 
 /*************************************************************************************
 * Header
@@ -68,7 +82,6 @@ header a{
     text-overflow: ellipsis;
 }
 
-
 /*************************************************************************************
 Scrollbar
 *************************************************************************************/
@@ -89,12 +102,136 @@ Scrollbar
     background: rgba(0,0,0,0);
 }
 
-
-
-
 /*************************************************************************************
-REPOSITORY PAGE
+* Repository - TEST SUITES / CASES TREE / CASE EDITOR
 *************************************************************************************/
+
+/****************************************************
+* Suites Tree
+****************************************************/
+
+#suites_tree_col {
+    height: calc(100vh - var(--header_height));
+    background:  #f4f6f9;
+    overflow: hidden;
+}
+
+#tree {
+    padding-bottom: 40px !important;
+}
+
+.selected {
+    border: 1px solid rgba(25, 54, 84, 0.22) !important;
+    background: #edf7fb !important;
+    border-radius: 3px;
+}
+
+/****************************************************
+* Test cases list
+****************************************************/
+#test_cases_list_col {
+    min-width: 30%;
+}
+
+.test_case_clickable_area {
+    width: 100%;
+    cursor: pointer;
+}
+
+.test_case_controls {
+    min-width: 70px;
+}
+
+.test_case:hover {
+    background: #7c87911c;
+    --test_case_controls_opacity: 1;
+}
+
+.test_case_info {
+    min-width: 140px;
+}
+
+.test_case_controls {
+    opacity: var(--test_case_controls_opacity);
+    transition: 0.3s;
+}
+
+/****************************************************
+* Test case editor area
+****************************************************/
+
+#test_case_col {
+    /*background:  #f4f6f9;*/
+}
+
+
+
+
+
+
+
+
+
+
+
+/****************************************************
+*old
+****************************************************/
+
+
+#tree {
+    margin-left: -30px;
+    overflow-y: auto;
+    max-height: calc(100vh - 120px)
+}
+
+.tree_suite {
+    padding-left: 30px;
+}
+
+
+.tree_test_suite_content {
+    background: #d9dfe3;
+    padding-left: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.tree_suite_test_cases {
+    margin-bottom: 10px;
+}
+
+.tree_test_case_content {
+    border-bottom: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.tree_test_case_click {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    width: 90%;
+}
+
+.tree_test_case_controls {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+}
+
+.tree_test_case_content:hover {
+    background: #7c87911c;
+}
+
+.test_case_id {
+    display: inline-block;
+    width: 110px;
+}
+
+.test_suite_cbx {
+    margin-top: 10px;
+}
+
 
 .test_suites_col {
     overflow-y: auto;

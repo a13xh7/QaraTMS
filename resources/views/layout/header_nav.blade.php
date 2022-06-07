@@ -14,7 +14,7 @@
 {{--            DO NOT DISABE UL because form will be at start--}}
             <div class="navbar-nav nav-pills me-auto mb-2 mb-lg-0">
 
-                @if(str_contains(url()->current(),'repository'))
+                @if(Route::currentRouteName() == 'repository_show_page')
                     <a href="{{route("repository_list_page", $project->id)}}" class="nav-link text-white">
                         <i class="bi bi-server"></i>
                         Repositories

@@ -3,12 +3,11 @@
     <div class="d-flex justify-content-between border-bottom mt-2 pb-2 mb-2">
 
 
-
         <div style="min-width: 140px">
 
             <i class="bi bi-chevron-double-up text-danger"></i>
 
-            <span>
+                <span>
                     @if($testCase->automated)
                     <i class="bi bi-robot mx-1"></i>
                 @else
@@ -24,20 +23,24 @@
 
         </div>
 
+        <input type="hidden" id="tce_suite_id" value="{{$testCase->suite_id}}">
+
 
         <div class="test_case_title">
-            <a href="{{route('test_case_show_page', $testCase->id)}}" class="link-dark"> <b>{{$testCase->title}}</b> </a>
+            <a target="_blank" href="{{route('test_case_show_page', $testCase->id)}}" class="link-dark"> <b>{{$testCase->title}}</b> </a>
         </div>
 
         <div style="min-width: 70px" class="justify-content-end ">
+
             <button type="button" class="btn btn-outline-dark btn-sm"
                     onclick="renderTestCaseEditForm({{$testCase->id}})">
                 <i class="bi bi-pencil"></i>
             </button>
 
-            <button type="button" class="btn btn-outline-dark btn-sm" onclick="closeTestCaseEditor()">
+            <button href="button" class="btn btn-outline-dark btn-sm" onclick="closeTestCaseEditor()">
                 <i class="bi bi-x-lg"></i>
             </button>
+
         </div>
 
     </div>

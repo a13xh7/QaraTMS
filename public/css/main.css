@@ -15,6 +15,13 @@ body {
 .fh {
     height: calc(100vh - var(--header_height));
     max-height: 100vh - var(--header_height);
+    overflow: auto;
+}
+
+.fh2 {
+    height: calc(100vh - 150px);
+    max-height: calc(100vh - 150px);
+    overflow: auto;
 }
 
 h3.page_title {
@@ -49,6 +56,14 @@ a {
     min-height: 300px
 }
 
+/*************************************************************************************
+* Image lightbox
+*************************************************************************************/
+
+#any_img_lightbox_image {
+    max-height: 90vh;
+    max-width: 90vw;
+}
 /*************************************************************************************
 * Header
 *************************************************************************************/
@@ -162,7 +177,57 @@ Scrollbar
 
 #test_case_col {
     /*background:  #f4f6f9;*/
+    /*max-height: calc(100vh - 120px);*/
 }
+
+.test_case_editor {
+    max-height: calc(100vh - 120px);
+}
+
+#test_case_content {
+    overflow-y: auto;
+    max-height: calc(100vh - 170px)
+}
+
+#test_case_editor_footer {
+    position: absolute;
+    bottom: 10px;
+}
+
+
+
+
+/****************************************************
+* DOCS
+****************************************************/
+
+.doc_title {
+    max-width: 1200px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.docs_tree_link {
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -248,10 +313,7 @@ Scrollbar
     padding-right: 10px;
 }
 
-#test_case_content {
-    overflow-y: auto;
-    max-height: calc(100vh - 120px)
-}
+
 
 [data-badge]:after {
     background: #6c757d;

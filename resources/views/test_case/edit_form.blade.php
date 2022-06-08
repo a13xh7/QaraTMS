@@ -2,7 +2,7 @@
 
     <div class="d-flex justify-content-between border-bottom mt-2 pb-2 mb-2">
         <div>
-            <span class="fs-5">Edit New Test Case</span>
+            <span class="fs-5">Edit Test Case</span>
         </div>
 
         <div>
@@ -15,38 +15,35 @@
     <div id="test_case_content">
         <div class="p-4 pt-0">
 
-            <div class="row mb-3 border p-3 rounded">
+            <div class="row mb-3">
 
                 <div class="mb-3 d-flex justify-content-start border p-3 bg-light">
 
                     <div>
-                        <label for="test_suite_id" class="form-label">Test Suite</label>
+                        <label for="test_suite_id" class="form-label"><strong>Test Suite</strong></label>
                         <select name="suite_id" id="tce_test_suite_select" class="form-select border-secondary">
 
-                            @foreach($repository->suites as $repoTestSuite)
+                            @foreach($repository->suites as $repoTestSuite)--}}
 
-                                <option value="{{$repoTestSuite->id}}"
-                                        @if($repoTestSuite->id == $testCase->suite_id)
-                                        selected
-                                    @endif
-                                >
-                                    {{$repoTestSuite->title}}
-                                </option>
-                            @endforeach
+                            <option value="{{$repoTestSuite->id}}"
+                                    @if($repoTestSuite->id == $testCase->suite_id)
+                                    selected
+                                @endif
+                            >
+                                {{$repoTestSuite->title}}
+                            </option>
+                        @endforeach
 
                         </select>
                     </div>
 
-
                     <div class="mx-5">
-
                         <label class="form-label">
                             <b>Priority</b>
                             <i class="bi bi-chevron-double-up text-danger"></i>|<i class="bi bi-list text-info"></i>|<i class="bi bi-chevron-double-down text-warning"></i>
                         </label>
 
                         <select id="tce_priority_select" name="priority" class="form-select border-secondary" id="tce_priority_select">
-
                             @if($testCase->priority == \App\Enums\CasePriority::NORMAL)
                                 <option value="{{\App\Enums\CasePriority::NORMAL}}" selected> Normal</option>
                                 <option value="{{\App\Enums\CasePriority::HIGH}}">High</option>
@@ -60,22 +57,19 @@
                                 <option value="{{\App\Enums\CasePriority::HIGH}}">High</option>
                                 <option value="{{\App\Enums\CasePriority::LOW}}" selected>Low</option>
                             @endif
-
                         </select>
                     </div>
 
-                    <div class="mx-5">
-                        <label class="form-label">Type <i class="bi bi-person"></i> | <i class="bi bi-robot"></i></label>
+                    <div>
+                        <label class="form-label"><b>Type</b> <i class="bi bi-person"></i> | <i class="bi bi-robot"></i></label>
                         <select name="automated" class="form-select border-secondary" id="tce_automated_select">
-
-                            @if($testCase->automated)
+                            @if($testCase->automated)--}}
                                 <option value="0"> Manual</option>
                                 <option value="1" selected>Automated</option>
                             @else
                                 <option value="0" selected> Manual</option>
                                 <option value="1">Automated</option>
                             @endif
-
                         </select>
                     </div>
 
@@ -83,105 +77,91 @@
 
                 <input type="hidden" id="tce_case_id" value="{{$testCase->id}}">
 
-                <div class="mb-3">
+                <div class="mb-3 p-0">
                     <label for="title" class="form-label"><b>Title</b></label>
-                    <input name="title" id="tce_title_input" type="text" class="form-control border-secondary" value="{{$testCase->title}}" >
+                    <input name="title" id="tce_title_input" type="text" class="form-control border-secondary"  value="{{$testCase->title}}">
                 </div>
 
-                <div class="col">
+                <div class="col p-0">
                     <label class="form-label"><b>Preconditions</b></label>
-                    @if(isset($data->preconditions))
-                        <textarea name="pre_conditions" class="form-control border-secondary" id="tce_preconditions_input" rows="3">{{ $data->preconditions }}</textarea>
+                    @if(isset($data->preconditions))--}}
+                        <textarea name="pre_conditions" class="editor_textarea form-control border-secondary" id="tce_preconditions_input" rows="3">{{ $data->preconditions }}</textarea>
                     @else
-                        <textarea name="pre_conditions" class="form-control border-secondary" id="tce_preconditions_input" rows="3"></textarea>
+                        <textarea name="pre_conditions" class="editor_textarea form-control border-secondary" id="tce_preconditions_input" rows="3"></textarea>
                     @endif
                 </div>
 
             </div>
 
-
-
-            <div class="row mb-3 border p-3 rounded" id="steps_container">
-                <p class="fs-5">Steps</p>
+            <div class="row" id="steps_container">
+                <div class="p-0 mb-1">
+                    <b class="fs-5">Steps</b>
+                    <span class="text-muted fw-lighter" style="font-size: 12px">Action <i class="bi bi-arrow-right"></i> Expected Result</span>
+                </div>
 
                 @if(isset($data->steps))
 
                     @foreach($data->steps as $id => $step)
 
                         <div class="row m-0 p-0 step">
-
-                            <div class="col-auto p-0 pt-4">
+                            <div class="col-auto p-0 d-flex flex-column align-items-center">
                                 <span class="fs-5 step_number">{{$id+1}}</span>
-                            </div>
-
-                            <div class="col">
-                                <label class="form-label m-0"><b>Action</b></label>
-                                <textarea class="form-control border-secondary step_action" rows="2">{!! $step->action !!}</textarea>
-                            </div>
-
-                            <div class="col">
-                                <label class="form-label m-0"><b>Expected Result</b></label>
-                                <textarea class="form-control border-secondary step_result" rows="2">{{ $step->result }}</textarea>
-                            </div>
-
-                            <div class="col-auto p-0 pt-4">
-                                <button type="button" class="btn btn-outline-danger btn-sm step_delete_btn" onclick="removeStep(this)">
+                                <button type="button" class="btn btn-outline-danger btn-sm step_delete_btn px-1 py-0" onclick="removeStep(this)">
                                     <i class="bi bi-x-circle"></i>
                                 </button>
                             </div>
 
+                            <div class="col p-0 mx-1">
+                                <textarea class="editor_textarea form-control border-secondary step_action" rows="2">{!! $step->action !!}</textarea>
+                            </div>
+                            <div class="col p-0">
+                                <textarea class="editor_textarea form-control border-secondary step_result" rows="2">{{ $step->result }}</textarea>
+                            </div>
                         </div>
                     @endforeach
 
                 @else
+
                     <div class="row m-0 p-0 step">
-
-                        <div class="col-auto p-0 pt-4">
+                        <div class="col-auto p-0 d-flex flex-column align-items-center">
                             <span class="fs-5 step_number">1</span>
-                        </div>
-
-                        <div class="col">
-                            <label class="form-label m-0"><b>Action</b></label>
-                            <textarea class="form-control border-secondary step_action" rows="2"></textarea>
-                        </div>
-
-                        <div class="col">
-                            <label class="form-label m-0"><b>Expected Result</b></label>
-                            <textarea class="form-control border-secondary step_result" rows="2"></textarea>
-                        </div>
-
-                        <div class="col-auto p-0 pt-4">
-                            <button type="button" class="btn btn-outline-danger btn-sm step_delete_btn" onclick="removeStep(this)">
+                            <button type="button" class="btn btn-outline-danger btn-sm step_delete_btn px-1 py-0" onclick="removeStep(this)">
                                 <i class="bi bi-x-circle"></i>
                             </button>
                         </div>
 
+                        <div class="col p-0 mx-1">
+                            <textarea class="editor_textarea form-control border-secondary step_action" rows="2"></textarea>
+                        </div>
+                        <div class="col p-0">
+                            <textarea class="editor_textarea form-control border-secondary step_result" rows="2"></textarea>
+                        </div>
                     </div>
+
                 @endif
-            </div>
 
-
-            <div class="row border mt-3 p-3 rounded">
-                <div class="col">
-                    <button type="button" class="btn btn-primary" onclick="addStep()">
-                        <i class="bi bi-plus-circle"></i>
-                        Add Step
-                    </button>
-                </div>
-
-
-                <div class="col">
-                    <button id="tce_save_btn" type="button" class="btn btn-warning w-100" onclick="updateTestCase()">
-                        <i class="bi bi-save"></i>
-                        Update Test Case
-                    </button>
-                </div>
             </div>
 
         </div>
     </div>
 
+    <div id="test_case_editor_footer" class="col-5 d-flex justify-content-end border-top pt-2">
 
+        <button type="button" class="btn btn-primary px-5" onclick="addStep()">
+            <i class="bi bi-plus-circle"></i>
+            Add Step
+        </button>
 
+        <div class="col d-flex justify-content-end pe-3">
+            <button id="tce_save_btn" type="button" class="btn btn-warning px-5 mx-3 me-3" onclick="updateTestCase()">
+                <i class="bi bi-save"></i>
+                Update Test Case
+            </button>
+        </div>
+    </div>
 
 </div>
+
+
+
+

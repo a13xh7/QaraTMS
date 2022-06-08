@@ -77,6 +77,7 @@ function createTestCase(addAnother=false) {
             'suite_id': newTestCase.suite_id,
             'automated': newTestCase.automated,
             'priority': newTestCase.priority,
+            'order': $('.test_case').length + 1,
             'data': JSON.stringify(newTestCase.data)
         },
 

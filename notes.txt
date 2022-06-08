@@ -5,7 +5,9 @@ replace collapse icon test suite
 new editor
 registration / users
 
+$( document ).ready(function() {
 
+});
 
 html код новых шагов находится в 4-х местах - формы создать, обновить(if,else) и в js коде case_viewer
 

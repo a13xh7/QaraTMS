@@ -2,8 +2,7 @@
 
     <div class="d-flex justify-content-between border-bottom mt-2 pb-2 mb-2">
         <div>
-            <span class="fs-5">Create New Test Case</span>
-            <span class="text-muted"> | you can use markdown formatting</span>
+            <span class="fs-5">Create Test Case</span>
         </div>
 
         <div>
@@ -16,7 +15,7 @@
     <div id="test_case_content">
         <div class="p-4 pt-0">
 
-            <div class="row mb-3 border p-3 rounded">
+            <div class="row mb-3">
 
                 <div class="mb-3 d-flex justify-content-start border p-3 bg-light">
 
@@ -36,11 +35,6 @@
 
                         </select>
                     </div>
-
-                    {{--<i class=" fs-3 bi bi-chevron-double-up text-danger"></i>--}}
-                    {{--<i class=" fs-3 bi bi-chevron-double-down text-warning"></i>--}}
-                    {{--<i class=" fs-3 bi bi-list text-success"></i>--}}
-
 
                     <div class="mx-5">
                         <label class="form-label">
@@ -65,72 +59,63 @@
 
                 </div>
 
-                <div class="mb-3">
+                <div class="mb-3 p-0">
                     <label for="title" class="form-label"><b>Title</b></label>
                     <input name="title" id="tce_title_input" type="text" class="form-control border-secondary" >
                 </div>
 
-                <div class="col">
+                <div class="col p-0">
                     <label class="form-label"><b>Preconditions</b></label>
-                    <textarea name="pre_conditions" class="form-control border-secondary" id="tce_preconditions_input" rows="3"></textarea>
+                    <textarea name="pre_conditions" class="editor_textarea form-control border-secondary" id="tce_preconditions_input" rows="3"></textarea>
                 </div>
 
             </div>
 
-            <div class="row mb-3 border p-3 rounded" id="steps_container">
-                <p class="fs-5">Steps</p>
+            <div class="row" id="steps_container">
+               <div class="p-0 mb-1">
+                   <b class="fs-5">Steps</b>
+                   <span class="text-muted fw-lighter" style="font-size: 12px">Action <i class="bi bi-arrow-right"></i> Expected Result</span>
+               </div>
 
                 <div class="row m-0 p-0 step">
-
-                    <div class="col-auto p-0 pt-4">
+                    <div class="col-auto p-0 d-flex flex-column align-items-center">
                         <span class="fs-5 step_number">1</span>
-                    </div>
-
-                    <div class="col">
-                        <label class="form-label m-0"><b>Action</b></label>
-                        <textarea class="form-control border-secondary step_action" rows="2"></textarea>
-                    </div>
-
-                    <div class="col">
-                        <label class="form-label m-0"><b>Expected Result</b></label>
-                        <textarea class="form-control border-secondary step_result" rows="2"></textarea>
-                    </div>
-
-                    <div class="col-auto p-0 pt-4">
-                        <button type="button" class="btn btn-outline-danger btn-sm step_delete_btn" onclick="removeStep(this)">
+                        <button type="button" class="btn btn-outline-danger btn-sm step_delete_btn px-1 py-0" onclick="removeStep(this)">
                             <i class="bi bi-x-circle"></i>
                         </button>
                     </div>
 
+                    <div class="col p-0 mx-1">
+                        <textarea class="editor_textarea form-control border-secondary step_action" rows="2"></textarea>
+                    </div>
+                    <div class="col p-0">
+                        <textarea class="editor_textarea form-control border-secondary step_result" rows="2"></textarea>
+                    </div>
                 </div>
 
             </div>
-
-            <div class="row border mt-3 p-3 rounded d-flex justify-content-between" >
-
-                <div class="col">
-                    <button type="button" class="btn btn-primary" onclick="addStep()">
-                        <i class="bi bi-plus-circle"></i>
-                        Add Step
-                    </button>
-                </div>
-
-
-                <div class="col d-flex justify-content-end pe-3">
-
-                    <button id="tce_save_btn" type="button" class="btn btn-success me-3" onclick="createTestCase()">
-                        Create
-                    </button>
-
-                    <button id="tce_save_btn" type="button" class="btn btn-success" onclick="createTestCase(true)">
-                        Create and add another
-                    </button>
-                </div>
-            </div>
-
 
         </div>
     </div>
 
+    <div id="test_case_editor_footer" class="col-5 d-flex justify-content-between border-top pt-2">
+        <div class="col">
+            <button type="button" class="btn btn-primary" onclick="addStep()">
+                <i class="bi bi-plus-circle"></i>
+                Add Step
+            </button>
+        </div>
+
+        <div class="col d-flex justify-content-end pe-3">
+
+            <button id="tce_save_btn" type="button" class="btn btn-success me-3" onclick="createTestCase()">
+                Create
+            </button>
+
+            <button id="tce_save_btn" type="button" class="btn btn-success me-3" onclick="createTestCase(true)">
+                Create and add another
+            </button>
+        </div>
+    </div>
 
 </div>

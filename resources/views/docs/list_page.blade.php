@@ -5,7 +5,7 @@
     @include('layout.sidebar_nav')
 
 
-    <div class="col">
+    <div class="col fh">
 
         <div class="border-bottom my-3">
             <h3 class="page_title">
@@ -22,8 +22,8 @@
                 <div class="col base_block shadow">
 
                     <div class="mt-2 d-flex justify-content-between border-bottom pb-1">
-                        <div>
-                            <span class="fs-2">{{$selectedDocument->title}}</span>
+                        <div class="doc_title" title="{{$selectedDocument->title}}">
+                            <span class="fs-3">{{$selectedDocument->title}}</span>
                         </div>
 
                         <div class="mt-2">

@@ -18,7 +18,7 @@ class CreateDocumentsTable extends Migration
             $table->foreignId('project_id')->constrained('projects')->onDelete('cascade');
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->string('title');
-            $table->text('content')->nullable();
+            $table->longText('content')->nullable();
             $table->timestamps();
         });
     }

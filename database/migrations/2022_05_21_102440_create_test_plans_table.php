@@ -19,7 +19,7 @@ class CreateTestPlansTable extends Migration
             $table->integer('repository_id');
             $table->string('title');
             $table->string('description')->nullable();
-            $table->text('data')->nullable();
+            $table->longText('data')->nullable();
             $table->timestamps();
         });
     }

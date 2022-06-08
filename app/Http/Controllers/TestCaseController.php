@@ -20,6 +20,7 @@ class TestCaseController extends Controller
         $testCase->automated = (bool)$request->automated;
         $testCase->priority = $request->priority;
         $testCase->suite_id = $request->suite_id;
+        $testCase->order = $request->order;
         $testCase->data = $request->data;
 
         $testCase->save();

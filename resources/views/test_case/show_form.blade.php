@@ -27,7 +27,9 @@
 
 
         <div class="test_case_title">
-            <a target="_blank" href="{{route('test_case_show_page', $testCase->id)}}" class="link-dark"> <b>{{$testCase->title}}</b> </a>
+            <a target="_blank" href="{{route('test_case_show_page', $testCase->id)}}" class="link-dark">
+                <i class="bi bi-link-45deg"></i>
+                <b>{{$testCase->title}}</b> </a>
         </div>
 
         <div style="min-width: 70px" class="justify-content-end ">
@@ -53,7 +55,7 @@
                     <div class="row mb-3 border p-3 rounded">
 
                         <div>
-                            {!! parsedown($data->preconditions) !!}
+                            {!! $data->preconditions !!}
                         </div>
 
                     </div>
@@ -78,13 +80,13 @@
 
                                 <div class="col-6">
                                     <div>
-                                        {!! parsedown($step->action) !!}
+                                        {!! $step->action !!}
                                     </div>
                                 </div>
 
                                 <div class="col-6">
                                     <div>
-                                        {!! parsedown($step->result) !!}
+                                        {!! $step->result !!}
                                     </div>
                                 </div>
                             </div>

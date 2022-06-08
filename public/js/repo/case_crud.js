@@ -1,4 +1,29 @@
+$("#test_cases_list").sortable({
+    update: function (e, u) {
+        updateOrder();
+    }
+});
 
+function updateOrder() {
+    var order = [];
+    $('#test_cases_list .test_case').each(function(index,element) {
+        order.push({
+            id: $(this).attr('data-case_id'),
+            order: index+1
+        });
+    });
+    console.log(order)
+
+    $.ajax({
+        url: "/tcuo",
+        type: 'post',
+        data: {
+            order: order
+        },
+        success: function (result) {
+        }
+    });
+}
 /****************************************************************************
  * Get data from CREATE and UPDATE test case form. Save data in object
  ****************************************************************************/

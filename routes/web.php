@@ -32,7 +32,7 @@ Route::get('/repo/{id}',[\App\Http\Controllers\AjaxDataController::class, 'getSu
 Route::post('/tsup',[TestSuiteController::class, 'updateParent']);
 Route::post('/tsuo',[TestSuiteController::class, 'updateOrder']);
 
-
+Route::post('/tcuo',[TestCaseController::class, 'updateOrder']);
 
 /**********************************************************************
 // PROJECT

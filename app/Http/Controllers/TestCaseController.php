@@ -70,6 +70,15 @@ class TestCaseController extends Controller
         $testCase->delete();
     }
 
+    public function updateOrder(Request $request)
+    {
+        foreach($request->order as $data){
+            $testCase = TestCase::findOrFail($data['id']);
+            $testCase->order = $data['order'];
+            $testCase->save();
+        }
+    }
+
     /*****************************************
      *  PAGES / FORMS / HTML BLOCKS
      *****************************************/

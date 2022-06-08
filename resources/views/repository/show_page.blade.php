@@ -97,8 +97,16 @@
         let repository_id = {{$repository->id}}
     </script>
 
-{{--    <script src="{{asset('repository/tree.js')}}"></script>--}}
-
     <script src="{{asset('/js/repo/repository.js')}}"></script>
+
+    <script>
+
+        $("#test_cases_list").sortable({
+            update: function (e, u) {
+
+            }
+        });
+
+    </script>
 
 @endsection

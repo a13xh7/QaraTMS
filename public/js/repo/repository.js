@@ -14,8 +14,6 @@ $.getScript('/js/repo/case_editor.js', function() {
     loadSuitesTree();
 });
 
-
-
 /**************************************************
  * Click on test suite - load suite test cases
  *************************************************/

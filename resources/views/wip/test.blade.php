@@ -46,22 +46,8 @@
     $("#sortable").sortable({
         update: function (e, u) {
 
-            console.log($(this).sortable('serialize'));
 
-            {{--var data = $(this).sortable('serialize');--}}
-            {{--$.ajax({--}}
-            {{--    url: "{{ url('controller/sorting_method') }}",--}}
-            {{--    type: 'post',--}}
-            {{--    data: data,--}}
-            {{--    success: function (result) {--}}
-
-            {{--    },--}}
-            {{--    complete: function () {--}}
-
-            {{--    }--}}
-            {{--});--}}
         }
-
     });
 </script>
 

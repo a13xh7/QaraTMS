@@ -84,7 +84,7 @@
 
                 <div class="col p-0">
                     <label class="form-label"><b>Preconditions</b></label>
-                    @if(isset($data->preconditions))--}}
+                    @if(isset($data->preconditions))
                         <textarea name="pre_conditions" class="editor_textarea form-control border-secondary" id="tce_preconditions_input" rows="3">{{ $data->preconditions }}</textarea>
                     @else
                         <textarea name="pre_conditions" class="editor_textarea form-control border-secondary" id="tce_preconditions_input" rows="3"></textarea>

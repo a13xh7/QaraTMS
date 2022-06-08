@@ -21,7 +21,7 @@
             </div>
         @endif
 
-        <div class="card p-4 shadow">
+        <div class="base_block p-4 shadow">
             <form action="{{route('project_create')}}" method="POST" enctype="multipart/form-data">
 
                 @csrf

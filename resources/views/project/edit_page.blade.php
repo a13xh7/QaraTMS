@@ -38,7 +38,7 @@
         </div>
     @endif
 
-    <div class="card p-4">
+    <div class="base_block shadow p-4">
         <form action="{{route('project_update')}}" method="POST">
 
             @csrf

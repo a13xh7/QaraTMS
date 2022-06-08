@@ -23,7 +23,7 @@
             </div>
         @endif
 
-        <div class="card p-4">
+        <div class="base_block shadow p-4">
             <form  method="POST" action="{{route('repository_create')}}">
                 @csrf
 

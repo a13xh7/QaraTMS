@@ -66,9 +66,40 @@
 
 @section('footer')
     <script>
+        // $('#content').summernote({
+        //     minHeight: '300px',
+        //     callbacks: {
+        //         onImageUpload: function(files, editor, welEditable) {
+        //             sendFile(files[0], editor, welEditable);
+        //         }
+        //     }
+        // });
+
         $('#content').summernote({
-            minHeight: '300px',
+            minHeight: '300px'
         });
+
+
+
+        {{--function sendFile(file, editor, welEditable) {--}}
+        {{--    var lib_url = '{{route('ckeditor.upload')}}';--}}
+        {{--    data = new FormData();--}}
+        {{--    data.append("file", file);--}}
+        {{--    console.log(data)--}}
+        {{--    $.ajax({--}}
+        {{--        data: data,--}}
+        {{--        type: "POST",--}}
+        {{--        url: lib_url,--}}
+        {{--        cache: false,--}}
+        {{--        processData: false,--}}
+        {{--        contentType: false,--}}
+        {{--        success: function(url) {--}}
+        {{--            console.log(url)--}}
+        {{--            var image = $('<img>').attr('src', url);--}}
+        {{--            $('.summernote_editor').summernote("insertNode", image[0]);--}}
+        {{--        }--}}
+        {{--    });--}}
+        {{--}--}}
     </script>
 
 @endsection

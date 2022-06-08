@@ -19,8 +19,8 @@
         <div class="row row-cols-1 row-cols-md-2 g-3">
             @foreach($testPlans as $testPlan)
 
-                <div class="col">
-                    <div class="card h-100">
+                <div class="col ">
+                    <div class="card shadow h-100">
 
                         <div class="card-body d-flex justify-content-between pb-0">
                             <div>

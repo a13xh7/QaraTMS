@@ -29,15 +29,21 @@ function loadCasesList(id, element) {
     $('#test_cases_list').load(`/tscl/${activeTreeSuiteItem.getId()}`, function() { }); // load test cases
 }
 
-function expandSuitesList() {
+/**************************************************
+ * Collapse / expand test cases list
+ **************************************************/
+function expandCasesList() {
     $('#test_cases_list_col').addClass('col-9').removeClass('col')
 }
 
-function collapseSuitesList() {
+function collapseCasesList() {
     $('#test_cases_list_col').addClass('col').removeClass('col-9')
 }
 
-// BLOCK ANY BUTTON AFTER CLICK to prevent ajax errors
+/**************************************************
+ *  BLOCK ANY BUTTON AFTER CLICK
+ *  to prevent ajax errors, double input
+ **************************************************/
 
 $("body").on('click', 'button', function () {
     let button = $(this).prop('disabled', true);
@@ -46,21 +52,29 @@ $("body").on('click', 'button', function () {
     }, 500);
 });
 
-
 /**************************************************
  * Collapse / expand children
  **************************************************/
-
+let hide = false;
 $('body').on("click", "#toogle_collaple_expand", function (e) {
     let suite_id = $(this).parent().parent().parent().parent().data('mid');
-    rec(suite_id)
+
+    hide = hide ? false : true;
+
+    rec(suite_id, hide)
 });
 
-function rec(suite_id) {
-    let child_li = $(`li[data-pid='${suite_id}']`).hide();
+function rec(suite_id, hide) {
+    let child_li = $(`li[data-pid='${suite_id}']`);
+
+    if(hide) {
+        child_li.hide();
+    } else {
+        child_li.show();
+    }
 
     if($(`li[data-pid='${child_li.attr('data-mid')}']` ).length > 0) {
-        rec(child_li.attr('data-mid'))
+        rec(child_li.attr('data-mid'), hide)
     }
 }
 

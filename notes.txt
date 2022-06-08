@@ -1,8 +1,9 @@
 
-sort cases
+
+replace collapse icon test suite
+
 new editor
 registration / users
-priority field
 
 
 
@@ -11,18 +12,12 @@ html код новых шагов находится в 4-х местах - фо
 
 composer dumpautoload
 
-
-
-
 https://github.com/staudenmeir/laravel-adjacency-list
-
 
 
 git reset --hard HEAD~1
 
 php artisan db:seed --class=UserSeeder
-
-
 
 
 php artisan make:migration create_repositories_table

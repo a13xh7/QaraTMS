@@ -18,7 +18,7 @@ class CreateTestRunsTable extends Migration
             $table->foreignId('test_plan_id')->constrained('test_plans')->onDelete('cascade');
             $table->integer('project_id');
             $table->string('title');
-            $table->text('data')->nullable();
+            $table->longText('data')->nullable();
             $table->timestamps();
         });
     }

@@ -1,7 +1,27 @@
+
+let editor;
+function renderEditors() {
+    editor = $('.editor_textarea').summernote({
+            minHeight: null,             // set minimum height of editor
+            maxHeight: null,             // set maximum height of editor
+            focus: true,                // set focus to editable area after initializing summernote
+
+            toolbar: [
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['picture'],
+            ]
+        },
+    );
+
+    $('.editor_textarea').removeClass('editor_textarea');
+}
+
+
 /****************************************************************************
  * TEST CASE AREA in repository. Load TEST CASE forms
  ****************************************************************************/
-
 
 let testCaseAreaLocator = "#test_case_area";
 
@@ -16,6 +36,7 @@ function loadTestCaseCreateForm() {
     $(testCaseAreaLocator).load(url, function() {
         $('textarea').autoResize();
         collapseCasesList();
+        renderEditors();
     });
 }
 
@@ -35,6 +56,7 @@ function renderTestCaseEditForm(test_case_id) {
         $('textarea').autoResize();
         oldParentId = $("#tccf_test_suite_select").val();
         collapseCasesList();
+        renderEditors();
     });
 }
 
@@ -61,6 +83,7 @@ function isTestCaseViewFormLoaded() {
 function addStep() {
     let stepNumber = $('.step').length + 1;
     renderStep(stepNumber)
+    renderEditors();
 }
 
 function removeStep(btn) {
@@ -79,29 +102,21 @@ function removeStep(btn) {
 
 function renderStep(stepNumber) {
     let stepHtml = `
-         <div class="row m-0 p-0 step">
+    <div class="row m-0 mt-2 p-0 step">
+        <div class="col-auto p-0 d-flex flex-column align-items-center">
+            <span class="fs-5 step_number">${stepNumber}</span>
+            <button type="button" class="btn btn-outline-danger btn-sm step_delete_btn px-1 py-0" onclick="removeStep(this)">
+                <i class="bi bi-x-circle"></i>
+            </button>
+        </div>
 
-            <div class="col-auto p-0 pt-4">
-                <span class="fs-5 step_number">${stepNumber}</span>
-            </div>
-
-            <div class="col">
-                <label class="form-label m-0"><b>Action</b></label>
-                <textarea class="form-control border-secondary step_action" rows="2"></textarea>
-            </div>
-
-            <div class="col">
-                <label class="form-label m-0"><b>Expected Result</b></label>
-                <textarea class="form-control border-secondary step_result" rows="2"></textarea>
-            </div>
-
-            <div class="col-auto p-0 pt-4">
-                <button type="button" class="btn btn-outline-danger btn-sm step_delete_btn" onclick="removeStep(this)">
-                    <i class="bi bi-x-circle"></i>
-                </button>
-            </div>
-
-        </div>`;
+        <div class="col p-0 mx-1">
+            <textarea class="editor_textarea form-control border-secondary step_action" rows="2"></textarea>
+        </div>
+        <div class="col p-0">
+            <textarea class="editor_textarea form-control border-secondary step_result" rows="2"></textarea>
+        </div>
+    </div>`;
 
     $("#steps_container").append(stepHtml)
 }

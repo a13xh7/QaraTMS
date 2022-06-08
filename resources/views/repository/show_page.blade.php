@@ -2,6 +2,9 @@
 
 @section('head')
     <link rel="stylesheet" href="{{asset('css/suites_tree.css')}}">
+
+    <link href="{{asset('editor/summernote-repo.css')}}" rel="stylesheet">
+    <script src="{{asset('editor/summernote-lite.min.js')}}"></script>
 @endsection
 
 @section('content')

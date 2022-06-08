@@ -11,7 +11,14 @@ $.getScript('/js/repo/case_crud.js', function() {});
  * when all scripts are loaded
  *************************************************/
 $.getScript('/js/repo/case_editor.js', function() {
-    loadSuitesTree();
+    try {
+        loadSuitesTree();
+    }
+    catch (e) {
+        setTimeout(function() {
+            loadSuitesTree();
+        }, 1000);
+    }
 });
 
 /**************************************************
@@ -49,7 +56,7 @@ $("body").on('click', 'button', function () {
     let button = $(this).prop('disabled', true);
     setTimeout(function() {
         button.prop('disabled', false);
-    }, 500);
+    }, 250);
 });
 
 /**************************************************

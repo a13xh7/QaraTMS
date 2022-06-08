@@ -6,53 +6,48 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link
-        rel="stylesheet"
-        href="//cdnjs.cloudflare.com/ajax/libs/jodit/3.18.9/jodit.min.css"
-    />
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jodit/3.18.9/jodit.min.js"></script>
+
+    <!-- include libraries(jQuery, bootstrap) -->
+    <script type="text/javascript" src="//code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
+    <script type="text/javascript" src="cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-bs5.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-bs5.min.js"></script>
 
 </head>
 <body>
 
-<textarea id="editor"></textarea>
-
-<hr>
-
-<textarea></textarea>
 
 
+<textarea id="summernote">Hello Summernote</textarea>
 
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
 
 <script>
-    const editor2 = Jodit.make("#editor", {
-        "showCharsCounter": false,
-        "showWordsCounter": false,
-        "showXPathInStatusbar": false,
-        "buttons": "bold,italic,underline,strikethrough,ul,ol,table,link,align",
+    let editor;
+    $(document).ready(function() {
 
-    });
+        editor = $('#summernote').summernote({
+                height: 300,                 // set editor height
+                minHeight: null,             // set minimum height of editor
+                maxHeight: null,             // set maximum height of editor
+                focus: true,                // set focus to editable area after initializing summernote
 
-
-    $('textarea').each(function () {
-        var editor = Jodit.make(this, {
-            uploader: {
-                url: 'http://localhost:8181/index.php?action=fileUpload'
+                toolbar: [
+                    // [groupName, [list of button]]
+                    ['style', ['bold', 'italic', 'underline', 'clear']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                ]
             },
-            filebrowser: {
-                ajax: {
-                    url: 'http://localhost:8181/index.php'
-                }
-            }
-            }
         );
-        editor.value = '<p>start</p>';
     });
-
 </script>
-
 </body>
 </html>
+
+
+
+

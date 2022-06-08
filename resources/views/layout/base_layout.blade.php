@@ -7,11 +7,14 @@
 
     <link rel="icon" type="image/x-icon" href="{{asset('/img/favicon.ico')}}">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
 
     <link href="{{asset('css/main.css')}}" rel="stylesheet">
-
 
     @yield('head')
 </head>
@@ -25,9 +28,7 @@
 
     <div class="row fh">
 
-
-        @yield('content')
-
+           @yield('content')
 
     </div>
 
@@ -39,19 +40,11 @@
             <img id="any_img_lightbox_image" src="" alt="">
         </div>
     </div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/interactjs@1.10.11/dist/interact.min.js"></script>
-
+</div>
 
 <script src="{{asset('js/main.js')}}"></script>
 
 
 @yield('footer')
-
 </body>
 </html>

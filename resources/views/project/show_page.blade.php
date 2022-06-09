@@ -23,7 +23,7 @@
     <div class="row row-cols-1 row-cols-md-4 g-3">
 
         <div class="col">
-            <div class="card shadow-sm">
+            <div class="base_block border shadow-sm">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <span class="fs-3" style="margin-top: auto; margin-bottom: auto"><i class="bi bi-stack"></i> TEST SUITES</span>
@@ -34,7 +34,7 @@
         </div>
 
         <div class="col">
-            <div class="card shadow-sm">
+            <div class="base_block border shadow-sm">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <span class="fs-3" style="margin-top: auto; margin-bottom: auto"><i class="bi bi-file-earmark-text"></i> TEST CASES</span>
@@ -46,7 +46,7 @@
 
 
         <div class="col">
-            <div class="card shadow-sm">
+            <div class="base_block border shadow-sm">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <span class="fs-3" style="margin-top: auto; margin-bottom: auto"><i class="bi bi-journals"></i> TEST PLANS</span>
@@ -58,7 +58,7 @@
 
 
         <div class="col">
-            <div class="card shadow-sm">
+            <div class="base_block border shadow-sm">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <span class="fs-3" style="margin-top: auto; margin-bottom: auto"><i class="bi bi-play-circle"></i> TEST RUNS</span>

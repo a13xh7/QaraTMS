@@ -18,7 +18,7 @@
 
                         <div class="mt-1">
                             <span>@if($testCase->automated) <i class="bi bi-robot"></i> @else <i class="bi bi-person"></i> @endif </span>
-                            <span class="text-muted ps-1 pe-3 ">{{$project->prefix}}-{{$testCase->id}}</span>
+                            <span class="text-muted ps-1 pe-3 ">{{$repository->prefix}}-{{$testCase->id}}</span>
                             <span>{{$testCase->title}}</span>
                         </div>
 

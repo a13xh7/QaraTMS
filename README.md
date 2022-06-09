@@ -15,7 +15,7 @@ This is beta, there may be bugs.
 
 ## Getting Started
 
-- You will need to install **php**, **mysql** and **composer**. I use **php 7.4** and **mysql 8**
+- You will need to install **php 7.4**, **mysql-8** and **composer**.
 - Create a database locally named `tms` utf8_general_ci
 - Pull project from git repository.
 - Rename `.env.backup` file to `.env` and fill the database information.

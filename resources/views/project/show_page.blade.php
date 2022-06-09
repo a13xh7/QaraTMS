@@ -26,6 +26,17 @@
             <div class="base_block border shadow-sm">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
+                        <span class="fs-3" style="margin-top: auto; margin-bottom: auto"><i class="bi bi-server"></i> REPOSITORIES</span>
+                        <b class="fs-1 text-primary">{{$project->repositoriesCount()}}</b>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="base_block border shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
                         <span class="fs-3" style="margin-top: auto; margin-bottom: auto"><i class="bi bi-stack"></i> TEST SUITES</span>
                         <b class="fs-1 text-primary">{{$project->suitesCount()}}</b>
                     </div>
@@ -63,6 +74,17 @@
                     <div class="d-flex justify-content-between">
                         <span class="fs-3" style="margin-top: auto; margin-bottom: auto"><i class="bi bi-play-circle"></i> TEST RUNS</span>
                         <b class="fs-1 text-primary">{{$project->testRunsCount()}}</b>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="base_block border shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <span class="fs-3" style="margin-top: auto; margin-bottom: auto"><i class="bi bi-robot"></i> AUTOMATION</span>
+                        <b class="fs-1 text-primary">{{ $project->getAutomationPercent() }}%</b>
                     </div>
                 </div>
             </div>

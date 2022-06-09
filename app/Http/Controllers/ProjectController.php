@@ -52,13 +52,11 @@ class ProjectController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'prefix' => 'required',
         ]);
 
         $project = new Project();
 
         $project->title = $request->title;
-        $project->prefix = strtoupper($request->prefix);
         $project->description = $request->description;
 
         $project->save();
@@ -67,6 +65,7 @@ class ProjectController extends Controller
         $repository = new Repository();
         $repository->project_id = $project->id;
         $repository->title = "Default";
+        $repository->prefix = "D";
         $repository->description = "Default Test Repository. Test suites and test cases are located here";
         $repository->save();
 
@@ -79,7 +78,6 @@ class ProjectController extends Controller
         $project = Project::findOrFail($request->id);
 
         $project->title = $request->title;
-        $project->prefix = strtoupper($request->prefix);
         $project->description = $request->description;
 
         $project->save();

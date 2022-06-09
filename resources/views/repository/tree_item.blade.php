@@ -48,7 +48,7 @@
                                 <i class="bi bi-person"></i>
                             @endif
                         </span>
-                        <span class="text-muted ps-2 test_case_id">{{$project->prefix}}-{{$testCase->id}}</span>
+                        <span class="text-muted ps-2 test_case_id">{{$repository->prefix}}-{{$testCase->id}}</span>
                         <span class="tree_case_title">{{$testCase->title}}</span>
                     </div>
 

@@ -21,7 +21,7 @@
                         @endif
                     </span>
 
-                    <span class="text-primary">{{$project->prefix}}-{{$testCase->id}}</span>
+                    <span class="text-primary">{{$repository->prefix}}-{{$testCase->id}}</span>
                 </div>
 
                 <div class="test_case_title">

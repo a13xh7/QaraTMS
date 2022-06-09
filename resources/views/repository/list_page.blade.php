@@ -21,7 +21,7 @@
             @foreach($repositories as $repository)
 
                 <div class="col">
-                    <div class="card h-100 shadow">
+                    <div class="base_block border h-100 shadow-sm">
 
                         <div class="card-body">
                             <div>

@@ -38,7 +38,7 @@
 
         <div class="d-flex justify-content-between border-bottom mt-2 pb-2 mb-2">
             <div>
-                <span class="fs-6 badge bg-secondary">{{$project->prefix}}-{{$testCase->id}}</span>
+                <span class="fs-6 badge bg-secondary">{{$repository->prefix}}-{{$testCase->id}}</span>
                 <span class="fs-5">
             @if($testCase->automated)
                         <i class="bi bi-robot"></i>

@@ -68,6 +68,7 @@ class RepositoryController extends Controller
         $repository = new Repository();
 
         $repository->title = $request->title;
+        $repository->prefix = $request->prefix;
         $repository->project_id = $request->project_id;
         $repository->description = $request->description;
 
@@ -81,6 +82,7 @@ class RepositoryController extends Controller
         $repository = Repository::findOrFail($request->id);
 
         $repository->title = $request->title;
+        $repository->prefix = $request->prefix;
         $repository->project_id = $request->project_id;
         $repository->description = $request->description;
 

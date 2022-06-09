@@ -32,14 +32,6 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="prefix" class="form-label">Prefix <span class="text-muted">(max 3 symbols)</span></label>
-                    <input type="text" class="form-control" name="prefix"
-                           required maxlength="3"
-                           pattern="[^\s]+" title="please dont use the white space :)"
-                           style="text-transform:uppercase" >
-                </div>
-
-                <div class="mb-3">
                     <label for="description" class="form-label">Description</label>
                     <textarea class="form-control" name="description" maxlength="255"> </textarea>
                 </div>

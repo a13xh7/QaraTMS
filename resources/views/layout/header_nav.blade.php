@@ -37,7 +37,11 @@
 
             </div>
 
-            <div>
+            <div class="d-flex justify-content-between">
+                <a class="navbar-brand link-light" href="https://t.me/qaratms"  target="_blank">
+                    <img src="{{asset('img/telegram.png')}}" alt="" width="35px">
+                </a>
+
                 <a class="navbar-brand link-light" href="https://github.com/a13xh7/QaraTMS"  target="_blank">
                     <img src="{{asset('img/github.png')}}" alt="" width="30px">
                 </a>

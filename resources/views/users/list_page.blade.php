@@ -15,64 +15,112 @@
             </h3>
         </div>
 
+        @foreach($users as $user)
 
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">View</th>
-                <th scope="col">Add & Edit</th>
-                <th scope="col">Delete</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <th scope="row">Project</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-            </tr>
-            <tr>
-                <th scope="row">Repository</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-            </tr>
+            <div>{{$user->email}}</div>
+        @endforeach
 
-            <tr>
-                <th scope="row">Test Suite</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-            </tr>
+        <div class="row m-0">
 
-            <tr>
-                <th scope="row">Test Case</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-            </tr>
+            <div class="col p-3 shadow me-1" >
 
-            <tr>
-                <th scope="row">Test Plan</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-            </tr>
+                <form action="{{ route('register') }}" method="POST">
+                    @csrf
+                    <div class="form-group mb-3">
+                        <input type="text" placeholder="Name" id="name" class="form-control" name="name"
+                               required autofocus>
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type="text" placeholder="Email" id="email_address" class="form-control"
+                               name="email" required autofocus>
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type="password" placeholder="Password" id="password" class="form-control"
+                               name="password" required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="remember"> Remember Me</label>
+                        </div>
+                    </div>
+                    <div class="d-grid mx-auto">
+                        <button type="submit" class="btn btn-success">Create</button>
+                    </div>
+                </form>
 
-            <tr>
-                <th scope="row">Test Run</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-            </tr>
-
-            </tbody>
-        </table>
+            </div>
 
 
+            <div class="col p-3 shadow" >
 
+                <h3>Permissions</h3>
+                <hr>
 
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Entity</th>
+                        <th scope="col">Add & Edit</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row">Project</th>
+                        <td> <input id="" class="form-check-input" type="checkbox" value=""></td>
+                        <td> <input id="" class="form-check-input" type="checkbox" value=""></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Repository</th>
+                        <td><input id="" class="form-check-input" type="checkbox" value=""></td>
+                        <td><input id="" class="form-check-input" type="checkbox" value=""></td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">Test Suite</th>
+                        <td><input id="" class="form-check-input" type="checkbox" value=""></td>
+                        <td><input id="" class="form-check-input" type="checkbox" value=""></td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">Test Case</th>
+                        <td><input id="" class="form-check-input" type="checkbox" value=""></td>
+                        <td><input id="" class="form-check-input" type="checkbox" value=""></td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">Test Plan</th>
+                        <td><input id="" class="form-check-input" type="checkbox" value=""></td>
+                        <td><input id="" class="form-check-input" type="checkbox" value=""></td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">Test Run</th>
+                        <td><input id="" class="form-check-input" type="checkbox" value=""></td>
+                        <td><input id="" class="form-check-input" type="checkbox" value=""></td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">Document</th>
+                        <td><input id="" class="form-check-input" type="checkbox" value=""></td>
+                        <td><input id="" class="form-check-input" type="checkbox" value=""></td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">User</th>
+                        <td colspan="2">
+                            <input  id="" class="form-check-input" type="checkbox" value="">
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
 
     </div>
+
+
+
 @endsection

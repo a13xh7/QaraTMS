@@ -36,7 +36,7 @@ php artisan db:seed --class=UserSeeder
 
 php artisan make:migration create_repositories_table
 
-php artisan make:controller DashboardController
+php artisan make:controller UsersController
 
 php artisan make:controller RepositoryController --resource --model=Repository
 

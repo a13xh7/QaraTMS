@@ -131,11 +131,10 @@ class TestRunController extends Controller
         $testCase = TestCase::findOrFail($test_case_id);
         $suite = Suite::findOrFail($testCase->suite_id);
         $repository = Repository::findOrFail($suite->repository_id);
-        $project = Project::findOrFail($repository->project_id);
         $data = json_decode($testCase->data);
 
         return view('test_run.test_case')
-            ->with('project', $project)
+            ->with('repository', $repository)
             ->with('testCase', $testCase)
             ->with('testRun', $testRun)
             ->with('data', $data);

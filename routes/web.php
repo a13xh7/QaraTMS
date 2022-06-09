@@ -10,6 +10,8 @@ use \App\Http\Controllers\TestRunController;
 use \App\Http\Controllers\RepositoryController;
 use \App\Http\Controllers\DocumentsController;
 use \App\Http\Controllers\AuthController;
+use \App\Http\Controllers\UsersController;
+
 
 Route::get('dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
 
@@ -49,6 +51,12 @@ Route::post('/tcuo',[TestCaseController::class, 'updateOrder']);
 
 Route::middleware(['auth'])->group(function () {
 
+    /**********************************************************************
+    // USERS
+     ***********************************************************************/
+
+    Route::get('/users', [UsersController::class, 'index'])
+        ->name("users_list_page");
 
     /**********************************************************************
     // PROJECT

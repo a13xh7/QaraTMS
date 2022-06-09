@@ -49,12 +49,11 @@ class TestSuiteController extends Controller
     {
         $suite = Suite::findOrFail($test_suite_id);
         $repository = Repository::findOrFail($suite->repository_id);
-        $project = Project::findOrFail($repository->project_id);
         $testCases = TestCase::where('suite_id', $test_suite_id)->orderBy('order')->get();
 
         return view('repository.test_cases_list')
             ->with('testCases', $testCases)
-            ->with('project', $project);
+            ->with('repository', $repository);
     }
 
     /******************************************
@@ -71,8 +70,7 @@ class TestSuiteController extends Controller
         $suite->save();
 
         return [
-            'html' => view('repository.new_suite')
-                    ->with('suite', $suite)->render(),
+            'html' => '',
             'json' => $suite->toJson()
         ];
     }

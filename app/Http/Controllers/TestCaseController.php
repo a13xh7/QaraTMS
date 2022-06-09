@@ -27,15 +27,11 @@ class TestCaseController extends Controller
 
         $suite = Suite::findOrFail($testCase->suite_id);
         $repository = Repository::findOrFail($suite->repository_id);
-        $project = Project::findOrFail($repository->project_id);
 
         $testCase->repository_id = $suite->repository_id;  // это нужно для загрузки формы  read в js
 
         return [
-            'html' => view('repository.new_test_case')
-                    ->with('testCase', $testCase)
-                    ->with('suite', $suite)
-                    ->with('project', $project)->render(),
+            'html' => '',
             'json' => $testCase->toJson()
         ];
     }
@@ -54,15 +50,11 @@ class TestCaseController extends Controller
 
         $suite = Suite::findOrFail($testCase->suite_id);
         $repository = Repository::findOrFail($suite->repository_id);
-        $project = Project::findOrFail($repository->project_id);
 
         $testCase->repository_id = $suite->repository_id;  // это нужно для загрузки формы в js
 
         return [
-            'html' => view('repository.new_test_case')
-                ->with('testCase', $testCase)
-                ->with('suite', $suite)
-                ->with('project', $project)->render(),
+            'html' => '',
             'json' => $testCase->toJson()
         ];
     }

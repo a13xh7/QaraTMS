@@ -96,7 +96,7 @@
             <div class="row" id="steps_container">
                 <div class="p-0 mb-1">
                     <b class="fs-5">Steps</b>
-                    <span class="text-muted fw-lighter" style="font-size: 12px">Action <i class="bi bi-arrow-right"></i> Expected Result</span>
+                    <span class="text-muted" style="font-size: 12px">Action <i class="bi bi-arrow-right"></i> Expected Result</span>
                 </div>
 
                 @if(isset($data->steps))

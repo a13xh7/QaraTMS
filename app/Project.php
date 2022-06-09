@@ -66,7 +66,8 @@ class Project extends Model
             $totalCases = $this->casesCount();
             $automatedCases = $this->automatedCasesCount();
 
-            return ($automatedCases * 100) /  $totalCases;
+            $result = ($automatedCases * 100) /  $totalCases;
+            return round($result, 1);
         } catch (\ErrorException $e) {
             return 0;
         }

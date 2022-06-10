@@ -24,6 +24,10 @@ class ProjectController extends Controller
 
     public function create()
     {
+        if(!auth()->user()->can('add_edit_projects')) {
+            abort(403);
+        }
+
         return view('project.create_page');
     }
 
@@ -39,6 +43,10 @@ class ProjectController extends Controller
 
     public function edit($id)
     {
+        if(!auth()->user()->can('add_edit_projects')) {
+            abort(403);
+        }
+
         $project = Project::findOrFail($id);
         return view('project.edit_page')
             ->with('project', $project);
@@ -50,6 +58,10 @@ class ProjectController extends Controller
 
     public function store(Request $request)
     {
+        if(!auth()->user()->can('add_edit_projects')) {
+            abort(403);
+        }
+
         $request->validate([
             'title' => 'required',
         ]);
@@ -75,6 +87,10 @@ class ProjectController extends Controller
 
     public function update(Request $request)
     {
+        if(!auth()->user()->can('add_edit_projects')) {
+            abort(403);
+        }
+
         $project = Project::findOrFail($request->id);
 
         $project->title = $request->title;
@@ -87,6 +103,10 @@ class ProjectController extends Controller
 
     public function destroy(Request $request)
     {
+        if(!auth()->user()->can('delete_projects')) {
+            abort(403);
+        }
+
         $project = Project::findOrFail($request->id);
         $project->delete();
         return redirect()->route('project_list_page');

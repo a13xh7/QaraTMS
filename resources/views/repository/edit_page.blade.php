@@ -15,17 +15,19 @@
             </h3>
 
             <div>
-                <form method="POST" action="{{route("repository_delete")}}">
-                    @csrf
-                    <input type="hidden" name="id" value="{{$repository->id}}">
-                    <input type="hidden" name="project_id" value="{{$repository->project_id}}">
+                @can('delete_repositories')
+                    <form method="POST" action="{{route("repository_delete")}}">
+                        @csrf
+                        <input type="hidden" name="id" value="{{$repository->id}}">
+                        <input type="hidden" name="project_id" value="{{$repository->project_id}}">
 
-                    <button type="submit" class="btn btn-sm  btn-danger">
-                        <i class="bi bi-trash3"></i>
-                        Delete
-                    </button>
-                </form>
-            </div>
+                        <button type="submit" class="btn btn-sm  btn-danger">
+                            <i class="bi bi-trash3"></i>
+                            Delete
+                        </button>
+                    </form>
+                @endcan
+        </div>
 
         </div>
 

@@ -8,14 +8,16 @@
 
     <div class="page_title border-bottom my-3 d-flex justify-content-between">
         <h3 class="page_title">
-            Dashboard
+            {{$project->title}} <i class="bi bi-arrow-right-short"></i> Dashboard
         </h3>
 
         <div>
-            <a href="{{route('project_edit_page', $project->id)}}" class="btn btn-sm btn-secondary">
-                <i class="bi bi-gear"></i>
-                Settings
-            </a>
+            @can('add_edit_projects')
+                <a href="{{route('project_edit_page', $project->id)}}" class="btn btn-sm btn-secondary">
+                    <i class="bi bi-gear"></i>
+                    Settings
+                </a>
+            @endcan
         </div>
     </div>
 

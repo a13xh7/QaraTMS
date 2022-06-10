@@ -10,9 +10,12 @@
         <div class="border-bottom my-3">
             <h3 class="page_title">
                 Test Repositories
-                <a class="mx-3" href="{{route("repository_create_page", $project->id)}}">
-                    <button type="button" class="btn btn-sm btn-primary"> <i class="bi bi-plus-lg"></i> Add New</button>
-                </a>
+
+                @can('add_edit_repositories')
+                    <a class="mx-3" href="{{route("repository_create_page", $project->id)}}">
+                        <button type="button" class="btn btn-sm btn-primary"> <i class="bi bi-plus-lg"></i> Add New</button>
+                    </a>
+                @endcan
             </h3>
         </div>
 

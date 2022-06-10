@@ -1,6 +1,9 @@
 
 https://github.com/nauvalazhar/bootstrap-5-login-page/
 
+php artisan db:seed --class=AdminSeeder
+
+
 image inside test area
 
 
@@ -31,7 +34,7 @@ https://github.com/staudenmeir/laravel-adjacency-list
 
 git reset --hard HEAD~1
 
-php artisan db:seed --class=UserSeeder
+php artisan db:seed --class=AdminSeeder
 
 
 php artisan make:migration create_repositories_table

@@ -1,6 +1,5 @@
 <?php
 
-use App\Suite;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\ProjectController;
 use \App\Http\Controllers\TestPlanController;
@@ -13,21 +12,6 @@ use \App\Http\Controllers\AuthController;
 use \App\Http\Controllers\UsersController;
 
 
-Route::get('dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
-
-Route::get('login', [AuthController::class, 'showLoginPage'])->name('login_page');
-Route::post('auth', [AuthController::class, 'authorizeUser'])->name('auth');
-
-Route::get('register', [AuthController::class, 'showRegistrationPage'])->name('registration_page');
-Route::post('register', [AuthController::class, 'registerUser'])->name('register');
-
-Route::get('logout', [AuthController::class, 'logout'])->name('logout');
-
-
-
-
-Route::post('ck-editor/imgupload', [\App\Http\Controllers\CkeditorController::class,'imgupload'])->name('ckeditor.upload');
-
 /**********************************************************************
 // test
  ***********************************************************************/
@@ -35,17 +19,26 @@ Route::get('/test', function () {
     return view('users.list_page');
 });
 
-Route::get('/repo',[\App\Http\Controllers\TestController::class, 'index']);
+Route::post('ck-editor/imgupload', [\App\Http\Controllers\CkeditorController::class,'imgupload'])->name('ckeditor.upload');
+
+
+
+/**********************************************************************
+// AUTH
+ ***********************************************************************/
+
+Route::get('login', [AuthController::class, 'showLoginPage'])->name('login_page');
+Route::post('auth', [AuthController::class, 'authorizeUser'])->name('auth');
+Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+
 
 /**********************************************************************
 // AJAX
  ***********************************************************************/
 
 Route::get('/repo/{id}',[\App\Http\Controllers\AjaxDataController::class, 'getSuitesTree']);
-
 Route::post('/tsup',[TestSuiteController::class, 'updateParent']);
 Route::post('/tsuo',[TestSuiteController::class, 'updateOrder']);
-
 Route::post('/tcuo',[TestCaseController::class, 'updateOrder']);
 
 
@@ -57,6 +50,18 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/users', [UsersController::class, 'index'])
         ->name("users_list_page");
+
+    Route::get('/users/create', [UsersController::class, 'create'])
+        ->name("users_create_page");
+
+    Route::get('/users/{user_id}/edit', [UsersController::class, 'edit'])
+        ->where('user_id', '[0-9]+')
+        ->name("users_edit_page");
+
+
+    Route::post('/user/create', [UsersController::class, 'store'])->name("user_create");
+    Route::post('/user/update', [UsersController::class, 'update'])->name("user_update");
+    Route::post('/user/delete', [UsersController::class, 'destroy'])->name("user_delete");
 
     /**********************************************************************
     // PROJECT

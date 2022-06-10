@@ -38,16 +38,22 @@ class AdminSeeder extends Seeder
         Permission::create(['name' => 'delete_documents']);
 
         $adminUser->givePermissionTo([
+            'manage_users',
+
             'add_edit_projects',
             'delete_projects',
 
             'add_edit_repositories',
             'delete_repositories',
-            '',
-            '',
-            '',
-            '',
-            '',
+
+            'add_edit_test_plans',
+            'delete_test_plans',
+
+            'add_edit_test_runs',
+            'delete_test_runs',
+
+            'add_edit_documents',
+            'delete_documents'
         ]);
     }
 }

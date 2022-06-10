@@ -2,6 +2,9 @@
 
 @section('content')
 
+    @include('layout.sidebar_nav')
+
+
     <div class="col">
 
         <div class="border-bottom my-3">

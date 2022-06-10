@@ -60,16 +60,6 @@
                     </div>
 
 
-                    <div class="card-footer py-3 border-0">
-                        <div class="text-center">
-                            Don't have an account? <a href="{{route('registration_page')}}" class="text-dark">Create One</a>
-                        </div>
-
-{{--                        <a href="forgot.html" class="float-end">--}}
-{{--                            Forgot Password?--}}
-{{--                        </a>--}}
-                    </div>
-
                 </div>
 
                 <div class="text-center mt-5 text-muted">

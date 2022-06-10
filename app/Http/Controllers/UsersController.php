@@ -8,18 +8,29 @@ use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         $users = User::all();
 
         return view('users.list_page')
             ->with('users', $users);
     }
 
-    public function create() {
+    public function create()
+    {
+        if(!auth()->user()->can('manage_users')) {
+            abort(403);
+        }
+
         return view('users.create_page');
     }
 
-    public function edit($user_id) {
+    public function edit($user_id)
+    {
+        if(!auth()->user()->can('manage_users')) {
+            abort(403);
+        }
+
         $user = User::findOrFail($user_id);
 
         return view('users.edit_page')
@@ -28,6 +39,10 @@ class UsersController extends Controller
 
     public function store(Request $request)
     {
+        if(!auth()->user()->can('manage_users')) {
+            abort(403);
+        }
+
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
@@ -49,6 +64,10 @@ class UsersController extends Controller
 
     public function update(Request $request)
     {
+        if(!auth()->user()->can('manage_users')) {
+            abort(403);
+        }
+
         $user = User::findOrFail($request->user_id);
 
         $request->validate([
@@ -71,7 +90,12 @@ class UsersController extends Controller
         return redirect()->route('users_list_page');
     }
 
-    public function destroy(Request $request) {
+    public function destroy(Request $request)
+    {
+        if(!auth()->user()->can('manage_users')) {
+            abort(403);
+        }
+
         $user = User::findOrFail($request->user_id);
         $user->delete();
         return redirect()->route('users_list_page');
@@ -104,6 +128,52 @@ class UsersController extends Controller
             $user->givePermissionTo('delete_repositories');
         } else {
             $user->revokePermissionTo('delete_repositories');
+        }
+
+        // USERS
+        if($request->manage_users) {
+            $user->givePermissionTo('manage_users');
+        } else {
+            $user->revokePermissionTo('manage_users');
+        }
+
+        // TEST PLANS
+        if($request->add_edit_test_plans) {
+            $user->givePermissionTo('add_edit_test_plans');
+        } else {
+            $user->revokePermissionTo('add_edit_test_plans');
+        }
+
+        if($request->delete_test_plans) {
+            $user->givePermissionTo('delete_test_plans');
+        } else {
+            $user->revokePermissionTo('delete_test_plans');
+        }
+
+        // TEST RUNS
+        if($request->add_edit_test_runs) {
+            $user->givePermissionTo('add_edit_test_runs');
+        } else {
+            $user->revokePermissionTo('add_edit_test_runs');
+        }
+
+        if($request->delete_test_runs) {
+            $user->givePermissionTo('delete_test_runs');
+        } else {
+            $user->revokePermissionTo('delete_test_runs');
+        }
+
+        // DOCUMENTS
+        if($request->add_edit_documents) {
+            $user->givePermissionTo('add_edit_documents');
+        } else {
+            $user->revokePermissionTo('add_edit_documents');
+        }
+
+        if($request->delete_documents) {
+            $user->givePermissionTo('delete_documents');
+        } else {
+            $user->revokePermissionTo('delete_documents');
         }
     }
 }

@@ -10,9 +10,12 @@
         <div class="border-bottom my-3">
             <h3 class="page_title">
                 Documents
-                <a class="mx-3" href="{{route("document_create_page", $project->id)}}">
-                    <button type="button" class="btn btn-sm btn-primary"> <i class="bi bi-plus-lg"></i> Add New</button>
-                </a>
+
+                @can('add_edit_documents')
+                    <a class="mx-3" href="{{route("document_create_page", $project->id)}}">
+                        <button type="button" class="btn btn-sm btn-primary"> <i class="bi bi-plus-lg"></i> Add New</button>
+                    </a>
+                @endcan
             </h3>
         </div>
 
@@ -32,14 +35,16 @@
                             </a>
 
 
-                            <form method="POST" action="{{route("document_delete")}}" style="display: inline-block">
-                                @csrf
-                                <input type="hidden" name="id" value="{{$selectedDocument->id}}">
+                            @can('delete_documents')
+                                <form method="POST" action="{{route("document_delete")}}" style="display: inline-block">
+                                    @csrf
+                                    <input type="hidden" name="id" value="{{$selectedDocument->id}}">
 
-                                <button type="submit" class="btn btn-sm btn-outline-danger" title="Delete">
-                                    <i class="bi bi-trash3"></i>
-                                </button>
-                            </form>
+                                    <button type="submit" class="btn btn-sm btn-outline-danger" title="Delete">
+                                        <i class="bi bi-trash3"></i>
+                                    </button>
+                                </form>
+                            @endcan
                         </div>
 
 

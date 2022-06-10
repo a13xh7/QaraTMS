@@ -57,7 +57,7 @@
                     <div class="row mb-3 border p-3 rounded">
 
                         <div>
-                            {!! parsedown($data->preconditions) !!}
+                            {!! $data->preconditions !!}
                         </div>
 
                     </div>
@@ -82,13 +82,13 @@
 
                                 <div class="col-6">
                                     <div>
-                                        {!! parsedown($step->action) !!}
+                                        {!! $step->action !!}
                                     </div>
                                 </div>
 
                                 <div class="col-6">
                                     <div>
-                                        {!! parsedown($step->result) !!}
+                                        {!! $step->result !!}
                                     </div>
                                 </div>
                             </div>

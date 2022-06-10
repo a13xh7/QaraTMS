@@ -29,6 +29,10 @@ class DocumentsController extends Controller
 
     public function create($project_id) // create page
     {
+        if(!auth()->user()->can('add_edit_documents')) {
+            abort(403);
+        }
+
         $project = Project::findOrFail($project_id);
         $documents = Document::where('project_id', $project->id)->tree()->get()->toTree();
 
@@ -51,6 +55,10 @@ class DocumentsController extends Controller
 
     public function edit($project_id, $document_id)
     {
+        if(!auth()->user()->can('add_edit_documents')) {
+            abort(403);
+        }
+
         $project = Project::findOrFail($project_id);
         $documents = Document::where('project_id', $project->id)->tree()->get()->toTree();
         $selectedDocument = Document::findOrFail($document_id);
@@ -67,6 +75,10 @@ class DocumentsController extends Controller
 
     public function store(Request $request)
     {
+        if(!auth()->user()->can('add_edit_documents')) {
+            abort(403);
+        }
+
         $request->validate([
             'title' => 'required',
         ]);
@@ -86,6 +98,10 @@ class DocumentsController extends Controller
 
     public function update(Request $request)
     {
+        if(!auth()->user()->can('add_edit_documents')) {
+            abort(403);
+        }
+
         $document = Document::findOrFail($request->id);
 
         $document->title = $request->title;
@@ -100,6 +116,10 @@ class DocumentsController extends Controller
 
     public function destroy(Request $request)
     {
+        if(!auth()->user()->can('delete_documents')) {
+            abort(403);
+        }
+
         $document = Document::findOrFail($request->id);
         $project_id = $document->project_id;
 

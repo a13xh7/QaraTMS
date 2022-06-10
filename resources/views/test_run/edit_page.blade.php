@@ -15,16 +15,18 @@
             </h3>
 
             <div>
-                <form method="POST" action="{{route("test_run_delete")}}">
-                    @csrf
-                    <input type="hidden" name="id" value="{{$testRun->id}}">
-                    <input type="hidden" name="project_id" value="{{$testRun->project_id}}">
+                @can('delete_test_runs')
+                    <form method="POST" action="{{route("test_run_delete")}}">
+                        @csrf
+                        <input type="hidden" name="id" value="{{$testRun->id}}">
+                        <input type="hidden" name="project_id" value="{{$testRun->project_id}}">
 
-                    <button type="submit" class="btn btn-sm  btn-danger">
-                        <i class="bi bi-trash3"></i>
-                        Delete
-                    </button>
-                </form>
+                        <button type="submit" class="btn btn-sm  btn-danger">
+                            <i class="bi bi-trash3"></i>
+                            Delete
+                        </button>
+                    </form>
+                @endcan
             </div>
 
         </div>

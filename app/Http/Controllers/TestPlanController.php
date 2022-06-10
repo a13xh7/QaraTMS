@@ -13,7 +13,11 @@ use Illuminate\Http\Request;
 class TestPlanController extends Controller
 {
 
-    public function startNewTestRun($test_plan_id) {
+    public function startNewTestRun($test_plan_id)
+    {
+        if(!auth()->user()->can('add_edit_test_runs')) {
+            abort(403);
+        }
 
         $testPlan = TestPlan::findOrFail($test_plan_id);
 

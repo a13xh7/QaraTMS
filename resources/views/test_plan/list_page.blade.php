@@ -48,10 +48,12 @@
                         <div class="d-flex justify-content-end align-items-end border-top py-2">
                             <div>
 
-                                <a href="{{route('start_new_test_run', $testPlan->id)}}" class="link-light btn btn-sm btn-success" onclick="showNewTestRunForm({{$testPlan->id}})">
-                                    <i class="bi bi-play-circle"></i>
-                                    Start new test run
-                                </a>
+                                @can('add_edit_test_runs')
+                                    <a href="{{route('start_new_test_run', $testPlan->id)}}" class="link-light btn btn-sm btn-success me-3">
+                                        <i class="bi bi-play-circle"></i>
+                                        Start new test run
+                                    </a>
+                                @endcan
 
                                 @can('add_edit_test_plans')
                                     <a href="{{ route("test_plan_update_page", [$project->id, $testPlan->id]) }}" class="btn btn-sm btn-outline-dark mx-3">

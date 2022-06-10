@@ -30,9 +30,11 @@
                         </div>
 
                         <div class="mt-2">
-                            <a href="{{route('document_edit_page', [$selectedDocument->project_id, $selectedDocument->id])}}" class="btn btn-sm btn-outline-secondary" title="Edit">
-                                <i class="bi bi-pencil"></i>
-                            </a>
+                            @can('add_edit_documents')
+                                <a href="{{route('document_edit_page', [$selectedDocument->project_id, $selectedDocument->id])}}" class="btn btn-sm btn-outline-secondary" title="Edit">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                            @endcan
 
 
                             @can('delete_documents')

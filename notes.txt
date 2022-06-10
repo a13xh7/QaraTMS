@@ -1,4 +1,19 @@
 
+https://github.com/nauvalazhar/bootstrap-5-login-page/
+
+php artisan db:seed --class=AdminSeeder
+
+
+image inside test area
+
+
+roles
+
+admin
+qa
+tester
+
+
 
 replace collapse icon test suite
 
@@ -19,12 +34,12 @@ https://github.com/staudenmeir/laravel-adjacency-list
 
 git reset --hard HEAD~1
 
-php artisan db:seed --class=UserSeeder
+php artisan db:seed --class=AdminSeeder
 
 
 php artisan make:migration create_repositories_table
 
-php artisan make:controller DashboardController
+php artisan make:controller UsersController
 
 php artisan make:controller RepositoryController --resource --model=Repository
 

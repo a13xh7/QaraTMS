@@ -15,16 +15,18 @@ This is beta, there may be bugs.
 
 ## Getting Started
 
-- You will need to install **php**, **mysql** and **composer**. I use **php 7.4** and **mysql 8**
+- You will need to install **php 7.4**, **mysql-8** and **composer**.
 - Create a database locally named `tms` utf8_general_ci
 - Pull project from git repository.
 - Rename `.env.backup` file to `.env` and fill the database information.
 - Run `composer install` or ```php composer.phar install```
 - Run `php artisan key:generate`
 - Run `php artisan migrate`
+- Run `php artisan db:seed --class=AdminSeeder` to create admin user and assign permissions.
 - Run `php artisan serve`
-
-##### You can now access project at localhost:8000 
+- You can now access project at **localhost:8000** 
+- Login with default email and password - **admin@admin.com** / **password**
+- Go to **Users** page and change default email and password. 
 
 ## How to use it
 ![logo](public/img/header.jpg)

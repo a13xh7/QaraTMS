@@ -62,11 +62,9 @@ $("body").on('click', 'button', function () {
 /**************************************************
  * Collapse / expand children
  **************************************************/
-let hide = false;
+
 $('body').on("click", "#toogle_collaple_expand", function (e) {
     let suite_id = $(this).parent().parent().parent().parent().data('mid');
-
-    hide = hide ? false : true;
 
     rec(suite_id, hide)
 });
@@ -74,7 +72,7 @@ $('body').on("click", "#toogle_collaple_expand", function (e) {
 function rec(suite_id, hide) {
     let child_li = $(`li[data-pid='${suite_id}']`);
 
-    if(hide) {
+    if(child_li.is(":visible")) {
         child_li.hide();
     } else {
         child_li.show();

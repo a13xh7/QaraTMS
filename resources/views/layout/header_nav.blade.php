@@ -33,14 +33,40 @@
                     <a href="{{route("project_documents_list_page", $project->id)}}" class="nav-link text-white">
                         <i class="bi bi-file-text-fill"></i> Documents
                     </a>
+
+
+
+                    <a href="{{route("project_list_page")}}" class="nav-link text-white">
+                        <i class="bi bi-diagram-3-fill"></i>
+                        Projects
+                    </a>
+
+
+                    <a href="{{route('users_list_page')}}" class="nav-link text-white">
+                        <i class="bi bi-people-fill"></i>
+                        Users
+                    </a>
+
                 @endif
 
             </div>
 
-            <div>
+            <div class="d-flex justify-content-between">
+                <a class="navbar-brand link-light" href="https://t.me/qaratms"  target="_blank">
+                    <img src="{{asset('img/telegram.png')}}" alt="" width="35px">
+                </a>
+
                 <a class="navbar-brand link-light" href="https://github.com/a13xh7/QaraTMS"  target="_blank">
                     <img src="{{asset('img/github.png')}}" alt="" width="30px">
                 </a>
+
+                @if(Route::currentRouteName() == 'repository_show_page')
+                    <a href="{{route('logout')}}" class="nav-link text-white">
+                        <i class="bi bi-box-arrow-in-left"></i>
+                        <b>Logout</b>
+                    </a>
+                @endif
+
             </div>
         </div>
     </div>

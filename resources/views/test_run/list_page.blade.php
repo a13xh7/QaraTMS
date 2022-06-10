@@ -19,7 +19,7 @@
             @foreach($testRuns as $testRun)
 
                 <div class="col">
-                    <div class="card shadow h-100">
+                    <div class="base_block shadow h-100">
 
                         <div class="card-body d-flex justify-content-between ">
                             <div>

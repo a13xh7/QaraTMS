@@ -113,6 +113,7 @@
       <path value="$PROJECT_DIR$/vendor/parsedown/laravel" />
       <path value="$PROJECT_DIR$/vendor/staudenmeir/laravel-cte" />
       <path value="$PROJECT_DIR$/vendor/staudenmeir/laravel-adjacency-list" />
+      <path value="$PROJECT_DIR$/vendor/spatie/laravel-permission" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.2">

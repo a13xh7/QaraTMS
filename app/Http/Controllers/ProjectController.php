@@ -24,6 +24,10 @@ class ProjectController extends Controller
 
     public function create()
     {
+        if(!auth()->user()->can('add_edit_projects')) {
+            abort(403);
+        }
+
         return view('project.create_page');
     }
 
@@ -39,6 +43,10 @@ class ProjectController extends Controller
 
     public function edit($id)
     {
+        if(!auth()->user()->can('add_edit_projects')) {
+            abort(403);
+        }
+
         $project = Project::findOrFail($id);
         return view('project.edit_page')
             ->with('project', $project);
@@ -50,15 +58,17 @@ class ProjectController extends Controller
 
     public function store(Request $request)
     {
+        if(!auth()->user()->can('add_edit_projects')) {
+            abort(403);
+        }
+
         $request->validate([
             'title' => 'required',
-            'prefix' => 'required',
         ]);
 
         $project = new Project();
 
         $project->title = $request->title;
-        $project->prefix = strtoupper($request->prefix);
         $project->description = $request->description;
 
         $project->save();
@@ -67,6 +77,7 @@ class ProjectController extends Controller
         $repository = new Repository();
         $repository->project_id = $project->id;
         $repository->title = "Default";
+        $repository->prefix = "D";
         $repository->description = "Default Test Repository. Test suites and test cases are located here";
         $repository->save();
 
@@ -76,10 +87,13 @@ class ProjectController extends Controller
 
     public function update(Request $request)
     {
+        if(!auth()->user()->can('add_edit_projects')) {
+            abort(403);
+        }
+
         $project = Project::findOrFail($request->id);
 
         $project->title = $request->title;
-        $project->prefix = strtoupper($request->prefix);
         $project->description = $request->description;
 
         $project->save();
@@ -89,6 +103,10 @@ class ProjectController extends Controller
 
     public function destroy(Request $request)
     {
+        if(!auth()->user()->can('delete_projects')) {
+            abort(403);
+        }
+
         $project = Project::findOrFail($request->id);
         $project->delete();
         return redirect()->route('project_list_page');

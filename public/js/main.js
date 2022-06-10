@@ -2,7 +2,7 @@
  * LIGHTBOX - Show lightbox for resized image
  *****************************************************************************/
 
-$("body").on( "click", "img", function() {
+$("body").on( "click", "#test_case_content img, .document img", function() {
     var imageSrc =  $(this).attr('src');
     $("#any_img_lightbox_image").attr("src",imageSrc);
     $("#any_img_lightbox").modal('show');

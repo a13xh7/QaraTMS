@@ -15,17 +15,19 @@
             </h3>
 
             <div>
-                <form method="POST" action="{{route("repository_delete")}}">
-                    @csrf
-                    <input type="hidden" name="id" value="{{$repository->id}}">
-                    <input type="hidden" name="project_id" value="{{$repository->project_id}}">
+                @can('delete_repositories')
+                    <form method="POST" action="{{route("repository_delete")}}">
+                        @csrf
+                        <input type="hidden" name="id" value="{{$repository->id}}">
+                        <input type="hidden" name="project_id" value="{{$repository->project_id}}">
 
-                    <button type="submit" class="btn btn-sm  btn-danger">
-                        <i class="bi bi-trash3"></i>
-                        Delete
-                    </button>
-                </form>
-            </div>
+                        <button type="submit" class="btn btn-sm  btn-danger">
+                            <i class="bi bi-trash3"></i>
+                            Delete
+                        </button>
+                    </form>
+                @endcan
+        </div>
 
         </div>
 
@@ -50,6 +52,15 @@
                 <div class="mb-3">
                     <label for="title" class="form-label">Name</label>
                     <input type="text" class="form-control" name="title" required maxlength="100" value="{{$repository->title}}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="prefix" class="form-label">Prefix <span class="text-muted">(max 3 symbols)</span></label>
+                    <input type="text" class="form-control" name="prefix"
+                           required maxlength="3"
+                           pattern="[^\s]+" title="please dont use the white space :)"
+                           style="text-transform:uppercase"
+                    value="{{$repository->prefix}}">
                 </div>
 
                 <div class="mb-3">

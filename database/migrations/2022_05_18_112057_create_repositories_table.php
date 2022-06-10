@@ -17,6 +17,7 @@ class CreateRepositoriesTable extends Migration
             $table->id();
             $table->foreignId('project_id')->constrained('projects')->onDelete('cascade');
             $table->string('title');
+            $table->string("prefix", 3);
             $table->string('description')->nullable();
             $table->timestamps();
         });

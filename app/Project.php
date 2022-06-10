@@ -2,8 +2,10 @@
 
 namespace App;
 
+use Brick\Math\Exception\DivisionByZeroException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Mockery\Exception;
 
 class Project extends Model
 {
@@ -24,6 +26,11 @@ class Project extends Model
 
 
     // Count Methods
+
+    public function repositoriesCount()
+    {
+        return $this->repositories->count();
+    }
 
     public function suitesCount()
     {
@@ -51,5 +58,19 @@ class Project extends Model
     public function testRunsCount()
     {
         return TestRun::where('project_id', $this->id)->count();
+    }
+
+    public function getAutomationPercent() {
+
+        try {
+            $totalCases = $this->casesCount();
+            $automatedCases = $this->automatedCasesCount();
+
+            $result = ($automatedCases * 100) /  $totalCases;
+            return round($result, 1);
+        } catch (\ErrorException $e) {
+            return 0;
+        }
+
     }
 }

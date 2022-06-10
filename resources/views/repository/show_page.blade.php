@@ -24,11 +24,13 @@
                     <i class="bi bi-plus-lg"></i> Test Suite
                 </button>
 
-                <a href="{{route('repository_edit_page', [$project->id, $repository->id])}}"
-                   class="btn btn-sm btn-outline-dark me-1"
-                   title="Repository Settings">
-                    <i class="bi bi-gear"></i>
-                </a>
+                @can('add_edit_repositories')
+                    <a href="{{route('repository_edit_page', [$project->id, $repository->id])}}"
+                       class="btn btn-sm btn-outline-dark me-1"
+                       title="Repository Settings">
+                        <i class="bi bi-gear"></i>
+                    </a>
+                @endcan
 
             </div>
         </div>

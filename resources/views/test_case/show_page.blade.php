@@ -21,7 +21,7 @@
                     </span>
 
                     <span class="text-primary">
-                         {{$project->prefix}}-<span id="tce_case_id">{{$testCase->id}}</span>
+                         {{$repository->prefix}}-<span id="tce_case_id">{{$testCase->id}}</span>
                     </span>
 
 

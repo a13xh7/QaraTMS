@@ -5,7 +5,7 @@
     @include('layout.sidebar_nav')
 
 
-    <div class="col fh">
+    <div class="col fh document">
 
         <div class="border-bottom my-3">
             <h3 class="page_title">

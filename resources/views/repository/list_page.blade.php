@@ -10,9 +10,12 @@
         <div class="border-bottom my-3">
             <h3 class="page_title">
                 Test Repositories
-                <a class="mx-3" href="{{route("repository_create_page", $project->id)}}">
-                    <button type="button" class="btn btn-sm btn-primary"> <i class="bi bi-plus-lg"></i> Add New</button>
-                </a>
+
+                @can('add_edit_repositories')
+                    <a class="mx-3" href="{{route("repository_create_page", $project->id)}}">
+                        <button type="button" class="btn btn-sm btn-primary"> <i class="bi bi-plus-lg"></i> Add New</button>
+                    </a>
+                @endcan
             </h3>
         </div>
 
@@ -21,7 +24,7 @@
             @foreach($repositories as $repository)
 
                 <div class="col">
-                    <div class="card h-100 shadow">
+                    <div class="base_block border h-100 shadow-sm">
 
                         <div class="card-body">
                             <div>

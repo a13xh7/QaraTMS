@@ -8,19 +8,32 @@
 
     <div class="page_title border-bottom my-3 d-flex justify-content-between">
         <h3 class="page_title">
-            Dashboard
+            {{$project->title}} <i class="bi bi-arrow-right-short"></i> Dashboard
         </h3>
 
         <div>
-            <a href="{{route('project_edit_page', $project->id)}}" class="btn btn-sm btn-secondary">
-                <i class="bi bi-gear"></i>
-                Settings
-            </a>
+            @can('add_edit_projects')
+                <a href="{{route('project_edit_page', $project->id)}}" class="btn btn-sm btn-secondary">
+                    <i class="bi bi-gear"></i>
+                    Settings
+                </a>
+            @endcan
         </div>
     </div>
 
 
     <div class="row row-cols-1 row-cols-md-4 g-3">
+
+        <div class="col">
+            <div class="base_block border shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <span class="fs-3" style="margin-top: auto; margin-bottom: auto"><i class="bi bi-server"></i> REPOSITORIES</span>
+                        <b class="fs-1 text-primary">{{$project->repositoriesCount()}}</b>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="col">
             <div class="base_block border shadow-sm">
@@ -44,6 +57,16 @@
             </div>
         </div>
 
+        <div class="col">
+            <div class="base_block border shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <span class="fs-3" style="margin-top: auto; margin-bottom: auto"><i class="bi bi-robot"></i> AUTOMATION</span>
+                        <b class="fs-1 text-primary">{{ $project->getAutomationPercent() }}%</b>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="col">
             <div class="base_block border shadow-sm">

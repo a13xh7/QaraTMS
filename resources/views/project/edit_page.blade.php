@@ -13,15 +13,17 @@
         </h3>
 
         <div>
-            <form method="POST" action={{route("project_delete")}}>
-                @csrf
-                <input type="hidden" name="id" value="{{$project->id}}">
+            @can('delete_projects')
+                <form method="POST" action={{route("project_delete")}}>
+                    @csrf
+                    <input type="hidden" name="id" value="{{$project->id}}">
 
-                <button type="submit" class="btn btn-sm btn-danger">
-                    <i class="bi bi-trash3"></i>
-                    Delete
-                </button>
-            </form>
+                    <button type="submit" class="btn btn-sm btn-danger">
+                        <i class="bi bi-trash3"></i>
+                        Delete
+                    </button>
+                </form>
+            @endcan
         </div>
 
     </div>
@@ -47,13 +49,6 @@
             <div class="mb-3">
                 <label for="title" class="form-label">Project Name</label>
                 <input type="text" class="form-control" name="title" required value="{{$project->title}}" maxlength="100">
-            </div>
-
-            <div class="mb-3">
-                <label for="prefix" class="form-label">Prefix <span>(max: 3)</span></label>
-                <input type="text" class="form-control" name="prefix" required value="{{$project->prefix}}"
-                       maxlength="3" pattern="[^\s]+" title="please dont use the white space"
-                       style="text-transform:uppercase" >
             </div>
 
             <div class="mb-3">

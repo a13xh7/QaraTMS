@@ -1,10 +1,10 @@
 $("#test_cases_list").sortable({
     update: function (e, u) {
-        updateOrder();
+        updateCasesOrder();
     }
 });
 
-function updateOrder() {
+function updateCasesOrder() {
     var order = [];
     $('#test_cases_list .test_case').each(function(index,element) {
         order.push({
@@ -12,7 +12,7 @@ function updateOrder() {
             order: index+1
         });
     });
-    console.log(order)
+     console.log(order);
 
     $.ajax({
         url: "/tcuo",
@@ -31,7 +31,7 @@ function updateOrder() {
 function getTestCaseDataFromForm() {
     let testCase = {};
 
-    testCase.id = $("#tce_case_id").val()
+    testCase.id = $("#tce_case_id").val();
     testCase.title = $("#tce_title_input").val();
     testCase.suite_id = $("#tce_test_suite_select").val();
     testCase.automated = $("#tce_automated_select").val();

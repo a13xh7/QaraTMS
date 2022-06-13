@@ -1,4 +1,4 @@
-
+https://github.com/staudenmeir/laravel-adjacency-list
 https://rodionoff.space/all/mysql8-in-docker/
 
 docker start mysql
@@ -31,7 +31,7 @@ html код новых шагов находится в 4-х местах - фо
 
 composer dumpautoload
 
-https://github.com/staudenmeir/laravel-adjacency-list
+
 
 
 git reset --hard HEAD~1

@@ -47,6 +47,7 @@ class TestRunController extends Controller
         $testSuitesIds = TestCase::whereIn('id', $testCasesIds)->get()->pluck('suite_id')->toArray();
 
         $testSuitesTree = Suite::whereIn('id', $testSuitesIds)->tree()->get()->toTree();
+        $suites = Suite::whereIn('id', $testSuitesIds)->orderBy('order')->get();
 
         $testRun->removeDeletedCasesFromResults();
 
@@ -58,6 +59,7 @@ class TestRunController extends Controller
             ->with('testPlan', $testPlan)
             ->with('repository', $repository)
             ->with('testSuitesTree', $testSuitesTree)
+            ->with('suites', $suites)
             ->with('testCasesIds', $testCasesIds)
             ->with('results', $results);
     }

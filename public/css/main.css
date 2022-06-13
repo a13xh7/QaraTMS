@@ -149,6 +149,11 @@ Scrollbar
     min-width: 30%;
 }
 
+#test_cases_list {
+    max-height:  calc(100vh - 120px); ;
+    overflow-y: scroll;
+}
+
 .test_case_clickable_area {
     width: 100%;
     cursor: pointer;
@@ -303,11 +308,6 @@ Scrollbar
 
 .test_suites_col {
     overflow-y: auto;
-}
-
-#test_case_col {
-    margin: 0;
-    max-width: 50%;
 }
 
 #test_case_block {

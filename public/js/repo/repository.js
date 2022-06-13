@@ -25,11 +25,11 @@ $.getScript('/js/repo/case_editor.js', function() {
  * Click on test suite - load suite test cases
  *************************************************/
 
-function loadCasesList(id, element) {
+function loadCasesList(id) {
     activeTreeSuiteItem.setId(id);
 
     // Add selected class
-    $('#tree .branch-wrapper').removeClass("selected")
+    $('#tree .branch-wrapper').removeClass("selected");
     activeTreeSuiteItem.addSelectedClass();
 
     $('#test_cases_list_site_title').text(activeTreeSuiteItem.getTitle()); // set title in test cases list area

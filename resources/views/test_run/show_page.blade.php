@@ -28,7 +28,8 @@
         </div>
 
         <div id="tree">
-            @include('test_run.tree')
+{{--            @include('test_run.tree')--}}
+            @include('test_run.test_cases_list')
         </div>
 
     </div>
@@ -36,9 +37,9 @@
 
     <div class="col" id="test_case_col">
 
-       <h4 class="ms-5 mt-3">
-           Select Test Case.
-       </h4>
+       <div class="fs-5 border-bottom mt-2 pb-2 mb-2">
+           Select Test Case
+        </div>
 
     </div>
 

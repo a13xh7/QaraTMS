@@ -71,7 +71,7 @@ class TestPlanController extends Controller
         $project = Project::findOrFail($project_id);
         $repositories = $project->repositories;
         $testPlan = TestPlan::findOrFail($test_plan_id);
-        $testSuitesTree = Suite::where('repository_id', $testPlan->repository_id)->tree()->get()->toTree();
+        $testSuitesTree = Suite::where('repository_id', $testPlan->repository_id)->orderBy('order')->tree()->get()->toTree();
 
         return view('test_plan.edit_page')
             ->with('project', $project)
@@ -145,7 +145,7 @@ class TestPlanController extends Controller
     {
         $repository = Repository::findOrFail($repository_id);
         $project = Project::findOrFail($repository->project_id);
-        $testSuitesTree = Suite::where('repository_id', $repository_id)->tree()->get()->toTree();
+        $testSuitesTree = Suite::where('repository_id', $repository_id)->orderBy('order')->tree()->get()->toTree();
 
         return view('test_plan.tree')
             ->with('repository', $repository)

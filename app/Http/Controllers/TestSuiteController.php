@@ -56,6 +56,18 @@ class TestSuiteController extends Controller
             ->with('repository', $repository);
     }
 
+    public function loadCasesListWithChildSuites($test_suite_id)
+    {
+        $suite = Suite::findOrFail($test_suite_id);
+        $repository = Repository::findOrFail($suite->repository_id);
+        $testCases = TestCase::where('suite_id', $test_suite_id)->orderBy('order')->get();
+
+        return view('repository.test_cases_list_with_child_suites')
+            ->with('testCases', $testCases)
+            ->with('suite', $suite)
+            ->with('repository', $repository);
+    }
+
     /******************************************
      *  CRUD
      *****************************************/
@@ -90,12 +102,12 @@ class TestSuiteController extends Controller
         $testSuite->title = $request->title;
         $testSuite->save();
 
-        // Remove this later
-        if($request->parent_id) {
-            $testSuite->parent_id = $request->parent_id;
-            $testSuite->save();
-            return redirect()->route('repository_show_page', [$request->project_id, $testSuite->repository_id]);
-        }
+        // TODO  - add move to other repository functionality
+//        if($request->parent_id) {
+//            $testSuite->parent_id = $request->parent_id;
+//            $testSuite->save();
+//            return redirect()->route('repository_show_page', [$request->project_id, $testSuite->repository_id]);
+//        }
     }
 
     public function destroy(Request $request)

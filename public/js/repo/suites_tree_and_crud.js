@@ -72,10 +72,11 @@ sortable.onSortCompleted(async (event, ui) => {
     let suite_parent_id = ui.item.getParent().attr('data-mid');
 
     updateSuiteParent(suite_id, suite_parent_id);
-    updateOrder();
+    updateSuitesOrder();
+    // loadCasesList(suite_id);
 });
 
-function updateOrder() {
+function updateSuitesOrder() {
     var order = [];
     $('#tree li').each(function(index,element) {
         order.push({
@@ -121,7 +122,7 @@ function createSuite() {
                 activeTreeSuiteItem.addRootChild(newSuite.id, newSuite.parent_id)
             }
             closeSuiteForm();
-            updateOrder();
+            updateSuitesOrder();
         }
     });
 }
@@ -145,7 +146,7 @@ function updateSuite() {
 
         success: function (data) {
             $(`#suite_title_${activeTreeSuiteItem.getId()}`).text(suiteFormTitleInput.val());
-            $('#test_cases_list_site_title').text(suiteFormTitleInput.val())
+            $('#test_cases_list_site_title').text(suiteFormTitleInput.val());
             closeSuiteForm();
         }
     });

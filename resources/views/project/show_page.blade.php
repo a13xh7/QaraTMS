@@ -22,13 +22,13 @@
     </div>
 
 
-    <div class="row row-cols-1 row-cols-md-4 g-3">
+    <div class="row row-cols-1 row-cols-md-3 g-3">
 
         <div class="col">
             <div class="base_block border shadow-sm">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
-                        <span class="fs-3" style="margin-top: auto; margin-bottom: auto"><i class="bi bi-server"></i> REPOSITORIES</span>
+                        <a href="{{route("repository_list_page", $project->id)}}" class="fs-3 link-dark" style="margin-top: auto; margin-bottom: auto"><i class="bi bi-server"></i> REPOSITORIES</a>
                         <b class="fs-1 text-primary">{{$project->repositoriesCount()}}</b>
                     </div>
                 </div>
@@ -93,39 +93,39 @@
 
     </div>
 
-    <h3 class="page_title my-5 pb-3 border-bottom">
-        Latest Test Runs
-    </h3>
+{{--    <h3 class="page_title my-5 pb-3 border-bottom">--}}
+{{--        Latest Test Runs--}}
+{{--    </h3>--}}
 
-    <div class="row row-cols-1 row-cols-md-1 g-3">
-        @foreach($testRuns as $testRun)
+{{--    <div class="row row-cols-1 row-cols-md-1 g-3">--}}
+{{--        @foreach($testRuns as $testRun)--}}
 
-            <div class="col">
-                <div class="card h-100">
+{{--            <div class="col">--}}
+{{--                <div class="card h-100">--}}
 
-                    <div class="card-body d-flex justify-content-between ">
-                        <div>
-                            <a class="fs-4" href="{{route('test_run_show_page', [$project->id, $testRun->id])}}">
-                                <i class="bi bi-play-circle"></i> {{$testRun->title}}
-                            </a>
-                        </div>
+{{--                    <div class="card-body d-flex justify-content-between ">--}}
+{{--                        <div>--}}
+{{--                            <a class="fs-4" href="{{route('test_run_show_page', [$project->id, $testRun->id])}}">--}}
+{{--                                <i class="bi bi-play-circle"></i> {{$testRun->title}}--}}
+{{--                            </a>--}}
+{{--                        </div>--}}
 
-                        <div>
-                            <span class="text-muted" title="created at">{{$testRun->created_at->format('d-m-Y H:i')}} </span>
-                        </div>
-                    </div>
+{{--                        <div>--}}
+{{--                            <span class="text-muted" title="created at">{{$testRun->created_at->format('d-m-Y H:i')}} </span>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
 
-                    <div class="border-top p-2">
+{{--                    <div class="border-top p-2">--}}
 
 
-                        @include('test_run.chart')
+{{--                        @include('test_run.chart')--}}
 
-                    </div>
+{{--                    </div>--}}
 
-                </div>
-            </div>
-        @endforeach
-    </div>
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        @endforeach--}}
+{{--    </div>--}}
 
 
 </div>

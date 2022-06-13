@@ -66,10 +66,10 @@ $("body").on('click', 'button', function () {
 $('body').on("click", "#toogle_collaple_expand", function (e) {
     let suite_id = $(this).parent().parent().parent().parent().data('mid');
 
-    rec(suite_id, hide)
+    rec(suite_id)
 });
 
-function rec(suite_id, hide) {
+function rec(suite_id) {
     let child_li = $(`li[data-pid='${suite_id}']`);
 
     if(child_li.is(":visible")) {
@@ -79,7 +79,7 @@ function rec(suite_id, hide) {
     }
 
     if($(`li[data-pid='${child_li.attr('data-mid')}']` ).length > 0) {
-        rec(child_li.attr('data-mid'), hide)
+        rec(child_li.attr('data-mid'))
     }
 }
 

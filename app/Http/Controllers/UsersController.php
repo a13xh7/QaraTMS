@@ -130,6 +130,32 @@ class UsersController extends Controller
             $user->revokePermissionTo('delete_repositories');
         }
 
+        // TEST SUITES
+        if($request->add_edit_test_suites) {
+            $user->givePermissionTo('add_edit_test_suites');
+        } else {
+            $user->revokePermissionTo('add_edit_test_suites');
+        }
+
+        if($request->delete_test_suites) {
+            $user->givePermissionTo('delete_test_suites');
+        } else {
+            $user->revokePermissionTo('delete_test_suites');
+        }
+
+        // TEST CASES
+        if($request->add_edit_test_cases) {
+            $user->givePermissionTo('add_edit_test_cases');
+        } else {
+            $user->revokePermissionTo('add_edit_test_cases');
+        }
+
+        if($request->delete_test_cases) {
+            $user->givePermissionTo('delete_test_cases');
+        } else {
+            $user->revokePermissionTo('delete_test_cases');
+        }
+
         // USERS
         if($request->manage_users) {
             $user->givePermissionTo('manage_users');

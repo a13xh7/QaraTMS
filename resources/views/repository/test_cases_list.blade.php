@@ -30,13 +30,17 @@
             </div>
 
             <div class="test_case_controls" >
-                <button class="btn py-0 px-1" type="button" title="Edit" onclick="renderTestCaseEditForm('{{$testCase->id}}')">
-                    <i class="bi bi-pencil"></i>
-                </button>
+                @can('add_edit_test_cases')
+                    <button class="btn py-0 px-1" type="button" title="Edit" onclick="renderTestCaseEditForm('{{$testCase->id}}')">
+                        <i class="bi bi-pencil"></i>
+                    </button>
+                @endcan
 
-                <button class="btn py-0 px-1" type="button" title="Delete" onclick="deleteTestCase({{$testCase->id}})">
-                    <i class="bi bi-trash3"></i>
-                </button>
+                @can('delete_test_cases')
+                    <button class="btn py-0 px-1" type="button" title="Delete" onclick="deleteTestCase({{$testCase->id}})">
+                        <i class="bi bi-trash3"></i>
+                    </button>
+                @endcan
             </div>
 
         </div>

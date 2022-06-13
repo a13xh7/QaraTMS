@@ -87,17 +87,17 @@
                         <td><input name="delete_repositories" class="form-check-input" type="checkbox" @if($user->can('delete_repositories')) checked @endif></td>
                     </tr>
 
-{{--                    <tr>--}}
-{{--                        <th scope="row">Test Suite</th>--}}
-{{--                        <td><input id="" class="form-check-input" type="checkbox" value=""></td>--}}
-{{--                        <td><input id="" class="form-check-input" type="checkbox" value=""></td>--}}
-{{--                    </tr>--}}
+                    <tr>
+                        <th scope="row">Test Suite</th>
+                        <td><input name="add_edit_test_suites" class="form-check-input" type="checkbox" @if($user->can('add_edit_test_suites')) checked @endif></td>
+                        <td><input name="delete_test_suites" class="form-check-input" type="checkbox" @if($user->can('delete_test_suites')) checked @endif></td>
+                    </tr>
 
-{{--                    <tr>--}}
-{{--                        <th scope="row">Test Case</th>--}}
-{{--                        <td><input id="" class="form-check-input" type="checkbox" value=""></td>--}}
-{{--                        <td><input id="" class="form-check-input" type="checkbox" value=""></td>--}}
-{{--                    </tr>--}}
+                    <tr>
+                        <th scope="row">Test Case</th>
+                        <td><input name="add_edit_test_cases" class="form-check-input" type="checkbox" @if($user->can('add_edit_test_cases')) checked @endif></td>
+                        <td><input name="delete_test_cases" class="form-check-input" type="checkbox" @if($user->can('delete_test_cases')) checked @endif></td>
+                    </tr>
 
                     <tr>
                         <th scope="row">Test Plan</th>

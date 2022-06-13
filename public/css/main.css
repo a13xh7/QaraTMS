@@ -195,7 +195,9 @@ Scrollbar
     bottom: 10px;
 }
 
-
+.test_case_step {
+    max-width: 360px;
+}
 
 
 /****************************************************

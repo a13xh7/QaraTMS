@@ -61,7 +61,7 @@
 
                 <div class="mb-3 p-0">
                     <label for="title" class="form-label"><b>Title</b></label>
-                    <input name="title" id="tce_title_input" type="text" class="form-control border-secondary" >
+                    <input name="title" id="tce_title_input" type="text" class="form-control border-secondary" autofocus>
                 </div>
 
                 <div class="col p-0">
@@ -85,10 +85,10 @@
                         </button>
                     </div>
 
-                    <div class="col p-0 mx-1">
+                    <div class="col p-0 px-1 test_case_step">
                         <textarea class="editor_textarea form-control border-secondary step_action" rows="2"></textarea>
                     </div>
-                    <div class="col p-0">
+                    <div class="col p-0 test_case_step">
                         <textarea class="editor_textarea form-control border-secondary step_result" rows="2"></textarea>
                     </div>
                 </div>

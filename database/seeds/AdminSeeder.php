@@ -28,6 +28,12 @@ class AdminSeeder extends Seeder
         Permission::create(['name' => 'add_edit_repositories']);
         Permission::create(['name' => 'delete_repositories']);
 
+        Permission::create(['name' => 'add_edit_test_suites']);
+        Permission::create(['name' => 'delete_test_suites']);
+
+        Permission::create(['name' => 'add_edit_test_cases']);
+        Permission::create(['name' => 'delete_test_cases']);
+
         Permission::create(['name' => 'add_edit_test_plans']);
         Permission::create(['name' => 'delete_test_plans']);
 
@@ -45,6 +51,12 @@ class AdminSeeder extends Seeder
 
             'add_edit_repositories',
             'delete_repositories',
+
+            'add_edit_test_suites',
+            'delete_test_suites',
+
+            'add_edit_test_cases',
+            'delete_test_cases',
 
             'add_edit_test_plans',
             'delete_test_plans',

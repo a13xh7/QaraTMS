@@ -85,17 +85,17 @@
                         <td><input name="delete_repositories" class="form-check-input" type="checkbox"></td>
                     </tr>
 
-{{--                    <tr>--}}
-{{--                        <th scope="row">Test Suite</th>--}}
-{{--                        <td><input id="" class="form-check-input" type="checkbox" value=""></td>--}}
-{{--                        <td><input id="" class="form-check-input" type="checkbox" value=""></td>--}}
-{{--                    </tr>--}}
+                    <tr>
+                        <th scope="row">Test Suite</th>
+                        <td><input name="add_edit_test_suites" class="form-check-input" type="checkbox"></td>
+                        <td><input name="delete_test_suites" class="form-check-input" type="checkbox"></td>
+                    </tr>
 
-{{--                    <tr>--}}
-{{--                        <th scope="row">Test Case</th>--}}
-{{--                        <td><input id="" class="form-check-input" type="checkbox" value=""></td>--}}
-{{--                        <td><input id="" class="form-check-input" type="checkbox" value=""></td>--}}
-{{--                    </tr>--}}
+                    <tr>
+                        <th scope="row">Test Case</th>
+                        <td><input name="add_edit_test_cases" class="form-check-input" type="checkbox"></td>
+                        <td><input name="delete_test_cases" class="form-check-input" type="checkbox"></td>
+                    </tr>
 
                     <tr>
                         <th scope="row">Test Plan</th>

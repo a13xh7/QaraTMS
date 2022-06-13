@@ -13,7 +13,11 @@ use Illuminate\Http\Request;
 class TestPlanController extends Controller
 {
 
-    public function startNewTestRun($test_plan_id) {
+    public function startNewTestRun($test_plan_id)
+    {
+        if(!auth()->user()->can('add_edit_test_runs')) {
+            abort(403);
+        }
 
         $testPlan = TestPlan::findOrFail($test_plan_id);
 
@@ -46,6 +50,10 @@ class TestPlanController extends Controller
 
     public function create($project_id)
     {
+        if(!auth()->user()->can('add_edit_test_plans')) {
+            abort(403);
+        }
+
         $project = Project::findOrFail($project_id);
         $repositories = $project->repositories;
 
@@ -56,6 +64,10 @@ class TestPlanController extends Controller
 
     public function edit($project_id, $test_plan_id)
     {
+        if(!auth()->user()->can('add_edit_test_plans')) {
+            abort(403);
+        }
+
         $project = Project::findOrFail($project_id);
         $repositories = $project->repositories;
         $testPlan = TestPlan::findOrFail($test_plan_id);
@@ -74,6 +86,10 @@ class TestPlanController extends Controller
 
     public function store(Request $request)
     {
+        if(!auth()->user()->can('add_edit_test_plans')) {
+            abort(403);
+        }
+
         $request->validate([
             'title' => 'required',
         ]);
@@ -93,6 +109,10 @@ class TestPlanController extends Controller
 
     public function update(Request $request)
     {
+        if(!auth()->user()->can('add_edit_test_plans')) {
+            abort(403);
+        }
+
         $testPlan = TestPlan::findOrFail($request->id);
 
         $testPlan->title = $request->title;
@@ -107,6 +127,10 @@ class TestPlanController extends Controller
 
     public function destroy(Request $request)
     {
+        if(!auth()->user()->can('delete_test_plans')) {
+            abort(403);
+        }
+
         $testPlan = TestPlan::findOrFail($request->id);
         $project_id = $testPlan->project_id;
         $testPlan->delete();

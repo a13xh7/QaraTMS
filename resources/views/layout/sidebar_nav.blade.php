@@ -24,7 +24,7 @@
                 <i class="bi bi-play-circle"></i> Test Runs
             </a>
 
-     
+
 
             <a href="{{route("project_documents_list_page", $project->id)}}" class="nav-link text-white">
                 <i class="bi bi-file-text-fill"></i> Documents
@@ -37,7 +37,7 @@
 
         <a href="{{route("project_list_page")}}" class="nav-link text-white">
             <i class="bi bi-diagram-3-fill"></i>
-            Projects
+            All Projects
         </a>
 
 
@@ -45,6 +45,7 @@
             <i class="bi bi-people-fill"></i>
             Users
         </a>
+
 
         <hr>
 

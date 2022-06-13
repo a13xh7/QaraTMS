@@ -10,12 +10,11 @@ let suiteFormTitleInput = $('#test_suite_title_input');
 
 function loadSuitesTree() {
     $.ajax({
-        url: "/repo/1",
+        url: `/repo/${repository_id}`,
         method: "GET",
 
         success: function (data) {
             treeData = data;
-            // console.log(treeData)
             const content = treeData.map(sortable.createBranch);
             tree.html(content);
             sortable.run();

@@ -10,9 +10,12 @@
         <div class="border-bottom my-3">
             <h3 class="page_title">
                 Test Plans
-                <a class="mx-3" href="{{route("test_plan_create_page", $project->id)}}">
-                    <button type="button" class="btn btn-sm btn-primary"> <i class="bi bi-plus-lg"></i> New Test Plan</button>
-                </a>
+
+                @can('add_edit_test_plans')
+                    <a class="mx-3" href="{{route("test_plan_create_page", $project->id)}}">
+                        <button type="button" class="btn btn-sm btn-primary"> <i class="bi bi-plus-lg"></i> New Test Plan</button>
+                    </a>
+                @endcan
             </h3>
         </div>
 
@@ -20,7 +23,7 @@
             @foreach($testPlans as $testPlan)
 
                 <div class="col ">
-                    <div class="base_block shadow h-100">
+                    <div class="base_block shadow-sm border h-100">
 
                         <div class="card-body d-flex justify-content-between pb-0">
                             <div>
@@ -45,15 +48,19 @@
                         <div class="d-flex justify-content-end align-items-end border-top py-2">
                             <div>
 
-                                <a href="{{route('start_new_test_run', $testPlan->id)}}" class="link-light btn btn-sm btn-success" onclick="showNewTestRunForm({{$testPlan->id}})">
-                                    <i class="bi bi-play-circle"></i>
-                                    Start new test run
-                                </a>
+                                @can('add_edit_test_runs')
+                                    <a href="{{route('start_new_test_run', $testPlan->id)}}" class="link-light btn btn-sm btn-success me-3">
+                                        <i class="bi bi-play-circle"></i>
+                                        Start new test run
+                                    </a>
+                                @endcan
 
-                                <a href="{{ route("test_plan_update_page", [$project->id, $testPlan->id]) }}" class="btn btn-sm btn-outline-dark mx-3">
-                                    <i class="bi bi-pencil"></i>
-                                    Edit
-                                </a>
+                                @can('add_edit_test_plans')
+                                    <a href="{{ route("test_plan_update_page", [$project->id, $testPlan->id]) }}" class="btn btn-sm btn-outline-dark mx-3">
+                                        <i class="bi bi-pencil"></i>
+                                        Edit
+                                    </a>
+                                @endcan
                             </div>
                         </div>
 

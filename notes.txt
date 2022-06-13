@@ -1,5 +1,7 @@
 
-https://github.com/nauvalazhar/bootstrap-5-login-page/
+https://rodionoff.space/all/mysql8-in-docker/
+
+docker start mysql
 
 php artisan db:seed --class=AdminSeeder
 

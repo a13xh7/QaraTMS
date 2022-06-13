@@ -103,7 +103,7 @@
 
                     @foreach($data->steps as $id => $step)
 
-                        <div class="row m-0 p-0 step">
+                        <div class="row m-0 mt-2 p-0 step">
                             <div class="col-auto p-0 d-flex flex-column align-items-center">
                                 <span class="fs-5 step_number">{{$id+1}}</span>
                                 <button type="button" class="btn btn-outline-danger btn-sm step_delete_btn px-1 py-0" onclick="removeStep(this)">
@@ -111,10 +111,10 @@
                                 </button>
                             </div>
 
-                            <div class="col p-0 mx-1">
+                            <div class="col p-0 px-1 test_case_step">
                                 <textarea class="editor_textarea form-control border-secondary step_action" rows="2">{!! $step->action !!}</textarea>
                             </div>
-                            <div class="col p-0">
+                            <div class="col p-0 test_case_step">
                                 <textarea class="editor_textarea form-control border-secondary step_result" rows="2">{{ $step->result }}</textarea>
                             </div>
                         </div>
@@ -130,10 +130,10 @@
                             </button>
                         </div>
 
-                        <div class="col p-0 mx-1">
+                        <div class="col p-0 px-1 test_case_step">
                             <textarea class="editor_textarea form-control border-secondary step_action" rows="2"></textarea>
                         </div>
-                        <div class="col p-0">
+                        <div class="col p-0 test_case_step">
                             <textarea class="editor_textarea form-control border-secondary step_result" rows="2"></textarea>
                         </div>
                     </div>

@@ -19,10 +19,12 @@
             </span>
 
             <div>
-                <button id="add_root_suite_btn" class="btn btn-primary btn-sm" type="button" title="Add Test Suite"
-                        onclick="showSuiteForm('create')">
-                    <i class="bi bi-plus-lg"></i> Test Suite
-                </button>
+                @can('add_edit_test_suites')
+                    <button id="add_root_suite_btn" class="btn btn-primary btn-sm" type="button" title="Add Test Suite"
+                            onclick="showSuiteForm('create')">
+                        <i class="bi bi-plus-lg"></i> Test Suite
+                    </button>
+                @endcan
 
                 @can('add_edit_repositories')
                     <a href="{{route('repository_edit_page', [$project->id, $repository->id])}}"
@@ -57,11 +59,12 @@
                 </span>
                 </div>
 
-
-                <button class="btn btn-primary btn-sm mx-2" type="button" title="Add Test Case"
-                        onclick="loadTestCaseCreateForm()">
-                    <i class="bi bi-plus-lg"></i> Test Case
-                </button>
+                @can('add_edit_test_cases')
+                    <button class="btn btn-primary btn-sm mx-2" type="button" title="Add Test Case"
+                            onclick="loadTestCaseCreateForm()">
+                        <i class="bi bi-plus-lg"></i> Test Case
+                    </button>
+                @endcan
             </div>
 
         </div>
@@ -99,7 +102,7 @@
 
 @section('footer')
     <script>
-        let repository_id = {{$repository->id}}
+        let repository_id = {{$repository->id}};
     </script>
 
     <script src="{{asset('/js/repo/repository.js')}}"></script>

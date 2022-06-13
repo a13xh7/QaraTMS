@@ -110,10 +110,10 @@ function renderStep(stepNumber) {
             </button>
         </div>
 
-        <div class="col p-0 mx-1">
+        <div class="col p-0 px-1 test_case_step">
             <textarea class="editor_textarea form-control border-secondary step_action" rows="2"></textarea>
         </div>
-        <div class="col p-0">
+        <div class="col p-0 test_case_step">
             <textarea class="editor_textarea form-control border-secondary step_result" rows="2"></textarea>
         </div>
     </div>`;

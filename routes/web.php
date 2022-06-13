@@ -36,7 +36,8 @@ Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 // AJAX
  ***********************************************************************/
 
-Route::get('/repo/{id}',[\App\Http\Controllers\AjaxDataController::class, 'getSuitesTree']);
+Route::get('/repo/{repository_id}',[RepositoryController::class, 'getSuitesTree'])->where('repository_id', '[0-9]+');
+
 Route::post('/tsup',[TestSuiteController::class, 'updateParent']);
 Route::post('/tsuo',[TestSuiteController::class, 'updateOrder']);
 Route::post('/tcuo',[TestCaseController::class, 'updateOrder']);

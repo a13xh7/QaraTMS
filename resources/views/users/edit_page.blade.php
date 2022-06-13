@@ -78,51 +78,52 @@
                     <tr>
                         <th scope="row">Project</th>
                         <td> <input name="add_edit_projects" class="form-check-input" type="checkbox"  @if($user->can('add_edit_projects')) checked @endif> </td>
-                        <td> <input id="delete_projects" class="form-check-input" type="checkbox" @if($user->can('delete_projects')) checked @endif> </td>
+                        <td> <input name="delete_projects" class="form-check-input" type="checkbox" @if($user->can('delete_projects')) checked @endif> </td>
                     </tr>
 
                     <tr>
                         <th scope="row">Repository</th>
-                        <td><input id="add_edit_repositories" class="form-check-input" type="checkbox" @if($user->can('add_edit_repositories')) checked @endif></td>
-                        <td><input id="delete_repositories" class="form-check-input" type="checkbox" @if($user->can('delete_repositories')) checked @endif></td>
+                        <td><input name="add_edit_repositories" class="form-check-input" type="checkbox" @if($user->can('add_edit_repositories')) checked @endif></td>
+                        <td><input name="delete_repositories" class="form-check-input" type="checkbox" @if($user->can('delete_repositories')) checked @endif></td>
                     </tr>
 
-{{--                    <tr>--}}
-{{--                        <th scope="row">Test Suite</th>--}}
-{{--                        <td><input id="" class="form-check-input" type="checkbox" value=""></td>--}}
-{{--                        <td><input id="" class="form-check-input" type="checkbox" value=""></td>--}}
-{{--                    </tr>--}}
+                    <tr>
+                        <th scope="row">Test Suite</th>
+                        <td><input name="add_edit_test_suites" class="form-check-input" type="checkbox" @if($user->can('add_edit_test_suites')) checked @endif></td>
+                        <td><input name="delete_test_suites" class="form-check-input" type="checkbox" @if($user->can('delete_test_suites')) checked @endif></td>
+                    </tr>
 
-{{--                    <tr>--}}
-{{--                        <th scope="row">Test Case</th>--}}
-{{--                        <td><input id="" class="form-check-input" type="checkbox" value=""></td>--}}
-{{--                        <td><input id="" class="form-check-input" type="checkbox" value=""></td>--}}
-{{--                    </tr>--}}
+                    <tr>
+                        <th scope="row">Test Case</th>
+                        <td><input name="add_edit_test_cases" class="form-check-input" type="checkbox" @if($user->can('add_edit_test_cases')) checked @endif></td>
+                        <td><input name="delete_test_cases" class="form-check-input" type="checkbox" @if($user->can('delete_test_cases')) checked @endif></td>
+                    </tr>
 
-{{--                    <tr>--}}
-{{--                        <th scope="row">Test Plan</th>--}}
-{{--                        <td><input id="" class="form-check-input" type="checkbox" value=""></td>--}}
-{{--                        <td><input id="" class="form-check-input" type="checkbox" value=""></td>--}}
-{{--                    </tr>--}}
+                    <tr>
+                        <th scope="row">Test Plan</th>
+                        <td><input name="add_edit_test_plans" class="form-check-input" type="checkbox" @if($user->can('add_edit_test_plans')) checked @endif></td>
+                        <td><input name="delete_test_plans" class="form-check-input" type="checkbox" @if($user->can('delete_test_plans')) checked @endif></td>
+                    </tr>
 
-{{--                    <tr>--}}
-{{--                        <th scope="row">Test Run</th>--}}
-{{--                        <td><input id="" class="form-check-input" type="checkbox" value=""></td>--}}
-{{--                        <td><input id="" class="form-check-input" type="checkbox" value=""></td>--}}
-{{--                    </tr>--}}
+                    <tr>
+                        <th scope="row">Test Run</th>
+                        <td><input name="add_edit_test_runs" class="form-check-input" type="checkbox" @if($user->can('add_edit_test_runs')) checked @endif></td>
+                        <td><input name="delete_test_runs" class="form-check-input" type="checkbox" @if($user->can('delete_test_runs')) checked @endif></td>
+                    </tr>
 
-{{--                    <tr>--}}
-{{--                        <th scope="row">Document</th>--}}
-{{--                        <td><input id="" class="form-check-input" type="checkbox" value=""></td>--}}
-{{--                        <td><input id="" class="form-check-input" type="checkbox" value=""></td>--}}
-{{--                    </tr>--}}
+                    <tr>
+                        <th scope="row">Document</th>
+                        <td><input name="add_edit_documents" class="form-check-input" type="checkbox" @if($user->can('add_edit_documents')) checked @endif></td>
+                        <td><input name="delete_documents" class="form-check-input" type="checkbox" @if($user->can('delete_documents')) checked @endif></td>
+                    </tr>
 
-{{--                    <tr>--}}
-{{--                        <th scope="row">User</th>--}}
-{{--                        <td colspan="2">--}}
-{{--                            <input  id="" class="form-check-input" type="checkbox" value="">--}}
-{{--                        </td>--}}
-{{--                    </tr>--}}
+                    <tr>
+                        <th scope="row">User</th>
+                        <td colspan="2" style="padding-left: 20%;"  >
+                            <input name="manage_users" class="form-check-input" type="checkbox" @if($user->can('manage_users')) checked @endif>
+                        </td>
+                    </tr>
+
 
                     </tbody>
                 </table>
@@ -137,4 +138,13 @@
 
 
 
+@endsection
+
+@section('footer')
+    <script>
+        $('body').on('click', 'th', function () {
+            $(this).next().find('input[type=checkbox]').each(function () { this.checked = !this.checked; });
+            $(this).next().next().find('input[type=checkbox]').each(function () { this.checked = !this.checked; });
+        });
+    </script>
 @endsection

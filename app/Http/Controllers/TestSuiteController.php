@@ -62,6 +62,10 @@ class TestSuiteController extends Controller
 
     public function store(Request $request)
     {
+        if(!auth()->user()->can('add_edit_test_suites')) {
+            abort(403);
+        }
+
         $suite = new Suite();
 
         $suite->repository_id = $request->repository_id;
@@ -77,6 +81,10 @@ class TestSuiteController extends Controller
 
     public function update(Request $request)
     {
+        if(!auth()->user()->can('add_edit_test_suites')) {
+            abort(403);
+        }
+
         $testSuite = Suite::findOrFail($request->id);
 
         $testSuite->title = $request->title;
@@ -92,6 +100,10 @@ class TestSuiteController extends Controller
 
     public function destroy(Request $request)
     {
+        if(!auth()->user()->can('delete_test_suites')) {
+            abort(403);
+        }
+
         $testSuite = Suite::findOrFail($request->id);
         $testSuite->descendantsAndSelf()->delete();
     }

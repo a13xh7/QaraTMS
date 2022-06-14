@@ -1,6 +1,6 @@
 @foreach($testCases as $testCase)
 
-        <div id="{{$testCase->id}}"  class="test_case border-bottom d-flex ps-1 py-2 justify-content-between" data-case_id="{{$testCase->id}}">
+        <div id="{{$testCase->id}}"  class="test_case border-bottom d-flex ps-1  justify-content-between" data-case_id="{{$testCase->id}}">
 
             <div class="d-flex justify-content-start test_case_clickable_area" onclick="renderTestCase('{{$testCase->id}}')">
                 <div class="me-1 test_case_info">

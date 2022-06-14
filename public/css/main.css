@@ -157,10 +157,13 @@ Scrollbar
 .test_case_clickable_area {
     width: 100%;
     cursor: pointer;
+    padding-top: 7px;
+    padding-bottom: 7px;
 }
 
 .test_case_controls {
     min-width: 70px;
+    padding-top: 7px;
 }
 
 .test_case:hover {

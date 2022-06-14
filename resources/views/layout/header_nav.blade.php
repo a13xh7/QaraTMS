@@ -1,4 +1,4 @@
-<header class="navbar sticky-top navbar-expand-lg shadow">
+<header class="navbar sticky-top navbar-expand-lg shadow-sm">
 
     <div class="container-fluid">
         <a class="navbar-brand" href="/">

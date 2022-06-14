@@ -17,6 +17,10 @@ class TestSuiteController extends Controller
 
     public function updateParent(Request $request)
     {
+        if(!auth()->user()->can('add_edit_test_suites')) {
+            abort(403);
+        }
+
         $testSuite = Suite::findOrFail($request->id);
         $testSuite->parent_id = $request->parent_id;
         $testSuite->save();
@@ -24,6 +28,10 @@ class TestSuiteController extends Controller
 
     public function updateOrder(Request $request)
     {
+        if(!auth()->user()->can('add_edit_test_suites')) {
+            abort(403);
+        }
+
         foreach($request->order as $data){
             $testSuite = Suite::findOrFail($data['id']);
             $testSuite->order = $data['order'];
@@ -49,7 +57,7 @@ class TestSuiteController extends Controller
     {
         $suite = Suite::findOrFail($test_suite_id);
         $repository = Repository::findOrFail($suite->repository_id);
-        $testCases = TestCase::where('suite_id', $test_suite_id)->orderBy('order')->get();
+        $testCases = TestCase::select('id', 'suite_id', 'title', 'automated', 'priority', 'order')->where('suite_id', $test_suite_id)->orderBy('order')->get();
 
         return view('repository.test_cases_list')
             ->with('testCases', $testCases)

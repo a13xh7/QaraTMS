@@ -1,8 +1,7 @@
-# QaraTMS (beta) - Open Source Test Management System
+# QaraTMS - Open Source Test Management System
 
 **QaraTMS** is open source test management software for managing test suites, test cases, test plans, test runs and documentation.
 
-This is beta, there may be bugs. 
 
 ## Languages and Tools:
 
@@ -40,7 +39,7 @@ This is beta, there may be bugs.
    
 ![logo](public/img/1.png)
    
-3. Add test suites and test cases. At this moment you can use markdown for text formatting. 
+3. Add test suites and test cases. 
 
 ![logo](public/img/2.png)
 

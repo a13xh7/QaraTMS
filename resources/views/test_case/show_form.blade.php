@@ -32,7 +32,7 @@
                 <b>{{$testCase->title}}</b> </a>
         </div>
 
-        <div style="min-width: 70px" class="justify-content-end ">
+        <div style="min-width: 70px" class="justify-content-end">
 
             @can('add_edit_test_cases')
                 <button type="button" class="btn btn-outline-dark btn-sm"

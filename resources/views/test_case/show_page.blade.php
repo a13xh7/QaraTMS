@@ -7,9 +7,9 @@
 
     <div class="col">
 
-        <div class="border-bottom my-3">
-            <h3 class="page_title">
+        <div class="border-bottom my-3 d-flex justify-content-between">
 
+            <h3 class="page_title">
                 <i class="bi bi-chevron-double-up text-danger"></i>
 
                 <span>
@@ -23,18 +23,14 @@
                     <span class="text-primary">
                          {{$repository->prefix}}-<span id="tce_case_id">{{$testCase->id}}</span>
                     </span>
-
-
                 {{$testCase->title}}
-
 
             </h3>
 
-
-                <button type="button" class="btn btn-outline-dark btn-sm"
-                        onclick="renderTestCaseEditForm({{$testCase->id}})">
-                    <i class="bi bi-pencil"></i>
-                </button>
+            <button type="button" class="btn btn-outline-dark btn-sm mb-2"
+                    onclick="renderTestCaseEditForm({{$testCase->id}})">
+                <i class="bi bi-pencil px-1"></i>
+            </button>
 
         </div>
 
@@ -48,7 +44,7 @@
                         <div class="row mb-3 border p-3 rounded">
 
                             <div>
-                                {!! parsedown($data->preconditions) !!}
+                                {!! $data->preconditions !!}
                             </div>
 
                         </div>
@@ -73,13 +69,13 @@
 
                                     <div class="col-6">
                                         <div>
-                                            {!! parsedown($step->action) !!}
+                                            {!! $step->action !!}
                                         </div>
                                     </div>
 
                                     <div class="col-6">
                                         <div>
-                                            {!! parsedown($step->result) !!}
+                                            {!! $step->result !!}
                                         </div>
                                     </div>
                                 </div>

@@ -37,7 +37,7 @@
                         </select>
                     </div>
 
-                    <div class="mx-5">
+                    <div class="mx-4">
                         <label class="form-label">
                             <b>Priority</b>
                             <i class="bi bi-chevron-double-up text-danger"></i>|<i class="bi bi-list text-info"></i>|<i class="bi bi-chevron-double-down text-warning"></i>
@@ -106,8 +106,17 @@
                         <div class="row m-0 mt-2 p-0 step">
                             <div class="col-auto p-0 d-flex flex-column align-items-center">
                                 <span class="fs-5 step_number">{{$id+1}}</span>
+
+                                <button type="button" class="btn btn-outline btn-sm step_delete_btn px-1 py-0" onclick="stepUp(this)">
+                                    <i class="bi bi-arrow-up-circle"></i>
+                                </button>
+
                                 <button type="button" class="btn btn-outline-danger btn-sm step_delete_btn px-1 py-0" onclick="removeStep(this)">
                                     <i class="bi bi-x-circle"></i>
+                                </button>
+
+                                <button type="button" class="btn btn-outline btn-sm step_delete_btn px-1 py-0" onclick="stepDown(this)">
+                                    <i class="bi bi-arrow-down-circle"></i>
                                 </button>
                             </div>
 
@@ -125,8 +134,17 @@
                     <div class="row m-0 p-0 step">
                         <div class="col-auto p-0 d-flex flex-column align-items-center">
                             <span class="fs-5 step_number">1</span>
+
+                            <button type="button" class="btn btn-outline btn-sm step_delete_btn px-1 py-0" onclick="stepUp(this)">
+                                <i class="bi bi-arrow-up-circle"></i>
+                            </button>
+
                             <button type="button" class="btn btn-outline-danger btn-sm step_delete_btn px-1 py-0" onclick="removeStep(this)">
                                 <i class="bi bi-x-circle"></i>
+                            </button>
+
+                            <button type="button" class="btn btn-outline btn-sm step_delete_btn px-1 py-0" onclick="stepDown(this)">
+                                <i class="bi bi-arrow-down-circle"></i>
                             </button>
                         </div>
 

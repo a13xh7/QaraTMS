@@ -5,11 +5,13 @@
 $.getScript('/js/repo/tree.js', function() {});
 $.getScript('/js/repo/suites_tree_and_crud.js', function() {});
 $.getScript('/js/repo/case_crud.js', function() {});
+
 /**************************************************
  * RENDER SUITES TREE
  * and select first available suite
  * when all scripts are loaded
  *************************************************/
+
 $.getScript('/js/repo/case_editor.js', function() {
     try {
         loadSuitesTree();
@@ -27,6 +29,8 @@ $.getScript('/js/repo/case_editor.js', function() {
 
 function loadCasesList(id) {
     activeTreeSuiteItem.setId(id);
+
+    Cookies.set('lastSelectedSuite', id);
 
     // Add selected class
     $('#tree .branch-wrapper').removeClass("selected");

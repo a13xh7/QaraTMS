@@ -15,10 +15,11 @@
                 @endif
                 </span>
 
-            <span class="text-primary">
-                {{$repository->prefix}}-
-                <span id="tce_case_id">{{$testCase->id}}</span>
-            </span>
+            <u class="text-primary">
+                <a target="_blank" href="{{route('test_case_show_page', $testCase->id)}}">
+                    {{$repository->prefix}}-<span id="tce_case_id">{{$testCase->id}}</span>
+                </a>
+            </u>
 
 
         </div>
@@ -27,9 +28,7 @@
 
 
         <div class="test_case_title">
-            <a target="_blank" href="{{route('test_case_show_page', $testCase->id)}}" class="link-dark">
-                <i class="bi bi-link-45deg"></i>
-                <b>{{$testCase->title}}</b> </a>
+            <b>{{$testCase->title}}</b>
         </div>
 
         <div style="min-width: 70px" class="justify-content-end">

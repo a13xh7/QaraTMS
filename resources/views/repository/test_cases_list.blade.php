@@ -21,7 +21,9 @@
                         @endif
                     </span>
 
-                    <span class="text-primary">{{$repository->prefix}}-{{$testCase->id}}</span>
+                    <u class="text-primary under">
+                        <a href="{{route('test_case_show_page', $testCase->id)}}" target="_blank">{{$repository->prefix}}-{{$testCase->id}}</a>
+                    </u>
                 </div>
 
                 <div class="test_case_title">

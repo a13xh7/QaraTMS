@@ -14,9 +14,9 @@
 
 ## Getting Started
 
-- You will need to install **php 7.4**, **mysql-8** and **composer**.
-- Create a database locally named `tms` utf8_general_ci
-- Pull project from git repository.
+- You will need to install **php 7.4**, **mysql-8** or **SQLite**, **composer**.
+- Pull the project from git repository.
+- Create a database named `tms` utf8_general_ci, or you can use SQLite.
 - Rename `.env.backup` file to `.env` and fill the database information.
 - Run `composer install` or ```php composer.phar install```
 - Run `php artisan key:generate`
@@ -26,6 +26,12 @@
 - You can now access project at **localhost:8000** 
 - Login with default email and password - **admin@admin.com** / **password**
 - Go to **Users** page and change default email and password. 
+
+If you are using SQLite
+
+* Create **database.sqlite** file in database folder
+* Rename `.env_sqlite.backup` file to `.env` and fill the database information.
+
 
 ## How to use it
 ![logo](public/img/header.jpg)

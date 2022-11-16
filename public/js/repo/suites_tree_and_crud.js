@@ -20,15 +20,21 @@ function loadSuitesTree() {
             sortable.run();
 
         }, complete: function (data) {
-            selectFirstSuite();
+            selectLastActiveSuite();
         }
     });
 }
 
-function selectFirstSuite() {
+function selectLastActiveSuite() {
 
-    if($('#tree li .left-sidebar').length > 0) {
-        $('#tree li .left-sidebar').first().click();
+    if($('#tree li').length > 0) {
+
+        if(Cookies.get('lastSelectedSuite') != null) {
+            $(`#tree li[id="${Cookies.get('lastSelectedSuite')}"] .left-sidebar`).click();
+        } else {
+            $('#tree li .left-sidebar').first().click();
+        }
+
     } else {
         $('#test_cases_list').empty();
         closeTestCaseEditor();
@@ -200,7 +206,7 @@ function deleteSuite(id) {
             }
 
             if(was_selected) {
-                selectFirstSuite();
+                selectLastActiveSuite();
                 console.log('choose first')
             }
 

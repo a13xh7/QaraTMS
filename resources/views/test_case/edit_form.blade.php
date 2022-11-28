@@ -121,10 +121,18 @@
                             </div>
 
                             <div class="col p-0 px-1 test_case_step">
-                                <textarea class="editor_textarea form-control border-secondary step_action" rows="2">{!! $step->action !!}</textarea>
+                                <textarea class="editor_textarea form-control border-secondary step_action" rows="2">
+                                    @if(isset($step->action))
+                                        {!! $step->action !!}
+                                    @endif
+                                </textarea>
                             </div>
                             <div class="col p-0 test_case_step">
-                                <textarea class="editor_textarea form-control border-secondary step_result" rows="2">{{ $step->result }}</textarea>
+                                <textarea class="editor_textarea form-control border-secondary step_result" rows="2">
+                                    @if(isset($step->result))
+                                        {!! $step->result !!}
+                                    @endif
+                                </textarea>
                             </div>
                         </div>
                     @endforeach

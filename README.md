@@ -27,9 +27,9 @@
 - Login with default email and password - **admin@admin.com** / **password**
 - Go to **Users** page and change default email and password. 
 
-If you are using SQLite
+If you are using SQLite:
 
-* Create **database.sqlite** file in database folder
+* Create **database.sqlite** file in **./database** folder
 * Rename `.env_sqlite.backup` file to `.env` and fill the database information.
 
 

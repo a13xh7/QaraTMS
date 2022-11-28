@@ -10,7 +10,13 @@
         <div class="border-bottom my-3 d-flex justify-content-between">
 
             <h3 class="page_title">
-                <i class="bi bi-chevron-double-up text-danger"></i>
+                @if($testCase->priority == \App\Enums\CasePriority::LOW)
+                    <i class="bi bi-chevron-double-down text-warning"></i>
+                @elseif($testCase->priority == \App\Enums\CasePriority::NORMAL)
+                    <i class="bi bi-list text-info"></i>
+                @elseif($testCase->priority == \App\Enums\CasePriority::HIGH)
+                    <i class="bi bi-chevron-double-up text-danger"></i>
+                @endif
 
                 <span>
                     @if($testCase->automated)
@@ -18,11 +24,11 @@
                     @else
                         <i class="bi bi-person mx-1"></i>
                     @endif
-                    </span>
+                </span>
 
-                    <span class="text-primary">
-                         {{$repository->prefix}}-<span id="tce_case_id">{{$testCase->id}}</span>
-                    </span>
+                <span class="text-primary">
+                     {{$repository->prefix}}-<span id="tce_case_id">{{$testCase->id}}</span>
+                </span>
                 {{$testCase->title}}
 
             </h3>
@@ -69,13 +75,17 @@
 
                                     <div class="col-6">
                                         <div>
-                                            {!! $step->action !!}
+                                            @if(isset($step->action))
+                                                {!! $step->action !!}
+                                            @endif
                                         </div>
                                     </div>
 
                                     <div class="col-6">
                                         <div>
-                                            {!! $step->result !!}
+                                            @if(isset($step->action))
+                                                {!! $step->result !!}
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

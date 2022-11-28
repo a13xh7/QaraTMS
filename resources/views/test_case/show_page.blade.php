@@ -7,10 +7,16 @@
 
     <div class="col">
 
-        <div class="border-bottom my-3">
-            <h3 class="page_title">
+        <div class="border-bottom my-3 d-flex justify-content-between">
 
-                <i class="bi bi-chevron-double-up text-danger"></i>
+            <h3 class="page_title">
+                @if($testCase->priority == \App\Enums\CasePriority::LOW)
+                    <i class="bi bi-chevron-double-down text-warning"></i>
+                @elseif($testCase->priority == \App\Enums\CasePriority::NORMAL)
+                    <i class="bi bi-list text-info"></i>
+                @elseif($testCase->priority == \App\Enums\CasePriority::HIGH)
+                    <i class="bi bi-chevron-double-up text-danger"></i>
+                @endif
 
                 <span>
                     @if($testCase->automated)
@@ -18,23 +24,19 @@
                     @else
                         <i class="bi bi-person mx-1"></i>
                     @endif
-                    </span>
+                </span>
 
-                    <span class="text-primary">
-                         {{$repository->prefix}}-<span id="tce_case_id">{{$testCase->id}}</span>
-                    </span>
-
-
+                <span class="text-primary">
+                     {{$repository->prefix}}-<span id="tce_case_id">{{$testCase->id}}</span>
+                </span>
                 {{$testCase->title}}
-
 
             </h3>
 
-
-                <button type="button" class="btn btn-outline-dark btn-sm"
-                        onclick="renderTestCaseEditForm({{$testCase->id}})">
-                    <i class="bi bi-pencil"></i>
-                </button>
+            <button type="button" class="btn btn-outline-dark btn-sm mb-2"
+                    onclick="renderTestCaseEditForm({{$testCase->id}})">
+                <i class="bi bi-pencil px-1"></i>
+            </button>
 
         </div>
 
@@ -48,7 +50,7 @@
                         <div class="row mb-3 border p-3 rounded">
 
                             <div>
-                                {!! parsedown($data->preconditions) !!}
+                                {!! $data->preconditions !!}
                             </div>
 
                         </div>
@@ -73,13 +75,17 @@
 
                                     <div class="col-6">
                                         <div>
-                                            {!! parsedown($step->action) !!}
+                                            @if(isset($step->action))
+                                                {!! $step->action !!}
+                                            @endif
                                         </div>
                                     </div>
 
                                     <div class="col-6">
                                         <div>
-                                            {!! parsedown($step->result) !!}
+                                            @if(isset($step->action))
+                                                {!! $step->result !!}
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

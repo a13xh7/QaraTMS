@@ -5,20 +5,27 @@
 
         <div style="min-width: 140px">
 
-            <i class="bi bi-chevron-double-up text-danger"></i>
+            @if($testCase->priority == \App\Enums\CasePriority::LOW)
+                <i class="bi bi-chevron-double-down text-warning"></i>
+            @elseif($testCase->priority == \App\Enums\CasePriority::NORMAL)
+                <i class="bi bi-list text-info"></i>
+            @elseif($testCase->priority == \App\Enums\CasePriority::HIGH)
+                <i class="bi bi-chevron-double-up text-danger"></i>
+            @endif
 
-                <span>
-                    @if($testCase->automated)
-                    <i class="bi bi-robot mx-1"></i>
-                @else
-                    <i class="bi bi-person mx-1"></i>
-                @endif
-                </span>
-
-            <span class="text-primary">
-                {{$repository->prefix}}-
-                <span id="tce_case_id">{{$testCase->id}}</span>
+            <span>
+            @if($testCase->automated)
+                <i class="bi bi-robot mx-1"></i>
+            @else
+                <i class="bi bi-person mx-1"></i>
+            @endif
             </span>
+
+            <u class="text-primary">
+                <a target="_blank" href="{{route('test_case_show_page', $testCase->id)}}">
+                    {{$repository->prefix}}-<span id="tce_case_id">{{$testCase->id}}</span>
+                </a>
+            </u>
 
 
         </div>
@@ -27,12 +34,10 @@
 
 
         <div class="test_case_title">
-            <a target="_blank" href="{{route('test_case_show_page', $testCase->id)}}" class="link-dark">
-                <i class="bi bi-link-45deg"></i>
-                <b>{{$testCase->title}}</b> </a>
+            <b>{{$testCase->title}}</b>
         </div>
 
-        <div style="min-width: 70px" class="justify-content-end ">
+        <div style="min-width: 70px" class="justify-content-end">
 
             @can('add_edit_test_cases')
                 <button type="button" class="btn btn-outline-dark btn-sm"
@@ -82,13 +87,17 @@
 
                                 <div class="col-6">
                                     <div>
-                                        {!! $step->action !!}
+                                        @if(isset($step->action))
+                                            {!! $step->action !!}
+                                        @endif
                                     </div>
                                 </div>
 
                                 <div class="col-6">
                                     <div>
-                                        {!! $step->result !!}
+                                        @if(isset($step->result))
+                                            {!! $step->result !!}
+                                        @endif
                                     </div>
                                 </div>
                             </div>

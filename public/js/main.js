@@ -32,7 +32,6 @@ $( document ).ready(function() {
     $('.alert').show('fade', 500);
     setTimeout(removeAlert, 3000);
 
-
     $('body').on('click', '.alert button', function() {
         removeAlert();
     });
@@ -43,10 +42,6 @@ $( document ).ready(function() {
             $('.alert').remove();
         }, 500);
     }
-
-
-
-
 });
 
 var testCaseJson; // и переменная должна быть глобальной

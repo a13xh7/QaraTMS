@@ -133,6 +133,20 @@ function createSuite() {
     });
 }
 
+// form - handle press enter
+$("#test_suite_form_overlay form").submit(function() {
+    return false;
+});
+
+$("#test_suite_title_input").keyup(function(event) {
+    if (event.keyCode === 13 && $("#tsf_create_btn").is(":visible")) {
+        $("#tsf_create_btn").click();
+    } else if(event.keyCode === 13 && $("#tsf_update_btn").is(":visible")) {
+        $("#tsf_update_btn").click();
+    }
+});
+
+
 /**************************************************
  * SUITE UPDATE
  *************************************************/

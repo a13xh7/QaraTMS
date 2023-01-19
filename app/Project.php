@@ -62,15 +62,15 @@ class Project extends Model
 
     public function getAutomationPercent() {
 
-        try {
-            $totalCases = $this->casesCount();
-            $automatedCases = $this->automatedCasesCount();
+        $totalCases = $this->casesCount();
+        $automatedCases = $this->automatedCasesCount();
 
-            $result = ($automatedCases * 100) /  $totalCases;
-            return round($result, 1);
-        } catch (\ErrorException $e) {
+        if($totalCases <= 0 || $automatedCases <= 0) {
             return 0;
         }
+
+        $result = ($automatedCases * 100) /  $totalCases;
+        return round($result, 1);
 
     }
 }

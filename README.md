@@ -14,7 +14,7 @@
 
 ## Getting Started
 
-- You will need to install **php 7.4**, **mysql-8** or **SQLite**, **composer**.
+- You will need to install **php ^8.0.2**, **mysql-8** or **SQLite**, **composer**.
 - Pull the project from git repository.
 - Create a database named `tms` utf8_general_ci, or you can use SQLite.
 - Rename `.env.backup` file to `.env` and fill the database information.

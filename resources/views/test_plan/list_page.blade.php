@@ -23,7 +23,7 @@
             @foreach($testPlans as $testPlan)
 
                 <div class="col ">
-                    <div class="base_block shadow-sm border h-100">
+                    <div class="base_block shadow-sm border h-100 rounded">
 
                         <div class="card-body d-flex justify-content-between pb-0">
                             <div>
@@ -49,7 +49,7 @@
                             <div>
 
                                 @can('add_edit_test_runs')
-                                    <a href="{{route('start_new_test_run', $testPlan->id)}}" class="link-light btn btn-sm btn-success me-3">
+                                    <a href="{{route('start_new_test_run', $testPlan->id)}}" class="link-light btn btn-sm btn-success">
                                         <i class="bi bi-play-circle"></i>
                                         Start new test run
                                     </a>

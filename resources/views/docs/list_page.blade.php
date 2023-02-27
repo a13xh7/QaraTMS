@@ -19,10 +19,29 @@
             </h3>
         </div>
 
-        <div class="row m-0 mb-3" style="min-height: 700px">
+        <div class="row m-0 mb-3 shadow" style="min-height: 700px">
+
+            <div class="col base_block pe-3 border"
+                 @if( isset($selectedDocument) )
+                 style="max-width: 300px; background: #00000005"
+                @endif >
+
+                <div class="my-2 border-bottom">
+                    <span class="fs-4">Table of Contents</span>
+                </div>
+
+
+                <div >
+                    @foreach($documents as $document)
+                        @include('docs.tree_item')
+                    @endforeach
+                </div>
+
+            </div>
+
 
             @if(isset($selectedDocument))
-                <div class="col base_block shadow">
+                <div class="col base_block border">
 
                     <div class="mt-2 d-flex justify-content-between border-bottom pb-1">
                         <div class="doc_title" title="{{$selectedDocument->title}}">
@@ -57,24 +76,6 @@
                     </div>
                 </div>
             @endif
-
-            <div class="col base_block shadow ps-3 pe-3 ms-2"
-                 @if( isset($selectedDocument) )
-                 style="max-width: 300px; background: #00000005"
-                @endif >
-
-                <div class="my-2 border-bottom">
-                    <span class="fs-4">Table of Contents</span>
-                </div>
-
-
-                <div >
-                    @foreach($documents as $document)
-                        @include('docs.tree_item')
-                    @endforeach
-                </div>
-
-            </div>
 
         </div>
 

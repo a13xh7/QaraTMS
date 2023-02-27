@@ -21,7 +21,7 @@
         </div>
 
         @foreach($projects as $project)
-            <div class="base_block mb-2 shadow-sm border ">
+            <div class="base_block mb-2 shadow-sm border rounded">
                 <div class="card-body">
 
                     <div>

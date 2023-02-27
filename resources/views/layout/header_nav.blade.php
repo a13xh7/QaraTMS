@@ -15,6 +15,12 @@
             <div class="navbar-nav nav-pills me-auto mb-2 mb-lg-0">
 
                 @if(Route::currentRouteName() == 'repository_show_page')
+
+                    <a href="{{route("project_show_page", $project->id)}}" class="nav-link text-white">
+                        <i class="bi bi-kanban-fill"></i>
+                        Dashboard
+                    </a>
+
                     <a href="{{route("repository_list_page", $project->id)}}" class="nav-link text-white">
                         <i class="bi bi-server"></i>
                         Repositories

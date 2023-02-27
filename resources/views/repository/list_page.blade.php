@@ -9,7 +9,7 @@
 
         <div class="border-bottom my-3">
             <h3 class="page_title">
-                Test Repositories
+                Repositories
 
                 @can('add_edit_repositories')
                     <a class="mx-3" href="{{route("repository_create_page", $project->id)}}">
@@ -24,7 +24,7 @@
             @foreach($repositories as $repository)
 
                 <div class="col">
-                    <div class="base_block border h-100 shadow-sm">
+                    <div class="base_block border h-100 shadow-sm rounded">
 
                         <div class="card-body">
                             <div>

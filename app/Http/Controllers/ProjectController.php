@@ -35,10 +35,12 @@ class ProjectController extends Controller
     {
         $project = Project::findOrFail($id);
         $testRuns = TestRun::where('project_id', $project->id)->orderBy('created_at', 'DESC')->get();
+        $repositories = $project->repositories;
 
         return view('project.show_page')
             ->with('project', $project)
-            ->with('testRuns', $testRuns);
+            ->with('testRuns', $testRuns)
+            ->with('repositories', $repositories);
     }
 
     public function edit($id)

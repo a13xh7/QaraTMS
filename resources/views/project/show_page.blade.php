@@ -7,9 +7,7 @@
 <div class="col">
 
     <div class="page_title border-bottom my-3 d-flex justify-content-between">
-        <h3 class="page_title">
-            {{$project->title}} <i class="bi bi-arrow-right-short"></i> Dashboard
-        </h3>
+        <h3 class="page_title">Dashboard</h3>
 
         <div>
             @can('add_edit_projects')
@@ -22,70 +20,69 @@
     </div>
 
 
-    <div class="row row-cols-1 row-cols-md-3 g-3">
+    <div class="row row-cols-1 row-cols-md-6 g-2 text-secondary ">
 
         <div class="col">
-            <div class="base_block border shadow-sm">
+            <div class="base_block border shadow-sm rounded">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
-                        <a href="{{route("repository_list_page", $project->id)}}" class="fs-3 link-dark" style="margin-top: auto; margin-bottom: auto"><i class="bi bi-server"></i> REPOSITORIES</a>
-                        <b class="fs-1 text-primary">{{$project->repositoriesCount()}}</b>
+                        <span class="fs-5" style="margin-top: auto; margin-bottom: auto"><i class="bi bi-server"></i> Repositories</span>
+                        <b class="fs-5 text-primary">{{$project->repositoriesCount()}}</b>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="col">
-            <div class="base_block border shadow-sm">
+            <div class="base_block border shadow-sm rounded">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
-                        <span class="fs-3" style="margin-top: auto; margin-bottom: auto"><i class="bi bi-stack"></i> TEST SUITES</span>
-                        <b class="fs-1 text-primary">{{$project->suitesCount()}}</b>
+                        <span class="fs-5" style="margin-top: auto; margin-bottom: auto"><i class="bi bi-stack"></i> Test Suites</span>
+                        <b class="fs-5 text-primary">{{$project->suitesCount()}}</b>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="col">
-            <div class="base_block border shadow-sm">
+            <div class="base_block border shadow-sm rounded">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
-                        <span class="fs-3" style="margin-top: auto; margin-bottom: auto"><i class="bi bi-file-earmark-text"></i> TEST CASES</span>
-                        <b class="fs-1 text-primary">{{$project->casesCount()}}</b>
+                        <span class="fs-5" style="margin-top: auto; margin-bottom: auto"><i class="bi bi-file-earmark-text"></i> Test Cases</span>
+                        <b class="fs-5 text-primary">{{$project->casesCount()}}</b>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="col">
-            <div class="base_block border shadow-sm">
+            <div class="base_block border shadow-sm rounded">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
-                        <span class="fs-3" style="margin-top: auto; margin-bottom: auto"><i class="bi bi-robot"></i> AUTOMATION</span>
-                        <b class="fs-1 text-primary">{{ $project->getAutomationPercent() }}%</b>
+                        <span class="fs-5" style="margin-top: auto; margin-bottom: auto"><i class="bi bi-robot"></i> Automation</span>
+                        <b class="fs-5 text-primary">{{ $project->getAutomationPercent() }}%</b>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="col">
-            <div class="base_block border shadow-sm">
+            <div class="base_block border shadow-sm rounded">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
-                        <span class="fs-3" style="margin-top: auto; margin-bottom: auto"><i class="bi bi-journals"></i> TEST PLANS</span>
-                        <b class="fs-1 text-primary">{{$project->testPlansCount()}}</b>
+                        <span class="fs-5" style="margin-top: auto; margin-bottom: auto"><i class="bi bi-journals"></i> Test Plans</span>
+                        <b class="fs-5 text-primary">{{$project->testPlansCount()}}</b>
                     </div>
                 </div>
             </div>
         </div>
 
-
         <div class="col">
-            <div class="base_block border shadow-sm">
+            <div class="base_block border shadow-sm rounded">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
-                        <span class="fs-3" style="margin-top: auto; margin-bottom: auto"><i class="bi bi-play-circle"></i> TEST RUNS</span>
-                        <b class="fs-1 text-primary">{{$project->testRunsCount()}}</b>
+                        <span class="fs-5" style="margin-top: auto; margin-bottom: auto"><i class="bi bi-play-circle"></i> Test Runs</span>
+                        <b class="fs-5 text-primary">{{$project->testRunsCount()}}</b>
                     </div>
                 </div>
             </div>
@@ -93,54 +90,56 @@
 
     </div>
 
-{{--    <h3 class="page_title my-5 pb-3 border-bottom">--}}
-{{--        Latest Test Runs--}}
-{{--    </h3>--}}
+    <div class="border-bottom my-3">
+        <h3 class="page_title">
+            Repositories
 
-{{--    <div class="row row-cols-1 row-cols-md-1 g-3">--}}
-{{--        @foreach($testRuns as $testRun)--}}
+            @can('add_edit_repositories')
+                <a class="mx-3" href="{{route("repository_create_page", $project->id)}}">
+                    <button type="button" class="btn btn-sm btn-primary"> <i class="bi bi-plus-lg"></i> Add New</button>
+                </a>
+            @endcan
+        </h3>
+    </div>
 
-{{--            <div class="col">--}}
-{{--                <div class="card h-100">--}}
+    <div class="row row-cols-3 g-3">
+        @foreach($repositories as $repository)
 
-{{--                    <div class="card-body d-flex justify-content-between ">--}}
-{{--                        <div>--}}
-{{--                            <a class="fs-4" href="{{route('test_run_show_page', [$project->id, $testRun->id])}}">--}}
-{{--                                <i class="bi bi-play-circle"></i> {{$testRun->title}}--}}
-{{--                            </a>--}}
-{{--                        </div>--}}
+            <div class="col">
+                <div class="base_block border h-100 shadow-sm rounded">
 
-{{--                        <div>--}}
-{{--                            <span class="text-muted" title="created at">{{$testRun->created_at->format('d-m-Y H:i')}} </span>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
+                    <div class="card-body">
+                        <div>
+                            <i class="bi bi-stack"></i>
+                            <a class="fs-4" href="{{ route('repository_show_page', [$project->id, $repository->id]) }}">{{$repository->title}}</a>
+                        </div>
 
-{{--                    <div class="border-top p-2">--}}
+                        @if($repository->description)
+                            <div class="card-text text-muted">
+                                <span> {{$repository->description}} </span>
+                            </div>
+                        @endif
+                    </div>
 
+                    <div class="d-flex justify-content-end border-top p-2">
+                            <span class="text-muted">
+                                <b>{{ $repository->suitesCount() }}</b> Test Suites
+                                 | <b>{{ $repository->casesCount() }}</b> Test Cases
+                                  | <b>{{ $repository->automatedCasesCount() }}</b> Automated
+                             </span>
+                    </div>
 
-{{--                        @include('test_run.chart')--}}
+                </div>
+            </div>
 
-{{--                    </div>--}}
-
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        @endforeach--}}
-{{--    </div>--}}
+        @endforeach
+    </div>
 
 
 </div>
+
+
+
+
 @endsection
 
-{{--    <div>--}}
-{{--        <button type="submit" class="btn btn-light" title="Delete" style="padding: 0 7px 0 7px;">--}}
-{{--            <i class="bi bi-trash3" style="font-size: 13px;"></i>--}}
-{{--        </button>--}}
-
-{{--        <button type="submit" class="btn btn-light" title="Edit" style="padding: 0 7px 0 7px;">--}}
-{{--            <i class="bi bi-pencil" style="font-size: 13px;"></i>--}}
-{{--        </button>--}}
-
-{{--        <button type="submit" class="btn btn-light" title="Settings" style="padding: 0 7px 0 7px;">--}}
-{{--            <i class="bi bi-gear" style="font-size: 13px;"></i>--}}
-{{--        </button>--}}
-{{--    </div>--}}

@@ -4,7 +4,7 @@
         @if(isset($project))
 
             <a href="{{route("project_show_page", $project->id)}}" class="nav-link text-white sidebar_project_title">
-                <i class="bi bi-arrow-right-square-fill"></i>
+                <i class="bi bi-kanban-fill"></i>
                 {{$project->title}}
             </a>
 

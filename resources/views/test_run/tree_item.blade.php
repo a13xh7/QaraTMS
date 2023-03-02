@@ -8,7 +8,7 @@
     </div>
 
     <div class="tree_suite_test_cases">
-        @foreach($testSuite->testCases as $testCase)
+        @foreach($testSuite->testCases->sortBy('order') as $testCase)
 
             @if( in_array($testCase->id, $testCasesIds)   )
 

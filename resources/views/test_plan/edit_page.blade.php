@@ -63,15 +63,15 @@
                         <select name="repository_id" id="plan_repository_select" class="form-select" onchange="renderPlanTree(this)" required>
                             <option disabled selected value> ----- </option>
 
-                            @foreach($repositories as $repository)
-                                <option value="{{$repository->id}}"
+                            @foreach($repositories as $repositoryOption)
+                                <option value="{{$repositoryOption->id}}"
 
-                                    @if($repository->id == $testPlan->repository_id)
+                                    @if($repositoryOption->id == $testPlan->repository_id)
                                         selected
                                     @endif
 
                                 >
-                                    {{$repository->title}}
+                                    {{$repositoryOption->title}}
                                 </option>
                             @endforeach
 

@@ -14,7 +14,7 @@
     </div>
 
     <div class="tree_suite_test_cases">
-        @foreach($testSuite->testCases as $testCase)
+        @foreach($testSuite->testCases->sortBy('order') as $testCase)
 
             <div class="tree_test_case tree_test_case_content">
                 <div class='tree_test_case_click d-flex justify-content-start'>
@@ -26,7 +26,7 @@
 
                     <div>
                         <span>@if($testCase->automated) <i class="bi bi-robot"></i> @else <i class="bi bi-person"></i> @endif </span>
-                        <span class="text-muted ps-2 test_case_id">{{$repository->prefix}}-{{$testCase->id}}</span>
+                        <span class="text-muted ps-2 test_case_id">{{$prefix}}-{{$testCase->id}}</span>
                         <span>{{$testCase->title}}</span>
                     </div>
                 </div>

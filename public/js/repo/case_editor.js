@@ -7,7 +7,7 @@ function renderEditors() {
             focus: true,                // set focus to editable area after initializing summernote
 
             toolbar: [
-                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['style', ['style', 'bold', 'italic', 'underline', 'clear']],
                 ['color', ['color']],
                 ['para', ['ul', 'ol', 'paragraph']],
                 ['picture'],

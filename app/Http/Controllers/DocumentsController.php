@@ -4,9 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Document;
 use App\Project;
-use App\Repository;
-use App\Suite;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 class DocumentsController extends Controller
@@ -123,7 +120,6 @@ class DocumentsController extends Controller
         $document = Document::findOrFail($request->id);
         $project_id = $document->project_id;
 
-        $document->descendants()->delete();
         $document->delete();
         return redirect()->route('project_documents_list_page', $project_id);
     }

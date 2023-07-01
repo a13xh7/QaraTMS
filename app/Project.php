@@ -2,10 +2,7 @@
 
 namespace App;
 
-use Brick\Math\Exception\DivisionByZeroException;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
-use Mockery\Exception;
 
 class Project extends Model
 {

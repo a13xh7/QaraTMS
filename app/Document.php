@@ -3,8 +3,19 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
 
 class Document extends Model
 {
-    use \Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
+    use HasRecursiveRelationships;
+
+  public function delete() {
+    $descendants = $this->descendants;
+
+    foreach ($descendants as $descendant) {
+      $descendant->delete();
+    }
+    return parent::delete();
+  }
+
 }

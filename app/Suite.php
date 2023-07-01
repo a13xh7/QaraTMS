@@ -3,11 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
+use Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
 
 class Suite extends Model
 {
-    use \Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
+    use HasRecursiveRelationships;
 
     public function testCases()
     {
@@ -17,6 +17,15 @@ class Suite extends Model
     public function testCasesCount()
     {
         return $this->testCases->count();
+    }
+
+    public function delete() {
+      $descendants = $this->descendants;
+
+      foreach ($descendants as $descendant) {
+        $descendant->delete();
+      }
+      return parent::delete();
     }
 
 }

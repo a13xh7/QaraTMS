@@ -125,7 +125,7 @@ class TestSuiteController extends Controller
         }
 
         $testSuite = Suite::findOrFail($request->id);
-        $testSuite->descendantsAndSelf()->delete();
+        $testSuite->delete();
     }
 
 

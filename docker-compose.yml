@@ -1,0 +1,68 @@
+version: '3.8'
+
+volumes:
+  database-volume:
+  app-volume:
+
+services:
+  nginx:
+    build: 
+      context: .
+      dockerfile: docker/nginx/Dockerfile
+    ports:
+      - '80:80'
+    volumes:
+      - 'app-volume:/var/www'
+    depends_on:
+      - app
+    container_name: 'nginx'
+
+  app:
+    build:
+      context: .
+      dockerfile: docker/app/Dockerfile
+    ports:
+      - '9000:9000'  
+    volumes:
+      - 'app-volume:/var/www'
+    depends_on:
+      mysql:
+        condition: service_healthy
+    user: 'www-data:www-data'
+    # command: sh -c "php artisan migrate && php artisan db:seed --class=AdminSeeder && php-fpm"
+    command: sh -c "php artisan migrate && php-fpm"
+    links: 
+      - mysql
+    container_name: 'app'      
+
+  mysql:
+    image: 'mysql:8'
+    environment:
+      MYSQL_DATABASE: tms
+      MYSQL_ROOT_PASSWORD: root
+    command: '--character-set-server=utf8 --collation-server=utf8_general_ci'  
+    ports:
+      - '3306:3306'
+    volumes:
+      - 'database-volume:/var/lib/mysql'
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u root --password=root
+      start_period: 10s
+      interval: 15s
+      timeout: 15s
+      retries: 30  
+    container_name: 'mysql'
+       
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - '8080:80'
+    environment:
+      PMA_HOST: mysql  
+    depends_on:
+      - mysql
+    container_name: 'phpmyadmin'
+    
+
+

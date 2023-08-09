@@ -1,0 +1,90 @@
+version: '3.8'
+
+volumes:
+  database-volume:
+    driver_opts:
+      type: none
+      device: /data/quara/db
+      o: bind
+  app-volume:
+    driver_opts:
+      type: none
+      device: /data/quara/app
+      o: bind
+
+
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: docker/nginx/Dockerfile
+    restart: unless-stopped
+    ports:
+      - '${NGINX_PORT:-8075}:80'
+    volumes:
+      - 'app-volume:/var/www'
+    depends_on:
+      - app
+    container_name: 'nginx'
+
+  app:
+    build:
+      context: .
+      dockerfile: docker/app/Dockerfile
+    restart: unless-stopped
+    ports:
+      - '9000:9000'
+    volumes:
+      - 'app-volume:/var/www'
+    depends_on:
+      mysqldb:
+        condition: service_healthy
+    environment:
+      APP_URL: ${APP_FULL_URL:-http://localhost}
+      DB_HOST: ${DB_CONTAINER_NAME:-mysqldb}
+      DB_DATABASE: ${DB_NAME:-qara}
+      DB_USERNAME: ${DB_USER:-qara}
+      DB_PASSWORD: ${DB_PASS:-qara1155tms}
+      DB_PORT: ${DB_PORT:-3306}
+    user: 'www-data:www-data'
+    # command: sh -c "php artisan migrate && php artisan db:seed --class=AdminSeeder && php-fpm"
+    command: sh -c "php artisan migrate && php-fpm"
+    links:
+      - mysqldb
+    container_name: 'app'
+
+  mysqldb:
+    image: 'mysql:8'
+    environment:
+      MYSQL_DATABASE: ${DB_NAME:-qara}
+      MYSQL_USER: ${DB_USER:-qara}
+      MYSQL_PASSWORD: ${DB_PASS:-qara1155tms}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS:-root}
+    command: '--character-set-server=utf8 --collation-server=utf8_general_ci'
+    restart: unless-stopped
+    ports:
+      - '${DB_PORT:-3306}:3306'
+    volumes:
+      - 'database-volume:/var/lib/mysql'
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u root --password=${DB_ROOT_PASS:-root}
+      start_period: 5s
+      interval: 5s
+      timeout: 5s
+      retries: 30
+    container_name: ${DB_CONTAINER_NAME:-mysqldb}
+
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - '${PHP_MY_ADMIN_PORT:-8076}:80'
+    restart: unless-stopped
+    environment:
+      PMA_HOST: ${DB_CONTAINER_NAME:-mysqldb}
+    depends_on:
+      - mysqldb
+    container_name: 'phpmyadmin'
+
+
+

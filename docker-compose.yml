@@ -2,16 +2,25 @@ version: '3.8'
 
 volumes:
   database-volume:
+    driver_opts:
+      type: none
+      device: /data/quara/db
+      o: bind
   app-volume:
+    driver_opts:
+      type: none
+      device: /data/quara/app
+      o: bind
+
 
 services:
   nginx:
-    build: 
+    build:
       context: .
       dockerfile: docker/nginx/Dockerfile
     restart: unless-stopped
     ports:
-      - '${NGINX_PORT:-80}:80'
+      - '${NGINX_PORT:-8075}:80'
     volumes:
       - 'app-volume:/var/www'
     depends_on:
@@ -24,7 +33,7 @@ services:
       dockerfile: docker/app/Dockerfile
     restart: unless-stopped
     ports:
-      - '9000:9000'  
+      - '9000:9000'
     volumes:
       - 'app-volume:/var/www'
     depends_on:
@@ -42,7 +51,7 @@ services:
     command: sh -c "php artisan migrate && php-fpm"
     links:
       - mysqldb
-    container_name: 'app'      
+    container_name: 'app'
 
   mysqldb:
     image: 'mysql:8'
@@ -51,8 +60,8 @@ services:
       MYSQL_USER: ${DB_USER:-qara}
       MYSQL_PASSWORD: ${DB_PASS:-qara1155tms}
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS:-root}
-    command: '--character-set-server=utf8 --collation-server=utf8_general_ci' 
-    restart: unless-stopped 
+    command: '--character-set-server=utf8 --collation-server=utf8_general_ci'
+    restart: unless-stopped
     ports:
       - '${DB_PORT:-3306}:3306'
     volumes:
@@ -62,20 +71,20 @@ services:
       start_period: 5s
       interval: 5s
       timeout: 5s
-      retries: 30  
+      retries: 30
     container_name: ${DB_CONTAINER_NAME:-mysqldb}
-       
+
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     ports:
-      - '${PHP_MY_ADMIN_PORT:-8080}:80'
-    restart: unless-stopped  
+      - '${PHP_MY_ADMIN_PORT:-8076}:80'
+    restart: unless-stopped
     environment:
       PMA_HOST: ${DB_CONTAINER_NAME:-mysqldb}
     depends_on:
       - mysqldb
     container_name: 'phpmyadmin'
-    
+
 
 

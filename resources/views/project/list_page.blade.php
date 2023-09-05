@@ -21,7 +21,7 @@
         </div>
 
         @foreach($projects as $project)
-            <div class="base_block mb-2 shadow-sm border rounded">
+            <div class="card base_block mb-2 shadow-sm border rounded">
                 <div class="card-body">
 
                     <div>
@@ -36,7 +36,6 @@
                         <span class="text-muted align-self-end pt-2">
                                 <b>{{$project->suitesCount()}}</b> Test Suites
                                 | <b>{{$project->casesCount()}}</b> Test Cases
-{{--                                | <b>{{$project->automatedCasesCount()}}</b> automated--}}
                         </span>
                     </div>
 

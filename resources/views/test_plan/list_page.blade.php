@@ -23,7 +23,7 @@
             @foreach($testPlans as $testPlan)
 
                 <div class="col ">
-                    <div class="base_block shadow-sm border h-100 rounded">
+                    <div class="card base_block shadow-sm border h-100 rounded">
 
                         <div class="card-body d-flex justify-content-between pb-0">
                             <div>

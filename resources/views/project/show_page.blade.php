@@ -23,7 +23,7 @@
     <div class="row row-cols-1 row-cols-md-6 g-2 text-secondary ">
 
         <div class="col">
-            <div class="base_block border shadow-sm rounded">
+            <div class="card base_block border shadow-sm rounded">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <span class="fs-5" style="margin-top: auto; margin-bottom: auto"><i class="bi bi-server"></i> Repositories</span>
@@ -34,7 +34,7 @@
         </div>
 
         <div class="col">
-            <div class="base_block border shadow-sm rounded">
+            <div class="card base_block border shadow-sm rounded">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <span class="fs-5" style="margin-top: auto; margin-bottom: auto"><i class="bi bi-stack"></i> Test Suites</span>
@@ -45,7 +45,7 @@
         </div>
 
         <div class="col">
-            <div class="base_block border shadow-sm rounded">
+            <div class="card base_block border shadow-sm rounded">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <span class="fs-5" style="margin-top: auto; margin-bottom: auto"><i class="bi bi-file-earmark-text"></i> Test Cases</span>
@@ -56,7 +56,7 @@
         </div>
 
         <div class="col">
-            <div class="base_block border shadow-sm rounded">
+            <div class="card base_block border shadow-sm rounded">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <span class="fs-5" style="margin-top: auto; margin-bottom: auto"><i class="bi bi-robot"></i> Automation</span>
@@ -67,7 +67,7 @@
         </div>
 
         <div class="col">
-            <div class="base_block border shadow-sm rounded">
+            <div class="card base_block border shadow-sm rounded">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <span class="fs-5" style="margin-top: auto; margin-bottom: auto"><i class="bi bi-journals"></i> Test Plans</span>
@@ -78,7 +78,7 @@
         </div>
 
         <div class="col">
-            <div class="base_block border shadow-sm rounded">
+            <div class="card base_block border shadow-sm rounded">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <span class="fs-5" style="margin-top: auto; margin-bottom: auto"><i class="bi bi-play-circle"></i> Test Runs</span>
@@ -106,7 +106,7 @@
         @foreach($repositories as $repository)
 
             <div class="col">
-                <div class="base_block border h-100 shadow-sm rounded">
+                <div class="card base_block border h-100 shadow-sm rounded">
 
                     <div class="card-body">
                         <div>

@@ -32,6 +32,15 @@ If you are using SQLite:
 * Create **database.sqlite** file in **./database** folder
 * Rename `.env_sqlite.backup` file to `.env` and fill the database information.
 
+## Getting Started with docker-compose (quick start)
+
+- Install docker and docker-compose
+- Make docker-run.sh file executable ```sudo chmod +x docker-run.sh``` and run ```./docker-run.sh ```
+- Or ```docker compose up -d --build``` and on the first run or after clearing the database or its volume ```php artisan db:seed --class=AdminSeeder``` to create admin user and assign permissions
+
+## Getting Started with docker-compose (extended)
+
+- To access advanced configuration, refer to the [extended documentation](DOCKER_README.md)
 
 ## How to use it
 ![logo](public/img/header.jpg)

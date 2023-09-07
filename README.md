@@ -36,7 +36,7 @@ If you are using SQLite:
 
 - Install docker and docker-compose
 - Make docker-run.sh file executable ```sudo chmod +x docker-run.sh``` and run ```./docker-run.sh ```
-- Or ```docker compose up -d --build``` and on the first run or after clearing the database or its volume ```php artisan db:seed --class=AdminSeeder``` to create admin user and assign permissions
+- Or ```docker compose up -d --build``` and on the first run or after clearing the database or its volume ```docker exec app php artisan db:seed --class=AdminSeeder``` to create admin user and assign permissions
 
 ## Getting Started with docker-compose (extended)
 

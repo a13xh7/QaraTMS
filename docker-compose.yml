@@ -38,7 +38,7 @@ services:
       DB_PASSWORD: ${DB_PASS:-qarapass}
       DB_PORT: ${DB_PORT:-3306}
     user: 'www-data:www-data'
-    command: sh -c "php artisan migrate && php-fpm"
+    command: sh -c "php-fpm"
     links:
       - mysqldb
     container_name: 'app'

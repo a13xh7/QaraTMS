@@ -1,7 +1,7 @@
 <header class="navbar sticky-top navbar-expand-lg shadow-sm">
 
     <div class="container-fluid">
-        <a class="navbar-brand" href="/">
+        <a class="navbar-brand logo" href="/">
             <img src="{{asset('img/logo.png')}}" alt="" width="35px">
         </a>
 
@@ -57,7 +57,7 @@
 
             </div>
 
-            <div class="d-flex justify-content-between">
+            <div class="d-flex justify-content-between align-items-center logout_block">
                 <a class="navbar-brand link-light" href="https://github.com/a13xh7/QaraTMS"  target="_blank">
                     <img src="{{asset('img/github.png')}}" alt="" width="30px">
                 </a>

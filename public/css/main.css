@@ -108,6 +108,14 @@ header a{
     color: white;
 }
 
+.logo {
+    padding-left: 10px;
+    /*padding-right: 10px;*/
+}
+
+.logout_block {
+    padding-right: 15px;
+}
 /*************************************************************************************
 * Sidebar
 *************************************************************************************/
@@ -125,6 +133,11 @@ header a{
     overflow: hidden;
     text-overflow: ellipsis;
     font-size: 18px;
+}
+
+.menu_link {
+    /*padding-top: 5px;*/
+    padding-bottom: 10px;
 }
 
 /*************************************************************************************

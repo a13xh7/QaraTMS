@@ -77,7 +77,7 @@
                    <span class="text-muted" style="font-size: 12px">Action <i class="bi bi-arrow-right"></i> Expected Result</span>
                </div>
 
-                <div class="row m-0 p-0 step">
+                <div class="row m-0 p-0 mt-2 step">
                     <div class="col-auto p-0 d-flex flex-column align-items-center">
                         <span class="fs-5 step_number">1</span>
 

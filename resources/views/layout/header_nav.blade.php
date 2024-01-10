@@ -58,12 +58,12 @@
             </div>
 
             <div class="d-flex justify-content-between align-items-center logout_block">
-                <a class="navbar-brand link-light" href="https://github.com/a13xh7/QaraTMS"  target="_blank">
+                <a href="https://github.com/a13xh7/QaraTMS"  target="_blank">
                     <img src="{{asset('img/github.png')}}" alt="" width="30px">
                 </a>
 
                 @if(Route::currentRouteName() == 'repository_show_page')
-                    <a href="{{route('logout')}}" class="nav-link text-white">
+                    <a href="{{route('logout')}}" class="nav-link text-white" style="padding-left: 10px;">
                         <i class="bi bi-box-arrow-in-left"></i>
                         <b>Logout</b>
                     </a>

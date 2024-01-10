@@ -103,15 +103,21 @@ function removeStep(btn) {
 function stepUp(btn) {
     let step = $(btn).parent().parent();
     let previousStep = step.prev();
-    step.swapWith(previousStep);
-    updateStepsNumbers();
+
+    if(previousStep.is('.step')) {
+        step.swapWith(previousStep);
+        updateStepsNumbers();
+    }
 }
 
 function stepDown(btn) {
     let step = $(btn).parent().parent();
     let nextStep = step.next();
-    step.swapWith(nextStep);
-    updateStepsNumbers();
+
+    if(nextStep.is('.step')) {
+        step.swapWith(nextStep);
+        updateStepsNumbers();
+    }
 }
 
 function updateStepsNumbers() {

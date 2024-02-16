@@ -5,5 +5,13 @@
   "Test Runs": "Ejecuciones",
   "Documents": "Documentos",
   "Users": "Usuarios",
-  "Logout": "Cerrar sesión"
+  "Logout": "Cerrar sesión",
+  "Projects": "Proyectos",
+  "Create new project": "Crear nuevo proyecto",
+  "Test Suites": "Conjuntos de pruebas",
+  "Test Cases": "Casos de prueba",
+  "Dashboard of project": "Panel de control del proyecto",
+  "Settings": "Ajustes",
+  "Automation": "Automatización",
+  "Add New": "Agregar nuevo"
 }

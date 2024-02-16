@@ -27,9 +27,8 @@
 
 
             <a href="{{route("project_documents_list_page", $project->id)}}" class="nav-link text-white">
-                <i class="bi bi-file-text-fill"></i> {{ __(' Documents') }}
+                <i class="bi bi-file-text-fill"></i> {{ __('Documents') }}
             </a>
-
 
             <hr>
         @endif

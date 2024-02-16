@@ -57,6 +57,11 @@ class Project extends Model
         return TestRun::where('project_id', $this->id)->count();
     }
 
+    public function documentsCount()
+    {
+        return Document::where('project_id', $this->id)->count();
+    }
+
     public function getAutomationPercent() {
 
         $totalCases = $this->casesCount();

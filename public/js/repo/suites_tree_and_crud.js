@@ -4,6 +4,7 @@ let treeData = [];
 const sortable = new TreeSortable();
 
 let suiteFormTitleInput = $('#test_suite_title_input');
+
 /**************************************************
  * LOAD TREE
  *************************************************/
@@ -27,9 +28,9 @@ function loadSuitesTree() {
 
 function selectLastActiveSuite() {
 
-    if($('#tree li').length > 0) {
+    if ($('#tree li').length > 0) {
 
-        if(Cookies.get('lastSelectedSuite') != null) {
+        if (Cookies.get('lastSelectedSuite') != null) {
             $(`#tree li[id="${Cookies.get('lastSelectedSuite')}"] .left-sidebar`).click();
         } else {
             $('#tree li .left-sidebar').first().click();
@@ -40,6 +41,7 @@ function selectLastActiveSuite() {
         closeTestCaseEditor();
     }
 }
+
 /**************************************************
  * SUITE FORM - create / edit
  *************************************************/
@@ -48,13 +50,13 @@ function showSuiteForm(operation, suite_id = null) {
 
     activeTreeSuiteItem.setId(suite_id);
 
-    if(operation == 'create') {
+    if (operation == 'create') {
         $('#tsf_title').text('Create Test Suite');
         $('#tsf_create_btn').show();
         $('#tsf_update_btn').hide();
         suiteFormTitleInput.val('');
 
-    } else if(operation == 'edit') {
+    } else if (operation == 'edit') {
         $('#tsf_title').text('Edit Test Suite');
         $('#tsf_update_btn').show();
         $('#tsf_create_btn').hide();
@@ -84,10 +86,10 @@ sortable.onSortCompleted(async (event, ui) => {
 
 function updateSuitesOrder() {
     var order = [];
-    $('#tree li').each(function(index,element) {
+    $('#tree li').each(function (index, element) {
         order.push({
             id: $(this).attr('data-mid'),
-            order: index+1
+            order: index + 1
         });
     });
 
@@ -106,7 +108,7 @@ function updateSuitesOrder() {
  * SUITE CREATE
  *************************************************/
 function createSuite() {
-    if(!suiteFormTitleInput.val()) {
+    if (!suiteFormTitleInput.val()) {
         alert('Title is required');
         return;
     }
@@ -122,7 +124,7 @@ function createSuite() {
         success: function (data) {
             let newSuite = $.parseJSON(data.json);
 
-            if(newSuite.parent_id) {
+            if (newSuite.parent_id) {
                 activeTreeSuiteItem.addChild(newSuite.id, newSuite.parent_id);
             } else {
                 activeTreeSuiteItem.addRootChild(newSuite.id, newSuite.parent_id)
@@ -134,14 +136,14 @@ function createSuite() {
 }
 
 // form - handle press enter
-$("#test_suite_form_overlay form").submit(function() {
+$("#test_suite_form_overlay form").submit(function () {
     return false;
 });
 
-$("#test_suite_title_input").keyup(function(event) {
+$("#test_suite_title_input").keyup(function (event) {
     if (event.keyCode === 13 && $("#tsf_create_btn").is(":visible")) {
         $("#tsf_create_btn").click();
-    } else if(event.keyCode === 13 && $("#tsf_update_btn").is(":visible")) {
+    } else if (event.keyCode === 13 && $("#tsf_update_btn").is(":visible")) {
         $("#tsf_update_btn").click();
     }
 });
@@ -151,7 +153,7 @@ $("#test_suite_title_input").keyup(function(event) {
  * SUITE UPDATE
  *************************************************/
 function updateSuite() {
-    if(!suiteFormTitleInput.val()) {
+    if (!suiteFormTitleInput.val()) {
         alert('Title is required');
         return;
     }
@@ -210,16 +212,16 @@ function deleteSuite(id) {
         success: function (data) {
             activeTreeSuiteItem.removeSelfFromTree();
 
-            if(isTestCaseCreateOrEditFormLoaded()) {
+            if (isTestCaseCreateOrEditFormLoaded()) {
                 $(`#tce_test_suite_select option[value='${id}']`).remove();
             }
 
-            if(isTestCaseViewFormLoaded() && $('#tce_suite_id').val() == id) {
+            if (isTestCaseViewFormLoaded() && $('#tce_suite_id').val() == id) {
                 console.log('close eddddd')
                 closeTestCaseEditor();
             }
 
-            if(was_selected) {
+            if (was_selected) {
                 selectLastActiveSuite();
                 console.log('choose first')
             }
@@ -269,7 +271,7 @@ let activeTreeSuiteItem = {
     },
 
     addRootChild(id, parent_id) {
-        if( $('#tree li').length > 0) {
+        if ($('#tree li').length > 0) {
             $('#tree li').first().addSiblingBranch(id, parent_id);
         } else {
             location.reload();

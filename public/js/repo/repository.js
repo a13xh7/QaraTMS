@@ -38,7 +38,8 @@ function loadCasesList(id) {
     activeTreeSuiteItem.addSelectedClass();
 
     $('#test_cases_list_site_title').text(activeTreeSuiteItem.getTitle()); // set title in test cases list area
-    $('#test_cases_list').load(`/tscl/${activeTreeSuiteItem.getId()}`, function() { }); // load test cases
+    $('#test_cases_list').load(`/tscl/${activeTreeSuiteItem.getId()}`, function () {
+    }); // load test cases
 }
 
 /**************************************************
@@ -59,7 +60,7 @@ function collapseCasesList() {
 
 $("body").on('click', 'button', function () {
     let button = $(this).prop('disabled', true);
-    setTimeout(function() {
+    setTimeout(function () {
         button.prop('disabled', false);
     }, 250);
 });
@@ -77,13 +78,13 @@ $('body').on("click", "#toogle_collaple_expand", function (e) {
 function rec(suite_id) {
     let child_li = $(`li[data-pid='${suite_id}']`);
 
-    if(child_li.is(":visible")) {
+    if (child_li.is(":visible")) {
         child_li.hide();
     } else {
         child_li.show();
     }
 
-    if($(`li[data-pid='${child_li.attr('data-mid')}']` ).length > 0) {
+    if ($(`li[data-pid='${child_li.attr('data-mid')}']`).length > 0) {
         rec(child_li.attr('data-mid'))
     }
 }

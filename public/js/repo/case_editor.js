@@ -1,5 +1,5 @@
-
 let editor;
+
 function renderEditors() {
     editor = $('.editor_textarea').summernote({
             minHeight: null,             // set minimum height of editor
@@ -25,14 +25,14 @@ function renderEditors() {
 let testCaseAreaLocator = "#test_case_area";
 
 function loadTestCaseCreateForm() {
-    if($('#tree li').length <= 0) {
+    if ($('#tree li').length <= 0) {
         alert('Create at least one test suite.')
         return;
     }
 
     let url = activeTreeSuiteItem.getId() == null ? `/tc/create/${repository_id}` : `/tc/create/${repository_id}/${activeTreeSuiteItem.getId()}`;
 
-    $(testCaseAreaLocator).load(url, function() {
+    $(testCaseAreaLocator).load(url, function () {
         $('textarea').autoResize();
         collapseCasesList();
         renderEditors();
@@ -40,7 +40,7 @@ function loadTestCaseCreateForm() {
 }
 
 function renderTestCase(test_case_id) {
-    $(testCaseAreaLocator).load(`/tc/${test_case_id}`, function() {
+    $(testCaseAreaLocator).load(`/tc/${test_case_id}`, function () {
 
         $(`.test_case`).removeClass("selected");
         $(`.test_case[data-case_id='${test_case_id}']`).addClass('selected');
@@ -49,9 +49,10 @@ function renderTestCase(test_case_id) {
     });
 }
 
-let oldParentId='';
+let oldParentId = '';
+
 function renderTestCaseEditForm(test_case_id) {
-    $(testCaseAreaLocator).load(`/tc/${test_case_id}/edit`, function() {
+    $(testCaseAreaLocator).load(`/tc/${test_case_id}/edit`, function () {
         $('textarea').autoResize();
         oldParentId = $("#tccf_test_suite_select").val();
         collapseCasesList();
@@ -80,8 +81,8 @@ function isTestCaseViewFormLoaded() {
  * swap steps
  ****************************************************************************/
 
-$.fn.swapWith = function(to) {
-    return this.each(function() {
+$.fn.swapWith = function (to) {
+    return this.each(function () {
         var copy_to = $(to).clone(true);
         var copy_from = $(this).clone(true);
         $(to).replaceWith(copy_from);
@@ -104,7 +105,7 @@ function stepUp(btn) {
     let step = $(btn).parent().parent();
     let previousStep = step.prev();
 
-    if(previousStep.is('.step')) {
+    if (previousStep.is('.step')) {
         step.swapWith(previousStep);
         updateStepsNumbers();
     }
@@ -114,7 +115,7 @@ function stepDown(btn) {
     let step = $(btn).parent().parent();
     let nextStep = step.next();
 
-    if(nextStep.is('.step')) {
+    if (nextStep.is('.step')) {
         step.swapWith(nextStep);
         updateStepsNumbers();
     }

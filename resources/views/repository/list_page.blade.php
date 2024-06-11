@@ -13,7 +13,8 @@
 
                 @can('add_edit_repositories')
                     <a class="mx-3" href="{{route("repository_create_page", $project->id)}}">
-                        <button type="button" class="btn btn-sm btn-primary"> <i class="bi bi-plus-lg"></i> Add New</button>
+                        <button type="button" class="btn btn-sm btn-primary"><i class="bi bi-plus-lg"></i> Add New
+                        </button>
                     </a>
                 @endcan
             </h3>
@@ -29,7 +30,8 @@
                         <div class="card-body">
                             <div>
                                 <i class="bi bi-stack"></i>
-                                <a class="fs-4" href="{{ route('repository_show_page', [$project->id, $repository->id]) }}">{{$repository->title}}</a>
+                                <a class="fs-4"
+                                   href="{{ route('repository_show_page', [$project->id, $repository->id]) }}">{{$repository->title}}</a>
                             </div>
 
                             @if($repository->description)
@@ -54,9 +56,6 @@
         </div>
 
     </div>
-
-
-
 
 @endsection
 

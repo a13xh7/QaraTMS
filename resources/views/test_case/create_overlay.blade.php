@@ -1,6 +1,7 @@
 <div id="test_case_editor_overlay" class="overlay" style="display: block">
 
-    <div class="card position-absolute top-50 start-50 translate-middle border-secondary shadow" style="width: 90%; "> {{--height: 867px;--}}
+    <div class="card position-absolute top-50 start-50 translate-middle border-secondary shadow"
+         style="width: 90%; "> {{--height: 867px;--}}
 
         <div id="test_case_editor">
 
@@ -33,8 +34,8 @@
                                     @foreach($repository->suites as $repoTestSuite)
                                         <option value="{{$repoTestSuite->id}}"
                                                 @if($repoTestSuite->id == $parentTestSuite->id)
-                                                selected
-                                            @endif
+                                                    selected
+                                                @endif
                                         >
                                             {{$repoTestSuite->title}}
                                         </option>
@@ -46,7 +47,9 @@
                             <div class="mx-5">
                                 <label class="form-label">
                                     <b>Priority</b>
-                                    <i class="bi bi-chevron-double-up text-danger"></i>|<i class="bi bi-list text-info"></i>|<i class="bi bi-chevron-double-down text-warning"></i>
+                                    <i class="bi bi-chevron-double-up text-danger"></i>|<i
+                                            class="bi bi-list text-info"></i>|<i
+                                            class="bi bi-chevron-double-down text-warning"></i>
                                 </label>
 
                                 <select id="tce_priority_select" name="priority" class="form-select border-secondary">
@@ -57,7 +60,8 @@
                             </div>
 
                             <div>
-                                <label class="form-label"><b>Type</b> <i class="bi bi-person"></i> | <i class="bi bi-robot"></i></label>
+                                <label class="form-label"><b>Type</b> <i class="bi bi-person"></i> | <i
+                                            class="bi bi-robot"></i></label>
                                 <select name="automated" class="form-select border-secondary" id="tce_automated_select">
                                     <option value="0" selected> Manual</option>
                                     <option value="1">Automated</option>
@@ -68,12 +72,13 @@
 
                         <div class="mb-3">
                             <label for="title" class="form-label"><b>Title</b></label>
-                            <input name="title" id="tce_title_input" type="text" class="form-control border-secondary" >
+                            <input name="title" id="tce_title_input" type="text" class="form-control border-secondary">
                         </div>
 
                         <div class="col">
                             <label class="form-label"><b>Preconditions</b></label>
-                            <textarea name="pre_conditions" class="editor_textarea" id="tce_preconditions_input" rows="3"></textarea>
+                            <textarea name="pre_conditions" class="editor_textarea" id="tce_preconditions_input"
+                                      rows="3"></textarea>
                         </div>
 
                     </div>
@@ -100,7 +105,8 @@
                             </div>
 
                             <div class="col-auto p-0 pt-4">
-                                <button type="button" class="btn btn-outline-danger btn-sm step_delete_btn" onclick="removeStep(this)">
+                                <button type="button" class="btn btn-outline-danger btn-sm step_delete_btn"
+                                        onclick="removeStep(this)">
                                     <i class="bi bi-x-circle"></i>
                                 </button>
                             </div>

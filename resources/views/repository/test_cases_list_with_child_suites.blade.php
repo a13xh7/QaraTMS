@@ -1,4 +1,3 @@
-
 @if($suite->descendants()->count() > 0)
 
     {{--    PARENT SUITE TEST CASES   --}}
@@ -18,7 +17,7 @@
 
                 <span class="text-muted" style="font-size: 14px">
                     @foreach($childSuite->ancestors()->get()->reverse() as $parent)
-                       {{$parent->title}}
+                        {{$parent->title}}
                         <i class="bi bi-arrow-right-short"></i>
                     @endforeach
                 </span>
@@ -36,7 +35,7 @@
 @else
 
     @foreach($testCases as $testCase)
-       @include('repository.test_case_list_item')
+        @include('repository.test_case_list_item')
     @endforeach
 
 @endif

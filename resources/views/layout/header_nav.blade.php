@@ -11,7 +11,7 @@
 
         <div class="collapse navbar-collapse">
 
-{{--            DO NOT DISABE UL because form will be at start--}}
+            {{--            DO NOT DISABE UL because form will be at start--}}
             <div class="navbar-nav nav-pills me-auto mb-2 mb-lg-0">
 
                 @if(Route::currentRouteName() == 'repository_show_page')
@@ -58,7 +58,7 @@
             </div>
 
             <div class="d-flex justify-content-between align-items-center logout_block">
-                <a href="https://github.com/a13xh7/QaraTMS"  target="_blank">
+                <a href="https://github.com/a13xh7/QaraTMS" target="_blank">
                     <img src="{{asset('img/github.png')}}" alt="" width="30px">
                 </a>
 

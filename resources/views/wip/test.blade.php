@@ -9,7 +9,7 @@
 
     <!-- include libraries(jQuery, bootstrap) -->
     <script type="text/javascript" src="//code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"/>
     <script type="text/javascript" src="cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
 
@@ -20,14 +20,12 @@
 <body>
 
 
-
 <textarea id="summernote">Hello Summernote</textarea>
-
 
 
 <script>
     let editor;
-    $(document).ready(function() {
+    $(document).ready(function () {
 
         editor = $('#summernote').summernote({
                 height: 300,                 // set editor height

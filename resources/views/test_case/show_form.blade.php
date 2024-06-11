@@ -15,10 +15,10 @@
 
             <span>
             @if($testCase->automated)
-                <i class="bi bi-robot mx-1"></i>
-            @else
-                <i class="bi bi-person mx-1"></i>
-            @endif
+                    <i class="bi bi-robot mx-1"></i>
+                @else
+                    <i class="bi bi-person mx-1"></i>
+                @endif
             </span>
 
             <u class="text-primary">
@@ -55,62 +55,61 @@
     </div>
 
     <div id="test_case_content" class="position-relative">
-            <div class="p-4 pt-0">
+        <div class="p-4 pt-0">
 
-                @if(isset( $data->preconditions) && !empty($data->preconditions) )
-                    <strong class="fs-5 pb-3">Preconditions</strong>
-                    <div class="row mb-3 border p-3 rounded">
+            @if(isset( $data->preconditions) && !empty($data->preconditions) )
+                <strong class="fs-5 pb-3">Preconditions</strong>
+                <div class="row mb-3 border p-3 rounded">
 
-                        <div>
-                            {!! $data->preconditions !!}
-                        </div>
-
-                    </div>
-                @endif
-
-                @if(isset($data->steps) && !empty($data->steps))
-                    <strong class="fs-5 pb-3">Steps</strong>
-                    <div class="row mb-3 border p-3 rounded" id="steps_container">
-
-
-                        <div class="row step pb-2 mb-2">
-                            <div class="col-6">
-                                <b>Action</b>
-                            </div>
-                            <div class="col-6">
-                                <b>Expected result</b>
-                            </div>
-                        </div>
-
-                        @foreach($data->steps as $id => $step)
-                            <div class="row step border-top mb-2 pt-2" data-badge="{{$id+1}}">
-
-                                <div class="col-6">
-                                    <div>
-                                        @if(isset($step->action))
-                                            {!! $step->action !!}
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="col-6">
-                                    <div>
-                                        @if(isset($step->result))
-                                            {!! $step->result !!}
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
+                    <div>
+                        {!! $data->preconditions !!}
                     </div>
 
-                @else
-                    <p>No additional details available.</p>
-                @endif
+                </div>
+            @endif
 
-            </div>
+            @if(isset($data->steps) && !empty($data->steps))
+                <strong class="fs-5 pb-3">Steps</strong>
+                <div class="row mb-3 border p-3 rounded" id="steps_container">
+
+
+                    <div class="row step pb-2 mb-2">
+                        <div class="col-6">
+                            <b>Action</b>
+                        </div>
+                        <div class="col-6">
+                            <b>Expected result</b>
+                        </div>
+                    </div>
+
+                    @foreach($data->steps as $id => $step)
+                        <div class="row step border-top mb-2 pt-2" data-badge="{{$id+1}}">
+
+                            <div class="col-6">
+                                <div>
+                                    @if(isset($step->action))
+                                        {!! $step->action !!}
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="col-6">
+                                <div>
+                                    @if(isset($step->result))
+                                        {!! $step->result !!}
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+
+            @else
+                <p>No additional details available.</p>
+            @endif
+
         </div>
-
+    </div>
 
 
 </div>

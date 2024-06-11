@@ -1,12 +1,11 @@
-
 @if(isset($selectedDocument->id))
 
     @if($document->id != $selectedDocument->id)
 
         <option value="{{$document->id}}"
-            @if($document->id == $selectedDocument->parent_id)
-                selected
-            @endif
+                @if($document->id == $selectedDocument->parent_id)
+                    selected
+                @endif
         >
 
             @for ($i = 0; $i < $document->ancestors()->count(); $i++)

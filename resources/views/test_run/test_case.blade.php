@@ -1,6 +1,6 @@
 <div id="test_case_block">
 
-    <div class="border rounded py-1 mt-2 mb-2 d-flex justify-content-center" >
+    <div class="border rounded py-1 mt-2 mb-2 d-flex justify-content-center">
 
         <div class="position-static">
             <button type="button" class="btn btn-outline-success test_run_case_btn"
@@ -52,54 +52,54 @@
 
         <div class="p-4 pt-0 position-relative">
 
-                @if(isset( $data->preconditions) && !empty($data->preconditions) )
-                    <strong class="fs-5 pb-3">Preconditions</strong>
-                    <div class="row mb-3 border p-3 rounded">
+            @if(isset( $data->preconditions) && !empty($data->preconditions) )
+                <strong class="fs-5 pb-3">Preconditions</strong>
+                <div class="row mb-3 border p-3 rounded">
 
-                        <div>
-                            {!! $data->preconditions !!}
-                        </div>
-
-                    </div>
-                @endif
-
-                @if(isset($data->steps) && !empty($data->steps))
-                    <strong class="fs-5 pb-3">Steps</strong>
-                    <div class="row mb-3 border p-3 rounded" id="steps_container">
-
-
-                        <div class="row step pb-2 mb-2">
-                            <div class="col-6">
-                                <b>Action</b>
-                            </div>
-                            <div class="col-6">
-                                <b>Expected result</b>
-                            </div>
-                        </div>
-
-                        @foreach($data->steps as $id => $step)
-                            <div class="row step border-top mb-2 pt-2" data-badge="{{$id+1}}">
-
-                                <div class="col-6">
-                                    <div>
-                                        {!! $step->action !!}
-                                    </div>
-                                </div>
-
-                                <div class="col-6">
-                                    <div>
-                                        {!! $step->result !!}
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
+                    <div>
+                        {!! $data->preconditions !!}
                     </div>
 
-                @else
-                    <p>No additional details available.</p>
-                @endif
+                </div>
+            @endif
 
-            </div>
+            @if(isset($data->steps) && !empty($data->steps))
+                <strong class="fs-5 pb-3">Steps</strong>
+                <div class="row mb-3 border p-3 rounded" id="steps_container">
+
+
+                    <div class="row step pb-2 mb-2">
+                        <div class="col-6">
+                            <b>Action</b>
+                        </div>
+                        <div class="col-6">
+                            <b>Expected result</b>
+                        </div>
+                    </div>
+
+                    @foreach($data->steps as $id => $step)
+                        <div class="row step border-top mb-2 pt-2" data-badge="{{$id+1}}">
+
+                            <div class="col-6">
+                                <div>
+                                    {!! $step->action !!}
+                                </div>
+                            </div>
+
+                            <div class="col-6">
+                                <div>
+                                    {!! $step->result !!}
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+
+            @else
+                <p>No additional details available.</p>
+            @endif
+
+        </div>
 
     </div>
 

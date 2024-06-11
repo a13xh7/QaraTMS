@@ -8,7 +8,7 @@
     <div class="col shadow-sm" style="max-width: 700px">
 
         {{-- COLUMN header--}}
-        <div class="border-bottom mt-2 pb-2 mb-2 d-flex justify-content-between" >
+        <div class="border-bottom mt-2 pb-2 mb-2 d-flex justify-content-between">
             <span class="fs-5">
                  Test Run  <i class="bi bi-arrow-right-short"></i> {{$testRun->title}}
             </span>
@@ -28,7 +28,7 @@
         </div>
 
         <div id="tree">
-{{--            @include('test_run.tree')--}}
+            {{--            @include('test_run.tree')--}}
             @include('test_run.test_cases_list')
         </div>
 
@@ -37,8 +37,8 @@
 
     <div class="col" id="test_case_col">
 
-       <div class="fs-5 border-bottom mt-2 pb-2 mb-2">
-           Select Test Case
+        <div class="fs-5 border-bottom mt-2 pb-2 mb-2">
+            Select Test Case
         </div>
 
     </div>

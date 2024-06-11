@@ -23,16 +23,17 @@
                         <label for="test_suite_id" class="form-label"><strong>Test Suite</strong></label>
                         <select name="suite_id" id="tce_test_suite_select" class="form-select border-secondary">
 
-                            @foreach($repository->suites as $repoTestSuite)--}}
+                            @foreach($repository->suites as $repoTestSuite)
+                                --}}
 
-                            <option value="{{$repoTestSuite->id}}"
-                                    @if($repoTestSuite->id == $testCase->suite_id)
-                                    selected
-                                @endif
-                            >
-                                {{$repoTestSuite->title}}
-                            </option>
-                        @endforeach
+                                <option value="{{$repoTestSuite->id}}"
+                                        @if($repoTestSuite->id == $testCase->suite_id)
+                                            selected
+                                        @endif
+                                >
+                                    {{$repoTestSuite->title}}
+                                </option>
+                            @endforeach
 
                         </select>
                     </div>
@@ -40,10 +41,12 @@
                     <div class="mx-4">
                         <label class="form-label">
                             <b>Priority</b>
-                            <i class="bi bi-chevron-double-up text-danger"></i>|<i class="bi bi-list text-info"></i>|<i class="bi bi-chevron-double-down text-warning"></i>
+                            <i class="bi bi-chevron-double-up text-danger"></i>|<i class="bi bi-list text-info"></i>|<i
+                                    class="bi bi-chevron-double-down text-warning"></i>
                         </label>
 
-                        <select id="tce_priority_select" name="priority" class="form-select border-secondary" id="tce_priority_select">
+                        <select id="tce_priority_select" name="priority" class="form-select border-secondary"
+                                id="tce_priority_select">
                             @if($testCase->priority == \App\Enums\CasePriority::NORMAL)
                                 <option value="{{\App\Enums\CasePriority::NORMAL}}" selected> Normal</option>
                                 <option value="{{\App\Enums\CasePriority::HIGH}}">High</option>
@@ -63,7 +66,8 @@
                     <div>
                         <label class="form-label"><b>Type</b> <i class="bi bi-person"></i> | <i class="bi bi-robot"></i></label>
                         <select name="automated" class="form-select border-secondary" id="tce_automated_select">
-                            @if($testCase->automated)--}}
+                            @if($testCase->automated)
+                                --}}
                                 <option value="0"> Manual</option>
                                 <option value="1" selected>Automated</option>
                             @else
@@ -79,15 +83,18 @@
 
                 <div class="mb-3 p-0">
                     <label for="title" class="form-label"><b>Title</b></label>
-                    <input name="title" id="tce_title_input" type="text" class="form-control border-secondary"  value="{{$testCase->title}}">
+                    <input name="title" id="tce_title_input" type="text" class="form-control border-secondary"
+                           value="{{$testCase->title}}">
                 </div>
 
                 <div class="col p-0">
                     <label class="form-label"><b>Preconditions</b></label>
                     @if(isset($data->preconditions))
-                        <textarea name="pre_conditions" class="editor_textarea form-control border-secondary" id="tce_preconditions_input" rows="3">{{ $data->preconditions }}</textarea>
+                        <textarea name="pre_conditions" class="editor_textarea form-control border-secondary"
+                                  id="tce_preconditions_input" rows="3">{{ $data->preconditions }}</textarea>
                     @else
-                        <textarea name="pre_conditions" class="editor_textarea form-control border-secondary" id="tce_preconditions_input" rows="3"></textarea>
+                        <textarea name="pre_conditions" class="editor_textarea form-control border-secondary"
+                                  id="tce_preconditions_input" rows="3"></textarea>
                     @endif
                 </div>
 
@@ -107,15 +114,18 @@
                             <div class="col-auto p-0 d-flex flex-column align-items-center">
                                 <span class="fs-5 step_number">{{$id+1}}</span>
 
-                                <button type="button" class="btn btn-outline btn-sm step_delete_btn px-1 py-0" onclick="stepUp(this)">
+                                <button type="button" class="btn btn-outline btn-sm step_delete_btn px-1 py-0"
+                                        onclick="stepUp(this)">
                                     <i class="bi bi-arrow-up-circle"></i>
                                 </button>
 
-                                <button type="button" class="btn btn-outline-danger btn-sm step_delete_btn px-1 py-0" onclick="removeStep(this)">
+                                <button type="button" class="btn btn-outline-danger btn-sm step_delete_btn px-1 py-0"
+                                        onclick="removeStep(this)">
                                     <i class="bi bi-x-circle"></i>
                                 </button>
 
-                                <button type="button" class="btn btn-outline btn-sm step_delete_btn px-1 py-0" onclick="stepDown(this)">
+                                <button type="button" class="btn btn-outline btn-sm step_delete_btn px-1 py-0"
+                                        onclick="stepDown(this)">
                                     <i class="bi bi-arrow-down-circle"></i>
                                 </button>
                             </div>
@@ -143,24 +153,29 @@
                         <div class="col-auto p-0 d-flex flex-column align-items-center">
                             <span class="fs-5 step_number">1</span>
 
-                            <button type="button" class="btn btn-outline btn-sm step_delete_btn px-1 py-0" onclick="stepUp(this)">
+                            <button type="button" class="btn btn-outline btn-sm step_delete_btn px-1 py-0"
+                                    onclick="stepUp(this)">
                                 <i class="bi bi-arrow-up-circle"></i>
                             </button>
 
-                            <button type="button" class="btn btn-outline-danger btn-sm step_delete_btn px-1 py-0" onclick="removeStep(this)">
+                            <button type="button" class="btn btn-outline-danger btn-sm step_delete_btn px-1 py-0"
+                                    onclick="removeStep(this)">
                                 <i class="bi bi-x-circle"></i>
                             </button>
 
-                            <button type="button" class="btn btn-outline btn-sm step_delete_btn px-1 py-0" onclick="stepDown(this)">
+                            <button type="button" class="btn btn-outline btn-sm step_delete_btn px-1 py-0"
+                                    onclick="stepDown(this)">
                                 <i class="bi bi-arrow-down-circle"></i>
                             </button>
                         </div>
 
                         <div class="col p-0 px-1 test_case_step">
-                            <textarea class="editor_textarea form-control border-secondary step_action" rows="2"></textarea>
+                            <textarea class="editor_textarea form-control border-secondary step_action"
+                                      rows="2"></textarea>
                         </div>
                         <div class="col p-0 test_case_step">
-                            <textarea class="editor_textarea form-control border-secondary step_result" rows="2"></textarea>
+                            <textarea class="editor_textarea form-control border-secondary step_result"
+                                      rows="2"></textarea>
                         </div>
                     </div>
 

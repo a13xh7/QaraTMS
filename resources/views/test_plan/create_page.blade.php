@@ -25,7 +25,7 @@
 
         <div class="row m-0">
 
-            <div class="col-4 p-3 shadow" style="margin-right: 10px;" >
+            <div class="col-4 p-3 shadow" style="margin-right: 10px;">
 
                 <form action="{{route('test_plan_create')}}" method="POST">
 
@@ -36,15 +36,17 @@
 
                     <div class="mb-3">
                         <label for="title" class="form-label">Name</label>
-                        <input type="text" class="form-control" name="title"  value="Test plan - {{date('Y.m.d H:i')}}" required maxlength="100">
+                        <input type="text" class="form-control" name="title" value="Test plan - {{date('Y.m.d H:i')}}"
+                               required maxlength="100">
                     </div>
 
                     <div class="mb-3">
 
                         <label for="test_suite_id" class="form-label">Test Repository</label>
 
-                        <select name="repository_id" id="plan_repository_select" class="form-select" onchange="renderPlanTree(this)" required>
-                            <option disabled selected value> ----- </option>
+                        <select name="repository_id" id="plan_repository_select" class="form-select"
+                                onchange="renderPlanTree(this)" required>
+                            <option disabled selected value> -----</option>
 
                             @foreach($repositories as $repository)
                                 <option value="{{$repository->id}}">
@@ -75,7 +77,7 @@
             </div>
 
 
-            <div class="col p-3 shadow" >
+            <div class="col p-3 shadow">
 
                 <div class="border-bottom position-static d-flex justify-content-between">
                     <h3>Select Test Cases</h3>
@@ -101,7 +103,6 @@
         </div>
 
     </div>
-
 
 @endsection
 

@@ -1,4 +1,4 @@
-<div id="test_suite_editor" class="modal fade"  data-bs-backdrop="static" data-bs-keyboard="false"
+<div id="test_suite_editor" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false"
      tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 
     <div class="modal-dialog modal-md modal-dialog-centered">

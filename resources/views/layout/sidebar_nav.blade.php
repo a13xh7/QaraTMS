@@ -43,12 +43,12 @@
         <a href="{{route('users_list_page')}}" class="nav-link text-white">
             <i class="bi bi-people-fill"></i>
             {{ __('Users') }}
-       </a>
+        </a>
 
 
-       <hr>
+        <hr>
 
-       <a href="{{route('logout')}}" class="nav-link text-white">
+        <a href="{{route('logout')}}" class="nav-link text-white">
             <i class="bi bi-box-arrow-in-left"></i>
             <b>{{ __('Logout') }}</b>
         </a>

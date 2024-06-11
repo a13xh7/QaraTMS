@@ -12,7 +12,8 @@
 
                 @can('add_edit_test_runs')
                     <a class="mx-3" href="{{route("test_run_create_page", $project->id)}}">
-                        <button type="button" class="btn btn-sm btn-primary"> <i class="bi bi-plus-lg"></i> New Test Run</button>
+                        <button type="button" class="btn btn-sm btn-primary"><i class="bi bi-plus-lg"></i> New Test Run
+                        </button>
                     </a>
                 @endcan
 
@@ -33,14 +34,15 @@
                             </div>
 
                             <div>
-                                <span class="text-muted" title="created at">{{$testRun->created_at->format('d-m-Y H:i')}} </span>
+                                <span class="text-muted"
+                                      title="created at">{{$testRun->created_at->format('d-m-Y H:i')}} </span>
                             </div>
                         </div>
 
                         <div class="border-top p-2">
 
 
-                          @include('test_run.chart')
+                            @include('test_run.chart')
 
                         </div>
 
@@ -48,9 +50,6 @@
                 </div>
             @endforeach
         </div>
-
-
-
 
 
     </div>

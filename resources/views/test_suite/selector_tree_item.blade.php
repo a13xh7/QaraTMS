@@ -1,12 +1,11 @@
-
 @if(isset($editableSuite->id))
 
     @if($suite->id != $editableSuite->id)
 
         <option value="{{$suite->id}}"
-            @if($suite->id == $editableSuite->parent_id)
-                selected
-            @endif
+                @if($suite->id == $editableSuite->parent_id)
+                    selected
+                @endif
         >
 
             @for ($i = 0; $i < $suite->ancestors()->count(); $i++)

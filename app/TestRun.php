@@ -6,6 +6,9 @@ use App\Enums\TestRunCaseStatus;
 use Illuminate\Database\Eloquent\Model;
 
 
+/**
+ * @mixin IdeHelperTestRun
+ */
 class TestRun extends Model
 {
     /*

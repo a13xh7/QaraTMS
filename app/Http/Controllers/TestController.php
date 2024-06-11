@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Project;
 use App\Repository;
 use App\Suite;
-use App\Project;
 
 
 class TestController extends Controller

@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\TestRunCaseStatus;
+use App\Project;
 use App\Repository;
+use App\Suite;
 use App\TestCase;
 use App\TestPlan;
-use App\Project;
 use App\TestRun;
-use App\Suite;
 use Illuminate\Http\Request;
 
 class TestRunController extends Controller
@@ -66,7 +65,7 @@ class TestRunController extends Controller
 
     public function create($project_id)
     {
-        if(!auth()->user()->can('add_edit_test_runs')) {
+        if (!auth()->user()->can('add_edit_test_runs')) {
             abort(403);
         }
 
@@ -80,7 +79,7 @@ class TestRunController extends Controller
 
     public function edit($project_id, $test_run_id)
     {
-        if(!auth()->user()->can('add_edit_test_runs')) {
+        if (!auth()->user()->can('add_edit_test_runs')) {
             abort(403);
         }
 
@@ -99,7 +98,7 @@ class TestRunController extends Controller
 
     public function store(Request $request)
     {
-        if(!auth()->user()->can('add_edit_test_runs')) {
+        if (!auth()->user()->can('add_edit_test_runs')) {
             abort(403);
         }
 
@@ -120,7 +119,7 @@ class TestRunController extends Controller
 
     public function update(Request $request)
     {
-        if(!auth()->user()->can('add_edit_test_runs')) {
+        if (!auth()->user()->can('add_edit_test_runs')) {
             abort(403);
         }
 
@@ -134,7 +133,7 @@ class TestRunController extends Controller
 
     public function destroy(Request $request)
     {
-        if(!auth()->user()->can('delete_test_runs')) {
+        if (!auth()->user()->can('delete_test_runs')) {
             abort(403);
         }
 

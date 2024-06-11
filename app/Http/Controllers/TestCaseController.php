@@ -4,24 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Project;
 use App\Repository;
-use App\TestCase;
 use App\Suite;
+use App\TestCase;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
-use mysql_xdevapi\Exception;
 
 class TestCaseController extends Controller
 {
     public function store(Request $request)
     {
-        if(!auth()->user()->can('add_edit_test_cases')) {
+        if (!auth()->user()->can('add_edit_test_cases')) {
             abort(403);
         }
 
         $testCase = new TestCase();
 
         $testCase->title = $request->title;
-        $testCase->automated = (bool)$request->automated;
+        $testCase->automated = (bool) $request->automated;
         $testCase->priority = $request->priority;
         $testCase->suite_id = $request->suite_id;
         $testCase->order = $request->order;
@@ -42,18 +40,18 @@ class TestCaseController extends Controller
 
     public function update(Request $request)
     {
-        if(!auth()->user()->can('add_edit_test_cases')) {
+        if (!auth()->user()->can('add_edit_test_cases')) {
             abort(403);
         }
 
         $testCase = TestCase::findOrFail($request->id);
 
         $testCase->title = $request->title;
-        $testCase->automated = (bool)$request->automated;
+        $testCase->automated = (bool) $request->automated;
         $testCase->priority = $request->priority;
         $testCase->suite_id = $request->suite_id;
         $testCase->data = $request->data;
-       // $testCase->data = FilesController::saveImagesAndGetCleanCode($request->data);
+        // $testCase->data = FilesController::saveImagesAndGetCleanCode($request->data);
 
         $testCase->save();
 
@@ -70,7 +68,7 @@ class TestCaseController extends Controller
 
     public function destroy(Request $request)
     {
-        if(!auth()->user()->can('delete_test_cases')) {
+        if (!auth()->user()->can('delete_test_cases')) {
             abort(403);
         }
 
@@ -80,7 +78,7 @@ class TestCaseController extends Controller
 
     public function updateOrder(Request $request)
     {
-        foreach($request->order as $data){
+        foreach ($request->order as $data) {
             $testCase = TestCase::findOrFail($data['id']);
             $testCase->order = $data['order'];
             $testCase->save();
@@ -108,9 +106,9 @@ class TestCaseController extends Controller
             ->with('data', $data);
     }
 
-    public function loadCreateForm($repository_id, $parent_test_suite_id=null)
+    public function loadCreateForm($repository_id, $parent_test_suite_id = null)
     {
-        if($parent_test_suite_id != null) {
+        if ($parent_test_suite_id != null) {
             $parentTestSuite = Suite::where('id', $parent_test_suite_id)->first();
         } else {
             $parentTestSuite = Suite::where('repository_id', $repository_id)->first();

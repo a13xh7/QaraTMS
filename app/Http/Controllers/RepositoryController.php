@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Document;
 use App\Project;
 use App\Repository;
 use App\Suite;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 class RepositoryController extends Controller
@@ -23,7 +21,7 @@ class RepositoryController extends Controller
 
         $jsSuitesTree = [];
 
-        foreach($suitesTree as $suite) {
+        foreach ($suitesTree as $suite) {
             $this->recursiveGetData($suite, $jsSuitesTree);
         }
 
@@ -39,7 +37,7 @@ class RepositoryController extends Controller
             'title' => $suite->title
         ];
 
-        foreach($suite->children as $suiteChild) {
+        foreach ($suite->children as $suiteChild) {
             $this->recursiveGetData($suiteChild, $jsSuitesTree);
         }
     }
@@ -60,7 +58,7 @@ class RepositoryController extends Controller
 
     public function create($project_id)
     {
-        if(!auth()->user()->can('add_edit_repositories')) {
+        if (!auth()->user()->can('add_edit_repositories')) {
             abort(403);
         }
 
@@ -83,7 +81,7 @@ class RepositoryController extends Controller
 
     public function edit($project_id, $repository_id)
     {
-        if(!auth()->user()->can('add_edit_repositories')) {
+        if (!auth()->user()->can('add_edit_repositories')) {
             abort(403);
         }
 
@@ -101,7 +99,7 @@ class RepositoryController extends Controller
 
     public function store(Request $request)
     {
-        if(!auth()->user()->can('add_edit_repositories')) {
+        if (!auth()->user()->can('add_edit_repositories')) {
             abort(403);
         }
 
@@ -124,7 +122,7 @@ class RepositoryController extends Controller
 
     public function update(Request $request)
     {
-        if(!auth()->user()->can('add_edit_repositories')) {
+        if (!auth()->user()->can('add_edit_repositories')) {
             abort(403);
         }
 
@@ -142,7 +140,7 @@ class RepositoryController extends Controller
 
     public function destroy(Request $request)
     {
-        if(!auth()->user()->can('delete_repositories')) {
+        if (!auth()->user()->can('delete_repositories')) {
             abort(403);
         }
 

@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Repository;
-use App\TestPlan;
 use App\Project;
-use App\TestRun;
+use App\Repository;
 use App\Suite;
-use Illuminate\Database\Eloquent\Model;
+use App\TestPlan;
+use App\TestRun;
 use Illuminate\Http\Request;
 
 class TestPlanController extends Controller
@@ -15,7 +14,7 @@ class TestPlanController extends Controller
 
     public function startNewTestRun($test_plan_id)
     {
-        if(!auth()->user()->can('add_edit_test_runs')) {
+        if (!auth()->user()->can('add_edit_test_runs')) {
             abort(403);
         }
 
@@ -28,7 +27,7 @@ class TestPlanController extends Controller
         $testRun->data = $testRun->getInitialData();
         $testRun->save();
 
-        $testRun->title = 'Test Run ' . $testRun->id. ' for ' . $testPlan->title;
+        $testRun->title = 'Test Run '.$testRun->id.' for '.$testPlan->title;
         $testRun->save();
 
         return redirect()->route('test_run_show_page', [$testPlan->project_id, $testRun->id]);
@@ -50,7 +49,7 @@ class TestPlanController extends Controller
 
     public function create($project_id)
     {
-        if(!auth()->user()->can('add_edit_test_plans')) {
+        if (!auth()->user()->can('add_edit_test_plans')) {
             abort(403);
         }
 
@@ -64,7 +63,7 @@ class TestPlanController extends Controller
 
     public function edit($project_id, $test_plan_id)
     {
-        if(!auth()->user()->can('add_edit_test_plans')) {
+        if (!auth()->user()->can('add_edit_test_plans')) {
             abort(403);
         }
 
@@ -89,7 +88,7 @@ class TestPlanController extends Controller
 
     public function store(Request $request)
     {
-        if(!auth()->user()->can('add_edit_test_plans')) {
+        if (!auth()->user()->can('add_edit_test_plans')) {
             abort(403);
         }
 
@@ -112,7 +111,7 @@ class TestPlanController extends Controller
 
     public function update(Request $request)
     {
-        if(!auth()->user()->can('add_edit_test_plans')) {
+        if (!auth()->user()->can('add_edit_test_plans')) {
             abort(403);
         }
 
@@ -130,7 +129,7 @@ class TestPlanController extends Controller
 
     public function destroy(Request $request)
     {
-        if(!auth()->user()->can('delete_test_plans')) {
+        if (!auth()->user()->can('delete_test_plans')) {
             abort(403);
         }
 

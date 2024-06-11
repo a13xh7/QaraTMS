@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Repository;
 use App\Suite;
-use App\Project;
 use App\TestCase;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 class TestSuiteController extends Controller
@@ -17,7 +15,7 @@ class TestSuiteController extends Controller
 
     public function updateParent(Request $request)
     {
-        if(!auth()->user()->can('add_edit_test_suites')) {
+        if (!auth()->user()->can('add_edit_test_suites')) {
             abort(403);
         }
 
@@ -28,18 +26,18 @@ class TestSuiteController extends Controller
 
     public function updateOrder(Request $request)
     {
-        if(!auth()->user()->can('add_edit_test_suites')) {
+        if (!auth()->user()->can('add_edit_test_suites')) {
             abort(403);
         }
 
-        foreach($request->order as $data){
+        foreach ($request->order as $data) {
             $testSuite = Suite::findOrFail($data['id']);
             $testSuite->order = $data['order'];
             $testSuite->save();
         }
     }
 
-    public function loadEditor($operation, $repository_id, $test_suite_id=null)
+    public function loadEditor($operation, $repository_id, $test_suite_id = null)
     {
         $repository = Repository::findOrFail($repository_id);
         $editableSuite = isset($test_suite_id) ? Suite::findOrFail($test_suite_id) : null;
@@ -57,7 +55,8 @@ class TestSuiteController extends Controller
     {
         $suite = Suite::findOrFail($test_suite_id);
         $repository = Repository::findOrFail($suite->repository_id);
-        $testCases = TestCase::select('id', 'suite_id', 'title', 'automated', 'priority', 'order')->where('suite_id', $test_suite_id)->orderBy('order')->get();
+        $testCases = TestCase::select('id', 'suite_id', 'title', 'automated', 'priority', 'order')->where('suite_id',
+            $test_suite_id)->orderBy('order')->get();
 
         return view('repository.test_cases_list')
             ->with('testCases', $testCases)
@@ -82,7 +81,7 @@ class TestSuiteController extends Controller
 
     public function store(Request $request)
     {
-        if(!auth()->user()->can('add_edit_test_suites')) {
+        if (!auth()->user()->can('add_edit_test_suites')) {
             abort(403);
         }
 
@@ -101,7 +100,7 @@ class TestSuiteController extends Controller
 
     public function update(Request $request)
     {
-        if(!auth()->user()->can('add_edit_test_suites')) {
+        if (!auth()->user()->can('add_edit_test_suites')) {
             abort(403);
         }
 
@@ -120,7 +119,7 @@ class TestSuiteController extends Controller
 
     public function destroy(Request $request)
     {
-        if(!auth()->user()->can('delete_test_suites')) {
+        if (!auth()->user()->can('delete_test_suites')) {
             abort(403);
         }
 

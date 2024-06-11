@@ -26,7 +26,7 @@ class DocumentsController extends Controller
 
     public function create($project_id) // create page
     {
-        if(!auth()->user()->can('add_edit_documents')) {
+        if (!auth()->user()->can('add_edit_documents')) {
             abort(403);
         }
 
@@ -52,7 +52,7 @@ class DocumentsController extends Controller
 
     public function edit($project_id, $document_id)
     {
-        if(!auth()->user()->can('add_edit_documents')) {
+        if (!auth()->user()->can('add_edit_documents')) {
             abort(403);
         }
 
@@ -72,7 +72,7 @@ class DocumentsController extends Controller
 
     public function store(Request $request)
     {
-        if(!auth()->user()->can('add_edit_documents')) {
+        if (!auth()->user()->can('add_edit_documents')) {
             abort(403);
         }
 
@@ -86,7 +86,7 @@ class DocumentsController extends Controller
         $document->project_id = $request->project_id;
         $document->parent_id = $request->parent_id;
         $document->content = $request->get('content');
-       // $document->content = FilesController::saveImagesAndGetCleanCode($request->get('content'));
+        // $document->content = FilesController::saveImagesAndGetCleanCode($request->get('content'));
 
         $document->save();
 
@@ -95,7 +95,7 @@ class DocumentsController extends Controller
 
     public function update(Request $request)
     {
-        if(!auth()->user()->can('add_edit_documents')) {
+        if (!auth()->user()->can('add_edit_documents')) {
             abort(403);
         }
 
@@ -104,7 +104,7 @@ class DocumentsController extends Controller
         $document->title = $request->title;
         $document->parent_id = $request->parent_id;
         $document->content = $request->post('content');
-       // $document->content = FilesController::saveImagesAndGetCleanCode($request->get('content'));
+        // $document->content = FilesController::saveImagesAndGetCleanCode($request->get('content'));
 
         $document->save();
 
@@ -113,7 +113,7 @@ class DocumentsController extends Controller
 
     public function destroy(Request $request)
     {
-        if(!auth()->user()->can('delete_documents')) {
+        if (!auth()->user()->can('delete_documents')) {
             abort(403);
         }
 

@@ -9,7 +9,7 @@
         <div class="d-flex justify-content-between border-bottom my-3">
 
             <h3 class="page_title">
-                 Edit Test Run
+                Edit Test Run
                 <i class="bi bi-arrow-right-short text-muted"></i>
                 {{$testRun->title}}
             </h3>
@@ -43,7 +43,7 @@
         @endif
 
         <div class="card p-4">
-            <form  method="POST" action="{{route('test_run_update')}}">
+            <form method="POST" action="{{route('test_run_update')}}">
                 @csrf
 
                 <input type="hidden" name="id" value="{{$testRun->id}}">
@@ -51,7 +51,8 @@
 
                 <div class="mb-3">
                     <label for="title" class="form-label">Name</label>
-                    <input type="text" class="form-control" name="title" required maxlength="100" value="{{$testRun->title}}">
+                    <input type="text" class="form-control" name="title" required maxlength="100"
+                           value="{{$testRun->title}}">
                 </div>
 
 
@@ -67,8 +68,6 @@
 
 
     </div>
-
-
 
 @endsection
 

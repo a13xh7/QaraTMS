@@ -13,7 +13,8 @@
 
                 @can('add_edit_documents')
                     <a class="mx-3" href="{{route("document_create_page", $project->id)}}">
-                        <button type="button" class="btn btn-sm btn-primary"> <i class="bi bi-plus-lg"></i> Add New</button>
+                        <button type="button" class="btn btn-sm btn-primary"><i class="bi bi-plus-lg"></i> Add New
+                        </button>
                     </a>
                 @endcan
             </h3>
@@ -23,15 +24,15 @@
 
             <div class="col base_block pe-3 border"
                  @if( isset($selectedDocument) )
-                 style="max-width: 300px; background: #00000005"
-                @endif >
+                     style="max-width: 300px; background: #00000005"
+                    @endif >
 
                 <div class="my-2 border-bottom">
                     <span class="fs-4">Table of Contents</span>
                 </div>
 
 
-                <div >
+                <div>
                     @foreach($documents as $document)
                         @include('docs.tree_item')
                     @endforeach
@@ -50,7 +51,8 @@
 
                         <div class="mt-2">
                             @can('add_edit_documents')
-                                <a href="{{route('document_edit_page', [$selectedDocument->project_id, $selectedDocument->id])}}" class="btn btn-sm btn-outline-secondary" title="Edit">
+                                <a href="{{route('document_edit_page', [$selectedDocument->project_id, $selectedDocument->id])}}"
+                                   class="btn btn-sm btn-outline-secondary" title="Edit">
                                     <i class="bi bi-pencil"></i>
                                 </a>
                             @endcan

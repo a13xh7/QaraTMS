@@ -6,7 +6,8 @@
 
     <div class="mb-2">
         <label for="tse_title" class="form-label">Name</label>
-        <input id="tse_title" name="title" type="text" class="form-control" value="{{$editableSuite->title}}" placeholder="Name" required>
+        <input id="tse_title" name="title" type="text" class="form-control" value="{{$editableSuite->title}}"
+               placeholder="Name" required>
     </div>
 
     <div class="mb-2">
@@ -25,7 +26,9 @@
     </div>
 
     <div class="d-flex justify-content-end">
-        <button type="button" class="btn btn-danger me-2" data-bs-dismiss="modal" onclick="closeTestSuiteEditor()">Cancel</button>
+        <button type="button" class="btn btn-danger me-2" data-bs-dismiss="modal" onclick="closeTestSuiteEditor()">
+            Cancel
+        </button>
         <button type="submit" class="btn btn-warning">Update</button>
     </div>
 

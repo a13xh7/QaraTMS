@@ -12,7 +12,8 @@
 
                 @can('manage_users')
                     <a class="mx-3" href="{{route('users_create_page')}}">
-                        <button type="button" class="btn btn-sm btn-primary"> <i class="bi bi-plus-lg"></i> Add User</button>
+                        <button type="button" class="btn btn-sm btn-primary"><i class="bi bi-plus-lg"></i> Add User
+                        </button>
                     </a>
                 @endcan
             </h3>
@@ -28,23 +29,23 @@
                     </div>
 
                     @can('manage_users')
-                    <div class="d-flex justify-content-start">
+                        <div class="d-flex justify-content-start">
 
-                        <a href="{{route('users_edit_page', $user->id)}}" class="btn btn-sm btn-outline-dark">
-                            <i class="bi bi-pencil"></i>
-                            Edit
-                        </a>
+                            <a href="{{route('users_edit_page', $user->id)}}" class="btn btn-sm btn-outline-dark">
+                                <i class="bi bi-pencil"></i>
+                                Edit
+                            </a>
 
 
-                        <form action="{{route('user_delete')}}" method="POST">
-                            @csrf
-                            <input type="hidden" name="user_id" value="{{$user->id}}">
-                            <button type="submit" class="btn btn-sm btn-outline-danger me-3 ms-2">
-                                <i class="bi bi-x-lg"></i>
-                                Delete
-                            </button>
-                        </form>
-                    </div>
+                            <form action="{{route('user_delete')}}" method="POST">
+                                @csrf
+                                <input type="hidden" name="user_id" value="{{$user->id}}">
+                                <button type="submit" class="btn btn-sm btn-outline-danger me-3 ms-2">
+                                    <i class="bi bi-x-lg"></i>
+                                    Delete
+                                </button>
+                            </form>
+                        </div>
                     @endcan
 
                 </div>
@@ -53,7 +54,5 @@
         </div>
 
     </div>
-
-
 
 @endsection

@@ -140,9 +140,9 @@
                         </div>
 
                         <div class="card-footer">
-                                <b>{{ $repository->suitesCount() }}</b> {{ __('Test Cases') }}
-                                 | <b>{{ $repository->casesCount() }}</b> {{ __('Test Suites') }}
-                                  | <b>{{ $repository->automatedCasesCount() }}</b> {{ __('Automation') }}
+                            <b>{{ $repository->suitesCount() }}</b> {{ __('Test Cases') }}
+                            | <b>{{ $repository->casesCount() }}</b> {{ __('Test Suites') }}
+                            | <b>{{ $repository->automatedCasesCount() }}</b> {{ __('Automation') }}
 
                         </div>
 

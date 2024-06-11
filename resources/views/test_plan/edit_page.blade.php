@@ -42,7 +42,7 @@
 
         <div class="row m-0">
 
-            <div class="col-4 base_block p-3 shadow" style="margin-right: 10px;" >
+            <div class="col-4 base_block p-3 shadow" style="margin-right: 10px;">
 
                 <form action="{{route('test_plan_update')}}" method="POST" enctype="multipart/form-data">
                     @csrf
@@ -54,21 +54,23 @@
 
                     <div class="mb-3">
                         <label for="title" class="form-label">Name</label>
-                        <input type="text" class="form-control" name="title" required value="{{$testPlan->title}}" maxlength="100">
+                        <input type="text" class="form-control" name="title" required value="{{$testPlan->title}}"
+                               maxlength="100">
                     </div>
 
                     <div class="mb-3">
 
                         <label for="test_suite_id" class="form-label">Test Repository</label>
-                        <select name="repository_id" id="plan_repository_select" class="form-select" onchange="renderPlanTree(this)" required>
-                            <option disabled selected value> ----- </option>
+                        <select name="repository_id" id="plan_repository_select" class="form-select"
+                                onchange="renderPlanTree(this)" required>
+                            <option disabled selected value> -----</option>
 
                             @foreach($repositories as $repositoryOption)
                                 <option value="{{$repositoryOption->id}}"
 
-                                    @if($repositoryOption->id == $testPlan->repository_id)
-                                        selected
-                                    @endif
+                                        @if($repositoryOption->id == $testPlan->repository_id)
+                                            selected
+                                        @endif
 
                                 >
                                     {{$repositoryOption->title}}
@@ -80,7 +82,8 @@
 
                     <div class="mb-3">
                         <label for="description" class="form-label">Description</label>
-                        <textarea class="form-control" name="description" maxlength="255" rows="7">{{$testPlan->description}}</textarea>
+                        <textarea class="form-control" name="description" maxlength="255"
+                                  rows="7">{{$testPlan->description}}</textarea>
                     </div>
 
                     <div class="d-flex justify-content-end">
@@ -98,7 +101,7 @@
             </div>
 
 
-            <div class="col p-3 shadow base_block" >
+            <div class="col p-3 shadow base_block">
 
                 <div class="border-bottom position-static d-flex justify-content-between">
                     <h3>Select Test Cases</h3>
@@ -126,8 +129,6 @@
 
     </div>
 
-
-
 @endsection
 
 
@@ -135,13 +136,13 @@
     <script src="{{asset('js/test_plan_page.js')}}"></script>
 
     <script>
-        $( document ).ready(function() {
+        $(document).ready(function () {
 
 
             {{--// Отметить все выбранные тест кейсы, чекбоксы--}}
 
             const testCasesIdsArray = $("#test_plan_data").val().split(",");
-            testCasesIdsArray.forEach( (id) => {
+            testCasesIdsArray.forEach((id) => {
                 $(`.test_case_cbx[data-test_case_id='${id}']`).click(); //prop('checked', true);
             });
 

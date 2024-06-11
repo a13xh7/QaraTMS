@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Repository;
-use App\TestPlan;
-use App\Suite;
 use App\Project;
+use App\Repository;
 use App\TestRun;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -24,7 +21,7 @@ class ProjectController extends Controller
 
     public function create()
     {
-        if(!auth()->user()->can('add_edit_projects')) {
+        if (!auth()->user()->can('add_edit_projects')) {
             abort(403);
         }
 
@@ -45,7 +42,7 @@ class ProjectController extends Controller
 
     public function edit($id)
     {
-        if(!auth()->user()->can('add_edit_projects')) {
+        if (!auth()->user()->can('add_edit_projects')) {
             abort(403);
         }
 
@@ -60,7 +57,7 @@ class ProjectController extends Controller
 
     public function store(Request $request)
     {
-        if(!auth()->user()->can('add_edit_projects')) {
+        if (!auth()->user()->can('add_edit_projects')) {
             abort(403);
         }
 
@@ -89,7 +86,7 @@ class ProjectController extends Controller
 
     public function update(Request $request)
     {
-        if(!auth()->user()->can('add_edit_projects')) {
+        if (!auth()->user()->can('add_edit_projects')) {
             abort(403);
         }
 
@@ -105,7 +102,7 @@ class ProjectController extends Controller
 
     public function destroy(Request $request)
     {
-        if(!auth()->user()->can('delete_projects')) {
+        if (!auth()->user()->can('delete_projects')) {
             abort(403);
         }
 

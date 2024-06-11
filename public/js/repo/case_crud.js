@@ -6,13 +6,13 @@ $("#test_cases_list").sortable({
 
 function updateCasesOrder() {
     var order = [];
-    $('#test_cases_list .test_case').each(function(index,element) {
+    $('#test_cases_list .test_case').each(function (index, element) {
         order.push({
             id: $(this).attr('data-case_id'),
-            order: index+1
+            order: index + 1
         });
     });
-     console.log(order);
+    console.log(order);
 
     $.ajax({
         url: "/tcuo",
@@ -24,6 +24,7 @@ function updateCasesOrder() {
         }
     });
 }
+
 /****************************************************************************
  * Get data from CREATE and UPDATE test case form. Save data in object
  ****************************************************************************/
@@ -41,10 +42,9 @@ function getTestCaseDataFromForm() {
     testCase.data['preconditions'] = $("#tce_preconditions_input").val();
     testCase.data.steps = [];
 
-    $( $(".step") ).each( function(index) {
+    $($(".step")).each(function (index) {
 
-        if($(this).find(".step_action").val() || $(this).find(".step_result").val())
-        {
+        if ($(this).find(".step_action").val() || $(this).find(".step_result").val()) {
             testCase.data.steps[index] =
                 {
                     action: $(this).find(".step_action").val(),
@@ -61,10 +61,10 @@ function getTestCaseDataFromForm() {
  *      json of created test case
  ****************************************************************************/
 
-function createTestCase(addAnother=false) {
+function createTestCase(addAnother = false) {
     let newTestCase = getTestCaseDataFromForm();
 
-    if(!newTestCase.title) {
+    if (!newTestCase.title) {
         alert('Title is required');
         return;
     }
@@ -84,7 +84,7 @@ function createTestCase(addAnother=false) {
         success: function (data) {  // response is case html and json
             let testCase = $.parseJSON(data.json);
 
-            if(addAnother) {
+            if (addAnother) {
                 loadTestCaseCreateForm();
             } else {
                 renderTestCase(testCase.id)
@@ -102,7 +102,7 @@ function createTestCase(addAnother=false) {
 function updateTestCase() {
     let updatingTestCase = getTestCaseDataFromForm();
 
-    if(!updatingTestCase.title) {
+    if (!updatingTestCase.title) {
         alert('Title is required');
         return;
     }
@@ -137,9 +137,9 @@ function deleteTestCase(id) {
             "id": id,
         },
         success: function (data) {
-            $("[data-case_id=" + id +"]").remove();
+            $("[data-case_id=" + id + "]").remove();
 
-            if($('#tce_case_id').val() == id || $('#tce_case_id').text() == id) {
+            if ($('#tce_case_id').val() == id || $('#tce_case_id').text() == id) {
                 closeTestCaseEditor();
             }
         }

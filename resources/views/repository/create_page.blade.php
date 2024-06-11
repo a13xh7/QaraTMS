@@ -24,7 +24,7 @@
         @endif
 
         <div class="base_block shadow p-4">
-            <form  method="POST" action="{{route('repository_create')}}">
+            <form method="POST" action="{{route('repository_create')}}">
                 @csrf
 
                 <input type="hidden" name="project_id" value="{{$project->id}}">
@@ -35,16 +35,17 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="prefix" class="form-label">Prefix <span class="text-muted">(max 3 symbols)</span></label>
+                    <label for="prefix" class="form-label">Prefix <span
+                                class="text-muted">(max 3 symbols)</span></label>
                     <input type="text" class="form-control" name="prefix"
                            required maxlength="3"
                            pattern="[^\s]+" title="please dont use the white space :)"
-                           style="text-transform:uppercase" >
+                           style="text-transform:uppercase">
                 </div>
 
                 <div class="mb-3">
                     <label for="description" class="form-label">Description</label>
-                    <textarea name="description" class="form-control"  maxlength="255"> </textarea>
+                    <textarea name="description" class="form-control" maxlength="255"> </textarea>
                 </div>
 
                 <button type="submit" class="btn btn-success px-5">

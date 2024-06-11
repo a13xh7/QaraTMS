@@ -61,14 +61,12 @@
 
     </div>
 
-
-
 @endsection
 
 
 @section('footer')
     <script>
-        $( document ).ready(function() {
+        $(document).ready(function () {
 
             $('#content').summernote({
                 minHeight: '300px',

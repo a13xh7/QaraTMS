@@ -90,8 +90,12 @@
                     <input type="title" class="form-control" id="test_suite_title_input" placeholder="New test suite">
                 </div>
                 <div class="d-flex justify-content-end mb-3">
-                    <button id="tsf_update_btn" type="button" class="btn btn-success mx-3" style="display: none" onclick="updateSuite()">Update</button>
-                    <button id="tsf_create_btn" type="button" class="btn btn-success mx-3" onclick="createSuite()">Create</button>
+                    <button id="tsf_update_btn" type="button" class="btn btn-success mx-3" style="display: none"
+                            onclick="updateSuite()">Update
+                    </button>
+                    <button id="tsf_create_btn" type="button" class="btn btn-success mx-3" onclick="createSuite()">
+                        Create
+                    </button>
                     <button type="button" class="btn btn-danger" onclick="closeSuiteForm()">Cancel</button>
                 </div>
             </form>

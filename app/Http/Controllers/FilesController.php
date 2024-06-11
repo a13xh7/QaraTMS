@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use DOMDocument;
+use ErrorException;
 use Illuminate\Http\Request;
-use Mockery\Exception;
 
 class FilesController extends Controller
 {
@@ -11,23 +12,23 @@ class FilesController extends Controller
     public static function saveImagesAndGetCleanCode($data)
     {
         $content = $data;
-        $dom = new \DOMDocument();
+        $dom = new DOMDocument();
         $dom->loadHtml($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
         $imageFiles = $dom->getElementsByTagName('img');
 
-        foreach($imageFiles as $item => $image){
+        foreach ($imageFiles as $item => $image) {
             $data = $image->getAttribute('src');
 
             try {
                 list($type, $data) = explode(';', $data);
-                list(, $data)      = explode(',', $data);
+                list(, $data) = explode(',', $data);
                 $imgeData = base64_decode($data);
-            } catch (\ErrorException $e) {
+            } catch (ErrorException $e) {
                 continue;
             }
 
-            $image_name= "/media/" . time().$item.'.png';
-            $path = public_path() . $image_name;
+            $image_name = "/media/".time().$item.'.png';
+            $path = public_path().$image_name;
             file_put_contents($path, $imgeData);
 
             $image->removeAttribute('src');
@@ -45,11 +46,11 @@ class FilesController extends Controller
         if (isset($_FILES['file']['name'])) {
 
             if (!$_FILES['file']['error']) {
-                $name = rand(100,1000).'_'.date('Ymd');
+                $name = rand(100, 1000).'_'.date('Ymd');
                 $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
                 $filename = $name.'.'.$ext;
 
-                $destination = public_path() .'/media/'.$filename; //change this directory
+                $destination = public_path().'/media/'.$filename; //change this directory
                 $location = $_FILES["file"]["tmp_name"];
 
                 move_uploaded_file($location, $destination);

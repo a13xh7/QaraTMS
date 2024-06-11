@@ -12,12 +12,17 @@
 
             @if( in_array($testCase->id, $testCasesIds)   )
 
-                <div class="tree_test_case tree_test_case_content py-1 ps-1" onclick="loadTestCase({{$testRun->id}}, {{$testCase->id}})">
+                <div class="tree_test_case tree_test_case_content py-1 ps-1"
+                     onclick="loadTestCase({{$testRun->id}}, {{$testCase->id}})">
 
                     <div class='d-flex justify-content-between'>
 
                         <div class="mt-1">
-                            <span>@if($testCase->automated) <i class="bi bi-robot"></i> @else <i class="bi bi-person"></i> @endif </span>
+                            <span>@if($testCase->automated)
+                                    <i class="bi bi-robot"></i>
+                                @else
+                                    <i class="bi bi-person"></i>
+                                @endif </span>
                             <span class="text-muted ps-1 pe-3 ">{{$repository->prefix}}-{{$testCase->id}}</span>
                             <span>{{$testCase->title}}</span>
                         </div>

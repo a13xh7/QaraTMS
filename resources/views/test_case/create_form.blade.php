@@ -26,8 +26,8 @@
                             @foreach($repository->suites as $repoTestSuite)
                                 <option value="{{$repoTestSuite->id}}"
                                         @if($repoTestSuite->id == $parentTestSuite->id)
-                                        selected
-                                    @endif
+                                            selected
+                                        @endif
                                 >
                                     {{$repoTestSuite->title}}
                                 </option>
@@ -39,7 +39,8 @@
                     <div class="mx-4">
                         <label class="form-label">
                             <b>Priority</b>
-                            <i class="bi bi-chevron-double-up text-danger"></i>|<i class="bi bi-list text-info"></i>|<i class="bi bi-chevron-double-down text-warning"></i>
+                            <i class="bi bi-chevron-double-up text-danger"></i>|<i class="bi bi-list text-info"></i>|<i
+                                    class="bi bi-chevron-double-down text-warning"></i>
                         </label>
 
                         <select id="tce_priority_select" name="priority" class="form-select border-secondary">
@@ -61,35 +62,40 @@
 
                 <div class="mb-3 p-0">
                     <label for="title" class="form-label"><b>Title</b></label>
-                    <input name="title" id="tce_title_input" type="text" class="form-control border-secondary" autofocus>
+                    <input name="title" id="tce_title_input" type="text" class="form-control border-secondary"
+                           autofocus>
                 </div>
 
                 <div class="col p-0">
                     <label class="form-label"><b>Preconditions</b></label>
-                    <textarea name="pre_conditions" class="editor_textarea form-control border-secondary" id="tce_preconditions_input" rows="3"></textarea>
+                    <textarea name="pre_conditions" class="editor_textarea form-control border-secondary"
+                              id="tce_preconditions_input" rows="3"></textarea>
                 </div>
 
             </div>
 
             <div class="row" id="steps_container">
-               <div class="p-0 mb-1">
-                   <b class="fs-5">Steps</b>
-                   <span class="text-muted" style="font-size: 12px">Action <i class="bi bi-arrow-right"></i> Expected Result</span>
-               </div>
+                <div class="p-0 mb-1">
+                    <b class="fs-5">Steps</b>
+                    <span class="text-muted" style="font-size: 12px">Action <i class="bi bi-arrow-right"></i> Expected Result</span>
+                </div>
 
                 <div class="row m-0 p-0 mt-2 step">
                     <div class="col-auto p-0 d-flex flex-column align-items-center">
                         <span class="fs-5 step_number">1</span>
 
-                        <button type="button" class="btn btn-outline btn-sm step_delete_btn px-1 py-0" onclick="stepUp(this)">
+                        <button type="button" class="btn btn-outline btn-sm step_delete_btn px-1 py-0"
+                                onclick="stepUp(this)">
                             <i class="bi bi-arrow-up-circle"></i>
                         </button>
 
-                        <button type="button" class="btn btn-outline-danger btn-sm step_delete_btn px-1 py-0" onclick="removeStep(this)">
+                        <button type="button" class="btn btn-outline-danger btn-sm step_delete_btn px-1 py-0"
+                                onclick="removeStep(this)">
                             <i class="bi bi-x-circle"></i>
                         </button>
 
-                        <button type="button" class="btn btn-outline btn-sm step_delete_btn px-1 py-0" onclick="stepDown(this)">
+                        <button type="button" class="btn btn-outline btn-sm step_delete_btn px-1 py-0"
+                                onclick="stepDown(this)">
                             <i class="bi bi-arrow-down-circle"></i>
                         </button>
                     </div>

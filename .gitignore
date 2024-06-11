@@ -1,5 +1,9 @@
-.idea
-/.idea
+/.idea/
+# Allow codestyle to be synced with project
+!/.idea/
+/.idea/*
+!/.idea/codeStyles
+
 /node_modules
 /public/hot
 /public/storage

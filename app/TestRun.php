@@ -13,19 +13,22 @@ class TestRun extends Model
      *
      * [case_id => status]
      */
-    public function getResults() {
-        return (array)json_decode($this->data);
+    public function getResults()
+    {
+        return (array) json_decode($this->data);
     }
 
     /*
      * $results is array [case_id => status]
      */
-    public function saveResults($results) {
+    public function saveResults($results)
+    {
         $this->data = json_encode($results);
         $this->save();
     }
 
-    public function getInitialData() {
+    public function getInitialData()
+    {
         $testPlan = TestPlan::findOrFail($this->test_plan_id);
         $testCasesIds = explode(',', $testPlan->data);
 
@@ -37,10 +40,11 @@ class TestRun extends Model
         return json_encode($testRunData);
     }
 
-    public function getChartData() {
+    public function getChartData()
+    {
         $results = $this->getResults();
 
-        $totalTestCases = count($results) != 0 ? count($results)  : 1;
+        $totalTestCases = count($results) != 0 ? count($results) : 1;
         $passed = 0;
         $failed = 0;
         $blocked = 0;
@@ -48,7 +52,7 @@ class TestRun extends Model
 
         foreach ($results as $testCaseId => $status) {
 
-            if($status == TestRunCaseStatus::PASSED) {
+            if ($status == TestRunCaseStatus::PASSED) {
                 $passed++;
             } elseif ($status == TestRunCaseStatus::FAILED) {
                 $failed++;
@@ -75,13 +79,13 @@ class TestRun extends Model
     public function removeDeletedCasesFromResults()
     {
         $currentResults = $this->getResults();
-        $planTestCasesIds = array_keys ($this->getResults() );
+        $planTestCasesIds = array_keys($this->getResults());
 
         $existingCasesIds = TestCase::whereIn('id', $planTestCasesIds)->get()->pluck('id')->toArray();
 
         foreach ($planTestCasesIds as $planTestCaseId) {
 
-            if(false == in_array($planTestCaseId, $existingCasesIds)) {
+            if (false == in_array($planTestCaseId, $existingCasesIds)) {
                 unset($currentResults[$planTestCaseId]);
             }
         }

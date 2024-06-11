@@ -9,7 +9,7 @@
 const $ = jQuery;
 
 const getCenterPosition = element => {
-    const { top, left, width, height } = element.getBoundingClientRect();
+    const {top, left, width, height} = element.getBoundingClientRect();
 
     return {
         x: left + width / 2,
@@ -24,7 +24,7 @@ const getDistance = (elementA, elementB) => {
     const distanceX = Math.floor(Math.abs(positionA.x - positionB.x));
     const distanceY = Math.floor(Math.abs(positionA.y - positionB.y));
 
-    return { distanceX, distanceY };
+    return {distanceX, distanceY};
 };
 
 function TreeSortable() {
@@ -78,7 +78,7 @@ function TreeSortable() {
                 return v.toString(16);
             });
         },
-        createBranch({ id, parent_id, title, level, mid, pid }) {
+        createBranch({id, parent_id, title, level, mid, pid}) {
             const {
                 options: {
                     branchSelector,
@@ -86,14 +86,14 @@ function TreeSortable() {
                     dragHandlerSelector,
                     childrenBusSelector,
                     levelPrefix,
-                    dataAttributes: { idAttr, parentAttr, level: levelAttr },
+                    dataAttributes: {idAttr, parentAttr, level: levelAttr},
                 },
                 cleanSelector,
             } = treeSortable;
             return `
 		<li class="${cleanSelector(
-            branchSelector
-        )} ${levelPrefix}-${level}"
+                branchSelector
+            )} ${levelPrefix}-${level}"
 		id="${mid ? mid : id}"
 		data-${idAttr}="${id}"
 		data-${parentAttr}="${parent_id}"
@@ -138,14 +138,14 @@ function TreeSortable() {
         },
 
         jQuerySupplements() {
-            const { options } = treeSortable;
-            const { levelPrefix, dataAttributes } = options;
+            const {options} = treeSortable;
+            const {levelPrefix, dataAttributes} = options;
 
             $.fn.extend({
                 getBranchLevel() {
                     if ($(this).length === 0) return 0;
 
-                    const { depth } = options;
+                    const {depth} = options;
                     const margin = $(this).css("margin-left");
 
                     return /(px)|(em)|(rem)$/i.test(margin)
@@ -176,7 +176,7 @@ function TreeSortable() {
                 },
                 getParent() {
                     const {
-                        options: { branchSelector },
+                        options: {branchSelector},
                     } = treeSortable;
                     const level = $(this).getBranchLevel() || 1;
                     let $prev = $(this).prev(branchSelector);
@@ -189,14 +189,14 @@ function TreeSortable() {
                 },
                 getRootChild() {
                     const {
-                        options: { branchSelector, treeSelector, levelPrefix },
+                        options: {branchSelector, treeSelector, levelPrefix},
                     } = treeSortable;
 
                     return $(treeSelector).children(`${branchSelector}.${levelPrefix}-1`);
                 },
                 getLastChild() {
                     const {
-                        options: { branchSelector, treeSelector, levelPrefix },
+                        options: {branchSelector, treeSelector, levelPrefix},
                     } = treeSortable;
                     const $children = $(this).getChildren();
                     const $descendants = $(this).getDescendants();
@@ -206,7 +206,7 @@ function TreeSortable() {
                 },
                 getChildren() {
                     const {
-                        options: { branchSelector },
+                        options: {branchSelector},
                     } = treeSortable;
                     let $children = $();
 
@@ -226,7 +226,7 @@ function TreeSortable() {
                 },
                 getDescendants() {
                     const {
-                        options: { branchSelector },
+                        options: {branchSelector},
                     } = treeSortable;
                     let $descendants = $();
 
@@ -250,7 +250,7 @@ function TreeSortable() {
                 },
                 nextSibling() {
                     const {
-                        options: { branchSelector },
+                        options: {branchSelector},
                     } = treeSortable;
 
                     let level = $(this).getBranchLevel() || 1,
@@ -266,7 +266,7 @@ function TreeSortable() {
                 },
                 prevSibling() {
                     const {
-                        options: { branchSelector },
+                        options: {branchSelector},
                     } = treeSortable;
                     let level = $(this).getBranchLevel() || 1,
                         $prev = $(this).prev(branchSelector),
@@ -298,7 +298,7 @@ function TreeSortable() {
                 },
                 getSiblings(level = null) {
                     const {
-                        options: { treeSelector, branchSelector },
+                        options: {treeSelector, branchSelector},
                     } = treeSortable;
                     level = level || $(this).getBranchLevel();
 
@@ -307,19 +307,19 @@ function TreeSortable() {
                         $self = this;
 
                     $branches.length &&
-                        $branches.each(function () {
-                            let branchLevel = $(this).getBranchLevel();
+                    $branches.each(function () {
+                        let branchLevel = $(this).getBranchLevel();
 
-                            if (+branchLevel === +level && $self[0] !== $(this)[0]) {
-                                $siblings.push($(this));
-                            }
-                        });
+                        if (+branchLevel === +level && $self[0] !== $(this)[0]) {
+                            $siblings.push($(this));
+                        }
+                    });
 
                     return $siblings;
                 },
                 calculateSiblingDistances() {
                     const {
-                        options: { branchSelector, branchPathSelector },
+                        options: {branchSelector, branchPathSelector},
                     } = treeSortable;
                     $(branchSelector).each(function () {
                         const level = $(this).getBranchLevel() || 1;
@@ -364,7 +364,7 @@ function TreeSortable() {
                         options: {
                             treeSelector,
                             branchSelector,
-                            dataAttributes: { id },
+                            dataAttributes: {id},
                             maxLevel,
                         },
                         generateUUID,
@@ -385,7 +385,7 @@ function TreeSortable() {
 
                     $lastChild = $branch.getLastChild();
 
-                    const $element = createBranch({ id: uid, parent_id, title, level, mid, pid});
+                    const $element = createBranch({id: uid, parent_id, title, level, mid, pid});
 
                     if ($lastChild.length) {
                         $lastChild.after($element);
@@ -402,7 +402,7 @@ function TreeSortable() {
                         options: {
                             treeSelector,
                             branchSelector,
-                            dataAttributes: { parent },
+                            dataAttributes: {parent},
                         },
                         generateUUID,
                         createBranch,
@@ -427,7 +427,7 @@ function TreeSortable() {
                         }
                     }
 
-                    const $element = createBranch({ id: uid, parent_id, level, title, mid, pid });
+                    const $element = createBranch({id: uid, parent_id, level, title, mid, pid});
 
                     if ($lastChild.length) {
                         $lastChild.after($element);
@@ -441,7 +441,7 @@ function TreeSortable() {
 
                 removeBranch() {
                     const {
-                        options: { treeSelector, branchSelector },
+                        options: {treeSelector, branchSelector},
                         updateBranchZIndex,
                     } = treeSortable;
 
@@ -460,18 +460,18 @@ function TreeSortable() {
 
         updateBranchZIndex() {
             const {
-                options: { treeSelector, branchSelector },
+                options: {treeSelector, branchSelector},
             } = treeSortable;
             const $branches = $(`${treeSelector} > ${branchSelector}`);
             const length = $branches.length;
 
             $branches.length &&
-                $branches.each(function (index) {
-                    $(this).css("z-index", Math.max(1, length - index));
-                });
+            $branches.each(function (index) {
+                $(this).css("z-index", Math.max(1, length - index));
+            });
         },
         initSorting() {
-            const { options, pxToNumber, numberToPx, updateBranchZIndex } = treeSortable;
+            const {options, pxToNumber, numberToPx, updateBranchZIndex} = treeSortable;
             const {
                 treeSelector,
                 dragHandlerSelector,
@@ -543,7 +543,7 @@ function TreeSortable() {
                     height -= 2;
 
                     let width = ui.helper.find(branchSelector).outerWidth() - 2;
-                    ui.placeholder.css({ height, width });
+                    ui.placeholder.css({height, width});
 
                     const tmp = ui.placeholder.nextBranch();
                     tmp.css("margin-top", numberToPx(helperHeight));
@@ -557,8 +557,8 @@ function TreeSortable() {
                     $(`${treeSelector} ${branchSelector} ${branchPathSelector}`).hide();
                 },
                 sort(_, ui) {
-                    const { options, getTreeEdge } = treeSortable;
-                    const { depth, maxLevel } = options;
+                    const {options, getTreeEdge} = treeSortable;
+                    const {depth, maxLevel} = options;
                     let treeEdge = getTreeEdge(),
                         offset = ui.helper.offset(),
                         currentBranchEdge = offset.left,

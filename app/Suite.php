@@ -19,13 +19,14 @@ class Suite extends Model
         return $this->testCases->count();
     }
 
-    public function delete() {
-      $descendants = $this->descendants;
+    public function delete()
+    {
+        $descendants = $this->descendants;
 
-      foreach ($descendants as $descendant) {
-        $descendant->delete();
-      }
-      return parent::delete();
+        foreach ($descendants as $descendant) {
+            $descendant->delete();
+        }
+        return parent::delete();
     }
 
 }

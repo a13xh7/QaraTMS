@@ -13,7 +13,8 @@
 
                 @can('add_edit_test_plans')
                     <a class="mx-3" href="{{route("test_plan_create_page", $project->id)}}">
-                        <button type="button" class="btn btn-sm btn-primary"> <i class="bi bi-plus-lg"></i> New Test Plan</button>
+                        <button type="button" class="btn btn-sm btn-primary"><i class="bi bi-plus-lg"></i> New Test Plan
+                        </button>
                     </a>
                 @endcan
             </h3>
@@ -32,15 +33,20 @@
 
                             <div>
                                  <span>
-                                    @if($testPlan->data) <b>{{count(explode("," , $testPlan->data))}}</b>  @else 0  @endif test cases
+                                    @if($testPlan->data)
+                                         <b>{{count(explode("," , $testPlan->data))}}</b>
+                                     @else
+                                         0
+                                     @endif test cases
                                  </span> |
-                                <span class="text-muted" title="created at">{{$testPlan->created_at->format('d-m-Y')}} </span>
+                                <span class="text-muted"
+                                      title="created at">{{$testPlan->created_at->format('d-m-Y')}} </span>
                             </div>
                         </div>
 
                         @if($testPlan->description)
                             <div class="card-text text-muted ps-3">
-                               <span> {{$testPlan->description}} </span>
+                                <span> {{$testPlan->description}} </span>
                             </div>
                         @endif
 
@@ -49,14 +55,16 @@
                             <div>
 
                                 @can('add_edit_test_runs')
-                                    <a href="{{route('start_new_test_run', $testPlan->id)}}" class="link-light btn btn-sm btn-success">
+                                    <a href="{{route('start_new_test_run', $testPlan->id)}}"
+                                       class="link-light btn btn-sm btn-success">
                                         <i class="bi bi-play-circle"></i>
                                         Start new test run
                                     </a>
                                 @endcan
 
                                 @can('add_edit_test_plans')
-                                    <a href="{{ route("test_plan_update_page", [$project->id, $testPlan->id]) }}" class="btn btn-sm btn-outline-dark mx-3">
+                                    <a href="{{ route("test_plan_update_page", [$project->id, $testPlan->id]) }}"
+                                       class="btn btn-sm btn-outline-dark mx-3">
                                         <i class="bi bi-pencil"></i>
                                         Edit
                                     </a>
@@ -70,7 +78,6 @@
         </div>
 
     </div>
-
 
 @endsection
 

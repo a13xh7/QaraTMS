@@ -71,7 +71,8 @@ class TestPlanController extends Controller
         $project = Project::findOrFail($project_id);
         $repositories = $project->repositories;
         $testPlan = TestPlan::findOrFail($test_plan_id);
-        $testSuitesTree = Suite::where('repository_id', $testPlan->repository_id)->orderBy('order')->tree()->get()->toTree();
+        $testSuitesTree = Suite::where('repository_id',
+            $testPlan->repository_id)->orderBy('order')->tree()->get()->toTree();
         $prefix = Repository::findOrFail($testPlan->repository_id)->prefix;
 
         return view('test_plan.edit_page')

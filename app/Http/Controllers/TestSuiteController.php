@@ -57,7 +57,8 @@ class TestSuiteController extends Controller
     {
         $suite = Suite::findOrFail($test_suite_id);
         $repository = Repository::findOrFail($suite->repository_id);
-        $testCases = TestCase::select('id', 'suite_id', 'title', 'automated', 'priority', 'order')->where('suite_id', $test_suite_id)->orderBy('order')->get();
+        $testCases = TestCase::select('id', 'suite_id', 'title', 'automated', 'priority', 'order')->where('suite_id',
+            $test_suite_id)->orderBy('order')->get();
 
         return view('repository.test_cases_list')
             ->with('testCases', $testCases)

@@ -35,13 +35,15 @@ class Project extends Model
         return Suite::whereIn('repository_id', $repositoryIds)->count();
     }
 
-    public function casesCount() {
+    public function casesCount()
+    {
         $repositoryIds = Repository::where('project_id', $this->id)->pluck('id')->toArray();
         $suiteIds = Suite::whereIn('repository_id', $repositoryIds)->pluck('id')->toArray();
         return TestCase::whereIn('suite_id', $suiteIds)->count();
     }
 
-    public function automatedCasesCount() {
+    public function automatedCasesCount()
+    {
         $repositoryIds = Repository::where('project_id', $this->id)->pluck('id')->toArray();
         $suiteIds = Suite::whereIn('repository_id', $repositoryIds)->pluck('id')->toArray();
         return TestCase::whereIn('suite_id', $suiteIds)->where('automated', true)->count();
@@ -62,16 +64,17 @@ class Project extends Model
         return Document::where('project_id', $this->id)->count();
     }
 
-    public function getAutomationPercent() {
+    public function getAutomationPercent()
+    {
 
         $totalCases = $this->casesCount();
         $automatedCases = $this->automatedCasesCount();
 
-        if($totalCases <= 0 || $automatedCases <= 0) {
+        if ($totalCases <= 0 || $automatedCases <= 0) {
             return 0;
         }
 
-        $result = ($automatedCases * 100) /  $totalCases;
+        $result = ($automatedCases * 100) / $totalCases;
         return round($result, 1);
 
     }

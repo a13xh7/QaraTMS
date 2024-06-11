@@ -91,7 +91,8 @@ class TestCaseController extends Controller
      *  PAGES / FORMS / HTML BLOCKS
      *****************************************/
 
-    public function show($test_case_id) {
+    public function show($test_case_id)
+    {
         $testCase = TestCase::findOrFail($test_case_id);
         $data = json_decode($testCase->data);
 

@@ -15,7 +15,7 @@ class AuthController extends Controller
 
     public function showLoginPage()
     {
-        if(Auth::check()){
+        if (Auth::check()) {
             return redirect('/');
         }
 
@@ -42,7 +42,8 @@ class AuthController extends Controller
      *  LOGOUT
      *****************************************/
 
-    public function logout() {
+    public function logout()
+    {
         Session::flush();
         Auth::logout();
         return redirect()->route('login_page');

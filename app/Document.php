@@ -9,13 +9,14 @@ class Document extends Model
 {
     use HasRecursiveRelationships;
 
-  public function delete() {
-    $descendants = $this->descendants;
+    public function delete()
+    {
+        $descendants = $this->descendants;
 
-    foreach ($descendants as $descendant) {
-      $descendant->delete();
+        foreach ($descendants as $descendant) {
+            $descendant->delete();
+        }
+        return parent::delete();
     }
-    return parent::delete();
-  }
 
 }

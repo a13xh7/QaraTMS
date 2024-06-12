@@ -1,3 +1,8 @@
+@php use App\Project;
+/**
+ * @var Project $project
+ */
+@endphp
 @extends('layout.base_layout')
 
 @section('content')

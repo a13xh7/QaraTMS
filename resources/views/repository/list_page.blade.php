@@ -1,3 +1,9 @@
+@php use App\Project;use App\Repository;
+/**
+ * @var Repository[] $repositories
+ * @var Project $project
+ */
+@endphp
 @extends('layout.base_layout')
 
 @section('content')

@@ -1,3 +1,9 @@
+@php use App\Repository;use App\TestCase;
+/**
+ * @var TestCase $testCase
+ * @var Repository $repository
+ */
+@endphp
 <div id="{{$testCase->id}}" class="test_case border-bottom d-flex ps-1 py-2 justify-content-between"
      data-case_id="{{$testCase->id}}">
 

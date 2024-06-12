@@ -1,3 +1,9 @@
+@php use App\Suite;use App\TestCase;
+/**
+ * @var TestCase[] $testCases
+ * @var Suite $suite
+ */
+@endphp
 @if($suite->descendants()->count() > 0)
 
     {{--    PARENT SUITE TEST CASES   --}}
@@ -26,7 +32,7 @@
         @endif
 
         {{--    CHILD SUITE TEST CASES   --}}
-        @foreach(\App\TestCase::where('suite_id', $childSuite->id)->orderBy('order')->get() as $testCase)
+        @foreach(TestCase::where('suite_id', $childSuite->id)->orderBy('order')->get() as $testCase)
             @include('repository.test_case_list_item')
         @endforeach
 

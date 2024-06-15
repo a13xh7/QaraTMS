@@ -1,3 +1,9 @@
+@php use App\User;use Illuminate\Support\MessageBag;
+/**
+ * @var User $user
+ * @var MessageBag $errors
+ */
+@endphp
 @extends('layout.base_layout')
 
 @section('content')

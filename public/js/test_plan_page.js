@@ -5,10 +5,16 @@ function renderPlanTree(select) {
 }
 
 function selectAllTestPlanCases() {
-    $(".test_suite_cbx").each(function (index) {
-        $(this).prop('checked', false);
-        $(this).click();
+    const selectedTestCases = [];
+    $(".test_suite_cbx, .test_case_cbx").each(function (index) {
+        $(this).prop('checked', true)
+        const testCaseId = $(this).attr('data-test_case_id');
+        // add test case ids to selectedTestCases
+        if (testCaseId !== undefined) {
+            selectedTestCases.push(testCaseId);
+        }
     });
+    $('#test_plan_data').val(selectedTestCases);
 }
 
 function deselectAllTestPlanCases() {

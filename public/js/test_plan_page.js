@@ -32,7 +32,10 @@ $(document).ready(function () {
     $("body").on("change", ".test_suite_cbx, .test_case_cbx", function () {
         if ($(this).hasClass("test_suite_cbx")) {
             // go up to the tree_suite element and update all children to the new value
-            $(this).closest(".tree_suite").find(".test_suite_cbx, .test_case_cbx").prop("checked", $(this).prop("checked"));
+            $(this)
+                .closest(".tree_suite")
+                .find(".test_suite_cbx, .test_case_cbx")
+                .prop("checked", $(this).prop("checked"));
         }
         // update the parent suite(s) state
         updateParentSuites($(this));

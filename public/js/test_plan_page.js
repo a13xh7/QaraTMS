@@ -18,14 +18,9 @@ function selectAllTestPlanCases() {
 }
 
 function deselectAllTestPlanCases() {
-    $(".test_suite_cbx").each(function (index) {
+    $(".test_suite_cbx, .test_case_cbx").each(function () {
         $(this).prop('checked', false);
     });
-
-    $(".test_case_cbx").each(function (index) {
-        $(this).prop('checked', false);
-    });
-
     $('#test_plan_data').val('');
 }
 

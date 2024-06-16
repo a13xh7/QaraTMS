@@ -30,15 +30,13 @@ function deselectAllTestPlanCases() {
  ****************************************************************************/
 
 $(document).ready(function () {
-
-
-    // Чекбокс test suite
+    // checkbox test suite
     $("body").on("change", ".test_suite_cbx", function () {
 
         var test_suite_id = $(this).attr('data-test_suite_id');
 
         if (this.checked) {
-            $(`.test_case_cbx[data-test_suite_id=${test_suite_id}]`).prop('checked', true);  // отметить все текст кейсы сьюта
+            $(`.test_case_cbx[data-test_suite_id=${test_suite_id}]`).prop('checked', true); // mark all the suite's test cases
             $(`.test_suite_cbx[data-parent_id=${test_suite_id}]`).click(); //
         } else {
             $(`.test_case_cbx[data-test_suite_id=${test_suite_id}]`).prop('checked', false);
@@ -55,7 +53,7 @@ $(document).ready(function () {
         var test_suite_selector = `.test_suite_cbx[data-test_suite_id=${test_suite_id}]`;
         var test_case_selector = `.test_case_cbx[data-test_suite_id=${test_suite_id}]`;
 
-        // найти все тест кейсы  с указанным test suite id
+        // find all test cases with the specified test suite id
         var status = [];
         $(test_case_selector).each(function (index) {
             status.push($(this).prop('checked'))

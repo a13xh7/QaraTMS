@@ -74,6 +74,14 @@ If you are using SQLite:
 
 Please contribute using [GitHub Flow](https://guides.github.com/introduction/flow). Create a branch, add commits, and [open a pull request](https://github.com/rahuldkjain/github-profile-readme-generator/compare).
 
+### Updating Models
+
+When a model is updated, the helper files for it must be regenerated to provide autocompletion inside the source code.
+To do so, run this command:
+
+```bash
+php artisan ide-helper:models -M
+```
 
 ## License
 

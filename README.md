@@ -32,6 +32,16 @@ If you are using SQLite:
 * Create **database.sqlite** file in **./database** folder
 * Rename `.env_sqlite.backup` file to `.env` and fill the database information.
 
+### Generating Helper Sources for Project
+
+This project is configured to use the laravel-ide-helper. To generate the helper files run these commands:
+
+```bash
+php artisan ide-helper:generate &&
+php artisan ide-helper:models --write-mixin &&
+php artisan ide-helper:meta
+```
+
 ## Getting Started with docker-compose (quick start)
 
 - Install docker and docker-compose

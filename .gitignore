@@ -4,6 +4,9 @@
 /.idea/*
 !/.idea/codeStyles
 
+#generated form laravel-ide-helper
+.phpstorm.meta.php
+
 /node_modules
 /public/hot
 /public/storage

@@ -1,3 +1,9 @@
+@php use App\Repository;use Illuminate\Support\MessageBag;
+/**
+ * @var Repository $repository
+ * @var MessageBag $errors
+ */
+@endphp
 @extends('layout.base_layout')
 
 @section('content')

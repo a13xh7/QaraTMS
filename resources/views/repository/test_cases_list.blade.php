@@ -1,3 +1,9 @@
+@php use App\Enums\CasePriority;use App\Repository;use App\TestCase;
+/**
+ * @var TestCase[] $testCases
+ * @var Repository $repository
+ */
+@endphp
 @foreach($testCases as $testCase)
 
     <div id="{{$testCase->id}}" class="test_case border-bottom d-flex ps-1  justify-content-between"
@@ -7,9 +13,9 @@
              onclick="renderTestCase('{{$testCase->id}}')">
             <div class="me-1 test_case_info">
 
-                @if($testCase->priority == \App\Enums\CasePriority::NORMAL)
+                @if($testCase->priority == CasePriority::NORMAL)
                     <i class="bi bi-list text-info"></i>
-                @elseif($testCase->priority == \App\Enums\CasePriority::HIGH)
+                @elseif($testCase->priority == CasePriority::HIGH)
                     <i class="bi bi-chevron-double-up text-danger"></i>
                 @else
                     <i class="bi bi-chevron-double-down text-warning"></i>

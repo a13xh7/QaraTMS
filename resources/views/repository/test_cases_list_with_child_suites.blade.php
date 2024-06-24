@@ -1,3 +1,9 @@
+@php use App\Suite;use App\TestCase;
+/**
+ * @var TestCase[] $testCases
+ * @var Suite $suite
+ */
+@endphp
 @if($suite->descendants()->count() > 0)
 
     {{--    PARENT SUITE TEST CASES   --}}
@@ -7,6 +13,7 @@
 
     <br>
 
+    @php /** @var Suite $childSuite */ @endphp
     @foreach($suite->descendants()->get() as $childSuite)
 
         {{--   SHOW CHILD SUITE TITLE WITH FULL PATH --}}
@@ -16,6 +23,7 @@
                 <i class="bi bi-folder2 fs-5"></i>
 
                 <span class="text-muted" style="font-size: 14px">
+                    @php /** @var Suite $parent */ @endphp
                     @foreach($childSuite->ancestors()->get()->reverse() as $parent)
                         {{$parent->title}}
                         <i class="bi bi-arrow-right-short"></i>
@@ -26,7 +34,7 @@
         @endif
 
         {{--    CHILD SUITE TEST CASES   --}}
-        @foreach(\App\TestCase::where('suite_id', $childSuite->id)->orderBy('order')->get() as $testCase)
+        @foreach(TestCase::where('suite_id', $childSuite->id)->orderBy('order')->get() as $testCase)
             @include('repository.test_case_list_item')
         @endforeach
 

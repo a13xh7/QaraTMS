@@ -63,18 +63,6 @@ class TestSuiteController extends Controller
             ->with('repository', $repository);
     }
 
-    public function loadCasesListWithChildSuites($test_suite_id)
-    {
-        $suite = Suite::findOrFail($test_suite_id);
-        $repository = Repository::findOrFail($suite->repository_id);
-        $testCases = TestCase::where('suite_id', $test_suite_id)->orderBy('order')->get();
-
-        return view('repository.test_cases_list_with_child_suites')
-            ->with('testCases', $testCases)
-            ->with('suite', $suite)
-            ->with('repository', $repository);
-    }
-
     /******************************************
      *  CRUD
      *****************************************/

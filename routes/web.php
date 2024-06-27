@@ -107,10 +107,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/tscl/{test_suite_id}', [TestSuiteController::class, 'loadCasesList'])
         ->where('test_suite_id', '[0-9]+');
 
-
-//    Route::get('/tscl/{test_suite_id}', [TestSuiteController::class, 'loadCasesListWithChildSuites'])
-//        ->where('test_suite_id', '[0-9]+');
-
     // Test suite editor - return form html code
     // it's create an update form in one
     Route::get('/tse/{operation}/{repository_id}/{test_suite_id?}', [TestSuiteController::class, 'loadEditor'])

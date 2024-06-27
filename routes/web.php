@@ -13,19 +13,8 @@ use \App\Http\Controllers\UsersController;
 
 
 /**********************************************************************
-// test
- ***********************************************************************/
-Route::get('/test', function () {
-    return view('users.list_page');
-});
-
-Route::post('ck-editor/imgupload', [\App\Http\Controllers\CkeditorController::class,'imgupload'])->name('ckeditor.upload');
-
-
-
-/**********************************************************************
-// AUTH
- ***********************************************************************/
+ * AUTH
+ **********************************************************************/
 
 Route::get('login', [AuthController::class, 'showLoginPage'])->name('login_page');
 Route::post('auth', [AuthController::class, 'authorizeUser'])->name('auth');

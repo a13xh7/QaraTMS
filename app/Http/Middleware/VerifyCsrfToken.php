@@ -12,8 +12,6 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        '/ck-editor/imgupload',
-
         '/test-suite/create',
         '/test-suite/delete',
         '/test-suite/update',

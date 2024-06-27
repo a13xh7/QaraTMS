@@ -1,16 +1,15 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DocumentsController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\RepositoryController;
+use App\Http\Controllers\TestCaseController;
+use App\Http\Controllers\TestPlanController;
+use App\Http\Controllers\TestRunController;
+use App\Http\Controllers\TestSuiteController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
-use \App\Http\Controllers\ProjectController;
-use \App\Http\Controllers\TestPlanController;
-use \App\Http\Controllers\TestCaseController;
-use \App\Http\Controllers\TestSuiteController;
-use \App\Http\Controllers\TestRunController;
-use \App\Http\Controllers\RepositoryController;
-use \App\Http\Controllers\DocumentsController;
-use \App\Http\Controllers\AuthController;
-use \App\Http\Controllers\UsersController;
-
 
 /**********************************************************************
  * AUTH
@@ -20,23 +19,22 @@ Route::get('login', [AuthController::class, 'showLoginPage'])->name('login_page'
 Route::post('auth', [AuthController::class, 'authorizeUser'])->name('auth');
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
-
 /**********************************************************************
-// AJAX
- ***********************************************************************/
+ * AJAX
+ **********************************************************************/
 
-Route::get('/repo/{repository_id}',[RepositoryController::class, 'getSuitesTree'])->where('repository_id', '[0-9]+');
+Route::get('/repo/{repository_id}', [RepositoryController::class, 'getSuitesTree'])->where('repository_id', '[0-9]+');
 
-Route::post('/tsup',[TestSuiteController::class, 'updateParent']);
-Route::post('/tsuo',[TestSuiteController::class, 'updateOrder']);
-Route::post('/tcuo',[TestCaseController::class, 'updateOrder']);
+Route::post('/tsup', [TestSuiteController::class, 'updateParent']);
+Route::post('/tsuo', [TestSuiteController::class, 'updateOrder']);
+Route::post('/tcuo', [TestCaseController::class, 'updateOrder']);
 
 
 Route::middleware(['auth'])->group(function () {
 
     /**********************************************************************
-    // USERS
-     ***********************************************************************/
+     * USERS
+     **********************************************************************/
 
     Route::get('/users', [UsersController::class, 'index'])
         ->name("users_list_page");
@@ -54,8 +52,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/user/delete', [UsersController::class, 'destroy'])->name("user_delete");
 
     /**********************************************************************
-    // PROJECT
-     ***********************************************************************/
+     * PROJECT
+     **********************************************************************/
 
     Route::get('/', [ProjectController::class, 'index'])
         ->name("project_list_page");
@@ -76,8 +74,8 @@ Route::middleware(['auth'])->group(function () {
 
 
     /**********************************************************************
-    // REPOSITORY
-     ***********************************************************************/
+     * REPOSITORY
+     **********************************************************************/
 
     Route::get('/project/{project_id}/repositories', [RepositoryController::class, 'index'])
         ->where('project_id', '[0-9]+')
@@ -102,6 +100,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/repository/update', [RepositoryController::class, 'update'])->name("repository_update");
     Route::post('/repository/delete', [RepositoryController::class, 'destroy'])->name("repository_delete");
 
+    /**********************************************************************
+     * TEST SUITE
+     **********************************************************************/
 
     Route::get('/tscl/{test_suite_id}', [TestSuiteController::class, 'loadCasesList'])
         ->where('test_suite_id', '[0-9]+');
@@ -110,25 +111,21 @@ Route::middleware(['auth'])->group(function () {
 //    Route::get('/tscl/{test_suite_id}', [TestSuiteController::class, 'loadCasesListWithChildSuites'])
 //        ->where('test_suite_id', '[0-9]+');
 
-    /**********************************************************************
-    // TEST SUITE
-     ***********************************************************************/
-
-     // Test suite editor - return form html code
+    // Test suite editor - return form html code
     // it's create an update form in one
     Route::get('/tse/{operation}/{repository_id}/{test_suite_id?}', [TestSuiteController::class, 'loadEditor'])
         ->where('operation', 'create|update')
         ->where('repository_id', '[0-9]+')
         ->where('test_suite_id', '[0-9]+');
 
-    Route::post('/test-suite/create', [TestSuiteController::class, 'store'])->name("test_suite_create"); // returns test suite html for the tree
+    // returns test suite html for the tree
+    Route::post('/test-suite/create', [TestSuiteController::class, 'store'])->name("test_suite_create");
     Route::post('/test-suite/update', [TestSuiteController::class, 'update'])->name("test_suite_update");
     Route::post('/test-suite/delete', [TestSuiteController::class, 'destroy'])->name("test_suite_delete");
 
-
     /**********************************************************************
-    // TEST CASE
-     ***********************************************************************/
+     * TEST CASE
+     **********************************************************************/
 
     Route::get('/tc/create/{repository_id}/{parent_test_suite_id?}/', [TestCaseController::class, 'loadCreateForm'])
         ->where('repository_id', '[0-9]+')
@@ -150,8 +147,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/test-case/delete', [TestCaseController::class, 'destroy'])->name("test_case_delete");
 
     /**********************************************************************
-    // TEST PLAN
-     ***********************************************************************/
+     * TEST PLAN
+     **********************************************************************/
 
     Route::get('/project/{project_id}/test-plans', [TestPlanController::class, 'index'])
         ->where('project_id', '[0-9]+')
@@ -170,7 +167,7 @@ Route::middleware(['auth'])->group(function () {
         ->where('test_plan_id', '[0-9]+')
         ->name('start_new_test_run');
 
-// Html tree
+    // Html tree
     Route::get('/tpt/{repository_id}', [TestPlanController::class, 'loadRepoTree'])
         ->where('repository_id', '[0-9]+');
 
@@ -178,10 +175,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/test-plans/update', [TestPlanController::class, 'update'])->name("test_plan_update");
     Route::post('/test-plans/delete', [TestPlanController::class, 'destroy'])->name("test_plan_delete");
 
-
-
     /*************************************
-    // PROJECT TEST RUN PAGES
+     * PROJECT TEST RUN PAGES
      *************************************/
 
     Route::get('/project/{project_id}/test-runs', [TestRunController::class, 'index'])
@@ -202,7 +197,7 @@ Route::middleware(['auth'])->group(function () {
         ->where('test_run_id', '[0-9]+')
         ->name("test_run_edit_page");
 
-// TEST case html block
+    // TEST case html block
     Route::get('/trc/{test_run_id}/{test_case_id}', [TestRunController::class, 'loadTestCase'])
         ->where('test_run_id', '[0-9]+')
         ->where('test_case_id', '[0-9]+');
@@ -210,8 +205,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/trchart/{test_run_id}', [TestRunController::class, 'loadChart'])
         ->where('test_run_id', '[0-9]+');
 
-//Update test case status in results array
-
+    //Update test case status in results array
     Route::post('/trcs', [TestRunController::class, 'updateCaseStatus']);
 
     Route::post('/test-run/create', [TestRunController::class, 'store'])->name("test_run_create");
@@ -220,8 +214,8 @@ Route::middleware(['auth'])->group(function () {
 
 
     /**********************************************************************
-    // DOCUMENTS
-     ***********************************************************************/
+     * DOCUMENTS
+     **********************************************************************/
 
     Route::get('/project/{project_id}/documents', [DocumentsController::class, 'index'])
         ->where('project_id', '[0-9]+')
@@ -245,29 +239,4 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/documents/create', [DocumentsController::class, 'store'])->name("document_create");
     Route::post('/documents/update', [DocumentsController::class, 'update'])->name("document_update");
     Route::post('/documents/delete', [DocumentsController::class, 'destroy'])->name("document_delete");
-
-
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

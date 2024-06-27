@@ -86,7 +86,6 @@ class DocumentsController extends Controller
         $document->project_id = $request->project_id;
         $document->parent_id = $request->parent_id;
         $document->content = $request->get('content');
-        // $document->content = FilesController::saveImagesAndGetCleanCode($request->get('content'));
 
         $document->save();
 
@@ -104,7 +103,6 @@ class DocumentsController extends Controller
         $document->title = $request->title;
         $document->parent_id = $request->parent_id;
         $document->content = $request->post('content');
-        // $document->content = FilesController::saveImagesAndGetCleanCode($request->get('content'));
 
         $document->save();
 

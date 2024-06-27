@@ -51,7 +51,6 @@ class TestCaseController extends Controller
         $testCase->priority = $request->priority;
         $testCase->suite_id = $request->suite_id;
         $testCase->data = $request->data;
-        // $testCase->data = FilesController::saveImagesAndGetCleanCode($request->data);
 
         $testCase->save();
 

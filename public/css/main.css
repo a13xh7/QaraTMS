@@ -246,7 +246,7 @@ Scrollbar
 }
 
 .test_case_step {
-    max-width: 360px;
+    /*max-width: 360px;*/
 }
 
 #test_case_content img{

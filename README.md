@@ -53,32 +53,28 @@ php artisan ide-helper:meta
 - To access advanced configuration, refer to the [extended documentation](DOCKER_README.md)
 
 ## How to use it
+
 ![logo](public/img/header.jpg)
 
-1. Create Project.
-
-![logo](public/img/5.png)
-
-2. Create Test Repository. Test suites and test cases are located in test repository. 
-   You can create several test repositories for different project modules - web, admin, API, etc.
-   
-![logo](public/img/1.png)
-   
-3. Add test suites and test cases. 
-
-![logo](public/img/2.png)
-
-4. Create test plan, select cases you need to test. 
-
-![logo](public/img/3.png)
-
-5. Start new test run.
-
-![logo](public/img/4.png)
-
-6. Also, there is documentation module where you can store your project's documentation. 
-
-![logo](public/img/6.png)
+1. Create a Project.<br>
+   [![screenshot of created project](public/img/5_small.png)](public/img/5.png)
+   <br><br>
+2. Create a Test Repository. Test suites and test cases are located inside test repositories.
+   You can create several test repositories for different project modules e.g. web, admin, API, etc.<br>
+   [![screenshot of created repositories](public/img/1_small.png)](public/img/1.png)
+   <br><br>
+3. Add test suites and test cases to the test repository.<br>
+   [![screenshot of test case management inside a repository](public/img/2_small.png)](public/img/2.png)
+   <br><br>
+4. Create a test plan and select the test cases you need to test.<br>
+   [![screenshot of a test plan](public/img/3_small.png)](public/img/3.png)
+   <br><br>
+5. Start new test run.<br>
+   [![screenshot of a test run](public/img/4_small.png)](public/img/4.png)
+   <br><br>
+6. Also, there is documentation module where you can store your project's documentation.<br>
+   [![screenshot of documentation module](public/img/6_small.png)](public/img/6.png)
+   <br><br>
 
 ## Contributing
 

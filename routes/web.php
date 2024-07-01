@@ -117,7 +117,7 @@ Route::middleware(['auth'])->group(function () {
         ->where('test_suite_id', '[0-9]+');
 
     // Test suite editor - return form html code
-    // it's create an update form in one
+    // it's create and update form in one
     Route::get('/tse/{operation}/{repository_id}/{test_suite_id?}', [TestSuiteController::class, 'loadEditor'])
         ->where('operation', 'create|update')
         ->where('repository_id', '[0-9]+')

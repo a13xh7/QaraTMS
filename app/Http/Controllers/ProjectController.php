@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Project;
-use App\Repository;
-use App\TestRun;
+use App\Models\Project;
+use App\Models\Repository;
+use App\Models\TestRun;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller

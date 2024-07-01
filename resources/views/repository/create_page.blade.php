@@ -1,4 +1,4 @@
-@php use App\Project;use Illuminate\Support\MessageBag;
+@php use App\Models\Project;use Illuminate\Support\MessageBag;
 /**
  * @var Project $project
  * @var MessageBag $errors

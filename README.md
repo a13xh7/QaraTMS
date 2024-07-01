@@ -1,7 +1,7 @@
 # QaraTMS - Open Source Test Management System
 
-**QaraTMS** is open source test management software for managing test suites, test cases, test plans, test runs and documentation.
-
+**QaraTMS** is an open source test management software for managing test suites, test cases, test plans, test runs and
+documentation.
 
 ## Languages and Tools:
 
@@ -15,22 +15,22 @@
 ## Getting Started
 
 - You will need to install **php ^8.0.2**, **mysql-8** or **SQLite**, **composer**.
-- Pull the project from git repository.
-- Create a database named `tms` utf8_general_ci, or you can use SQLite.
-- Rename `.env.backup` file to `.env` and fill the database information.
-- Run `composer install` or ```php composer.phar install```
+- Pull the project from GitHub.
+- Create a database named `tms` using `utf8_general_ci`, or you can use SQLite.
+- Run `composer install` or `php composer.phar install`
+- Copy and rename the `.env.backup` file to `.env` and fill the database information.
 - Run `php artisan key:generate`
 - Run `php artisan migrate`
 - Run `php artisan db:seed --class=AdminSeeder` to create admin user and assign permissions.
 - Run `php artisan serve`
-- You can now access project at **localhost:8000** 
+- You can now access QaraTMS at **http://localhost:8000**
 - Login with default email and password - **admin@admin.com** / **password**
-- Go to **Users** page and change default email and password. 
+- Go to **Users** page and change default email and password.
 
 If you are using SQLite:
 
 * Create **database.sqlite** file in **./database** folder
-* Rename `.env_sqlite.backup` file to `.env` and fill the database information.
+* Copy and rename the `.env_sqlite.backup` file to `.env` and fill the database information.
 
 ### Generating Helper Sources for Project
 
@@ -45,8 +45,10 @@ php artisan ide-helper:meta
 ## Getting Started with docker-compose (quick start)
 
 - Install docker and docker-compose
-- Make docker-run.sh file executable ```sudo chmod +x docker-run.sh``` and run ```./docker-run.sh ```
-- Or ```docker compose up -d --build``` and on the first run or after clearing the database or its volume ```docker exec app php artisan migrate``` and ```docker exec app php artisan db:seed --class=AdminSeeder``` to create admin user and assign permissions
+- Make docker-run.sh file executable `sudo chmod +x docker-run.sh` and run `./docker-run.sh `
+- Or `docker compose up -d --build` and on the first run or after clearing the database or its
+  volume `docker exec app php artisan migrate` and `docker exec app php artisan db:seed --class=AdminSeeder` to
+  create the admin user and assign permissions
 
 ## Getting Started with docker-compose (extended)
 

@@ -33,6 +33,15 @@ Route::post('/tcuo', [TestCaseController::class, 'updateOrder']);
 Route::middleware(['auth'])->group(function () {
 
     /**********************************************************************
+     * INDEX
+     **********************************************************************/
+
+    Route::get('/', function () {
+        // redirect to project_list_page as the landing page
+        return redirect()->route('project_list_page');
+    });
+
+    /**********************************************************************
      * USERS
      **********************************************************************/
 
@@ -55,7 +64,7 @@ Route::middleware(['auth'])->group(function () {
      * PROJECT
      **********************************************************************/
 
-    Route::get('/', [ProjectController::class, 'index'])
+    Route::get('/project', [ProjectController::class, 'index'])
         ->name("project_list_page");
 
     Route::get('/project/create', [ProjectController::class, 'create'])

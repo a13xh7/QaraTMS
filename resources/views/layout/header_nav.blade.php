@@ -9,26 +9,26 @@
             <div class="navbar-nav nav-pills me-auto mb-2 mb-lg-0">
                 @if(Route::currentRouteName() == 'repository_show_page')
                     <a href="{{route("project_show_page", $project->id)}}" class="nav-link text-white">
-                        <i class="bi bi-kanban-fill"></i>&nbsp;Dashboard
+                        <i class="bi bi-kanban-fill"></i>&nbsp;{{__('Dashboard')}}
                     </a>
                     <a href="{{route("repository_list_page", $project->id)}}" class="nav-link text-white">
                         <i class="bi bi-server"></i>&nbsp;{{__('Repositories')}}
                     </a>
                     <a href="{{route("test_plan_list_page", $project->id)}}" class="nav-link text-white">
-                        <i class="bi bi-journals"></i>&nbsp;Test Plans
+                        <i class="bi bi-journals"></i>&nbsp;{{__('Test Plans')}}
                     </a>
                     <a href="{{route("test_run_list_page", $project->id)}}" class="nav-link text-white">
-                        <i class="bi bi-play-circle"></i>&nbsp;Test Runs
+                        <i class="bi bi-play-circle"></i>&nbsp;{{__('Test Runs')}}
                     </a>
                     <hr>
                     <a href="{{route("project_documents_list_page", $project->id)}}" class="nav-link text-white">
-                        <i class="bi bi-file-text-fill"></i>&nbsp;Documents
+                        <i class="bi bi-file-text-fill"></i>&nbsp;{{__('Documents')}}
                     </a>
                     <a href="{{route("project_list_page")}}" class="nav-link text-white">
-                        <i class="bi bi-diagram-3-fill"></i>&nbsp;Projects
+                        <i class="bi bi-diagram-3-fill"></i>&nbsp;{{__('Projects')}}
                     </a>
                     <a href="{{route('users_list_page')}}" class="nav-link text-white">
-                        <i class="bi bi-people-fill"></i>&nbsp;Users
+                        <i class="bi bi-people-fill"></i>&nbsp;{{__('Users')}}
                     </a>
                 @endif
             </div>
@@ -38,7 +38,7 @@
                 </a>
                 @if(Route::currentRouteName() == 'repository_show_page')
                     <a href="{{route('logout')}}" class="nav-link text-white" style="padding-left: 10px;">
-                        <i class="bi bi-box-arrow-in-left"></i>&nbsp;<b>Logout</b>
+                        <i class="bi bi-box-arrow-in-left"></i>&nbsp;<b>{{__('Logout')}}</b>
                     </a>
                 @endif
             </div>

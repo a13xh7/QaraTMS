@@ -36,10 +36,10 @@ If you are using SQLite:
 
 This project is configured to use the laravel-ide-helper. To generate the helper files run these commands:
 
+Windows:
+
 ```bash
-php artisan ide-helper:generate &&
-php artisan ide-helper:models --write-mixin &&
-php artisan ide-helper:meta
+php artisan ide-helper:generate; php artisan ide-helper:models --write-mixin; php artisan ide-helper:meta; php artisan ide-helper:eloquent
 ```
 
 ## Getting Started with docker-compose (quick start)

@@ -16,7 +16,7 @@ class IndexRedirectTest extends TestCase
 
         // expect redirect because user is unauthenticated
         $response->assertStatus(302);
-        $response->assertRedirect('/login');
+        $response->assertRedirect(route('login_page'));
     }
 
     public function testRedirectToProjectsForAuthenticatedUser()

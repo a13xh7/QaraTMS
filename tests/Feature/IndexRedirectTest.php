@@ -3,17 +3,20 @@
 namespace Tests\Feature;
 
 use App\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class IndexRedirectTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function testRedirectToLoginForUnauthenticatedUser()
     {
         $response = $this->get('/');
 
         // expect redirect because user is unauthenticated
         $response->assertStatus(302);
-        $response->assertRedirect('/login');
+        $response->assertRedirect(route('login_page'));
     }
 
     public function testRedirectToProjectsForAuthenticatedUser()

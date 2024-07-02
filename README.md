@@ -109,6 +109,15 @@ php artisan test
 > The `testing` environment is automatically applied when running `php artisan test` so the tests use the .env.testing
 > file as the configuration.
 
+#### Code Coverage
+
+To evaluate the code coverage, xdebug must be installed and its mode must contain `coverage`. After that, you can
+execute the tests with code coverage analysis enabled using
+
+```bash
+php artisan test --coverage
+```
+
 ## License
 
 QaraTMS is licensed under the [MIT](https://choosealicense.com/licenses/mit/) license.

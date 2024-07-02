@@ -4,8 +4,11 @@
 /.idea/*
 !/.idea/codeStyles
 
-#generated form laravel-ide-helper
+# Generated form laravel-ide-helper
 .phpstorm.meta.php
+
+# Databse for unit tests
+testing.sqlite
 
 /node_modules
 /public/hot

@@ -21,6 +21,9 @@ return new class extends Migration {
         DB::table($tableNames['model_has_permissions'])
             ->where('model_type', 'App\User')
             ->update(['model_type' => 'App\Models\User']);
+        DB::table($tableNames['model_has_roles'])
+            ->where('model_type', 'App\User')
+            ->update(['model_type' => 'App\Models\User']);
 
         app('cache')
             ->store(config('permission.cache.store') != 'default' ? config('permission.cache.store') : null)
@@ -42,6 +45,9 @@ return new class extends Migration {
 
         // Update the model_type from 'App\Models\User' to 'App\User'
         DB::table($tableNames['model_has_permissions'])
+            ->where('model_type', 'App\Models\User')
+            ->update(['model_type' => 'App\User']);
+        DB::table($tableNames['model_has_roles'])
             ->where('model_type', 'App\Models\User')
             ->update(['model_type' => 'App\User']);
 

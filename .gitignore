@@ -15,6 +15,7 @@ testing.sqlite
 /public/storage
 /public/media
 /storage/*.key
+/tests-coverage
 /vendor
 
 .env

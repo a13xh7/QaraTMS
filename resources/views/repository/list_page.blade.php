@@ -1,4 +1,4 @@
-@php use App\Models\Project;use App\Models\Repository;
+@php use App\Project;use App\Repository;
 /**
  * @var Repository[] $repositories
  * @var Project $project

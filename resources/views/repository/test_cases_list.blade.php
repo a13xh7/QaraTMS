@@ -1,4 +1,4 @@
-@php use App\Enums\CasePriority;use App\Models\Repository;use App\Models\TestCase;
+@php use App\Enums\CasePriority;use App\Repository;use App\TestCase;
 /**
  * @var TestCase[] $testCases
  * @var Repository $repository

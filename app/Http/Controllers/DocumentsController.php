@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Document;
-use App\Models\Project;
+use App\Document;
+use App\Project;
 use Illuminate\Http\Request;
 
 class DocumentsController extends Controller

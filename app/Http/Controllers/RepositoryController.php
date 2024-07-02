@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Project;
-use App\Models\Repository;
-use App\Models\Suite;
+use App\Project;
+use App\Repository;
+use App\Suite;
 use Illuminate\Http\Request;
 
 class RepositoryController extends Controller

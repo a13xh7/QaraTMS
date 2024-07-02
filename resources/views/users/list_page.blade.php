@@ -1,4 +1,4 @@
-@php use App\Models\User;
+@php use App\User;use Illuminate\Support\MessageBag;
 /**
  * @var User[] $users
  */

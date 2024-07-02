@@ -1,4 +1,4 @@
-@php use App\Models\Repository;use Illuminate\Support\MessageBag;
+@php use App\Repository;use Illuminate\Support\MessageBag;
 /**
  * @var Repository $repository
  * @var MessageBag $errors

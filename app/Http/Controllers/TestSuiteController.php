@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Repository;
-use App\Models\Suite;
-use App\Models\TestCase;
+use App\Repository;
+use App\Suite;
+use App\TestCase;
 use Illuminate\Http\Request;
 
 class TestSuiteController extends Controller

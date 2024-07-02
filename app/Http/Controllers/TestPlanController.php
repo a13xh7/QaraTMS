@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Project;
-use App\Models\Repository;
-use App\Models\Suite;
-use App\Models\TestPlan;
-use App\Models\TestRun;
+use App\Project;
+use App\Repository;
+use App\Suite;
+use App\TestPlan;
+use App\TestRun;
 use Illuminate\Http\Request;
 
 class TestPlanController extends Controller

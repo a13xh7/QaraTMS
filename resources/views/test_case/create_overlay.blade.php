@@ -53,7 +53,7 @@
                                 </label>
 
                                 <select id="tce_priority_select" name="priority" class="form-select border-secondary">
-                                    <option value="{{\App\Enums\CasePriority::NORMAL}}" selected> Normal</option>
+                                    <option value="{{\App\Enums\CasePriority::MEDIUM}}" selected> Normal</option>
                                     <option value="{{\App\Enums\CasePriority::HIGH}}">High</option>
                                     <option value="{{\App\Enums\CasePriority::LOW}}">Low</option>
                                 </select>

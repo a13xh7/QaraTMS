@@ -11,7 +11,7 @@
             <h3 class="page_title">
                 @if($testCase->priority == \App\Enums\CasePriority::LOW)
                     <i class="bi bi-chevron-double-down text-warning"></i>
-                @elseif($testCase->priority == \App\Enums\CasePriority::NORMAL)
+                @elseif($testCase->priority == \App\Enums\CasePriority::MEDIUM)
                     <i class="bi bi-list text-info"></i>
                 @elseif($testCase->priority == \App\Enums\CasePriority::HIGH)
                     <i class="bi bi-chevron-double-up text-danger"></i>

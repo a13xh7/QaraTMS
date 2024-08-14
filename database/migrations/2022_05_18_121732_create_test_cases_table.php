@@ -18,7 +18,7 @@ class CreateTestCasesTable extends Migration
             $table->foreignId('suite_id')->constrained('suites')->onDelete('cascade');
             $table->string("title");
             $table->boolean("automated")->default(false);
-            $table->integer("priority")->default(\App\Enums\CasePriority::NORMAL);
+            $table->integer("priority")->default(\App\Enums\CasePriority::MEDIUM);
             $table->longText("data")->nullable();
             $table->integer("order")->nullable();
             $table->timestamps();

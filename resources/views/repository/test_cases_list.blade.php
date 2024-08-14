@@ -13,7 +13,7 @@
              onclick="renderTestCase('{{$testCase->id}}')">
             <div class="me-1 test_case_info">
 
-                @if($testCase->priority == CasePriority::NORMAL)
+                @if($testCase->priority == CasePriority::MEDIUM)
                     <i class="bi bi-list text-info"></i>
                 @elseif($testCase->priority == CasePriority::HIGH)
                     <i class="bi bi-chevron-double-up text-danger"></i>

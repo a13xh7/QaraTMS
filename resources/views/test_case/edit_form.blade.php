@@ -47,16 +47,16 @@
 
                         <select id="tce_priority_select" name="priority" class="form-select border-secondary"
                                 id="tce_priority_select">
-                            @if($testCase->priority == \App\Enums\CasePriority::NORMAL)
-                                <option value="{{\App\Enums\CasePriority::NORMAL}}" selected> Normal</option>
+                            @if($testCase->priority == \App\Enums\CasePriority::MEDIUM)
+                                <option value="{{\App\Enums\CasePriority::MEDIUM}}" selected> Normal</option>
                                 <option value="{{\App\Enums\CasePriority::HIGH}}">High</option>
                                 <option value="{{\App\Enums\CasePriority::LOW}}">Low</option>
                             @elseif($testCase->priority == \App\Enums\CasePriority::HIGH)
-                                <option value="{{\App\Enums\CasePriority::NORMAL}}"> Normal</option>
+                                <option value="{{\App\Enums\CasePriority::MEDIUM}}"> Normal</option>
                                 <option value="{{\App\Enums\CasePriority::HIGH}}" selected>High</option>
                                 <option value="{{\App\Enums\CasePriority::LOW}}">Low</option>
                             @else
-                                <option value="{{\App\Enums\CasePriority::NORMAL}}"> Normal</option>
+                                <option value="{{\App\Enums\CasePriority::MEDIUM}}"> Normal</option>
                                 <option value="{{\App\Enums\CasePriority::HIGH}}">High</option>
                                 <option value="{{\App\Enums\CasePriority::LOW}}" selected>Low</option>
                             @endif

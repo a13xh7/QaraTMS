@@ -1,3 +1,4 @@
+
 <div id="test_case_editor">
 
     <div class="d-flex justify-content-between border-bottom mt-2 pb-2 mb-2">
@@ -14,7 +15,7 @@
             @endif
 
             <span>
-            @if($testCase->automated)
+                @if($testCase->automated)
                     <i class="bi bi-robot mx-1"></i>
                 @else
                     <i class="bi bi-person mx-1"></i>
@@ -22,36 +23,23 @@
             </span>
 
             <u class="text-primary">
-                <a target="_blank" href="{{route('test_case_show_page', $testCase->id)}}">
+                <span>
                     {{$repository->prefix}}-<span id="tce_case_id">{{$testCase->id}}</span>
-                </a>
+                </span>
             </u>
+
         </div>
 
         <input type="hidden" id="tce_suite_id" value="{{$testCase->suite_id}}">
 
         <div class="test_case_title">
-            <b>{{$testCase->title}}</b>
+            <h5>{{$testCase->title}}</h5>
         </div>
 
-        <div style="min-width: 70px" class="justify-content-end">
+        <button href="button" class="btn btn-outline-dark btn-sm" onclick="closeTestCaseOverlay()">
+            <i class="bi bi-x-lg"></i>
+        </button>
 
-            @can('add_edit_test_cases')
-                <button type="button" class="btn btn-outline-dark btn-sm"
-                        onclick="renderTestCaseEditForm({{$testCase->id}})">
-                    <i class="bi bi-pencil"></i>
-                </button>
-            @endcan
-
-            <button href="button" class="btn btn-outline-dark btn-sm" onclick="renderTestCaseOverlay({{$testCase->id}})">
-                <i class="bi bi-arrows-angle-expand"></i>
-            </button>
-
-            <button href="button" class="btn btn-outline-dark btn-sm" onclick="closeTestCaseEditor()">
-                <i class="bi bi-x-lg"></i>
-            </button>
-
-        </div>
 
     </div>
 
@@ -111,5 +99,6 @@
         </div>
     </div>
 
-
 </div>
+
+

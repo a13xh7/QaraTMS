@@ -31,7 +31,12 @@
 
                 <u class="text-primary under">
                     <a href="{{route('test_case_show_page', $testCase->id)}}" target="_blank">{{$repository->prefix}}
-                        -{{$testCase->id}}</a>
+                        -{{$testCase->id}}
+                    </a>
+
+{{--                    <button type="button" class="btn btn-outline-dark" onclick="renderTestCaseOverlay('{{$testCase->id}}')">--}}
+{{--                        {{$repository->prefix}}-<span id="tce_case_id">{{$testCase->id}}</span>--}}
+{{--                    </button>--}}
                 </u>
             </div>
 
@@ -43,7 +48,7 @@
         <div class="test_case_controls">
             @can('add_edit_test_cases')
                 <button class="btn py-0 px-1" type="button" title="Edit"
-                        onclick="renderTestCaseEditForm('{{$testCase->id}}')">
+                            onclick="renderTestCaseEditForm('{{$testCase->id}}')">
                     <i class="bi bi-pencil"></i>
                 </button>
             @endcan

@@ -39,8 +39,9 @@
                     <div class="mx-4">
                         <label class="form-label">
                             <b>Priority</b>
-                            <i class="bi bi-chevron-double-up text-danger"></i>|<i class="bi bi-list text-info"></i>|<i
-                                    class="bi bi-chevron-double-down text-warning"></i>
+                            <i class="bi bi-chevron-double-up text-danger"></i>|
+                            <i class="bi bi-list text-info"></i>|
+                            <i class="bi bi-chevron-double-down text-warning"></i>
                         </label>
 
                         <select id="tce_priority_select" name="priority" class="form-select border-secondary">

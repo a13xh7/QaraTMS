@@ -57,7 +57,7 @@
 
                     @if(isset($data->steps) && !empty($data->steps))
                         <strong class="fs-5 pb-3">Steps</strong>
-                        <div class="row mb-3 border p-3 rounded" id="steps_container">
+                        <div class="row mb-3 border p-3 mt-1 rounded" id="steps_container">
 
 
                             <div class="row step pb-2 mb-2">

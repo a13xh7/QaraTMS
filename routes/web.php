@@ -142,6 +142,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/tc/{test_case_id}', [TestCaseController::class, 'loadShowForm'])
         ->where('test_case_id', '[0-9]+');
 
+    Route::get('/test-case-overlay/{test_case_id}', [TestCaseController::class, 'loadShowOverlay'])
+        ->where('test_case_id', '[0-9]+');
+
     Route::get('/test-case/{test_case_id}', [TestCaseController::class, 'show'])
         ->where('test_case_id', '[0-9]+')
         ->name('test_case_show_page');

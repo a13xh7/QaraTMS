@@ -49,6 +49,17 @@ function renderTestCase(test_case_id) {
     });
 }
 
+function renderTestCaseOverlay(test_case_id) {
+    $('#test_case_overlay_data').load(`/test-case-overlay/${test_case_id}`, function () {
+
+        $(`.test_case`).removeClass("selected");
+        $(`.test_case[data-case_id='${test_case_id}']`).addClass('selected');
+
+        $("#test_case_overlay").modal('show');
+
+    });
+}
+
 let oldParentId = '';
 
 function renderTestCaseEditForm(test_case_id) {
@@ -63,6 +74,10 @@ function renderTestCaseEditForm(test_case_id) {
 function closeTestCaseEditor() {
     $('#test_case_editor').remove();
     expandCasesList();
+}
+
+function closeTestCaseOverlay() {
+    $("#test_case_overlay").modal('hide');
 }
 
 function isTestCaseCreateOrEditFormLoaded() {

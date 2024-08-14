@@ -23,14 +23,20 @@
         @yield('content')
     </div>
 </div>
-<div class="modal fade" id="any_img_lightbox" tabindex="-1" aria-labelledby="exampleModalCenterTitle"
-     style="display: none;" aria-hidden="true">
+
+<div class="modal fade" id="any_img_lightbox" tabindex="-1" style="display: none;" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="position-absolute top-50 start-50 translate-middle">
             <img id="any_img_lightbox_image" src="" alt="">
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="test_case_overlay" tabindex="-1" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-xl" id="test_case_overlay_data">
+    </div>
+</div>
+
 <script src="{{asset('js/main.js')}}"></script>
 @yield('footer')
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

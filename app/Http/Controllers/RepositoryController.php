@@ -6,6 +6,8 @@ use App\Models\Project;
 use App\Models\Repository;
 use App\Models\Suite;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 
 class RepositoryController extends Controller
 {
@@ -73,10 +75,16 @@ class RepositoryController extends Controller
         $repository = Repository::findOrFail($repository_id);
         $suitesTree = Suite::where('repository_id', $repository_id)->orderBy('order')->tree()->get()->toTree();
 
+        $user = Auth::user();
+        $canEditSuites = $user->can('add_edit_test_suites') == true ? 1 : 0;
+        $canDeleteSuites = $user->can('delete_test_suites') == true ? 1 : 0;
+
         return view('repository.show_page')
             ->with('project', $project)
             ->with('repository', $repository)
-            ->with('suitesTree', $suitesTree);
+            ->with('suitesTree', $suitesTree)
+            ->with('canEditSuites', $canEditSuites)
+            ->with('canDeleteSuites', $canDeleteSuites);
     }
 
     public function edit($project_id, $repository_id)

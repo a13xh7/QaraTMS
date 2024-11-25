@@ -118,12 +118,31 @@
     <script src="{{asset('/js/repo/repository.js')}}"></script>
 
     <script>
-
         $("#test_cases_list").sortable({
             update: function (e, u) {
 
             }
         });
+    </script>
+
+    <script>
+
+        function removeEditAndAddButtons() {
+            $(".edit_suite_btn").remove();
+            $(".add_child_suite_btn").remove();
+        }
+
+        function removeDeleteButtons() {
+            $(".delete_suite_btn").remove();
+        }
+
+        if({{$canEditSuites}} === 0) {
+            setTimeout(removeEditAndAddButtons, 1000);
+        }
+
+        if({{$canDeleteSuites}} === 0) {
+            setTimeout(removeDeleteButtons, 1000);
+        }
 
     </script>
 

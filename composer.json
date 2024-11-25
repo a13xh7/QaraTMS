@@ -15,7 +15,7 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^11.0",
         "laravel/tinker": "^2.5",
-        "spatie/laravel-permission": "^6.0",
+        "spatie/laravel-permission": "^6.9",
         "staudenmeir/laravel-adjacency-list": "^1.0"
     },
     "require-dev": {

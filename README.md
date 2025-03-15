@@ -23,7 +23,7 @@ documentation.
 - Run `php artisan migrate`
 - Run `php artisan db:seed --class=AdminSeeder` to create admin user and assign permissions.
 - Run `php artisan serve`
-- You can now access QaraTMS at **http://localhost:8000**
+- You can now access QaraTMS at **http://localhost**
 - Login with default email and password - **admin@admin.com** / **password**
 - Go to **Users** page and change default email and password.
 

@@ -6,7 +6,7 @@
         </div>
 
         <div>
-            <button href="button" class="btn btn-outline-dark btn-sm" onclick="renderTestCase({{$testCase->id}})">
+            <button href="button" class="btn btn-outline-dark btn-sm" onclick="{{$isShowPage ?? false ? "cancelEditTestCase()" : "renderTestCase($testCase->id)"}}">
                 <i class="bi bi-x-lg"></i> <b>Cancel</b>
             </button>
         </div>
@@ -24,8 +24,6 @@
                         <select name="suite_id" id="tce_test_suite_select" class="form-select border-secondary">
 
                             @foreach($repository->suites as $repoTestSuite)
-                                --}}
-
                                 <option value="{{$repoTestSuite->id}}"
                                         @if($repoTestSuite->id == $testCase->suite_id)
                                             selected
@@ -130,14 +128,14 @@
                                 </button>
                             </div>
 
-                            <div class="col p-0 px-1 test_case_step">
+                            <div class="col p-0 px-1 {{$isShowPage ?? false ? '' : 'test_case_step'}}">
                                 <textarea class="editor_textarea form-control border-secondary step_action" rows="2">
                                     @if(isset($step->action))
                                         {!! $step->action !!}
                                     @endif
                                 </textarea>
                             </div>
-                            <div class="col p-0 test_case_step">
+                            <div class="col p-0 {{$isShowPage ?? false ? '' : 'test_case_step'}}">
                                 <textarea class="editor_textarea form-control border-secondary step_result" rows="2">
                                     @if(isset($step->result))
                                         {!! $step->result !!}
@@ -186,20 +184,41 @@
         </div>
     </div>
 
-    <div id="test_case_editor_footer" class="col-5 d-flex justify-content-end border-top pt-2">
+    @if ($isShowPage ?? false)
 
-        <button type="button" class="btn btn-primary px-5" onclick="addStep()">
-            <i class="bi bi-plus-circle"></i>
-            Add Step
-        </button>
+        <div class="col-12 d-flex justify-content-end border-top pt-2 mb-5">
 
-        <div class="col d-flex justify-content-end pe-3">
-            <button id="tce_save_btn" type="button" class="btn btn-warning px-5 mx-3 me-3" onclick="updateTestCase()">
-                <i class="bi bi-save"></i>
-                Update Test Case
+            <button type="button" class="btn btn-primary px-5" onclick="addStepForShowPage()">
+                <i class="bi bi-plus-circle"></i>
+                Add Step
             </button>
+
+            <div class="col d-flex justify-content-end pe-3">
+                <button id="tce_save_btn" type="button" class="btn btn-warning px-5 mx-3 me-3" onclick="updateTestCaseForShowPage()">
+                    <i class="bi bi-save"></i>
+                    Update Test Case
+                </button>
+            </div>
         </div>
-    </div>
+
+    @else
+
+        <div id="test_case_editor_footer" class="col-5 d-flex justify-content-end border-top pt-2">
+
+            <button type="button" class="btn btn-primary px-5" onclick="addStep()">
+                <i class="bi bi-plus-circle"></i>
+                Add Step
+            </button>
+
+            <div class="col d-flex justify-content-end pe-3">
+                <button id="tce_save_btn" type="button" class="btn btn-warning px-5 mx-3 me-3" onclick="updateTestCase()">
+                    <i class="bi bi-save"></i>
+                    Update Test Case
+                </button>
+            </div>
+        </div>
+        
+    @endif
 
 </div>
 

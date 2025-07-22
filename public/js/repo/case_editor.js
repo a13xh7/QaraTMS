@@ -111,6 +111,12 @@ function addStep() {
     renderEditors();
 }
 
+function addStepForShowPage() {
+    let stepNumber = $('#steps_container .step').length + 1;
+    renderStepForShowPage(stepNumber)
+    renderEditors();
+}
+
 function removeStep(btn) {
     $(btn).parent().parent().remove();
     updateStepsNumbers();
@@ -170,6 +176,36 @@ function renderStep(stepNumber) {
             <textarea class="editor_textarea form-control border-secondary step_action" rows="2"></textarea>
         </div>
         <div class="col p-0 test_case_step">
+            <textarea class="editor_textarea form-control border-secondary step_result" rows="2"></textarea>
+        </div>
+    </div>`;
+
+    $("#steps_container").append(stepHtml)
+}
+
+function renderStepForShowPage(stepNumber) {
+    let stepHtml = `
+    <div class="row m-0 mt-2 p-0 step">
+        <div class="col-auto p-0 d-flex flex-column align-items-center">
+            <span class="fs-5 step_number">${stepNumber}</span>
+
+            <button type="button" class="btn btn-outline btn-sm step_delete_btn px-1 py-0" onclick="stepUp(this)">
+                <i class="bi bi-arrow-up-circle"></i>
+            </button>
+
+            <button type="button" class="btn btn-outline-danger btn-sm step_delete_btn px-1 py-0" onclick="removeStep(this)">
+                <i class="bi bi-x-circle"></i>
+            </button>
+
+            <button type="button" class="btn btn-outline btn-sm step_delete_btn px-1 py-0" onclick="stepDown(this)">
+                <i class="bi bi-arrow-down-circle"></i>
+            </button>
+        </div>
+
+        <div class="col p-0 px-1">
+            <textarea class="editor_textarea form-control border-secondary step_action" rows="2"></textarea>
+        </div>
+        <div class="col p-0">
             <textarea class="editor_textarea form-control border-secondary step_result" rows="2"></textarea>
         </div>
     </div>`;

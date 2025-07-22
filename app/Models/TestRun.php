@@ -38,7 +38,7 @@ class TestRun extends Model
         $testRunData = [];
 
         foreach ($testCasesIds as $testCaseId) {
-            $testRunData[$testCaseId] = TestRunCaseStatus::NOT_TESTED;
+            $testRunData[$testCaseId] = TestRunCaseStatus::TODO;
         }
         return json_encode($testRunData);
     }
@@ -51,8 +51,8 @@ class TestRun extends Model
         $passed = 0;
         $failed = 0;
         $blocked = 0;
-        $notTested = 0;
-
+        $todo = 0;
+        $skipped = 0;
         foreach ($results as $testCaseId => $status) {
 
             if ($status == TestRunCaseStatus::PASSED) {
@@ -61,8 +61,10 @@ class TestRun extends Model
                 $failed++;
             } elseif ($status == TestRunCaseStatus::BLOCKED) {
                 $blocked++;
-            } elseif ($status == TestRunCaseStatus::NOT_TESTED) {
-                $notTested++;
+            } elseif ($status == TestRunCaseStatus::TODO) {
+                $todo++;
+            } elseif ($status == TestRunCaseStatus::SKIPPED) {
+                $skipped++;
             }
 
         }
@@ -72,7 +74,8 @@ class TestRun extends Model
             'passed' => [$passed, (100 / $totalTestCases) * $passed],
             'failed' => [$failed, (100 / $totalTestCases) * $failed],
             'blocked' => [$blocked, (100 / $totalTestCases) * $blocked],
-            'not_tested' => [$notTested, (100 / $totalTestCases) * $notTested],
+            'todo' => [$todo, (100 / $totalTestCases) * $todo],
+            'skipped' => [$skipped, (100 / $totalTestCases) * $skipped],
         ];
 
         return $chartData;
@@ -94,5 +97,10 @@ class TestRun extends Model
         }
 
         $this->saveResults($currentResults);
+    }
+
+    public function getAssignee()
+    {
+        return (array) json_decode($this->assignee);
     }
 }

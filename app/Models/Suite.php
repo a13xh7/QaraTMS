@@ -32,4 +32,7 @@ class Suite extends Model
         return parent::delete();
     }
 
+    public function repository() {
+        return $this->belongsTo(Repository::class, 'repository_id');
+    }
 }

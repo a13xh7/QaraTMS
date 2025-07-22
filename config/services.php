@@ -30,4 +30,10 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'gitlab' => [
+        'token' => env('GITLAB_TOKEN'),
+        'graphql_url' => env('GITLAB_GRAPHQL_URL', 'https://gitlab.com/api/graphql'),
+        'group_name' => env('GITLAB_GROUP', 'admin'),
+    ],
+
 ];

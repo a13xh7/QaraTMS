@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        Commands\InspectMsReportTable::class,
+        Commands\InspectAppsReportTable::class,
     ];
 
     /**
@@ -24,7 +25,17 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->command('jira:leadtime')
+            ->hourlyAt(10)
+            ->appendOutputTo(storage_path('logs/jira_leadtime.log'));
+
+        $schedule->command('gitlab:leadtime daily')
+            ->hourlyAt(20)
+            ->appendOutputTo(storage_path('logs/gitlab_leadtime.log'));
+
+        $schedule->command('gitlab:contributor monthly')
+            ->hourlyAt(30)
+            ->appendOutputTo(storage_path('logs/gitlab_contributor.log'));
     }
 
     /**

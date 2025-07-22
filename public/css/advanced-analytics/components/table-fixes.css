@@ -1,0 +1,116 @@
+/**
+ * Table fixes for the year‑alignment issue during horizontal scrolling
+ * ───────────────────────────────────────────────────────────────────
+ *  • Separate vertical vs. horizontal stickiness            (.sticky‑y / .sticky‑x)
+ *  • Year headers are vertical‑sticky only   → they scroll horizontally
+ *  • Squad / Name columns are both‑sticky    → stay frozen left
+ *  • Uses CSS custom props so widths stay in one place
+ */
+
+/* ── Design tokens ──────────────────────────────────────────────── */
+:root {
+    --w-squad : 100px;   /* width of first sticky column  */
+    --w-name  : 220px;   /* width of second sticky column */
+    --w-month : 60px;    /* width of every data cell      */
+  }
+  
+  /* ── Container ──────────────────────────────────────────────────── */
+  .advanced-analytics-container .table-responsive {
+    overflow-x: auto;
+    position: relative;
+  }
+  
+  /* ── Base table layout ──────────────────────────────────────────── */
+  .contributor-table {
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+  
+  .contributor-table td,
+  .contributor-table th:not(.sticky-x) {
+    width: var(--w-month);
+    min-width: var(--w-month);
+    max-width: var(--w-month);
+  }
+  
+  /* ── Stickiness helpers ─────────────────────────────────────────── */
+  .sticky-x {                /* horizontal stick (left/right) */
+    position: sticky;
+    z-index: 10;
+    background: #fff;
+    box-shadow: 4px 0 5px -2px rgba(0,0,0,.1);
+  }
+  
+  .sticky-y {                /* vertical stick (top) */
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: #f8f9fa;
+  }
+  
+  .sticky-both {             /* horizontal + vertical */
+    position: sticky;
+    top: 0;
+    z-index: 15;
+    background: #fff;
+    box-shadow: 4px 0 5px -2px rgba(0,0,0,.1);
+  }
+  
+  /* ── Frozen left columns ───────────────────────────────────────── */
+  .contributor-table .sticky-col-1 {         /* Squad */
+    composes: sticky-both sticky-x;
+    left: 0;
+    width: var(--w-squad);
+  }
+  
+  .contributor-table .sticky-col-2 {         /* Name  */
+    composes: sticky-both sticky-x;
+    left: var(--w-squad);
+    width: var(--w-name);
+  }
+  
+  /* ── Year headers (vertical only) ──────────────────────────────── */
+  .contributor-table thead .year-header,          /* row wrapper */
+  .contributor-table thead th[data-year] {        /* individual cell */
+    composes: sticky-y;
+    left: auto !important;        /* ensure NO horizontal sticking  */
+    text-align: center;
+  }
+  
+  /* ── Month cells that belong to a year (visual group) ─────────── */
+  .contributor-table th.year-column-group {
+    border-right: 2px solid #aaa;
+    border-bottom: 2px solid #aaa;
+    background: #eef;
+  }
+  
+  /* ── Year boundary indicator every December column ─────────────── */
+  .contributor-table tr:not(.year-header) td[data-month="Dec"] {
+    border-right: 2px solid #aaa;
+  }
+  
+  /* ── Current month highlight ───────────────────────────────────── */
+  .contributor-table th.current-month,
+  .contributor-table td.current-month {
+    background: rgba(0,123,255,.1);
+    font-weight: 700;
+  }
+  
+  /* ── Debug grid helper (optional) ──────────────────────────────── */
+  .debug-grid .contributor-table td,
+  .debug-grid .contributor-table th {
+    outline: 1px solid rgba(255,0,0,.2);
+  }
+  
+  /* ── Fallback for browsers without position:sticky ─────────────── */
+  @supports not (position: sticky) {
+    .sticky-x,
+    .sticky-y,
+    .sticky-both { position: relative; }
+  
+    .advanced-analytics-container .table-responsive {
+      overflow-x: visible;
+      max-width: 100%;
+    }
+  }
+  

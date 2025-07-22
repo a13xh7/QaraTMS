@@ -1,4 +1,4 @@
-FROM php:8.3-fpm
+FROM php:8.2-apache
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -7,60 +7,80 @@ RUN apt-get update && apt-get install -y \
   zlib1g-dev \
   libxml2-dev \
   zip \
+  cron \
   unzip \
-  vim && \
+  vim \
+  tzdata \
+  supervisor && \
   apt-get clean && \
-  rm -rf /var/lib/apt/lists/* /tpm/* /var/tmp/*
+  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Set timezone
+RUN ln -fs /usr/share/zoneinfo/Asia/Jakarta /etc/localtime && dpkg-reconfigure -f noninteractive tzdata
 
 # Install PHP extensions
-RUN docker-php-ext-install pdo
-RUN docker-php-ext-install pdo_mysql
-RUN docker-php-ext-install gd
-RUN docker-php-ext-install mbstring
-RUN docker-php-ext-install exif
-RUN docker-php-ext-install pcntl
-RUN docker-php-ext-install bcmath
-RUN docker-php-ext-install xml
+RUN docker-php-ext-install pdo pdo_mysql gd mbstring exif pcntl bcmath xml
 
-# RUN mkdir -p /usr/local/etc/php/conf.d
-
-COPY ./docker/app/php.ini /usr/local/etc/php/conf.d/php.ini
-
+# Install Composer
 ENV COMPOSER_ALLOW_SUPERUSER=1
 RUN curl -sS https://getcomposer.org/installer | php -- \
   --filename=composer \
   --install-dir=/usr/local/bin
 
-COPY . /var/www
+# Copy PHP config
+COPY ./docker/app/php.ini /usr/local/etc/php/conf.d/php.ini
 
-RUN chown -R www-data:www-data /var/www
+# Enable Apache mod_rewrite
+RUN a2enmod rewrite
 
-WORKDIR /var/www
+# Copy source code
+COPY . /var/www/html
 
-RUN mv .env.backup .env
+RUN mkdir -p /var/www/html/storage/logs && \
+    mkdir -p /var/www/html/storage/framework/cache && \
+    mkdir -p /var/www/html/storage/framework/sessions && \
+    mkdir -p /var/www/html/storage/framework/views && \
+    mkdir -p /var/www/html/bootstrap/cache && \
+    touch /var/www/html/storage/logs/laravel.log
+# Set permissions
+RUN chown -R www-data:www-data /var/www/html && \
+    find /var/www/html -type f -exec chmod 644 {} \; && \
+    find /var/www/html -type d -exec chmod 755 {} \; && \
+    chmod -R 775 /var/www/html/storage && \
+    chmod -R 775 /var/www/html/bootstrap/cache && \
+    chmod 664 /var/www/html/storage/logs/laravel.log && \
+    chown www-data:www-data /var/www/html/storage/logs/laravel.log
 
-RUN composer install
-RUN composer require doctrine/dbal
+WORKDIR /var/www/html
 
-RUN php artisan key:generate && \
-  php artisan cache:clear && \
+# Laravel setup
+RUN mv .env.backup.prod .env && \
+  composer install && \
+  composer require doctrine/dbal && \
+  php artisan key:generate && \
   php artisan config:clear && \
+  php artisan cache:clear && \
   php artisan view:clear && \
+  php artisan route:clear && \
   php artisan optimize:clear
 
-RUN chown -R www-data:www-data /var/www
-RUN chmod -R 755 /var/www/storage
+# Configure Apache for Laravel
+RUN echo "<VirtualHost *:80>\n\
+  DocumentRoot /var/www/html/public\n\
+  <Directory /var/www/html/public>\n\
+  Options Indexes FollowSymLinks\n\
+  AllowOverride All\n\
+  Require all granted\n\
+  </Directory>\n\
+</VirtualHost>" > /etc/apache2/sites-available/000-default.conf
 
-# RUN addgroup -gid 1000 -system www && \
-#   adduser -uid 1000 --system www --ingroup www
+# Supervisor config
+COPY docker/app/supervisord.conf /etc/supervisord.conf
 
-# COPY --chown=www-data:www-data . /var/www
+# Entrypoint script
+COPY docker/app/entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
 
-# USER www
+EXPOSE 80
 
-EXPOSE 9000
-
-
-CMD [ "php-fpm" ]
-
-
+CMD ["/usr/local/bin/entrypoint.sh"]

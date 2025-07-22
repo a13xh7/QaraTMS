@@ -37,7 +37,7 @@
                     <div class="mb-3">
                         <label for="title" class="form-label">Name</label>
                         <input type="text" class="form-control" name="title" value="Test plan - {{date('Y.m.d H:i')}}"
-                               required maxlength="100">
+                            required maxlength="100">
                     </div>
 
                     <div class="mb-3">
@@ -45,7 +45,7 @@
                         <label for="test_suite_id" class="form-label">Test Repository</label>
 
                         <select name="repository_id" id="plan_repository_select" class="form-select"
-                                onchange="renderPlanTree(this)" required>
+                            onchange="renderPlanTree(this)" required>
                             <option disabled selected value> -----</option>
 
                             @foreach($repositories as $repository)
@@ -77,7 +77,7 @@
             </div>
 
 
-            <div class="col p-3 shadow">
+            <div class="col p-5 shadow">
 
                 <div class="border-bottom position-static d-flex justify-content-between">
                     <h3>Select Test Cases</h3>
@@ -107,7 +107,5 @@
 @endsection
 
 @section('footer')
-
-    <script src="{{asset('js/test_plan_page.js')}}"></script>
-
+    <script src="{{ asset_path('js/test_plan_page.js') }}"></script>
 @endsection

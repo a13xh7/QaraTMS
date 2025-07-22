@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitLab Connection Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        pre {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .loading {
+            display: none;
+        }
+        .status {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .success {
+            background-color: #dff0d8;
+            color: #3c763d;
+        }
+        .error {
+            background-color: #f2dede;
+            color: #a94442;
+        }
+    </style>
+</head>
+<body>
+    <h1>GitLab Connection Test Tool</h1>
+    <p>Use this page to test your GitLab API connection directly.</p>
+    
+    <form id="testForm">
+        <div class="form-group">
+            <label for="gitlab_url">GitLab URL</label>
+            <input type="url" id="gitlab_url" value="https://gitlab.com/api/v4" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="gitlab_token">Personal Access Token</label>
+            <input type="password" id="gitlab_token" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="gitlab_group">Group/Namespace (optional)</label>
+            <input type="text" id="gitlab_group" value="admin">
+        </div>
+        
+        <div class="form-group">
+            <button type="button" id="testButton">Test Connection</button>
+            <span class="loading" id="loading">Testing connection...</span>
+        </div>
+    </form>
+    
+    <div id="status" class="status" style="display: none;"></div>
+    
+    <div>
+        <h3>Response Details</h3>
+        <pre id="results">No results yet</pre>
+    </div>
+    
+    <script>
+        // Get the Laravel CSRF token from cookie if it exists
+        function getCsrfToken() {
+            const match = document.cookie.match(new RegExp('(^| )XSRF-TOKEN=([^;]+)'));
+            if (match) {
+                return decodeURIComponent(match[2]);
+            }
+            return null;
+        }
+
+        document.getElementById('testButton').addEventListener('click', function() {
+            const url = document.getElementById('gitlab_url').value;
+            const token = document.getElementById('gitlab_token').value;
+            const group = document.getElementById('gitlab_group').value;
+            const resultsEl = document.getElementById('results');
+            const statusEl = document.getElementById('status');
+            const loadingEl = document.getElementById('loading');
+            
+            if (!url || !token) {
+                alert('Please enter GitLab URL and Access Token before testing');
+                return;
+            }
+            
+            // Show loading
+            loadingEl.style.display = 'inline';
+            statusEl.style.display = 'none';
+            resultsEl.textContent = 'Testing connection...';
+            
+            // Get the CSRF token
+            const csrfToken = getCsrfToken();
+            const headers = {
+                'Content-Type': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest'
+            };
+            
+            if (csrfToken) {
+                headers['X-XSRF-TOKEN'] = csrfToken;
+            }
+            
+            // Make the connection test request
+            fetch('/api/test-gitlab-connection', {
+                method: 'POST',
+                headers: headers,
+                body: JSON.stringify({ url, token, group })
+            })
+            .then(response => {
+                return response.json().then(data => ({
+                    status: response.status,
+                    ok: response.ok,
+                    data
+                }));
+            })
+            .then(({ status, ok, data }) => {
+                // Hide loading
+                loadingEl.style.display = 'none';
+                
+                // Show response
+                resultsEl.textContent = JSON.stringify(data, null, 2);
+                
+                // Show status
+                statusEl.style.display = 'block';
+                if (data.success) {
+                    statusEl.className = 'status success';
+                    statusEl.innerHTML = `<strong>Success:</strong> ${data.message}`;
+                } else {
+                    statusEl.className = 'status error';
+                    statusEl.innerHTML = `<strong>Error:</strong> ${data.message}`;
+                }
+            })
+            .catch(error => {
+                // Hide loading
+                loadingEl.style.display = 'none';
+                
+                // Show error
+                resultsEl.textContent = 'Error: ' + error.message;
+                statusEl.style.display = 'block';
+                statusEl.className = 'status error';
+                statusEl.innerHTML = `<strong>Error:</strong> ${error.message}`;
+            });
+        });
+    </script>
+</body>
+</html> 

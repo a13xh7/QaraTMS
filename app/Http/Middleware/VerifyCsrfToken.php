@@ -26,7 +26,12 @@ class VerifyCsrfToken extends Middleware
         '/trcs',
         'tsup',
         'tsuo',
-        'tcuo'
+        'tcuo',
+        
+        // API routes
+        'api/test-gitlab-connection',
+        'api/debug-request',
+        'api/webhooks/*'
     ];
 
 

@@ -1,5 +1,4 @@
-
-.selected_case {
+.selected-case {
     border: 1px solid rgba(25, 54, 84, 0.22) !important;
     background: #edf7fb !important;
     border-radius: 3px;
@@ -10,53 +9,62 @@
 *************************************************************************************/
 
 #tree {
-    margin-left: -30px;
     overflow-y: auto;
-    max-height: calc(100vh - 120px)
+    max-height: calc(100vh - 120px);
 }
 
-.tree_suite {
+.tree-suite {
     padding-left: 30px;
 }
 
-.tree_test_suite_content {
+.tree-test-suite-content {
     background: #d9dfe3;
     padding-left: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
 }
 
-.tree_suite_test_cases {
+.tree-suite-test-cases {
     margin-bottom: 10px;
 }
 
-.tree_test_case_content {
+.tree-test-case-content {
     border-bottom: 1px solid #ddd;
     border-radius: 5px;
+    transition: background-color 0.2s ease;
 }
 
-.tree_test_case_click {
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 10px;
+.tree-test-case-click {
+    padding: 5px 0 5px 10px;
     width: 90%;
 }
 
-.tree_test_case_controls {
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 10px;
+.tree-test-case-controls {
+    padding: 5px 0 5px 10px;
 }
 
-.tree_test_case_content:hover {
-    background: #7c87911c;
+.tree-test-case-content:hover {
+    background: rgba(124, 135, 145, 0.11);
 }
 
-.test_case_id {
+.test-case-id {
     display: inline-block;
     width: 110px;
 }
 
-.test_suite_cbx {
+.test-suite-cbx {
     margin-top: 10px;
 }
+
+.collapsible {
+  background-color: #494a4b;
+  color: #fafbfb;
+  cursor: pointer;
+  vertical-align: super;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  font-style: normal;
+}
+

@@ -6,9 +6,23 @@ use App\Models\Repository;
 use App\Models\Suite;
 use App\Models\TestCase;
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\ApiController;
 class TestSuiteController extends Controller
 {
+    /**
+     * Summary of apicon
+     * @var ApiController
+     */
+    private $apiController;
+
+    /**
+     * Summary of __construct
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->apiController = new ApiController();
+    }
     /******************************************
      *  AJAX and html elements
      *****************************************/
@@ -55,8 +69,10 @@ class TestSuiteController extends Controller
     {
         $suite = Suite::findOrFail($test_suite_id);
         $repository = Repository::findOrFail($suite->repository_id);
-        $testCases = TestCase::select('id', 'suite_id', 'title', 'automated', 'priority', 'order')->where('suite_id',
-            $test_suite_id)->orderBy('order')->get();
+        $testCases = TestCase::select('id', 'suite_id', 'title', 'automated', 'priority', 'order')->where(
+            'suite_id',
+            $test_suite_id
+        )->orderBy('order')->get();
 
         return view('repository.test_cases_list')
             ->with('testCases', $testCases)
@@ -78,7 +94,10 @@ class TestSuiteController extends Controller
         $suite->repository_id = $request->repository_id;
         $suite->parent_id = $request->parent_id;
         $suite->title = $request->title;
-        $suite->save();
+        $result = $suite->save();
+        if ($result) {
+            $this->apiController->pushToLogDatabase("created", "test_suite", $request);
+        }
 
         return [
             'html' => '',
@@ -95,14 +114,10 @@ class TestSuiteController extends Controller
         $testSuite = Suite::findOrFail($request->id);
 
         $testSuite->title = $request->title;
-        $testSuite->save();
-
-        // TODO  - add move to other repository functionality
-//        if($request->parent_id) {
-//            $testSuite->parent_id = $request->parent_id;
-//            $testSuite->save();
-//            return redirect()->route('repository_show_page', [$request->project_id, $testSuite->repository_id]);
-//        }
+        $result = $testSuite->save();
+        if ($result) {
+            $this->apiController->pushToLogDatabase("updated", "test_suite", $request);
+        }
     }
 
     public function destroy(Request $request)
@@ -112,8 +127,9 @@ class TestSuiteController extends Controller
         }
 
         $testSuite = Suite::findOrFail($request->id);
-        $testSuite->delete();
+        $result = $testSuite->delete();
+        if ($result) {
+            $this->apiController->pushToLogDatabase("deleted", "test_suite", $request);
+        }
     }
-
-
 }

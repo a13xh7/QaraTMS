@@ -5,12 +5,28 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-
+use App\Http\Controllers\ApiController;
 class UsersController extends Controller
 {
+    /**
+     * Summary of apicon
+     * @var ApiController
+     */
+    private $apiController;
+
+    /**
+     * Summary of __construct
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->apiController = new ApiController();
+    }
     public function index()
     {
-        $users = User::all();
+        $users = User::query()
+            ->orderBy('created_at', 'asc')
+            ->paginate(10);
 
         return view('users.list_page')
             ->with('users', $users);
@@ -43,6 +59,21 @@ class UsersController extends Controller
             abort(403);
         }
 
+        // Check if at least one permission is selected
+        $hasAnyPermission = collect($request->all())->filter(function ($value, $key) {
+            return (
+                str_starts_with($key, 'add_edit_') ||
+                str_starts_with($key, 'delete_') ||
+                $key === 'manage_users'
+            ) && $value === 'on';
+        })->isNotEmpty();
+
+        if (!$hasAnyPermission) {
+            return back()
+                ->withInput()
+                ->withErrors(['permissions' => 'At least one permission must be selected.']);
+        }
+
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
@@ -57,6 +88,10 @@ class UsersController extends Controller
 
         $this->setPermissions($request, $newUser);
 
+        if ($newUser) {
+            $this->apiController->pushToLogDatabase("created", "user", $request);
+        }
+
         return redirect()->route('users_list_page');
     }
 
@@ -69,11 +104,25 @@ class UsersController extends Controller
 
         $user = User::findOrFail($request->user_id);
 
+        // Add validation for at least one permission
+        $hasAnyPermission = collect($request->all())->filter(function ($value, $key) {
+            return (
+                str_starts_with($key, 'add_edit_') ||
+                str_starts_with($key, 'delete_') ||
+                $key === 'manage_users'
+            ) && $value === 'on';
+        })->isNotEmpty();
+
+        if (!$hasAnyPermission) {
+            return back()
+                ->withInput()
+                ->withErrors(['permissions' => 'At least one permission must be selected.']);
+        }
+
         $request->validate([
             'name' => 'required',
-            'email' => 'required|unique:users,email,'.$user->id
+            'email' => 'required|unique:users,email,' . $user->id
         ]);
-
 
         $user->name = $request->name;
         $user->email = $request->email;
@@ -82,7 +131,11 @@ class UsersController extends Controller
             $user->password = Hash::make($request->password);
         }
 
-        $user->save();
+        $result = $user->save();
+
+        if ($result) {
+            $this->apiController->pushToLogDatabase("updated", "user", $request);
+        }
 
         $this->setPermissions($request, $user);
 
@@ -96,10 +149,25 @@ class UsersController extends Controller
         }
 
         $user = User::findOrFail($request->user_id);
-        $user->delete();
+        $result = $user->delete();
+        if ($result) {
+            $this->apiController->pushToLogDatabase("deleted", "user", $request);
+        }
         return redirect()->route('users_list_page');
     }
 
+    public function toggleActive($user_id)
+    {
+        if (!auth()->user()->can('manage_users')) {
+            abort(403);
+        }
+
+        $user = User::findOrFail($user_id);
+        $user->is_active = !$user->is_active;
+        $user->save();
+
+        return redirect()->back();
+    }
 
     private function setPermissions($request, $user)
     {

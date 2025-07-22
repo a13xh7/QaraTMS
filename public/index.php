@@ -7,6 +7,9 @@
  * @author   Taylor Otwell <taylor@laravel.com>
  */
 
+// Increase max execution time to avoid timeouts
+set_time_limit(120);
+
 define('LARAVEL_START', microtime(true));
 
 /*

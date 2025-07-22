@@ -1,0 +1,351 @@
+/* 
+ * Controls Styles for Advanced Analytics
+ * Contains styles for filters, selectors, and interactive controls
+ */
+
+/* Filter section styles */
+.c-filter-section {
+  background-color: var(--c-light);
+  padding: var(--space-lg);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-lg);
+  border: 1px solid var(--c-border);
+  transition: background-color var(--transition-medium), border-color var(--transition-medium);
+}
+
+.c-filter-section--active {
+  background-color: color-mix(in srgb, var(--c-primary) 5%, var(--c-light));
+  border-color: color-mix(in srgb, var(--c-primary) 30%, var(--c-border));
+}
+
+.c-filter--active {
+  border-color: var(--c-primary) !important;
+  box-shadow: 0 0 0 0.25rem var(--c-primary-border) !important;
+}
+
+/* Year selector styles */
+.c-year-selector {
+  position: relative;
+  display: inline-block;
+}
+
+.c-year-selector-toggle {
+  padding: var(--space-sm) var(--space-md);
+  background-color: var(--c-bg);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  min-width: 150px;
+  text-align: left;
+  transition: all var(--transition-fast);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.c-year-selector-toggle:hover {
+  background-color: var(--c-light);
+  border-color: var(--c-muted);
+}
+
+.c-year-selector-toggle::after {
+  content: "▼";
+  font-size: 0.75em;
+  margin-left: var(--space-sm);
+}
+
+.c-year-selector-toggle[aria-expanded="true"]::after {
+  content: "▲";
+}
+
+.c-year-selector-dropdown {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  z-index: var(--z-dropdown);
+  min-width: 180px;
+  padding: var(--space-xs) 0;
+  margin: 2px 0 0;
+  background-color: var(--c-bg);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.c-year-selector-dropdown.is-visible {
+  display: block;
+}
+
+.c-year-option {
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+  display: flex;
+  align-items: center;
+}
+
+.c-year-option:hover {
+  background-color: var(--c-light);
+}
+
+.c-year-option--checked {
+  background-color: var(--c-light-hover);
+  font-weight: 600;
+  position: relative;
+}
+
+.c-year-option--checked::after {
+  content: '✓';
+  position: absolute;
+  right: var(--space-md);
+  color: var(--c-success);
+}
+
+.c-year-option--all {
+  border-bottom: 1px solid var(--c-border);
+  margin-bottom: var(--space-xs);
+  padding-bottom: var(--space-sm);
+  font-weight: bold;
+}
+
+/* Metric buttons */
+.c-metric-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-md);
+}
+
+.c-metric-button {
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-sm);
+  background-color: var(--c-light);
+  cursor: pointer;
+  font-weight: 500;
+  transition: all var(--transition-fast);
+}
+
+.c-metric-button:hover {
+  background-color: var(--c-light-hover);
+}
+
+.c-metric-button--active {
+  background-color: var(--c-primary);
+  color: white;
+  border-color: var(--c-primary);
+}
+
+/* Filter status and badges */
+.c-filter-status {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background-color: color-mix(in srgb, var(--c-fg) 3%, transparent);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  margin-right: var(--space-lg);
+}
+
+.c-filter-status--active {
+  background-color: color-mix(in srgb, var(--c-primary) 5%, transparent);
+  border: 1px solid color-mix(in srgb, var(--c-primary) 10%, transparent);
+}
+
+.c-showing-count {
+  padding-right: var(--space-md);
+  border-right: 1px solid var(--c-border);
+  margin-right: var(--space-md);
+  font-weight: 600;
+  color: var(--c-fg);
+}
+
+.c-filter-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+.c-filter-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-xl);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  color: white;
+  box-shadow: var(--shadow-sm);
+}
+
+.c-filter-badge--primary {
+  background-color: var(--c-primary);
+}
+
+.c-filter-badge--info {
+  background-color: var(--c-info);
+  color: var(--c-dark);
+}
+
+.c-filter-badge--secondary {
+  background-color: var(--c-secondary);
+}
+
+.c-badge-clear {
+  border: none;
+  background: none;
+  color: rgba(255,255,255,0.7);
+  font-size: 1.1rem;
+  line-height: 1;
+  margin-left: var(--space-xs);
+  cursor: pointer;
+  border-radius: var(--radius-circle);
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: all var(--transition-fast);
+}
+
+.c-badge-clear:hover {
+  color: white;
+  background-color: rgba(255,255,255,0.2);
+}
+
+/* Search input with clear button */
+.c-search-container {
+  position: relative;
+}
+
+.c-search-input {
+  padding-right: 30px; /* Make space for the clear button */
+  width: 100%;
+}
+
+.c-clear-search {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.5;
+  transition: opacity var(--transition-fast);
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 5;
+}
+
+.c-clear-search:hover {
+  opacity: 1;
+}
+
+/* Highlight matches in search results */
+.c-highlight-match {
+  background-color: var(--c-warning);
+  font-weight: bold;
+  padding: 0 2px;
+}
+
+/* Checkbox styling */
+.c-checkbox {
+  width: 1.25em;
+  height: 1.25em;
+  margin-top: 0.25em;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-sm);
+  transition: background-color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.c-checkbox:checked {
+  background-color: var(--c-primary);
+  border-color: var(--c-primary);
+}
+
+.c-checkbox-label {
+  transition: color var(--transition-fast);
+}
+
+.c-checkbox-group--active .c-checkbox-label {
+  color: var(--c-primary);
+  font-weight: 500;
+}
+
+.c-checkbox-group--active .c-checkbox {
+  border-color: var(--c-primary);
+}
+
+/* Footer buttons container */
+.c-footer-buttons {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+/* Export button styling */
+.c-export-button {
+  background-color: #1d6f42; /* Excel green */
+  border-color: #1d6f42;
+  color: white;
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.c-export-button:hover {
+  background-color: #17592f;
+  border-color: #17592f;
+}
+
+.c-export-button i {
+  margin-right: var(--space-xs);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .c-filter-section {
+    padding: var(--space-sm);
+  }
+  
+  .c-metric-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .c-footer-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .c-footer-buttons .c-button {
+    flex: 1;
+    margin: 0 4px;
+  }
+  
+  .c-filter-status {
+    margin-bottom: var(--space-md);
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .c-showing-count {
+    border-right: none;
+    margin-right: 0;
+    padding-right: 0;
+    margin-bottom: var(--space-xs);
+    width: 100%;
+  }
+  
+  .c-filter-badges {
+    width: 100%;
+  }
+} 

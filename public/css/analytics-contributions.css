@@ -1,0 +1,1849 @@
+/* Advanced Analytics Styles 
+ * Organized by concern for better maintainability
+ */
+
+/* === Layout === */
+#yearlyOverviewTable {
+    position: relative;
+    border-collapse: separate; /* Important for proper sticky column rendering */
+    border-spacing: 0;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.table-responsive {
+    max-height: 70vh;
+    overflow-x: auto; /* Ensure horizontal scrolling works properly */
+    overflow-y: auto;
+    position: relative; /* Required for sticky positioning */
+}
+
+/* Fixed columns for horizontal scrolling */
+.sticky-col {
+    position: sticky !important;
+    z-index: 10 !important; /* Increased from 2 to be higher than year headers */
+    background-color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-shadow: 2px 0 5px -2px rgba(0,0,0,0.1);
+    left: 0; /* Ensure position is applied */
+}
+
+.sticky-col-1 {
+    left: 0;
+    width: 100px;
+    max-width: 100px;
+    min-width: 100px;
+    z-index: 20 !important; /* Increased from 3 to be higher than sticky-col-2 */
+    background-color: #f8f9fa;
+    border-right: 1px solid #dee2e6;
+}
+
+.sticky-col-2 {
+    left: 100px;
+    width: 220px;
+    max-width: 220px;
+    min-width: 220px;
+    z-index: 19 !important; /* Increased from 2 to be higher than year headers but below sticky-col-1 */
+    background-color: #fff;
+    border-right: 1px solid #dee2e6;
+    white-space: normal;
+    word-break: break-word;
+    overflow: visible;
+    padding-right: 15px;
+}
+
+/* Year headers fixed at top */
+#yearlyOverviewTable thead tr:first-child th {
+    position: sticky;
+    top: 0;
+    z-index: 3; /* Lower than sticky columns */
+    background-color: #f8f9fa;
+}
+
+#yearlyOverviewTable thead tr:nth-child(2) th {
+    position: sticky;
+    top: 40px;
+    z-index: 3; /* Lower than sticky columns */
+    background-color: #f8f9fa;
+}
+
+/* Fix for intersection of sticky headers and columns */
+#yearlyOverviewTable thead tr:first-child th.sticky-col-1,
+#yearlyOverviewTable thead tr:first-child th.sticky-col-2 {
+    z-index: 25 !important; /* Highest z-index for corner cells */
+}
+
+#yearlyOverviewTable thead tr:nth-child(2) th.sticky-col-1,
+#yearlyOverviewTable thead tr:nth-child(2) th.sticky-col-2 {
+    z-index: 24 !important; /* Very high z-index but below the top corner cells */
+}
+
+/* Fix the year headers - critical */
+#yearlyOverviewTable thead tr:first-child th.year-column {
+    left: auto !important; /* This fixes the freeze issue */
+    border-right: 2px solid #aaa;
+    border-bottom: 2px solid #aaa;
+    background-color: #f0f0f8;
+}
+
+/* Ensure year headers don't get fixed left positions */
+#yearlyOverviewTable thead tr:first-child th:nth-of-type(3),
+#yearlyOverviewTable thead tr:first-child th:nth-of-type(4),
+#yearlyOverviewTable thead tr:first-child th:nth-of-type(5) {
+    left: auto !important; /* Remove any fixed left positioning */
+}
+
+/* Fix Safari/iOS issues with sticky positioning */
+@supports (-webkit-overflow-scrolling: touch) {
+    .table-responsive {
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .sticky-col {
+        -webkit-transform: translateZ(0); /* Force GPU acceleration */
+    }
+}
+
+/* Month columns spacing - fixed width to prevent misalignment */
+#yearlyOverviewTable thead tr:nth-child(2) th,
+#yearlyOverviewTable tbody td:not(.sticky-col) {
+    min-width: 60px;
+    width: 60px;
+    max-width: 60px;
+}
+
+/* Fix for width of data cells to maintain alignment */
+#yearlyOverviewTable td:not(.sticky-col),
+#yearlyOverviewTable th:not(.sticky-col) {
+    width: 60px;
+    min-width: 60px;
+    max-width: 60px;
+}
+
+/* === Typography & Base Styles === */
+#yearlyOverviewTable td,
+#yearlyOverviewTable th {
+    padding: 8px 10px;
+    font-size: 0.9rem;
+    text-align: center;
+    position: relative;
+    vertical-align: middle;
+    min-height: 40px;
+    line-height: 1.2;
+    border: 1px solid #dee2e6;
+}
+
+.year-column {
+    text-align: center;
+    background-color: #f8f9fa;
+    font-weight: bold;
+    position: sticky;
+    top: 0;
+    z-index: 3;
+    padding-left: 15px !important; /* Ensure the first month isn't hidden */
+}
+
+/* Squad column styling */
+#yearlyOverviewTable td.sticky-col-1 {
+    text-align: left;
+    vertical-align: middle;
+    padding: 8px;
+    line-height: 1.3;
+    min-height: 40px;
+}
+
+/* Squad group marker */
+#yearlyOverviewTable tr td.sticky-col-1[style*="border-top"] {
+    padding-top: 15px; /* Add extra padding at the top of new squad groups */
+}
+
+/* Name column styling */
+#yearlyOverviewTable td.sticky-col-2 {
+    text-align: left;
+    padding: 8px 15px 8px 8px;
+    line-height: 1.4;
+    vertical-align: middle;
+    height: auto;
+    min-height: 40px;
+    font-size: 0.95rem;
+}
+
+/* Ensure content is vertically centered */
+#yearlyOverviewTable td.sticky-col-2 span,
+#yearlyOverviewTable td.sticky-col-1 span {
+    vertical-align: middle;
+    display: inline-block;
+}
+
+/* === Interactions === */
+#yearlyOverviewTable td {
+    transition: all 0.2s;
+}
+
+#yearlyOverviewTable td:hover {
+    transform: scale(1.05);
+    z-index: 5;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    position: relative;
+}
+
+/* Ensure borders between cells are consistent */
+#yearlyOverviewTable td,
+#yearlyOverviewTable th {
+    border: 1px solid #dee2e6;
+    box-sizing: border-box;
+}
+
+/* Ensure value numbers are fully visible */
+#yearlyOverviewTable td:not(.sticky-col) {
+    padding: 8px 4px;
+    white-space: nowrap;
+    overflow: visible;
+}
+
+/* === State Indicators === */
+/* Highlight the current month */
+.current-month {
+    border: 2px solid #007bff !important;
+    font-weight: bold;
+}
+
+/* Empty cells */
+.bg-light {
+    background-color: #f8f9fa;
+    color: #6c757d; /* Improved contrast from #adb5bd */
+    border: 1px solid #dee2e6; /* Added border for better visibility */
+}
+
+/* Zero value cells */
+.zero-value {
+    background-color: #f8f9fa;
+    color: #495057; /* Darker text for better contrast */
+    border: 1px solid #dee2e6;
+}
+
+/* No data / inactive periods */
+.disabled-cell {
+    background-color: #f8f9fa;
+    color: #adb5bd;
+    background-image: linear-gradient(45deg, rgba(0,0,0,0.03) 25%, transparent 25%, transparent 50%, rgba(0,0,0,0.03) 50%, rgba(0,0,0,0.03) 75%, transparent 75%);
+    background-size: 6px 6px;
+}
+
+/* === Trend Indicators === */
+.trend-indicator {
+    display: inline-block;
+    font-size: 10px;
+    margin-left: 3px;
+    position: relative;
+    top: -1px;
+    transition: opacity 0.3s ease;
+}
+
+.trend-up {
+    color: #28a745;
+}
+
+.trend-down {
+    color: #dc3545;
+}
+
+/* === Color Intensity Mapping === */
+.intensity-1 {
+    background-color: rgba(144, 238, 144, 0.2);
+}
+
+.intensity-2 {
+    background-color: rgba(144, 238, 144, 0.4);
+}
+
+.intensity-3 {
+    background-color: rgba(144, 238, 144, 0.6);
+}
+
+.intensity-4 {
+    background-color: rgba(144, 238, 144, 0.8);
+}
+
+.intensity-5 {
+    background-color: rgba(144, 238, 144, 1);
+}
+
+/* === A11y Enhancements === */
+/* High contrast mode support */
+@media (forced-colors: active) {
+    .trend-up, .trend-down {
+        forced-color-adjust: none;
+    }
+    
+    .intensity-1, .intensity-2, .intensity-3, .intensity-4, .intensity-5 {
+        border: 1px solid currentColor;
+    }
+}
+
+/* Screen reader only visuals */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* === Responsive Fixes === */
+@media (max-width: 768px) {
+    #yearlyOverviewTable td:hover {
+        transform: none;
+        box-shadow: none;
+    }
+    
+    #yearlyOverviewTable {
+        font-size: 0.8rem;
+    }
+    
+    .table-responsive {
+        max-height: 60vh;
+    }
+    
+    /* Make sure sticky columns stay fixed on mobile too */
+    .sticky-col-1 {
+        width: 80px;
+        max-width: 80px;
+        min-width: 80px;
+        font-size: 0.75rem;
+        left: 0;
+        z-index: 3;
+    }
+    
+    .sticky-col-2 {
+        width: 150px;
+        max-width: 150px;
+        min-width: 150px;
+        left: 80px;
+    }
+    
+    /* Compress table cells on mobile */
+    #yearlyOverviewTable td,
+    #yearlyOverviewTable th {
+        padding: 6px 4px;
+        height: 34px;
+        font-size: 0.8rem;
+    }
+    
+    /* Data cells should be narrower on mobile */
+    #yearlyOverviewTable td:not(.sticky-col),
+    #yearlyOverviewTable th:not(.sticky-col) {
+        width: 50px;
+        min-width: 50px;
+        max-width: 50px;
+    }
+    
+    /* Ensure month headers are visible */
+    #yearlyOverviewTable thead tr:nth-child(2) th {
+        font-size: 0.7rem;
+        padding: 4px 2px;
+    }
+    
+    /* Horizontal scroll indicator */
+    .table-responsive::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 5px;
+        background: linear-gradient(to right, transparent, rgba(0,0,0,0.1));
+        pointer-events: none;
+        opacity: 0.5;
+    }
+    
+    #yearlyOverviewTable td.sticky-col-1,
+    #yearlyOverviewTable td.sticky-col-2 {
+        padding-top: 6px;
+        padding-bottom: 6px;
+    }
+}
+
+/* Fix for WebKit browsers */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    .table-responsive {
+        overflow-x: auto !important;
+    }
+    
+    .sticky-col {
+        position: -webkit-sticky !important;
+        position: sticky !important;
+    }
+}
+
+/* === Squad Management Styles === */
+#squadManagementModal .table {
+    margin-bottom: 0;
+}
+
+#squadManagementModal .form-select {
+    min-width: 180px;
+}
+
+#squadManagementModal .apply-squad-btn {
+    min-width: 70px;
+}
+
+/* Filter styles */
+#squadFilterInput {
+    max-width: 300px;
+}
+
+/* Style for unassigned contributors */
+.unassigned-contributor td:nth-child(2) {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+/* Style for assigned contributors */
+.assigned-contributor {
+    opacity: 0.85;
+}
+
+/* Animation for row changes */
+@keyframes highlight-row {
+    0% { background-color: rgba(40, 167, 69, 0.2); }
+    100% { background-color: transparent; }
+}
+
+.highlight-row {
+    animation: highlight-row 2s ease-out;
+}
+
+/* Animation for successful updates */
+@keyframes highlight-success {
+    0% { background-color: #d4edda; }
+    100% { background-color: transparent; }
+}
+
+.highlight-success {
+    animation: highlight-success 2s ease-out;
+}
+
+/* No contributors message */
+#noUnknownMessage {
+    padding: 20px;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+/* Squad selection style */
+.squad-select option[value="new"] {
+    font-style: italic;
+    color: #007bff;
+}
+
+/* Squad filter header */
+.squad-filter-header {
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+/* Responsive tweaks for squad management */
+@media (max-width: 768px) {
+    #squadManagementModal .form-select {
+        min-width: 140px;
+        max-width: 100%;
+    }
+    
+    #squadManagementModal .table td {
+        padding: 0.5rem;
+    }
+    
+    .squad-filter-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .squad-filter-header > div {
+        margin-bottom: 10px;
+        width: 100%;
+    }
+}
+
+/* Squad list display */
+.squad-list-container {
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    padding: 10px;
+    border: 1px solid #dee2e6;
+}
+
+.squad-list-container h6 {
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    color: #495057;
+}
+
+.squad-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+/* Squad tags with delete options */
+.squad-tag {
+    position: relative;
+    padding-right: 25px; /* Space for delete button */
+    cursor: pointer;
+    user-select: none;
+    font-size: 0.85rem;
+    padding: 5px 10px 5px 10px;
+    border-radius: 20px;
+    transition: all 0.2s;
+}
+
+.squad-tag:hover {
+    transform: scale(1.05);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.squad-tag-delete {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    font-weight: bold;
+    width: 16px;
+    height: 16px;
+    line-height: 14px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.2);
+    display: none; /* Hide by default */
+    cursor: pointer;
+}
+
+.squad-tag:hover .squad-tag-delete {
+    display: inline-block;
+}
+
+.squad-tag-delete:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.squad-tag-wrapper {
+    display: inline-block;
+}
+
+/* Add New Squad button */
+#addNewSquadBtn {
+    white-space: nowrap;
+    padding: 6px 12px;
+    border-radius: 20px;
+}
+
+#addNewSquadBtn i {
+    margin-right: 5px;
+    font-size: 0.9rem;
+}
+
+/* Add Squad modal */
+#addSquadModal .existing-squads {
+    max-height: 200px;
+    overflow-y: auto;
+    padding: 10px;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+}
+
+.squad-item {
+    border-radius: 5px;
+    background-color: #fff;
+    padding: 5px;
+    margin-bottom: 5px !important;
+    transition: all 0.2s;
+}
+
+.squad-item:hover {
+    background-color: #f0f0f0;
+}
+
+.squad-item .badge {
+    font-size: 0.85rem;
+}
+
+.delete-squad-btn {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.delete-squad-btn:hover {
+    background-color: #dc3545;
+    color: #fff;
+    border-color: #dc3545;
+}
+
+/* Squad suggestions */
+.suggested-squad {
+    border-radius: 20px;
+    padding: 3px 12px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.suggested-squad:hover {
+    background-color: #0d6efd;
+    color: #fff;
+}
+
+/* Visual indicator for when squads are deleted */
+@keyframes fadeOutAndRemove {
+    0% { opacity: 1; }
+    100% { opacity: 0; height: 0; margin: 0; padding: 0; border: 0; }
+}
+
+.squad-item.removing {
+    animation: fadeOutAndRemove 0.5s forwards;
+    overflow: hidden;
+}
+
+/* Nested modal handling */
+#squadManagementModal.modal.show {
+    display: block !important;
+}
+
+/* When we have nested modals, make sure they stack properly */
+.modal-open .modal.fade.show + .modal.fade.show {
+    z-index: 1060 !important;
+}
+
+/* Special styling for the backdrop of nested modals */
+.modal-backdrop + .modal-backdrop {
+    opacity: 0.2;
+    z-index: 1055;
+}
+
+/* Make sure modals have proper padding */
+.modal-open {
+    padding-right: 17px !important; /* Standard scrollbar width */
+}
+
+/* Squad Management modal specific styles when nested */
+#squadManagementModal.nested-modal {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+#squadManagementModal.nested-modal .modal-content {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+/* Fix for iOS Safari */
+@supports (-webkit-overflow-scrolling: touch) {
+    body.modal-open {
+        position: fixed;
+        width: 100%;
+    }
+}
+
+/* When we have two modals open */
+body.modal-open.double-modal {
+    overflow: hidden !important;
+}
+
+/* Clickable squad tags */
+.squad-tag.clickable {
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.squad-tag.clickable:hover {
+    background-color: #007bff;
+    color: white;
+    transform: scale(1.05);
+}
+
+/* Similar squads container */
+#similarSquadsContainer {
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    padding: 8px;
+    margin-top: 8px;
+}
+
+#similarSquadsContainer p {
+    margin-bottom: 5px;
+    font-size: 0.85rem;
+}
+
+#similarSquads.squad-tags.small .squad-tag {
+    font-size: 0.8rem;
+    padding: 2px 8px;
+    margin: 2px;
+}
+
+/* Feedback styling */
+#squadNameFeedback {
+    display: none;
+    color: #dc3545;
+    margin-top: 4px;
+    font-size: 0.85rem;
+}
+
+/* New Squad Modal specific styles */
+#newSquadModal.modal.show {
+    display: block !important;
+    z-index: 1070 !important; /* Higher than squadManagementModal */
+}
+
+#newSquadModal .modal-content {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 1071;
+}
+
+#newSquadModal .modal-dialog {
+    position: relative;
+    margin: 30px auto;
+    max-width: 600px;
+}
+
+/* Large, prominent Add New Squad button */
+.add-new-squad {
+    margin: 10px;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Add Squad form styling */
+#newSquadName {
+    font-size: 16px;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+#squadNameFeedback {
+    color: #dc3545;
+    font-size: 14px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+
+/* Ensure the January column isn't hidden */
+#yearlyOverviewTable th:nth-child(3),
+#yearlyOverviewTable td:nth-child(3) {
+    padding-left: 8px;
+}
+
+/* Month columns spacing */
+#yearlyOverviewTable thead tr:nth-child(2) th,
+#yearlyOverviewTable tbody td:not(.sticky-col) {
+    min-width: 50px;
+    max-width: 80px;
+}
+
+/* First month in each year needs extra padding */
+#yearlyOverviewTable tr th:nth-of-type(3),
+#yearlyOverviewTable tr th:nth-of-type(15),
+#yearlyOverviewTable tr th:nth-of-type(27),
+#yearlyOverviewTable tr td:nth-of-type(3),
+#yearlyOverviewTable tr td:nth-of-type(15),
+#yearlyOverviewTable tr td:nth-of-type(27) {
+    padding-left: 8px;
+    border-left: 2px solid #ccc;
+}
+
+/* Squad and Name column vertical alignment */
+#yearlyOverviewTable td.sticky-col-1,
+#yearlyOverviewTable td.sticky-col-2 {
+    vertical-align: middle;
+    line-height: 1.5;
+}
+
+/* Data cells vertical alignment */
+#yearlyOverviewTable td:not(.sticky-col) {
+    vertical-align: middle;
+}
+
+/* Make sure table headers work with sticky columns */
+#yearlyOverviewTable thead th.sticky-col {
+    z-index: 20 !important; /* Updated to match fixed-headers.css */
+}
+
+/* Fix Safari/iOS issues with sticky positioning */
+@supports (-webkit-overflow-scrolling: touch) {
+    .table-responsive {
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .sticky-col {
+        -webkit-transform: translateZ(0); /* Force GPU acceleration */
+    }
+}
+
+/* Fix spacing between Name column and first data column */
+#yearlyOverviewTable tr td:nth-of-type(3),
+#yearlyOverviewTable tr th:nth-of-type(3) {
+    padding-left: 20px !important; /* Add extra padding for the first month column */
+    border-left: none;
+    position: relative;
+}
+
+/* Add a visual indicator for scrolling */
+#yearlyOverviewTable tr td:nth-of-type(3)::before,
+#yearlyOverviewTable tr th:nth-of-type(3)::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 10px;
+    background: linear-gradient(to right, rgba(0,0,0,0.05), transparent);
+    pointer-events: none;
+}
+
+/* Improve visual separation */
+.sticky-col-2:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 4px;
+    background: linear-gradient(to right, rgba(0,0,0,0.05), transparent);
+    pointer-events: none;
+}
+
+/* Headers need special z-index */
+#yearlyOverviewTable thead th {
+    z-index: 3;
+    background-color: #f8f9fa;
+}
+
+#yearlyOverviewTable thead th.sticky-col-1 {
+    z-index: 5;
+}
+
+#yearlyOverviewTable thead th.sticky-col-2 {
+    z-index: 4;
+}
+
+/* Tooltip styles */
+[data-bs-toggle="tooltip"] {
+    cursor: help;
+}
+
+.tooltip-inner {
+    max-width: 250px; /* Increased from 200px for better readability */
+    text-align: left;
+}
+
+/* Fix for year headers */
+.year-column {
+    text-align: center !important;
+    font-weight: bold !important;
+    background-color: #f0f0f8 !important; /* Match fixed-headers.css */
+    min-width: 60px !important;
+    position: sticky !important;
+    z-index: 3 !important; /* Lower than sticky columns */
+    border-right: 2px solid #aaa !important;
+    border-bottom: 2px solid #aaa !important;
+}
+
+/* Fix the column header cells */
+#yearlyOverviewTable thead tr:first-child th {
+    height: 40px;
+    box-sizing: border-box;
+}
+
+/* Fix for sticky headers inside a scrollable container */
+#yearlyOverviewTable thead {
+    position: sticky;
+    top: 0;
+    z-index: 4;
+}
+
+/* Year columns should span exactly 12 month columns */
+#yearlyOverviewTable thead tr:first-child th:not(.sticky-col) {
+    width: 720px !important; /* 12 months × 60px per month */
+    min-width: 720px !important;
+    max-width: 720px !important;
+}
+
+/* Override any transforms on hover for year header cells */
+#yearlyOverviewTable thead tr:first-child th:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+/* === Colors for values === */
+/* Make sure trending arrows have the right colors */
+.trend-up {
+    color: #28a745 !important;
+}
+
+.trend-down {
+    color: #dc3545 !important;
+}
+
+/* Year selector dropdown styles */
+.year-selector-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.year-selector-toggle {
+    padding: 6px 12px;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    cursor: pointer;
+    min-width: 150px;
+    text-align: left;
+    transition: all 0.2s;
+}
+
+.year-selector-toggle:hover {
+    background-color: #f8f9fa;
+    border-color: #adb5bd;
+}
+
+.year-selector-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    z-index: 1000;
+    min-width: 180px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: 4px;
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.year-selector-dropdown.d-none {
+    display: none !important;
+}
+
+.year-selector-dropdown.show {
+    display: block;
+}
+
+.year-selector-option {
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.year-selector-option:hover {
+    background-color: #f8f9fa;
+}
+
+.year-selector-option.checked {
+    background-color: #e9ecef;
+    font-weight: bold;
+    position: relative;
+}
+
+.year-selector-option.checked::after {
+    content: '✓';
+    position: absolute;
+    right: 12px;
+    color: #28a745;
+}
+
+.year-selector-option.all-years-option {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 5px;
+    padding-bottom: 10px;
+    font-weight: bold;
+}
+
+/* Filter section styles */
+.filter-section {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    border: 1px solid #e9ecef;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.filter-section.active-filtering {
+    background-color: #e9f7fe;
+    border-color: #86c6f8;
+}
+
+.filter-active {
+    border-color: #0d6efd !important;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25) !important;
+}
+
+/* Filter Status in Footer */
+.filter-status-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.showing-count {
+    padding-right: 10px;
+    border-right: 1px solid #e9ecef;
+    margin-right: 10px;
+}
+
+.filter-indicator {
+    font-size: 0.9rem;
+    color: #495057;
+}
+
+.filter-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.filter-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 10px;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.badge-clear-btn {
+    border: none;
+    background: none;
+    color: rgba(255,255,255,0.7);
+    font-size: 1.1rem;
+    line-height: 1;
+    margin-left: 5px;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: all 0.2s ease;
+}
+
+.badge-clear-btn:hover {
+    color: white;
+    background-color: rgba(255,255,255,0.2);
+}
+
+/* Footer styling when filters are active */
+.modal-footer.has-active-filters {
+    background-color: #f8f9fa;
+}
+
+/* Button styles */
+.btn-outline-secondary.btn-sm {
+    font-size: 0.825rem;
+    padding: 0.25rem 0.5rem;
+}
+
+#resetFiltersBtn {
+    white-space: nowrap;
+}
+
+/* Styled search input with clear button */
+#nameFilter {
+    padding-right: 30px; /* Make space for the clear button */
+}
+
+.clear-search-btn {
+    opacity: 0.5;
+    transition: opacity 0.2s ease;
+}
+
+.clear-search-btn:hover {
+    opacity: 1;
+}
+
+/* Highlight matches in search results */
+.highlight-match {
+    background-color: #ffff00;
+    font-weight: bold;
+    padding: 0 2px;
+}
+
+/* When filtering is active, add subtle styling to filtered rows */
+tr.filtered {
+    display: none;
+}
+
+/* Footer buttons container */
+.footer-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+/* Better Excel button styling */
+#exportYearlyData {
+    background-color: #1d6f42; /* Excel green */
+    border-color: #1d6f42;
+}
+
+#exportYearlyData:hover {
+    background-color: #17592f;
+    border-color: #17592f;
+}
+
+/* Filter badges */
+.filter-badge.bg-primary {
+    background-color: #0d6efd !important;
+}
+
+.filter-badge.bg-info {
+    background-color: #0dcaf0 !important;
+    color: #000 !important;
+}
+
+.filter-badge.bg-secondary {
+    background-color: #6c757d !important;
+}
+
+/* Make filter status more prominent */
+.filter-status-container {
+    background-color: rgba(0, 0, 0, 0.03);
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin-right: 16px !important;
+}
+
+.showing-count {
+    font-weight: 600;
+    color: #212529;
+}
+
+/* Ensure the footer is stuck to the bottom of viewport */
+#advancedAnalysisModal .modal-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+#advancedAnalysisModal .modal-body {
+    flex: 1 1 auto;
+    overflow: auto;
+}
+
+#advancedAnalysisModal .modal-footer {
+    flex-shrink: 0;
+}
+
+/* Filter status with active filters */
+.filter-status-container.has-filters {
+    background-color: rgba(13, 110, 253, 0.05);
+    border: 1px solid rgba(13, 110, 253, 0.1);
+}
+
+/* Responsive adjustments for footer */
+@media (max-width: 768px) {
+    .footer-buttons {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .footer-buttons .btn {
+        flex: 1;
+        margin: 0 4px;
+    }
+    
+    .filter-status-container {
+        margin-bottom: 10px;
+        width: 100%;
+    }
+}
+
+/* Checkbox styling */
+.form-check-input {
+    width: 1.25em;
+    height: 1.25em;
+    margin-top: 0.25em;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25em;
+    transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+}
+
+.form-check-input:checked {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+.form-check-label {
+    transition: color 0.15s ease-in-out;
+}
+
+.form-check.text-primary .form-check-label {
+    color: #0d6efd !important;
+    font-weight: 500;
+}
+
+.form-check.text-primary .form-check-input {
+    border-color: #0d6efd;
+}
+
+/* Container styling */
+#advanced-analytics-container {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  color: #333;
+  margin: 1rem 0;
+  position: relative;
+}
+
+/* Loading state */
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Controls bar */
+.controls-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  align-items: center;
+}
+
+/* Selectors styling */
+.selector-container {
+  position: relative;
+  display: inline-block;
+  min-width: 150px;
+}
+
+.selector-label {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.selector-dropdown {
+  position: relative;
+  width: 100%;
+  cursor: pointer;
+  background-color: #fff;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.selector-dropdown:hover {
+  border-color: #adb5bd;
+}
+
+.selector-dropdown:focus {
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.selector-dropdown::after {
+  content: "▼";
+  font-size: 0.8em;
+  margin-left: 0.5rem;
+}
+
+.selector-dropdown.active::after {
+  content: "▲";
+}
+
+.selector-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ced4da;
+  border-top: none;
+  border-radius: 0 0 0.25rem 0.25rem;
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 10;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: none;
+}
+
+.selector-container.open .selector-options {
+  display: block;
+}
+
+.selector-option {
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.selector-option:hover {
+  background-color: #f8f9fa;
+}
+
+.selector-option.checked {
+  background-color: #e9ecef;
+  font-weight: 500;
+}
+
+/* Year selector specific styles */
+#year-selector-container .selector-dropdown {
+  min-width: 150px;
+}
+
+.year-selector-option {
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.year-selector-option:hover {
+  background-color: #f8f9fa;
+}
+
+.year-selector-option.checked {
+  background-color: #e9ecef;
+  font-weight: 500;
+}
+
+.all-years-option {
+  border-bottom: 1px solid #dee2e6;
+}
+
+/* Squad selector specific styles */
+#squad-selector-container .selector-dropdown {
+  min-width: 180px;
+}
+
+.squad-selector-option {
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.squad-selector-option:hover {
+  background-color: #f8f9fa;
+}
+
+.squad-selector-option.checked {
+  background-color: #e9ecef;
+  font-weight: 500;
+}
+
+/* Search input */
+.search-container {
+  flex-grow: 1;
+  max-width: 300px;
+}
+
+#contributor-search {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+}
+
+#contributor-search:focus {
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  border-color: #80bdff;
+}
+
+/* Toggle switches */
+.toggle-container {
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
+}
+
+.toggle-label {
+  margin-left: 0.5rem;
+  cursor: pointer;
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 24px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .toggle-slider {
+  background-color: #2196F3;
+}
+
+input:focus + .toggle-slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .toggle-slider:before {
+  transform: translateX(16px);
+}
+
+/* Metric buttons */
+.metric-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.metric-button {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  background-color: #f8f9fa;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.metric-button:hover {
+  background-color: #e9ecef;
+}
+
+.metric-button.active {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.metric-button:focus {
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Table styling */
+.table-container {
+  overflow-x: auto;
+  max-width: 100%;
+  margin-bottom: 1rem;
+}
+
+#contributor-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+#contributor-table th,
+#contributor-table td {
+  padding: 0.5rem;
+  border: 1px solid #dee2e6;
+  text-align: center;
+}
+
+#contributor-table th {
+  background-color: #f8f9fa;
+  font-weight: 500;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.contributor-info-header {
+  width: 200px;
+  text-align: left !important;
+}
+
+.contributor-info {
+  width: 200px;
+  text-align: left !important;
+  background-color: #f8f9fa;
+  position: sticky;
+  left: 0;
+  z-index: 1;
+}
+
+.contributor-name {
+  font-weight: 500;
+}
+
+.contributor-squad {
+  font-size: 0.85em;
+  color: #6c757d;
+}
+
+.month-header {
+  min-width: 60px;
+  width: 60px;
+}
+
+.data-cell {
+  min-width: 60px;
+  width: 60px;
+  transition: background-color 0.2s ease;
+}
+
+.data-cell.empty {
+  background-color: #f8f9fa;
+}
+
+.data-cell.future-period {
+  background-color: #f8f9fa;
+  color: #adb5bd;
+}
+
+.contributor-row:hover {
+  background-color: #f2f2f2;
+}
+
+.contributor-row:hover .contributor-info {
+  background-color: #e9ecef;
+}
+
+.contributor-row.first-in-squad .contributor-info {
+  border-top: 2px solid #6c757d;
+}
+
+/* Trend indicators */
+.trend-up {
+  color: #28a745;
+}
+
+.trend-down {
+  color: #dc3545;
+}
+
+.trend-neutral {
+  color: #6c757d;
+}
+
+/* Value drop highlight */
+.value-drop {
+  background-color: #f8d7da !important;
+}
+
+/* Custom tooltips */
+.custom-tooltip {
+  padding: 0.5rem;
+  background-color: #fff;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  max-width: 300px;
+  z-index: 1000;
+}
+
+.metric-name {
+  font-weight: 500;
+}
+
+/* Export button */
+#export-csv-button {
+  padding: 0.5rem 1rem;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+#export-csv-button:hover {
+  background-color: #218838;
+}
+
+#export-csv-button:focus {
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+}
+
+/* Status messages */
+#status-message {
+  margin-bottom: 1rem;
+}
+
+/* Accessibility improvements */
+.visually-hidden {
+  position: absolute;
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+}
+
+/* Focus visible styles for keyboard navigation */
+:focus-visible {
+  outline: 2px solid #007bff;
+  outline-offset: 2px;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .dark-mode #advanced-analytics-container {
+    color: #e1e1e1;
+    background-color: #2d2d2d;
+  }
+  
+  .dark-mode .selector-dropdown,
+  .dark-mode .selector-options,
+  .dark-mode #contributor-search {
+    background-color: #3d3d3d;
+    border-color: #4d4d4d;
+    color: #e1e1e1;
+  }
+  
+  .dark-mode .selector-option:hover {
+    background-color: #4d4d4d;
+  }
+  
+  .dark-mode .selector-option.checked {
+    background-color: #5d5d5d;
+  }
+  
+  .dark-mode .metric-button {
+    background-color: #3d3d3d;
+    border-color: #4d4d4d;
+    color: #e1e1e1;
+  }
+  
+  .dark-mode .metric-button:hover {
+    background-color: #4d4d4d;
+  }
+  
+  .dark-mode .metric-button.active {
+    background-color: #0056b3;
+  }
+  
+  .dark-mode #contributor-table th,
+  .dark-mode #contributor-table td {
+    border-color: #4d4d4d;
+  }
+  
+  .dark-mode #contributor-table th,
+  .dark-mode .contributor-info {
+    background-color: #3d3d3d;
+  }
+  
+  .dark-mode .data-cell.empty,
+  .dark-mode .data-cell.future-period {
+    background-color: #3d3d3d;
+  }
+  
+  .dark-mode .contributor-row:hover {
+    background-color: #4d4d4d;
+  }
+  
+  .dark-mode .contributor-row:hover .contributor-info {
+    background-color: #5d5d5d;
+  }
+  
+  .dark-mode .value-drop {
+    background-color: #5c2a2f !important;
+  }
+  
+  .dark-mode .custom-tooltip {
+    background-color: #3d3d3d;
+    border-color: #4d4d4d;
+    color: #e1e1e1;
+  }
+  
+  .dark-mode .loading-overlay {
+    background-color: rgba(45, 45, 45, 0.7);
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .controls-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .selector-container {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+  
+  .search-container {
+    width: 100%;
+    max-width: none;
+    margin-bottom: 0.5rem;
+  }
+  
+  .metric-buttons {
+    width: 100%;
+    justify-content: flex-start;
+  }
+  
+  #contributor-table th,
+  #contributor-table td {
+    font-size: 0.9rem;
+    padding: 0.3rem;
+  }
+  
+  .contributor-info {
+    width: 150px;
+  }
+  
+  .month-header,
+  .data-cell {
+    min-width: 50px;
+    width: 50px;
+  }
+}
+
+/* Ensure year headers don't get fixed left positions - critical fix */
+#yearlyOverviewTable thead tr:first-child th.year-column,
+#yearlyOverviewTable thead tr:first-child th:nth-of-type(3),
+#yearlyOverviewTable thead tr:first-child th:nth-of-type(4),
+#yearlyOverviewTable thead tr:first-child th:nth-of-type(5) {
+    left: auto !important; /* Remove any fixed left positioning */
+}
+
+/* Sorting Styles */
+.sortable {
+    cursor: pointer;
+    position: relative;
+    padding-right: 20px;
+}
+
+.sortable:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.sortable.active {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.sortable i {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.5;
+}
+
+.sortable.active i {
+    opacity: 1;
+}
+
+/* Pagination Styles */
+.pagination-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: #15293E;
+    border-radius: 0.25rem;
+}
+
+.pagination-info {
+    color: #125590;
+}
+
+.pagination-controls {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.pagination-controls button {
+    min-width: 100px;
+}
+
+.pagination-controls button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    .sortable:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .sortable.active {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .pagination-container {
+        background-color: #343a40;
+    }
+
+    .pagination-info {
+        color: #adb5bd;
+    }
+}

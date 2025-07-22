@@ -1,0 +1,88 @@
+<!-- Advanced Analytics Component Template -->
+<div class="analytics-container">
+  <!-- Status Messages -->
+  <div id="status-message" class="alert" role="alert" style="display: none;"></div>
+  
+  <!-- Controls Container -->
+  <div class="controls-container">
+    <!-- Year Selector -->
+    <div class="selector-container" id="year-selector-container">
+      <label for="year-selector" class="selector-label">Year</label>
+      <div id="year-selector" class="selector-dropdown" tabindex="0" aria-haspopup="listbox" aria-label="Select year">
+        Show All Years
+      </div>
+    </div>
+    
+    <!-- Squad Selector -->
+    <div class="selector-container" id="squad-selector-container">
+      <label for="squad-selector" class="selector-label">Squad</label>
+      <div id="squad-selector" class="selector-dropdown" tabindex="0" aria-haspopup="listbox" aria-label="Select squad">
+        All
+      </div>
+    </div>
+    
+    
+    <!-- Toggles -->
+    <div class="toggle-container">
+      <label class="toggle-switch">
+        <input type="checkbox" id="core-squads-toggle">
+        <span class="toggle-slider"></span>
+      </label>
+      <label for="core-squads-toggle" class="toggle-label">Show Core Squads Only</label>
+    </div>
+    
+    <div class="toggle-container">
+      <label class="toggle-switch">
+        <input type="checkbox" id="include-inactive-toggle">
+        <span class="toggle-slider"></span>
+      </label>
+      <label for="include-inactive-toggle" class="toggle-label">Include Inactive</label>
+    </div>
+    
+    <!-- Export Button -->
+    <button id="export-csv-button" aria-label="Export data to CSV">
+      Export to CSV
+    </button>
+  </div>
+  
+  <!-- Metric Buttons -->
+  <div class="metric-buttons">
+    <button class="metric-button active" data-metric="totalEvents" aria-pressed="true">Total Events</button>
+    <button class="metric-button" data-metric="mrCreated" aria-pressed="false">MRs Created</button>
+    <button class="metric-button" data-metric="mrApproved" aria-pressed="false">MRs Approved</button>
+    <button class="metric-button" data-metric="repoPushes" aria-pressed="false">Repository Pushes</button>
+  </div>
+  
+  <!-- Table Container -->
+  <div class="table-container">
+    <table id="contributor-table">
+      <thead>
+        <tr>
+          <th class="contributor-info-header">Contributor</th>
+          <!-- Month headers will be dynamically added -->
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Data rows will be dynamically added -->
+      </tbody>
+    </table>
+  </div>
+  
+  <!-- Loading Overlay -->
+  <div class="loading-overlay" style="display: none;">
+    <div class="loading-spinner"></div>
+    <span class="visually-hidden">Loading data...</span>
+  </div>
+</div>
+
+<!-- Helpful ARIA descriptions for screen readers -->
+<div id="analytics-descriptions" class="visually-hidden">
+  <p id="year-selector-desc">Select a specific year or show all years to filter the data.</p>
+  <p id="squad-selector-desc">Filter contributors by their squad or team.</p>
+  <p id="search-desc">Search for specific contributors by name.</p>
+  <p id="core-squads-desc">Shows only contributors from core engineering squads.</p>
+  <p id="inactive-desc">Include contributors who are no longer active.</p>
+  <p id="metric-desc">Select which contribution metric to display in the table.</p>
+  <p id="table-desc">Table showing contribution data by month and year. Each cell displays the value for that contributor in that month.</p>
+  <p id="export-desc">Export the currently filtered data to a CSV file.</p>
+</div> 

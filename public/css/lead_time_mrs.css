@@ -1,0 +1,322 @@
+/* Base styles */
+:root {
+    --chart-min-height: 200px;
+    --chart-padding: 1rem;
+    --border-radius: 0.25rem;
+    --shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    --focus-ring-color: #0d6efd;
+    --focus-ring-width: 2px;
+    --scrollbar-size: 6px;
+    --scrollbar-thumb-color: rgba(0, 0, 0, 0.1);
+    --hover-bg-color: #f0f8ff;
+    --hover-text-color: #0a58ca;
+    --loading-bg-color: rgba(255, 255, 255, 0.9);
+}
+
+/* Filter controls */
+#localFilterControls {
+    min-height: 38px;
+}
+
+#localFilterControls select {
+    max-width: 100%;
+}
+
+#localFilterControls .form-select-sm {
+    font-size: 0.875rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+}
+
+#localFilterControls .btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+}
+
+#localFilterControls .card-body {
+    padding: 0.75rem 1rem;
+}
+
+/* Chart containers - Scoped selectors */
+.chart-container[data-chart] {
+    position: relative;
+    width: 100%;
+    background-color: #fff;
+    border-radius: var(--border-radius);
+    padding: var(--chart-padding);
+    min-height: var(--chart-min-height);
+}
+
+/* Optimize chart sizes with more specific selectors */
+.chart-container[data-chart="author"] {
+    min-height: 180px;
+}
+
+/* Table optimizations */
+.table {
+    font-size: 14px;
+    margin-bottom: 0;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.table th {
+    background-color: #f8f9fa;
+    font-weight: 500;
+    border-bottom: 1px solid #dee2e6;
+    white-space: nowrap;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.table td {
+    border-bottom: 1px solid #eee;
+    vertical-align: middle;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+/* Card optimizations with progressive enhancement */
+.card {
+    margin-bottom: 1rem;
+    box-shadow: var(--shadow);
+    background-color: #fff;
+    contain: content;
+}
+
+.card-body {
+    padding: var(--chart-padding);
+}
+
+.row:last-child .card {
+    margin-bottom: 0;
+}
+
+/* Hide empty cards if browser supports :has() */
+@supports selector(:has(*)) {
+    .card:has(.empty-state) {
+        display: none;
+    }
+}
+
+/* Pagination optimizations with improved accessibility */
+.pagination {
+    margin: 0;
+    gap: 0.25rem;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.page-link {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+    border-radius: var(--border-radius);
+    color: #0d6efd;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    transition: all 0.2s;
+}
+
+/* Enhanced hover states for pagination */
+.page-link:hover:not(.disabled):not(.active) {
+    background-color: var(--hover-bg-color);
+    color: var(--hover-text-color);
+    border-color: var(--hover-text-color);
+}
+
+/* Improved focus states for accessibility */
+.page-link:focus {
+    outline: var(--focus-ring-width) solid var(--focus-ring-color);
+    outline-offset: 2px;
+    box-shadow: none;
+}
+
+.page-link:focus:not(:focus-visible) {
+    outline: none;
+}
+
+.page-item.active .page-link {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    color: #fff;
+}
+
+.page-item.disabled .page-link {
+    color: #6c757d;
+    pointer-events: none;
+    background-color: #fff;
+    border-color: #dee2e6;
+}
+
+/* Code block styling */
+code {
+    padding: 0.2em 0.4em;
+    font-size: 85%;
+    background-color: rgba(175, 184, 193, 0.2);
+    border-radius: var(--border-radius);
+    font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+}
+
+/* Loading state */
+#filterLoadingState {
+    backdrop-filter: blur(2px);
+    transition: opacity 0.2s;
+}
+
+/* Optimize table scrolling with custom scrollbars */
+.table-responsive {
+    contain: paint;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb-color) transparent;
+}
+
+/* Webkit scrollbar styling */
+.table-responsive::-webkit-scrollbar {
+    height: var(--scrollbar-size);
+    width: var(--scrollbar-size);
+}
+
+.table-responsive::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-thumb-color);
+    border-radius: calc(var(--scrollbar-size) / 2);
+}
+
+/* Focus styles for interactive elements */
+/* button:focus,
+select:focus,
+input:focus {
+    outline: var(--focus-ring-width) solid var(--focus-ring-color);
+    outline-offset: 2px;
+} */
+
+/* Remove focus ring when using mouse */
+/* button:focus:not(:focus-visible),
+select:focus:not(:focus-visible),
+input:focus:not(:focus-visible) {
+    outline: none;
+} */
+
+/* Print optimizations */
+@media print {
+    .card {
+        break-inside: avoid;
+        box-shadow: none;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+
+    /* Ensure good contrast for printing */
+    body {
+        color: #000;
+        background: #fff;
+    }
+
+    .table th {
+        background-color: #fff !important;
+        color: #000;
+    }
+}
+
+/* Mobile adjustments for filter controls */
+@media (max-width: 768px) {
+    #localFilterControls {
+        flex-direction: column;
+    }
+
+    #localFilterControls select,
+    #localFilterControls .btn-sm {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+    #localFilterControls .col-md-2 {
+        width: 100%;
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    #localFilterControls .btn-sm {
+        flex: 1;
+    }
+}
+
+/* Chart loading state */
+.chart-loading-state {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    background: var(--loading-bg-color);
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    z-index: 1;
+    min-width: 200px;
+    justify-content: center;
+}
+
+.chart-loading-state .spinner-border {
+    width: 1rem;
+    height: 1rem;
+    border-width: 0.15em;
+}
+
+.chart-loading-state span {
+    font-size: 0.875rem;
+    color: #6c757d;
+}
+
+/* Chart error state */
+.chart-error-alert {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    min-width: 200px;
+    text-align: center;
+    padding: 1rem;
+    margin: 0;
+}
+
+.chart-container {
+    position: relative;
+}
+
+.chart-container .zoom-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    pointer-events: none;
+}
+
+.chart-container:hover .zoom-icon {
+    opacity: 1;
+}
+
+.zoom-icon-overlay {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 10px;
+    border-radius: 50%;
+}

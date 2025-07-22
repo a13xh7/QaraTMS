@@ -8,10 +8,24 @@ use App\Models\Suite;
 use App\Models\TestPlan;
 use App\Models\TestRun;
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\ApiController;
 class TestPlanController extends Controller
 {
 
+    /**
+     * Summary of apicon
+     * @var ApiController
+     */
+    private $apiController;
+
+    /**
+     * Summary of __construct
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->apiController = new ApiController();
+    }
     public function startNewTestRun($test_plan_id)
     {
         if (!auth()->user()->can('add_edit_test_runs')) {
@@ -27,7 +41,7 @@ class TestPlanController extends Controller
         $testRun->data = $testRun->getInitialData();
         $testRun->save();
 
-        $testRun->title = 'Test Run '.$testRun->id.' for '.$testPlan->title;
+        $testRun->title = 'Test Run ' . $testRun->id . ' for ' . $testPlan->title;
         $testRun->save();
 
         return redirect()->route('test_run_show_page', [$testPlan->project_id, $testRun->id]);
@@ -70,8 +84,10 @@ class TestPlanController extends Controller
         $project = Project::findOrFail($project_id);
         $repositories = $project->repositories;
         $testPlan = TestPlan::findOrFail($test_plan_id);
-        $testSuitesTree = Suite::where('repository_id',
-            $testPlan->repository_id)->orderBy('order')->tree()->get()->toTree();
+        $testSuitesTree = Suite::where(
+            'repository_id',
+            $testPlan->repository_id
+        )->orderBy('order')->tree()->get()->toTree();
         $prefix = Repository::findOrFail($testPlan->repository_id)->prefix;
 
         return view('test_plan.edit_page')
@@ -104,7 +120,11 @@ class TestPlanController extends Controller
         $testPlan->description = $request->description;
         $testPlan->data = $request->data;  // это строка с id выбранных тест кейсов - 1,2,3 etc
 
-        $testPlan->save();
+        $testResult = $testPlan->save();
+
+        if ($testResult) {
+            $this->apiController->pushToLogDatabase("created", "test_plan", $request);
+        }
 
         return redirect()->route('test_plan_list_page', $request->project_id);
     }
@@ -122,9 +142,13 @@ class TestPlanController extends Controller
         $testPlan->repository_id = $request->repository_id;
         $testPlan->data = $request->data;  // это строка с id выбранных тест кейсов - 1,2,3 etc
 
-        $testPlan->save();
+        $testResult = $testPlan->save();
 
-        return redirect()->route('test_plan_update_page', [$request->project_id, $request->id]);
+        if ($testResult) {
+            $this->apiController->pushToLogDatabase("updated", "test_plan", $request);
+        }
+
+        return redirect()->route('test_plan_list_page', $request->project_id);
     }
 
     public function destroy(Request $request)
@@ -135,7 +159,10 @@ class TestPlanController extends Controller
 
         $testPlan = TestPlan::findOrFail($request->id);
         $project_id = $testPlan->project_id;
-        $testPlan->delete();
+        $testResult = $testPlan->delete();
+        if ($testResult) {
+            $this->apiController->pushToLogDatabase("deleted", "test_plan", $request);
+        }
         return redirect()->route('test_plan_list_page', $project_id);
     }
 

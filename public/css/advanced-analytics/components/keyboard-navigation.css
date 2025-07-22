@@ -1,0 +1,170 @@
+/**
+ * keyboard-navigation.css
+ * Styles for keyboard focus and navigation enhancements
+ */
+
+/* Base focus styles that apply to all interactive elements */
+:focus {
+    outline: 2px solid #4a90e2;
+    outline-offset: 2px;
+}
+
+/* High contrast mode focus styles */
+@media (forced-colors: active) {
+    :focus {
+        outline: 3px solid CanvasText;
+        outline-offset: 3px;
+    }
+}
+
+/* Keyboard focus for table cells */
+.keyboard-focus {
+    position: relative;
+    z-index: 10;
+    outline: 3px solid #4a90e2 !important;
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.3);
+    border-radius: 2px;
+}
+
+/* Add a focus ring animation for better visibility */
+.keyboard-focus::after {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border: 2px solid rgba(74, 144, 226, 0.6);
+    border-radius: 4px;
+    animation: pulseFocus 2s infinite;
+    pointer-events: none;
+}
+
+@keyframes pulseFocus {
+    0% {
+        opacity: 0.6;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.3;
+        transform: scale(1.05);
+    }
+    100% {
+        opacity: 0.6;
+        transform: scale(1);
+    }
+}
+
+/* Ensure focus is highly visible in tables */
+.contributor-table .data-cell:focus,
+.contributor-table .data-cell.keyboard-focus {
+    outline: 3px solid #4a90e2 !important;
+    outline-offset: -1px;
+    position: relative;
+    z-index: 5;
+}
+
+/* Additional focus styles for buttons and controls */
+.metric-button:focus,
+.filter-selector:focus,
+.squad-selector-option:focus,
+#squad-selector:focus,
+#year-selector:focus,
+#contributor-search:focus {
+    outline: 2px solid #4a90e2;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(74, 144, 226, 0.25);
+}
+
+/* Skip navigation link - hidden until focused */
+.skip-to-content {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+    background: #fff;
+    color: #333;
+    padding: 15px 20px;
+    z-index: 9999;
+    font-weight: bold;
+    text-decoration: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border: 2px solid #4a90e2;
+    border-radius: 4px;
+}
+
+.skip-to-content:focus {
+    top: 10px;
+    left: 10px;
+    outline: none;
+}
+
+/* Focus management for modals */
+.modal-backdrop.show {
+    opacity: 0.7; /* Slightly darker backdrop for better focus contrast */
+}
+
+.modal.show .modal-content {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.modal-content :focus {
+    outline: 2px solid #4a90e2;
+    outline-offset: 2px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Ensure table header stays visually distinct when navigating with keyboard */
+th:focus, 
+th.keyboard-focus {
+    background-color: #e9f3ff !important;
+    position: relative;
+    z-index: 10;
+}
+
+/* Improved focus indicators for filter badges */
+.filter-badge:focus,
+.filter-badge .badge-clear-btn:focus {
+    outline: 2px solid #4a90e2;
+    outline-offset: 2px;
+}
+
+/* Focus indicator for cells with value drops */
+.data-cell.value-drop:focus,
+.data-cell.value-drop.keyboard-focus {
+    outline-color: #dc3545 !important;
+    box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.3);
+}
+
+.data-cell.value-drop.keyboard-focus::after {
+    border-color: rgba(220, 53, 69, 0.6);
+}
+
+/* Interactive elements within cells */
+.data-cell .trend-indicator:focus {
+    outline: 2px dashed #4a90e2;
+    outline-offset: 1px;
+}
+
+/* Make sure focus is clearly visible for dark mode */
+@media (prefers-color-scheme: dark) {
+    .keyboard-focus {
+        outline-color: #61dafb !important;
+        box-shadow: 0 0 0 2px rgba(97, 218, 251, 0.3);
+    }
+    
+    .keyboard-focus::after {
+        border-color: rgba(97, 218, 251, 0.6);
+    }
+    
+    .data-cell.value-drop:focus,
+    .data-cell.value-drop.keyboard-focus {
+        outline-color: #ff6b6b !important;
+        box-shadow: 0 0 0 2px rgba(255, 107, 107, 0.3);
+    }
+    
+    .data-cell.value-drop.keyboard-focus::after {
+        border-color: rgba(255, 107, 107, 0.6);
+    }
+} 

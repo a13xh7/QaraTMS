@@ -1,0 +1,126 @@
+.d-flex {
+    gap: 0;
+}
+
+.main-content {
+    min-height: 100vh;
+    padding-top: 0;
+    padding-left: 0;
+    background-color: #f8f9fa;
+    width: calc(100% - 250px);
+}
+
+.main-content .container-fluid {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+.page-title {
+    font-weight: 600;
+    color: #333;
+}
+
+.card {
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+}
+
+.hover-shadow {
+    transition: box-shadow 0.2s ease-in-out;
+}
+
+.hover-shadow:hover {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+.base_block {
+    transition: all 0.2s ease-in-out;
+}
+
+.base_block:hover {
+    transform: translateY(-2px);
+}
+
+.card-header {
+    border-top-left-radius: 6px !important;
+    border-top-right-radius: 6px !important;
+}
+
+.project-description {
+    min-height: 60px;
+    max-height: 100px;
+    overflow: hidden;
+}
+
+.progress {
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    transition: width 0.6s ease;
+}
+
+.btn {
+    font-weight: 500;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.btn-primary {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+.btn-primary:hover {
+    background-color: #0b5ed7;
+    border-color: #0a58ca;
+}
+
+.alert {
+    border-radius: 6px;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    content: "›";
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.form-control-lg {
+    font-size: 1rem;
+}
+
+.dropdown-item {
+    padding: 0.5rem 1rem;
+}
+
+.dropdown-item i {
+    width: 1rem;
+    text-align: center;
+}
+
+.list-group-item-action:hover {
+    background-color: #f8f9fa;
+}
+
+.list-group-item-action:hover i.bi-chevron-right {
+    transform: translateX(3px);
+}
+
+i.bi-chevron-right {
+    transition: transform 0.2s ease;
+}

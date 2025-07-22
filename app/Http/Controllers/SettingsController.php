@@ -342,20 +342,20 @@ class SettingsController extends Controller
     {
         // Update the .env file with default values
         $this->updateEnvironmentFile([
-            'CONFLUENCE_BASE_URL' => 'https://your-domain.atlassian.net/wiki',
-            'CONFLUENCE_USERNAME' => 'your-email@domain.com',
-            'CONFLUENCE_API_TOKEN' => 'your-confluence-api-token',
-            'CONFLUENCE_SPACE_KEY' => 'YOUR_SPACE_KEY',
-            'JIRA_URL_SEARCH' => 'https://your-domain.atlassian.net/rest/api/2/search',
-            'JIRA_USERNAME' => 'your-email@domain.com',
-            'JIRA_API_TOKEN' => 'your-jira-api-token',
-            'CONFLUENCE_SPACE_KEY2' => 'YOUR_SPACE_KEY2',
-            'GITLAB_URL' => 'https://gitlab.com/api/v4',
-            'GITLAB_API_URL' => 'https://gitlab.com/api/v4',
-            'PROJECT_ID' => 'your-project-id',
-            'GITLAB_TOKEN' => 'your-gitlab-token',
-            'SLACK_BOT_TOKEN' => 'your-slack-bot-token',
-            'SLACK_CHANNEL_ID' => 'your-slack-channel-id',
+            'CONFLUENCE_BASE_URL' => env('CONFLUENCE_BASE_URL', 'https://admin.atlassian.net/wiki'),
+            'CONFLUENCE_USERNAME' => env('CONFLUENCE_USERNAME'),
+            'CONFLUENCE_API_TOKEN' => env('CONFLUENCE_API_TOKEN'),
+            'CONFLUENCE_SPACE_KEY' => env('CONFLUENCE_SPACE_KEY', 'admin'),
+            'JIRA_URL_SEARCH' => env('JIRA_URL_SEARCH', 'https://admin.atlassian.net/rest/api/2/search'),
+            'JIRA_USERNAME' => env('JIRA_USERNAME'),
+            'JIRA_API_TOKEN' => env('JIRA_API_TOKEN'),
+            'CONFLUENCE_SPACE_KEY2' => env('CONFLUENCE_SPACE_KEY2', 'TE'),
+            'GITLAB_URL' => env('GITLAB_URL', 'https://gitlab.com/api/v4'),
+            'GITLAB_API_URL' => env('GITLAB_API_URL', 'https://gitlab.com/api/v4'),
+            'PROJECT_ID' => env('PROJECT_ID'),
+            'GITLAB_TOKEN' => env('GITLAB_TOKEN'),
+            'SLACK_BOT_TOKEN' => env('SLACK_BOT_TOKEN'),
+            'SLACK_CHANNEL_ID' => env('SLACK_CHANNEL_ID'),
         ]);
 
         return back()->with('success', 'Default settings applied successfully');

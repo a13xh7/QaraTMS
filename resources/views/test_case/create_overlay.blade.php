@@ -75,6 +75,11 @@
                             <input name="title" id="tce_title_input" type="text" class="form-control border-secondary">
                         </div>
 
+                        <div class="mb-3 p-0">
+                            <label class="form-label"><b>Description</b></label>
+                            <input name="description" id="tce_desc_input" type="text" class="form-control border-secondary">
+                        </div>
+
                         <div class="col">
                             <label class="form-label"><b>Preconditions</b></label>
                             <textarea name="pre_conditions" class="editor_textarea" id="tce_preconditions_input"

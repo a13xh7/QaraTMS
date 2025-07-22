@@ -27,4 +27,8 @@ class TestCase extends Model
           ]
         }
      */
+
+    public function suite() {
+        return $this->belongsTo(Suite::class, 'suite_id');
+    }
 }

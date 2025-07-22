@@ -32,10 +32,12 @@
 
             </h3>
 
-            <button type="button" class="btn btn-outline-dark btn-sm mb-2"
-                    onclick="renderTestCaseEditForm({{$testCase->id}})">
-                <i class="bi bi-pencil px-1"></i>
-            </button>
+            @can('add_edit_test_cases')
+                <button type="button" class="btn btn-outline-dark btn-sm mb-2"
+                        onclick="renderTestCaseEditForm({{$testCase->id}})">
+                    <i class="bi bi-pencil px-1"></i>
+                </button>
+            @endcan
 
         </div>
 
@@ -43,6 +45,15 @@
 
             <div id="test_case_content" class="position-relative">
                 <div class="p-4 pt-0">
+
+                    @if(isset( $testCase->description) && !empty($testCase->description) )
+                        <strong class="fs-5 pb-3">Description</strong>
+                        <div class="row mt-1 mb-3 border p-3 rounded">
+                            <div>
+                                {!! $testCase->description !!}
+                            </div>
+                        </div>
+                    @endif
 
                     @if(isset( $data->preconditions) && !empty($data->preconditions) )
                         <strong class="fs-5 pb-3">Preconditions</strong>

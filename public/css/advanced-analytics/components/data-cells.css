@@ -1,0 +1,195 @@
+/* 
+ * Data Cell Styles for Advanced Analytics
+ * Contains styles for data cells, values, and their various states
+ */
+
+/* Base cell styles */
+.c-analytics-table td,
+.c-analytics-table th {
+  padding: var(--space-sm) var(--space-sm);
+  font-size: var(--font-size-sm);
+  text-align: center;
+  position: relative;
+  vertical-align: middle;
+  min-height: var(--h-row);
+  line-height: 1.2;
+  border: 1px solid var(--c-border);
+}
+
+/* Text alignment for sticky columns */
+.c-analytics-table td.c-cell--squad {
+  text-align: left;
+  vertical-align: middle;
+  padding: var(--space-sm);
+  line-height: 1.3;
+}
+
+.c-analytics-table td.c-cell--name {
+  text-align: left;
+  padding: var(--space-sm) var(--space-lg) var(--space-sm) var(--space-sm);
+  line-height: 1.4;
+  font-size: var(--font-size-sm);
+}
+
+/* Hover effects - desktop only */
+@media (min-width: 769px) {
+  .c-analytics-table tbody tr:hover {
+    background-color: color-mix(in srgb, var(--c-bg) 95%, var(--c-fg));
+  }
+  
+  .c-analytics-table tbody tr:hover td.c-cell--sticky {
+    background-color: color-mix(in srgb, var(--c-light) 95%, var(--c-fg));
+  }
+}
+
+/* Current month highlight */
+.c-cell--current-month {
+  border: 2px solid var(--c-primary) !important;
+  font-weight: bold;
+}
+
+/* Empty and zero value cells */
+.c-cell--empty {
+  background-color: var(--c-light);
+  color: var(--c-muted);
+}
+
+.c-cell--zero {
+  background-color: var(--c-light);
+  color: var(--c-muted);
+}
+
+/* Inactive periods */
+.c-cell--inactive {
+  background-color: var(--c-light);
+  color: var(--c-light-muted);
+  background-image: linear-gradient(45deg, 
+    color-mix(in srgb, var(--c-fg) 3%, transparent) 25%, 
+    transparent 25%, 
+    transparent 50%, 
+    color-mix(in srgb, var(--c-fg) 3%, transparent) 50%, 
+    color-mix(in srgb, var(--c-fg) 3%, transparent) 75%, 
+    transparent 75%);
+  background-size: 6px 6px;
+}
+
+/* Value drop highlight with a11y improvements */
+.c-cell--value-drop {
+  background-color: color-mix(in srgb, var(--c-danger) 10%, var(--c-bg)) !important;
+  position: relative;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 5px,
+    color-mix(in srgb, var(--c-danger) 5%, transparent) 5px,
+    color-mix(in srgb, var(--c-danger) 5%, transparent) 10px
+  );
+}
+
+/* Visual indicator for value drops */
+.c-cell--value-drop::after {
+  content: '';
+  position: absolute;
+  bottom: 3px;
+  right: 3px;
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid color-mix(in srgb, var(--c-danger) 80%, transparent);
+}
+
+/* Trend indicators */
+.c-trend-indicator {
+  display: inline-block;
+  font-size: var(--font-size-xs);
+  margin-left: var(--space-xs);
+  position: relative;
+  top: -1px;
+  transition: opacity var(--transition-fast);
+}
+
+.c-trend--up {
+  color: var(--c-trend-up);
+}
+
+.c-trend--down {
+  color: var(--c-trend-down);
+}
+
+.c-trend--neutral {
+  color: var(--c-trend-neutral);
+}
+
+/* Cell content wrapper */
+.c-cell-content {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Ensure content is vertically centered */
+.c-analytics-table td.c-cell--squad span,
+.c-analytics-table td.c-cell--name span {
+  vertical-align: middle;
+  display: inline-block;
+}
+
+/* Screen reader only descriptions - accessible but visually hidden */
+.c-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* High contrast mode support */
+@media (forced-colors: active) {
+  .c-cell--value-drop {
+    border: 2px solid CanvasText;
+  }
+  
+  .c-cell--value-drop::after {
+    border-top-color: CanvasText;
+  }
+  
+  .c-trend--up,
+  .c-trend--down,
+  .c-trend--neutral {
+    forced-color-adjust: none;
+  }
+  
+  .c-cell--current-month {
+    border: 3px solid Highlight !important;
+  }
+}
+
+/* Responsive adjustments for cell styling */
+@media (max-width: 768px) {
+  .c-analytics-table td,
+  .c-analytics-table th {
+    padding: 6px 4px;
+    height: 34px;
+    font-size: var(--font-size-xs);
+  }
+  
+  .c-cell-content {
+    font-size: var(--font-size-xs);
+  }
+  
+  .c-trend-indicator {
+    font-size: 9px;
+    margin-left: 2px;
+  }
+  
+  .c-analytics-table td.c-cell--squad,
+  .c-analytics-table td.c-cell--name {
+    padding-top: 6px;
+    padding-bottom: 6px;
+  }
+} 

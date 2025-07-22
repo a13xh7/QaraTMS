@@ -1,0 +1,142 @@
+/*───────────────────────────────────────────────────────────────
+  Advanced‑Analytics  –  table layout & sticky behaviour
+  (replacement for the file you pasted)
+────────────────────────────────────────────────────────────────*/
+
+/*‑‑ Tokens ----------------------------------------------------*/
+:root {
+    --w-squad : 100px;           /* squad column width  (mobile‑first) */
+    --w-name  : 150px;           /* name  column width                */
+    --w-month : 60px;            /* every data cell                   */
+  }
+  
+  @media (min-width: 769px) {
+    :root {                      /* wider desktop table */
+      --w-squad : 100px;
+      --w-name  : 150px;
+    }
+  }
+  
+  /*‑‑ Container --------------------------------------------------*/
+  .advanced-analytics-container .table-responsive {
+    overflow-x: auto;
+    overflow-y: visible;
+    position: relative;
+    scrollbar-width: thin;               /* Firefox slim scrollbar */
+  }
+  
+  /*‑‑ Base table -------------------------------------------------*/
+  .contributor-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: .875rem;
+  }
+  
+  /* widths for all data cells (except sticky-x columns) */
+  .contributor-table td,
+  .contributor-table th:not(.sticky-x) {
+    width: var(--w-month);
+    min-width: var(--w-month);
+    max-width: var(--w-month);
+  }
+  
+  /*‑‑ Stickiness helpers ----------------------------------------*/
+  .sticky-x {                           /* horizontal stick (left) */
+    position: sticky;
+    background: #fff;
+    z-index: 7;
+    box-shadow: 2px 0 5px -2px rgba(0,0,0,.1);
+  }
+  
+  .sticky-y {                           /* vertical stick (top)    */
+    position: sticky;
+    top: 0;
+    background: #f8f9fa;
+    z-index: 10;
+  }
+  
+  .sticky-both {                        /* horizontal + vertical   */
+    position: sticky;
+    top: 0;
+    background: #fff;
+    z-index: 12;
+    box-shadow: 2px 0 5px -2px rgba(0,0,0,.1);
+  }
+  
+  /*‑‑ Frozen left columns ---------------------------------------*/
+  .contributor-table .sticky-col-1 {        /* squad */
+    composes: sticky-both sticky-x;
+    left: 0;
+    width: var(--w-squad);
+    z-index: 12;
+  }
+  
+  .contributor-table .sticky-col-2 {        /* name  */
+    composes: sticky-both sticky-x;
+    left: var(--w-squad);
+    width: var(--w-name);
+    z-index: 11;
+  }
+  
+  /*‑‑ Year & month header rows (vertical only) ------------------*/
+  .contributor-table .year-header th {
+    composes: sticky-y;
+    font-weight: 700;
+    height: 40px;
+    border-bottom: 2px solid #dee2e6;
+    left: auto !important;               /*  ← ensure no horiz. stick */
+  }
+  
+  .contributor-table .month-header th {
+    composes: sticky-y;
+    top: 40px;                           /* sits below year row */
+    height: 30px;
+    left: auto !important;
+  }
+  
+  /* make corner header cells both‑sticky */
+  .contributor-table thead th.sticky-col {
+    composes: sticky-both;
+  }
+  
+  /*‑‑ Data cells -------------------------------------------------*/
+  .contributor-table td {
+    border: 1px solid #dee2e6;
+    padding: .25rem .5rem;
+    text-align: center;
+    vertical-align: middle;
+  }
+  
+  .contributor-table tbody tr:nth-child(even) { background: rgba(0,0,0,.02); }
+  .contributor-table tbody tr:hover           { background: rgba(0,123,255,.05); }
+  
+  .data-cell              { cursor:pointer; transition:background .2s; }
+  .data-cell:hover        { background: rgba(0,123,255,.1); }
+  .data-cell.empty        { background:#f8f9fa; color:#adb5bd; }
+  .data-cell.current-month{ border:2px solid #007bff; }
+  .value-drop             { color:#dc3545; }
+  .zero-value             { color:#adb5bd; }
+  .disabled-cell          { background:#e9ecef; color:#adb5bd; cursor:not-allowed; }
+  
+  /*‑‑ Trend icons -----------------------------------------------*/
+  .trend-up   { color:#28a745; font-size:.75rem; margin-left:.25rem; }
+  .trend-down { color:#dc3545; font-size:.75rem; margin-left:.25rem; }
+  
+  /*‑‑ Year boundary rule ----------------------------------------*/
+  .contributor-table td[data-month="Dec"] { border-right:2px solid #dee2e6; }
+  
+  /*‑‑ Responsive tweaks -----------------------------------------*/
+  @media (max-width:768px) {
+    .contributor-table .sticky-col-1 { --w-squad:80px;  width:var(--w-squad); }
+    .contributor-table .sticky-col-2 { left:var(--w-squad); --w-name:120px; width:var(--w-name); }
+    .contributor-table td,
+    .contributor-table th { padding:.25rem; font-size:.75rem; }
+  }
+  
+  /*‑‑ Fallback for browsers without position:sticky -------------*/
+  @supports not (position: sticky) {
+    .sticky-x, .sticky-y, .sticky-both { position: relative; top:auto; left:auto; }
+    .advanced-analytics-container .table-responsive { overflow-x: visible; }
+  }
+  

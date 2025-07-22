@@ -8,9 +8,23 @@ use App\Models\Suite;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
-
+use App\Http\Controllers\ApiController;
 class RepositoryController extends Controller
 {
+    /**
+     * Summary of apicon
+     * @var ApiController
+     */
+    private $apiController;
+
+    /**
+     * Summary of __construct
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->apiController = new ApiController();
+    }
     /*****************************************
      *  AJAX
      *****************************************/
@@ -123,7 +137,11 @@ class RepositoryController extends Controller
         $repository->project_id = $request->project_id;
         $repository->description = $request->description;
 
-        $repository->save();
+        $saveResult = $repository->save();
+
+        if ($saveResult) {
+            $this->apiController->pushToLogDatabase("created", "repository", $request);
+        }
 
         return redirect()->route('repository_list_page', $repository->project_id);
     }
@@ -141,9 +159,13 @@ class RepositoryController extends Controller
         $repository->project_id = $request->project_id;
         $repository->description = $request->description;
 
-        $repository->save();
+        $saveResult = $repository->save();
 
-        return redirect()->route('repository_show_page', [$repository->project_id, $repository->id]);
+        if ($saveResult) {
+            $this->apiController->pushToLogDatabase("updated", "repository", $request);
+        }
+
+        return redirect()->route('repository_list_page', $repository->project_id);
     }
 
     public function destroy(Request $request)
@@ -154,6 +176,7 @@ class RepositoryController extends Controller
 
         $repository = Repository::findOrFail($request->id);
         $repository->delete();
+        $this->apiController->pushToLogDatabase("deleted", "repository", $request);
         return redirect()->route('repository_list_page', $request->project_id);
     }
 }

@@ -1,0 +1,9 @@
+.document-selector option {
+    font-family: monospace;
+    padding: 4px 8px;
+}
+
+.document-selector option:checked {
+    background: linear-gradient(0deg, #4CAF50 0%, #4CAF50 100%);
+    color: white;
+} 

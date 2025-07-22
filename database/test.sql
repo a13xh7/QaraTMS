@@ -1,0 +1,1 @@
+INSERT INTO monthly_contributions (year, month, month_name, username, name, mr_created, mr_approved, repo_pushes, total_events, created_at, updated_at) VALUES (2023, 4, 'April', 'test_user', 'Test User', 10, 15, 20, 45, NOW(), NOW());

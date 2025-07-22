@@ -1,5 +1,9 @@
 @extends('layout.base_layout')
 
+@section('head')
+    <link href="{{ asset_path('css/docs.css') }}" rel="stylesheet">
+@endsection
+
 @section('content')
 
     @include('layout.sidebar_nav')
@@ -8,36 +12,45 @@
     <div class="col fh document">
 
         <div class="border-bottom my-3">
-            <h3 class="page_title">
-                Documents
+            <h3 class="border-bottom my-3 page-title">{{ $pageTitle ?? 'Documents' }}</h3>
+            <div class="d-flex gap-3 mb-3">
+                @if(isset($project))
+                    @can('add_edit_documents')
+                        <a href="{{route("document_create_page", $project->id)}}" class="text-decoration-none">
+                            <button type="button" class="btn btn-primary px-3 text-nowrap">
+                                + Add New Doc
+                            </button>
+                        </a>
+                    @endcan
+                @endif
 
-                @can('add_edit_documents')
-                    <a class="mx-3" href="{{route("document_create_page", $project->id)}}">
-                        <button type="button" class="btn btn-sm btn-primary"><i class="bi bi-plus-lg"></i> Add New
-                        </button>
-                    </a>
-                @endcan
-            </h3>
+                <input type="text" class="form-filter-control" id="documentFilter" placeholder="Filter by title...">
+            </div>
         </div>
 
         <div class="row m-0 mb-3 shadow" style="min-height: 700px">
 
-            <div class="col base_block pe-3 border"
-                 @if( isset($selectedDocument) )
-                     style="max-width: 300px; background: #00000005"
-                    @endif >
-
-                <div class="my-2 border-bottom">
+            <div class="col base_block pe-3 border toc-sidebar" @if(isset($selectedDocument))
+            style="max-width: 300px; background: #f8f9fa" @endif>
+                <div class="toc-header my-2 border-bottom d-flex justify-content-between align-items-center">
                     <span class="fs-4">Table of Contents</span>
+                    <button class="btn btn-sm btn-outline-secondary d-lg-none" onclick="toggleTOC()">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
                 </div>
 
-
-                <div>
-                    @foreach($documents as $document)
-                        @include('docs.tree_item')
-                    @endforeach
+                <div class="toc-content">
+                    @if($documents->count() > 0)
+                        @foreach($documents as $document)
+                            @include('docs.tree_item')
+                        @endforeach
+                    @else
+                        <div class="text-muted text-center py-4">
+                            <i class="bi bi-file-earmark-text fs-4"></i>
+                            <p class="mt-2">No documents yet</p>
+                        </div>
+                    @endif
                 </div>
-
             </div>
 
 
@@ -50,24 +63,35 @@
                         </div>
 
                         <div class="mt-2">
-                            @can('add_edit_documents')
-                                <a href="{{route('document_edit_page', [$selectedDocument->project_id, $selectedDocument->id])}}"
-                                   class="btn btn-sm btn-outline-secondary" title="Edit">
-                                    <i class="bi bi-pencil"></i>
-                                </a>
-                            @endcan
+                            <div class="btn-group">
+                                @can('add_edit_documents')
+                                    <a href="{{route('document_edit_page', [$selectedDocument->project_id, $selectedDocument->id])}}"
+                                        class="btn btn-sm btn-outline-secondary" title="Edit">
+                                        <i class="bi bi-pencil"></i> Edit
+                                    </a>
+                                @endcan
 
-
-                            @can('delete_documents')
-                                <form method="POST" action="{{route("document_delete")}}" style="display: inline-block">
-                                    @csrf
-                                    <input type="hidden" name="id" value="{{$selectedDocument->id}}">
-
-                                    <button type="submit" class="btn btn-sm btn-outline-danger" title="Delete">
-                                        <i class="bi bi-trash3"></i>
+                                @can('delete_documents')
+                                    <button type="button"
+                                        class="btn btn-sm btn-outline-secondary dropdown-toggle dropdown-toggle-split"
+                                        data-bs-toggle="dropdown">
+                                        <span class="visually-hidden">Toggle Dropdown</span>
                                     </button>
-                                </form>
-                            @endcan
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <form method="POST" action="{{ route('document_delete') }}"
+                                                id="deleteForm_{{ $selectedDocument->id }}" style="display: none;">
+                                                @csrf
+                                                <input type="hidden" name="id" value="{{ $selectedDocument->id }}">
+                                            </form>
+                                            <button type="button" class="dropdown-item text-danger"
+                                                onclick="confirmDelete({{ $selectedDocument->id }})">
+                                                <i class="bi bi-trash3"></i> Delete
+                                            </button>
+                                        </li>
+                                    </ul>
+                                @endcan
+                            </div>
                         </div>
 
 
@@ -85,4 +109,6 @@
 
 @endsection
 
-
+@section('footer')
+    <script src="{{ asset_path('js/docs.js') }}"></script>
+@endsection

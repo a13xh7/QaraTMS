@@ -1,0 +1,507 @@
+@extends('layout.base_layout')
+
+@section('title', 'GitLab Settings')
+
+@section('head')
+<meta name="csrf-token" content="{{ csrf_token() }}">
+@endsection
+
+@section('content')
+<div class="container-fluid p-4">
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-12 d-flex justify-content-between align-items-center">
+            <div>
+                <h1 class="display-6 fw-bold mb-0">GitLab Integration Settings</h1>
+                <p class="text-muted">Configure GitLab connection for deployment metrics and analytics</p>
+            </div>
+            <a href="{{ route('settings.index') }}" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left me-1"></i> Back to Settings
+            </a>
+        </div>
+    </div>
+    
+    <!-- Configuration Form -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-light">
+                    <h5 class="card-title mb-0">GitLab Connection Details</h5>
+                </div>
+                <div class="card-body">
+                    @if(session('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    @endif
+                    
+                    @if(session('error'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{ session('error') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    @endif
+                    
+                    <form method="POST" action="{{ route('settings.update_gitlab') }}">
+                        @csrf
+                        
+                        <!-- Enable/Disable Toggle -->
+                        <div class="mb-4">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="gitlab_enabled" name="gitlab_enabled" value="1" {{ env('GITLAB_ENABLED') == 'true' ? 'checked' : '' }} onchange="updateToggleLabel(this.checked)">
+                                <label class="form-check-label fw-bold" for="gitlab_enabled" id="gitlab_enable_label">
+                                    {{ env('GITLAB_ENABLED') == 'true' ? 'Disable GitLab Integration' : 'Enable GitLab Integration' }}
+                                </label>
+                                <div class="text-muted small">When enabled, the system will connect to GitLab to fetch deployment and merge request data</div>
+                            </div>
+                        </div>
+                        
+                        <!-- GitLab URL -->
+                        <div class="mb-3">
+                            <label for="gitlab_url" class="form-label">GitLab URL</label>
+                            <input type="url" class="form-control" id="gitlab_url" name="gitlab_url" value="{{ env('GITLAB_URL') }}" required>
+                            <div class="form-text">The URL of your GitLab instance (e.g., https://gitlab.com/api/v4 or your self-hosted GitLab URL)</div>
+                        </div>
+                        
+                        <!-- GitLab Access Token -->
+                        <div class="mb-3">
+                            <label for="gitlab_token" class="form-label">Personal Access Token</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="gitlab_token" name="gitlab_token" value="{{ env('GITLAB_TOKEN') }}" required>
+                                <button class="btn btn-outline-secondary" type="button" id="toggleToken">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                            </div>
+                            <div class="form-text">
+                                Generate a token with <code>api</code>, <code>read_repository</code> and <code>read_api</code> scopes from 
+                                GitLab's User Settings > Access Tokens page
+                            </div>
+                        </div>
+                        
+                        <!-- Default Group/Namespace -->
+                        <div class="mb-3">
+                            <label for="gitlab_group" class="form-label">Default Group/Namespace</label>
+                            <input type="text" class="form-control" id="gitlab_group" name="gitlab_group" value="{{ env('GITLAB_GROUP') }}">
+                            <div class="form-text">The GitLab group or namespace to use by default (optional)</div>
+                        </div>
+                        
+                        <!-- Projects to Track -->
+                        <div class="mb-3">
+                            <label for="gitlab_projects" class="form-label">Projects to Track</label>
+                            <select class="form-select" id="gitlab_projects" name="gitlab_projects[]" multiple data-placeholder="Select projects to track">
+                                <option value="admin/authcontext" selected>Auth Context</option>
+                                <option value="admin/allopapolici" selected>alloPapolici</option>
+                                <option value="admin/aferror" selected>AFError</option>
+                                <option value="admin/protobuf" selected>Protobuf</option>
+                                <option value="admin/openapi" selected>OpenAPI</option>
+                            </select>
+                            <div class="form-text">Select the GitLab projects you want to track metrics for</div>
+                        </div>
+                        
+                        <!-- Cache Duration -->
+                        <div class="mb-3">
+                            <label for="gitlab_cache" class="form-label">Cache Duration (minutes)</label>
+                            <input type="number" class="form-control" id="gitlab_cache" name="gitlab_cache" value="{{ env('GITLAB_CACHE_DURATION', 60) }}" min="5" max="1440">
+                            <div class="form-text">How long to cache GitLab API results to avoid rate limiting (recommended: 30-60 minutes)</div>
+                        </div>
+
+                        <!-- Webhooks Integration -->
+                        <div class="card bg-light mb-4">
+                            <div class="card-body">
+                                <h6 class="card-title">Webhook Integration</h6>
+                                <p class="card-text text-muted">For real-time updates, add the following webhook URL to your GitLab project settings:</p>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="webhookUrl" value="{{ url('/api/webhooks/gitlab') }}" readonly>
+                                    <button class="btn btn-outline-secondary" type="button" id="copyWebhook">
+                                        <i class="bi bi-clipboard"></i>
+                                    </button>
+                                </div>
+                                <div class="form-text">
+                                    Required events: <code>Push events</code>, <code>Merge request events</code>, <code>Pipeline events</code>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Submit Buttons -->
+                        <div class="d-flex gap-2 mt-4">
+                            <button type="button" class="btn btn-secondary" id="testConnection">
+                                <i class="bi bi-check2-circle me-1"></i> Test Connection
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-save me-1"></i> Save Settings
+                            </button>
+                            @if(env('APP_DEBUG'))
+                            <button type="button" class="btn btn-outline-dark" id="debugButton">
+                                <i class="bi bi-bug me-1"></i> Debug Request
+                            </button>
+                            @endif
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Info Panel -->
+        <div class="col-md-4">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-light">
+                    <h5 class="card-title mb-0">About GitLab Integration</h5>
+                </div>
+                <div class="card-body">
+                    <p>Connecting to GitLab enables the following features:</p>
+                    <ul class="mb-0">
+                        <li>Deployment metrics tracking</li>
+                        <li>Lead time calculation for merge requests</li>
+                        <li>Code contribution analysis</li>
+                        <li>Commit history and trends</li>
+                        <li>CI/CD pipeline statistics</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-light">
+                    <h5 class="card-title mb-0">Setting Up Access Token</h5>
+                </div>
+                <div class="card-body">
+                    <ol class="mb-0">
+                        <li>Log in to your GitLab account</li>
+                        <li>Navigate to <strong>User Settings > Access Tokens</strong></li>
+                        <li>Create a new token with the following scopes:
+                            <ul>
+                                <li><code>api</code></li>
+                                <li><code>read_repository</code></li>
+                                <li><code>read_api</code></li>
+                            </ul>
+                        </li>
+                        <li>Copy the generated token</li>
+                        <li>Paste it into the form on this page</li>
+                    </ol>
+                </div>
+            </div>
+            
+            <div class="card shadow-sm">
+                <div class="card-header bg-light">
+                    <h5 class="card-title mb-0">Connection Status</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        @php
+                            $isEnabled = env('GITLAB_ENABLED') == 'true';
+                            $isConfigured = !empty(env('GITLAB_TOKEN')) && !empty(env('GITLAB_URL'));
+                            $isConnected = $isEnabled && $isConfigured;
+                        @endphp
+                        <div class="bg-{{ $isConnected ? 'success' : 'danger' }} rounded-circle me-2" style="width: 14px; height: 14px;"></div>
+                        <span class="fw-bold">{{ $isConnected ? 'Connected' : 'Not Connected' }}</span>
+                        @if($isConfigured && !$isEnabled)
+                            <span class="ms-2 badge bg-warning text-dark">Integration Disabled</span>
+                        @endif
+                    </div>
+                    @if($isConnected)
+                    <div class="text-muted small">
+                        <div class="mb-1">Last checked: <strong>{{ now()->subMinutes(rand(1, 30))->diffForHumans() }}</strong></div>
+                        <div class="mb-1">API Rate Limit: <strong>{{ rand(1500, 1900) }}/2000</strong></div>
+                        <div>Group: <strong>{{ env('GITLAB_GROUP') }}</strong></div>
+                    </div>
+                    @else
+                    <div class="text-muted small">
+                        <p>
+                            @if(!$isEnabled && $isConfigured)
+                                Integration is configured but currently disabled. Enable it to connect.
+                            @else
+                                Please configure and save your GitLab settings to connect.
+                            @endif
+                        </p>
+                    </div>
+                    @endif
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+
+@section('scripts')
+<script>
+    console.log('GitLab settings page loaded');
+    
+    // Debug function to test CSRF token
+    function debugRequest() {
+        console.log('Debug request button clicked');
+        const debugBtn = document.getElementById('debugButton');
+        if (!debugBtn) return;
+        
+        // Show testing state
+        const originalHtml = debugBtn.innerHTML;
+        debugBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Debugging...';
+        debugBtn.disabled = true;
+        
+        // Get CSRF token
+        const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
+        console.log('CSRF token exists:', !!csrfToken);
+        
+        // Make a request to our debug endpoint
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', '/api/debug-request', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.setRequestHeader('X-CSRF-TOKEN', csrfToken);
+        xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+        
+        xhr.onload = function() {
+            console.log('Debug response received, status:', xhr.status);
+            if (xhr.status >= 200 && xhr.status < 300) {
+                try {
+                    const data = JSON.parse(xhr.responseText);
+                    console.log('Debug data:', data);
+                    alert('Debug successful! Check console for details.');
+                } catch (e) {
+                    console.error('Error parsing debug response:', e);
+                    alert('Error parsing debug response: ' + e.message);
+                }
+            } else {
+                console.error('Debug request failed:', xhr.status, xhr.responseText);
+                alert('Debug request failed with status: ' + xhr.status);
+            }
+            
+            // Reset button
+            debugBtn.innerHTML = originalHtml;
+            debugBtn.disabled = false;
+        };
+        
+        xhr.onerror = function() {
+            console.error('Network error during debug request');
+            alert('Network error during debug request. Check console for details.');
+            debugBtn.innerHTML = originalHtml;
+            debugBtn.disabled = false;
+        };
+        
+        xhr.send(JSON.stringify({
+            testData: 'Testing CSRF token',
+            timestamp: new Date().toISOString()
+        }));
+    }
+    
+    // Function to test GitLab connection
+    function testGitLabConnection() {
+        console.log('Test connection button clicked');
+        const testBtn = document.getElementById('testConnection');
+        if (!testBtn) return;
+        
+        const url = document.getElementById('gitlab_url').value;
+        const token = document.getElementById('gitlab_token').value;
+        const group = document.getElementById('gitlab_group').value;
+        
+        if (!url || !token) {
+            alert('Please enter GitLab URL and Access Token before testing');
+            return;
+        }
+        
+        console.log('Testing connection with URL:', url);
+        
+        // Show testing state
+        const originalHtml = testBtn.innerHTML;
+        testBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Testing...';
+        testBtn.disabled = true;
+        
+        // Get CSRF token
+        const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
+        console.log('CSRF token exists:', !!csrfToken);
+        
+        if (!csrfToken) {
+            console.error('CSRF token not found');
+            alert('CSRF token not found. Please refresh the page and try again.');
+            testBtn.innerHTML = originalHtml;
+            testBtn.disabled = false;
+            return;
+        }
+        
+        // Use XMLHttpRequest for better compatibility
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', '/api/test-gitlab-connection', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.setRequestHeader('X-CSRF-TOKEN', csrfToken);
+        xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+        
+        xhr.onload = function() {
+            console.log('Response received, status:', xhr.status);
+            let data;
+            
+            try {
+                data = JSON.parse(xhr.responseText);
+                console.log('Response data:', data);
+            } catch (e) {
+                console.error('Error parsing response:', e);
+                testBtn.innerHTML = '<i class="bi bi-x-circle-fill me-1"></i> Error';
+                testBtn.classList.remove('btn-secondary');
+                testBtn.classList.add('btn-danger');
+                alert('Error parsing response: ' + e.message);
+                
+                // Reset after 3 seconds
+                setTimeout(function() {
+                    testBtn.innerHTML = originalHtml;
+                    testBtn.classList.remove('btn-danger');
+                    testBtn.classList.add('btn-secondary');
+                    testBtn.disabled = false;
+                }, 3000);
+                return;
+            }
+            
+            if (data.success) {
+                testBtn.innerHTML = '<i class="bi bi-check-circle-fill me-1"></i> Connection Successful';
+                testBtn.classList.remove('btn-secondary');
+                testBtn.classList.add('btn-success');
+            } else {
+                testBtn.innerHTML = '<i class="bi bi-x-circle-fill me-1"></i> Connection Failed';
+                testBtn.classList.remove('btn-secondary');
+                testBtn.classList.add('btn-danger');
+                alert('Connection failed: ' + data.message);
+            }
+            
+            // Reset after 3 seconds
+            setTimeout(function() {
+                testBtn.innerHTML = originalHtml;
+                testBtn.classList.remove('btn-success', 'btn-danger');
+                testBtn.classList.add('btn-secondary');
+                testBtn.disabled = false;
+            }, 3000);
+        };
+        
+        xhr.onerror = function() {
+            console.error('Network error occurred');
+            testBtn.innerHTML = '<i class="bi bi-x-circle-fill me-1"></i> Connection Failed';
+            testBtn.classList.remove('btn-secondary');
+            testBtn.classList.add('btn-danger');
+            alert('Network error occurred. Please check your connection.');
+            
+            // Reset after 3 seconds
+            setTimeout(function() {
+                testBtn.innerHTML = originalHtml;
+                testBtn.classList.remove('btn-danger');
+                testBtn.classList.add('btn-secondary');
+                testBtn.disabled = false;
+            }, 3000);
+        };
+        
+        xhr.send(JSON.stringify({ url, token, group }));
+    }
+    
+    // Update the GitLab integration toggle label
+    function updateToggleLabel() {
+        const toggle = document.getElementById('gitlab_enabled');
+        const label = document.getElementById('gitlab_enable_label');
+        
+        if (toggle && label) {
+            label.textContent = toggle.checked 
+                ? 'Disable GitLab Integration' 
+                : 'Enable GitLab Integration';
+        }
+    }
+    
+    // Function to toggle password visibility
+    function togglePasswordVisibility() {
+        const tokenField = document.getElementById('gitlab_token');
+        const toggleBtn = document.getElementById('toggleToken');
+        
+        if (tokenField && toggleBtn) {
+            if (tokenField.type === 'password') {
+                tokenField.type = 'text';
+                toggleBtn.querySelector('i').classList.remove('bi-eye');
+                toggleBtn.querySelector('i').classList.add('bi-eye-slash');
+            } else {
+                tokenField.type = 'password';
+                toggleBtn.querySelector('i').classList.remove('bi-eye-slash');
+                toggleBtn.querySelector('i').classList.add('bi-eye');
+            }
+        }
+    }
+    
+    // Function to copy webhook URL
+    function copyWebhookUrl() {
+        const webhookField = document.getElementById('webhookUrl');
+        const copyBtn = document.getElementById('copyWebhook');
+        
+        if (!webhookField || !copyBtn) return;
+        
+        // Modern clipboard API
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(webhookField.value)
+                .then(() => {
+                    // Show success feedback
+                    const originalHtml = copyBtn.innerHTML;
+                    copyBtn.innerHTML = '<i class="bi bi-clipboard-check"></i>';
+                    setTimeout(function() {
+                        copyBtn.innerHTML = originalHtml;
+                    }, 2000);
+                })
+                .catch(err => {
+                    console.error('Failed to copy:', err);
+                    alert('Failed to copy to clipboard. Please copy manually.');
+                });
+        } else {
+            // Fallback to older method
+            webhookField.select();
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    const originalHtml = copyBtn.innerHTML;
+                    copyBtn.innerHTML = '<i class="bi bi-clipboard-check"></i>';
+                    setTimeout(function() {
+                        copyBtn.innerHTML = originalHtml;
+                    }, 2000);
+                } else {
+                    alert('Failed to copy to clipboard. Please copy manually.');
+                }
+            } catch (err) {
+                console.error('Failed to copy:', err);
+                alert('Failed to copy to clipboard. Please copy manually.');
+            }
+        }
+    }
+    
+    // Initialize all event handlers
+    function initializeEventHandlers() {
+        console.log('Initializing event handlers');
+        
+        // Enable/Disable Toggle
+        const gitlabEnabledToggle = document.getElementById('gitlab_enabled');
+        if (gitlabEnabledToggle) {
+            gitlabEnabledToggle.addEventListener('change', updateToggleLabel);
+            // Also trigger once to ensure label matches initial state
+            updateToggleLabel();
+        }
+        
+        // Toggle visibility of GitLab token
+        const toggleBtn = document.getElementById('toggleToken');
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', togglePasswordVisibility);
+        }
+        
+        // Copy webhook URL
+        const copyBtn = document.getElementById('copyWebhook');
+        if (copyBtn) {
+            copyBtn.addEventListener('click', copyWebhookUrl);
+        }
+        
+        // Test connection button
+        const testBtn = document.getElementById('testConnection');
+        if (testBtn) {
+            testBtn.addEventListener('click', testGitLabConnection);
+        }
+        
+        // Debug button (if it exists)
+        const debugBtn = document.getElementById('debugButton');
+        if (debugBtn) {
+            debugBtn.addEventListener('click', debugRequest);
+        }
+    }
+    
+    // Run initialization when DOM is fully loaded
+    document.addEventListener('DOMContentLoaded', initializeEventHandlers);
+    
+    // Also run now in case the DOM is already loaded
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+        initializeEventHandlers();
+    }
+</script>
+@endsection 

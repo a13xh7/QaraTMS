@@ -1,0 +1,260 @@
+/* 
+ * Modal Styles for Advanced Analytics
+ * Contains styles for modals, including nested modals and footer layouts
+ */
+
+/* Modal wrapper */
+.c-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: var(--z-modal);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: var(--space-md);
+}
+
+.c-modal.is-visible {
+  display: flex;
+}
+
+/* Modal dialog */
+.c-modal-dialog {
+  position: relative;
+  width: 100%;
+  margin: auto;
+  pointer-events: auto;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh;
+}
+
+.c-modal-dialog--lg {
+  max-width: 1000px;
+}
+
+.c-modal-dialog--sm {
+  max-width: 600px;
+}
+
+.c-modal-dialog--fullscreen {
+  max-width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+/* Modal content */
+.c-modal-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: var(--c-bg);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  outline: 0;
+  max-height: 100%;
+}
+
+/* Modal header */
+.c-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--c-border);
+  border-top-left-radius: calc(var(--radius-md) - 1px);
+  border-top-right-radius: calc(var(--radius-md) - 1px);
+  position: relative;
+}
+
+.c-modal-title {
+  margin: 0;
+  font-weight: 500;
+  line-height: 1.5;
+  font-size: var(--font-size-lg);
+}
+
+.c-modal-close {
+  background: transparent;
+  border: 0;
+  padding: var(--space-sm);
+  margin: calc(var(--space-sm) * -1);
+  cursor: pointer;
+  font-size: var(--font-size-lg);
+  border-radius: var(--radius-circle);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color var(--transition-fast);
+}
+
+.c-modal-close:hover {
+  background-color: color-mix(in srgb, var(--c-fg) 10%, transparent);
+}
+
+/* Modal body */
+.c-modal-body {
+  position: relative;
+  flex: 1 1 auto;
+  padding: var(--space-lg);
+  overflow-y: auto;
+}
+
+/* Modal footer */
+.c-modal-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-md) var(--space-lg);
+  border-top: 1px solid var(--c-border);
+  border-bottom-left-radius: calc(var(--radius-md) - 1px);
+  border-bottom-right-radius: calc(var(--radius-md) - 1px);
+  background-color: var(--c-light);
+}
+
+.c-modal-footer--active-filters {
+  background-color: color-mix(in srgb, var(--c-primary) 5%, var(--c-light));
+}
+
+/* Nested modals */
+.c-modal.c-modal--nested {
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: calc(var(--z-modal) + 10);
+}
+
+.c-modal.c-modal--nested .c-modal-content {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+/* Fix for iOS Safari */
+@supports (-webkit-overflow-scrolling: touch) {
+  body.has-modal-open {
+    position: fixed;
+    width: 100%;
+  }
+}
+
+/* When we have two modals open */
+body.has-modal-open.has-nested-modal {
+  overflow: hidden !important;
+}
+
+/* Additional space for scrollbar */
+body.has-modal-open {
+  padding-right: 17px !important; /* Standard scrollbar width */
+}
+
+/* Modal transition animations */
+.c-modal.is-visible .c-modal-dialog {
+  animation: modalFadeIn var(--transition-fast);
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Squad management specific styles */
+.c-squad-management-container {
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+/* Squad filter styling */
+.c-squad-filter-header {
+  background-color: var(--c-light);
+  padding: var(--space-md);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-md);
+  display: flex;
+  align-items: center;
+}
+
+/* Toast notifications */
+.c-toast-container {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  padding: var(--space-md);
+  z-index: 5000;
+}
+
+.c-toast {
+  width: 350px;
+  background-color: var(--c-bg);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
+  margin-bottom: var(--space-sm);
+  overflow: hidden;
+  animation: toastIn var(--transition-fast);
+}
+
+.c-toast-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--c-border);
+}
+
+.c-toast-body {
+  padding: var(--space-md);
+}
+
+@keyframes toastIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .c-modal-dialog {
+    max-width: 100%;
+    margin: var(--space-sm);
+  }
+  
+  .c-modal-header,
+  .c-modal-body,
+  .c-modal-footer {
+    padding: var(--space-sm);
+  }
+  
+  .c-squad-filter-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .c-modal-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .c-modal-footer > * {
+    margin-top: var(--space-xs);
+    width: 100%;
+  }
+} 

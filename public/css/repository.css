@@ -1,0 +1,269 @@
+.main-content {
+    padding-top: 0;
+    padding-left: 0;
+    background-color: #f8f9fa;
+    width: calc(100% - 250px);
+}
+
+.page-title {
+    font-weight: 600;
+    color: #333;
+}
+
+.card {
+    border-radius: 6px;
+    transition: box-shadow 0.2s ease;
+}
+
+.card:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+.card-header {
+    border-top-left-radius: 6px !important;
+    border-top-right-radius: 6px !important;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.form-control-lg {
+    font-size: 1rem;
+}
+
+.btn {
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.btn-primary {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+.btn-primary:hover {
+    background-color: #0b5ed7;
+    border-color: #0a58ca;
+}
+
+.alert {
+    border-radius: 6px;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    content: "›";
+}
+
+#prefixPreview {
+    letter-spacing: 1px;
+    font-family: monospace;
+}
+
+/* Repository List Page Styles */
+.repository-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+}
+
+.repository-icon i {
+    font-size: 1.25rem;
+}
+
+.repository-description {
+    min-height: 50px;
+    max-height: 80px;
+    overflow: hidden;
+}
+
+.progress {
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    transition: width 0.6s ease;
+}
+
+.dropdown-item {
+    padding: 0.5rem 1rem;
+}
+
+.dropdown-item i {
+    width: 1rem;
+    text-align: center;
+}
+
+/* Repository Show Page Styles */
+:root {
+    --suites-column-width: 300px;
+    --test-case-column-width: 45%;
+}
+
+.repository-header {
+    z-index: 10;
+}
+
+.suites-tree-column {
+    width: var(--suites-column-width);
+    min-width: var(--suites-column-width);
+    max-width: var(--suites-column-width);
+    display: flex;
+    flex-direction: column;
+    transition: width 0.3s ease;
+}
+
+.suites-tree-container {
+    height: calc(100vh - 180px);
+}
+
+.test-cases-column {
+    min-width: 0;
+    transition: width 0.3s ease;
+}
+
+.test-case-column {
+    width: var(--test-case-column-width);
+    min-width: var(--test-case-column-width);
+    max-width: var(--test-case-column-width);
+    transition: width 0.3s ease;
+}
+
+.test-cases-container {
+    height: calc(100vh - 180px);
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Tree styling enhancements */
+.tree-root {
+    padding-left: 0;
+}
+
+.tree-item {
+    padding: 8px;
+    border-radius: 4px;
+    margin-bottom: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.tree-item:hover {
+    background-color: #e9ecef;
+}
+
+.tree-item.active {
+    background-color: #e7f1ff;
+    border-left: 3px solid #0d6efd;
+}
+
+.tree-toggle {
+    width: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
+/* Test case list styling */
+.test-case-item {
+    padding: 10px;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.test-case-item:hover {
+    background-color: #f8f9fa;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.test-case-item.active {
+    background-color: #e7f1ff;
+    border-color: #b8daff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    :root {
+        --suites-column-width: 250px;
+        --test-case-column-width: 50%;
+    }
+}
+
+@media (max-width: 992px) {
+    .test-case-column {
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        z-index: 100;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+    }
+}
+
+/* Repository Edit Page Styles */
+.form-control:focus, 
+.form-select:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.form-control-lg {
+    font-size: 1rem;
+}
+
+#prefixPreview {
+    letter-spacing: 1px;
+    font-family: monospace;
+}
+
+/* Repository Create Page Styles */
+.form-control:focus, 
+.form-select:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.form-control-lg {
+    font-size: 1rem;
+}
+
+#prefixPreview {
+    letter-spacing: 1px;
+    font-family: monospace;
+}
+
+/* Template selection styles */
+.template-options {
+    transition: all 0.3s ease;
+}
+
+.template-options.d-none {
+    display: none;
+}
+
+/* Repository Layout */
+.repository-layout {
+    display: flex;
+}

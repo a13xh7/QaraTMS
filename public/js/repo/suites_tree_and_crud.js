@@ -10,17 +10,24 @@ let suiteFormTitleInput = $('#test_suite_title_input');
  *************************************************/
 
 function loadSuitesTree() {
+    const repository_id = $('#repository_id').val();
+    
+    // Don't proceed if repository_id is undefined or empty
+    if (!repository_id) {
+        return;
+    }
+    
     $.ajax({
         url: `/repo/${repository_id}`,
         method: "GET",
-
+        
         success: function (data) {
             treeData = data;
             const content = treeData.map(sortable.createBranch);
             tree.html(content);
             sortable.run();
-
-        }, complete: function (data) {
+        }, 
+        complete: function (data) {
             selectLastActiveSuite();
         }
     });

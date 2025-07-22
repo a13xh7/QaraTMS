@@ -1,0 +1,130 @@
+/* 
+ * Design Tokens for Advanced Analytics
+ * Centralized variables for consistent styling across the application
+ */
+
+:root {
+  /* Colors - Core palette */
+  --c-primary: #0d6efd;
+  --c-secondary: #6c757d;
+  --c-success: #28a745;
+  --c-danger: #dc3545;
+  --c-warning: #ffc107;
+  --c-info: #0dcaf0;
+  --c-light: #f8f9fa;
+  --c-dark: #212529;
+  
+  /* Colors - Application specific */
+  --c-bg: #fff;
+  --c-fg: #212529;
+  --c-border: #dee2e6;
+  --c-muted: #6c757d;
+  --c-light-muted: #adb5bd;
+  
+  /* Color variations with opacity */
+  --c-primary-light: rgba(13, 110, 253, 0.1);
+  --c-primary-border: rgba(13, 110, 253, 0.25);
+  --c-light-hover: #e9ecef;
+  
+  /* Functional colors */
+  --c-trend-up: #28a745;
+  --c-trend-down: #dc3545;
+  --c-trend-neutral: #6c757d;
+  
+  /* Metric colors */
+  --c-total-events: #1e88e5;
+  --c-mr-created: #43a047;
+  --c-mr-approved: #8e24aa;
+  --c-repo-pushes: #f57c00;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.075);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  
+  /* Dimensions */
+  --w-squad: 100px;
+  --w-name: 220px;
+  --w-month: 60px;
+  --h-header: 40px;
+  --h-row: 40px;
+  
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  
+  /* Typography */
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.25rem;
+  
+  /* Z-index levels */
+  --z-dropdown: 1000;
+  --z-sticky: 100;
+  --z-sticky-header: 110;
+  --z-sticky-intersection: 120;
+  --z-modal: 1050;
+  --z-tooltip: 1070;
+  
+  /* Animations */
+  --transition-fast: 0.2s ease;
+  --transition-medium: 0.3s ease;
+  --transition-slow: 0.5s ease;
+  
+  /* Border radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+  --radius-xl: 2rem;
+  --radius-circle: 50%;
+  
+  /* Focus ring */
+  --focus-ring-width: 2px;
+  --focus-ring-color: rgba(13, 110, 253, 0.25);
+  
+  /* Opacity levels */
+  --opacity-disabled: 0.65;
+  --opacity-hover: 0.8;
+  --opacity-active: 1;
+}
+
+/* Dark mode overrides */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --c-bg: #2d2d2d;
+    --c-fg: #e1e1e1;
+    --c-border: #4d4d4d;
+    --c-muted: #9e9e9e;
+    --c-light-muted: #757575;
+    --c-light: #3d3d3d;
+    --c-light-hover: #4d4d4d;
+    
+    /* Shadow adjustments for dark mode */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.25);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.3);
+    
+    /* Functional color adjustments */
+    --c-primary-light: rgba(13, 110, 253, 0.2);
+    --c-primary-border: rgba(13, 110, 253, 0.4);
+    
+    /* Value drop background for dark mode */
+    --c-drop-bg: #5c2a2f;
+  }
+}
+
+/* High contrast mode adjustments */
+@media (forced-colors: active) {
+  :root {
+    --c-trend-up: CanvasText;
+    --c-trend-down: CanvasText;
+    --c-border: CanvasText;
+    --focus-ring-color: Highlight;
+    --focus-ring-width: 3px;
+  }
+} 

@@ -1,0 +1,114 @@
+/* ============================================================
+   Advanced Analytics Styles  –  FIXED 2023/2024 header freeze
+   ============================================================
+   • the three "left: 320|1040|1760px" rules were deleted
+   • a generic safeguard forces year headers to keep left:auto
+   ------------------------------------------------------------*/
+
+/* === Layout === */
+#yearlyOverviewTable{
+    position:relative;
+    border-collapse:separate;
+    border-spacing:0;
+    width:100%;
+    table-layout:fixed;
+}
+
+.table-responsive{
+    max-height:70vh;
+    overflow-x:auto;
+    overflow-y:auto;
+    position:relative;
+}
+
+/* Fixed columns */
+.sticky-col{
+    position:sticky!important;
+    z-index:10;
+    background:#fff;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    box-shadow:2px 0 5px -2px rgba(0,0,0,.1);
+    left:0;
+}
+
+.sticky-col-1{
+    left:0;width:100px;max-width:100px;min-width:100px;
+    z-index:20;
+    background:#f8f9fa;border-right:1px solid #dee2e6;
+}
+
+.sticky-col-2{
+    left:100px;width:220px;max-width:220px;min-width:220px;
+    z-index:19;
+    background:#fff;border-right:1px solid #dee2e6;
+    white-space:normal;word-break:break-word;overflow:visible;
+    padding-right:15px;
+}
+
+/* Year headers fixed at top */
+#yearlyOverviewTable thead tr:first-child th{
+    position:sticky;top:0;z-index:3;background:#f8f9fa;
+}
+
+#yearlyOverviewTable thead tr:nth-child(2) th{
+    position:sticky;top:40px;z-index:3;background:#f8f9fa;
+}
+
+/* intersection fixes */
+#yearlyOverviewTable thead tr:first-child th.sticky-col-1,
+#yearlyOverviewTable thead tr:first-child th.sticky-col-2 {
+    z-index:25;
+}
+
+#yearlyOverviewTable thead tr:nth-child(2) th.sticky-col-1,
+#yearlyOverviewTable thead tr:nth-child(2) th.sticky-col-2 {
+    z-index:24;
+}
+
+/* Safari GPU */
+@supports (-webkit-overflow-scrolling:touch){
+  .table-responsive{-webkit-overflow-scrolling:touch}
+  .sticky-col{-webkit-transform:translateZ(0)}
+}
+
+/* Month column width */
+#yearlyOverviewTable thead tr:nth-child(2) th,
+#yearlyOverviewTable tbody td:not(.sticky-col){
+    width:60px;min-width:60px;max-width:60px;
+}
+#yearlyOverviewTable td:not(.sticky-col),
+#yearlyOverviewTable th:not(.sticky-col){
+    width:60px;min-width:60px;max-width:60px;
+}
+
+/* === Typography & Base Styles === */
+#yearlyOverviewTable td,
+#yearlyOverviewTable th{
+    padding:8px 10px;font-size:.9rem;text-align:center;
+    position:relative;vertical-align:middle;min-height:40px;
+    line-height:1.2;border:1px solid #dee2e6;
+}
+
+.year-column{
+    text-align:center;background:#f8f9fa;font-weight:bold;
+    position:sticky;top:0;z-index:3;padding-left:15px!important;
+}
+
+/* -------------- safeguard: make sure year headers don't freeze */
+#yearlyOverviewTable thead tr:first-child th.year-column{
+    left:auto!important;
+}
+
+/* Year column groups - better visual separation */
+#yearlyOverviewTable thead tr:first-child th.year-column {
+    border-right: 2px solid #aaa;
+    border-bottom: 2px solid #aaa;
+    background-color: #f0f0f8;
+}
+
+/* Year boundary indicator every 12 columns */
+#yearlyOverviewTable tbody tr td:nth-child(14n+14) {
+    border-right: 2px solid #aaa;
+} 

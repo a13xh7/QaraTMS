@@ -972,7 +972,8 @@ a.note-dropdown-item, a.note-dropdown-item:hover {
 }
 
 .note-editor .note-editing-area .note-editable {
-    outline: none
+    outline: none;
+    min-height: 100px;
 }
 
 .note-editor .note-editing-area .note-editable sup {
@@ -1539,4 +1540,22 @@ a.note-dropdown-item, a.note-dropdown-item:hover {
 .help-list-item label {
     margin-bottom: 5px;
     display: inline-block
+}
+
+/* Improve accessibility with better focus states */
+.note-btn:focus {
+    outline: 2px solid #007bff;
+    outline-offset: 2px;
+}
+
+/* Add responsive improvements for mobile devices */
+@media (max-width: 576px) {
+    .note-editor .note-toolbar .note-btn-group {
+        margin-right: 2px;
+    }
+    
+    .note-modal-content {
+        width: 100%;
+        margin: 10px;
+    }
 }

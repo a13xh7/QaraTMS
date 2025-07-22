@@ -1,0 +1,158 @@
+/*───────────────────────────────────────────────────────────────
+  Advanced‑Analytics  –  table layout (patched)
+  Fix: year headers should scroll horizontally
+────────────────────────────────────────────────────────────────*/
+
+/* ========== tokens (unchanged) ========== */
+:root {
+  --w-squad : 100px;
+  --w-name  : 150px;
+  --w-month : 60px;
+
+  --h-header : 40px;           /* first header row height            */
+  --c-bg     : #fff;
+  --c-light  : #f8f9fa;
+  --c-border : #dee2e6;
+  --c-fg     : #000;
+  --shadow-sm: 2px 0 5px -2px rgba(0,0,0,.1);
+
+  --z-sticky            : 5;
+  --z-sticky-header     : 8;
+  --z-sticky-intersection: 12;
+
+  --space-sm : 8px;
+  --space-lg : 15px;
+  --font-size-sm : .875rem;
+  --font-size-xs : .75rem;
+}
+
+/* ========== container ========== */
+.c-table-container {
+  max-height: 70vh;
+  overflow: auto;
+  position: relative;
+}
+
+/* ========== base table ========== */
+.c-analytics-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+/* width for every data cell that is NOT sticky‑x */
+.c-analytics-table td:not(.c-cell--sticky),
+.c-analytics-table th:not(.c-cell--sticky) {
+  width: var(--w-month);
+  min-width: var(--w-month);
+  max-width: var(--w-month);
+}
+
+/* ========== stickiness helpers ========== */
+.c-cell--sticky-x   { position: sticky; background: var(--c-bg); z-index: var(--z-sticky); box-shadow: var(--shadow-sm); }
+.c-cell--sticky-y   { position: sticky; top: 0; background: var(--c-light); z-index: var(--z-sticky-header); }
+.c-cell--sticky-both{ position: sticky; top: 0; background: var(--c-bg); z-index: var(--z-sticky-intersection); box-shadow: var(--shadow-sm); }
+
+/* ========== frozen left columns ========== */
+.c-cell--squad {
+  composes: c-cell--sticky-both c-cell--sticky-x;
+  left: 0;
+  width: var(--w-squad);
+}
+
+.c-cell--name  {
+  composes: c-cell--sticky-both c-cell--sticky-x;
+  left: var(--w-squad);
+  width: var(--w-name);
+  white-space: normal;
+  word-break: break-word;
+  padding-right: var(--space-lg);
+}
+
+/* ========== header rows ========== */
+.c-analytics-table thead tr:first-child th { /* year row */
+  composes: c-cell--sticky-y;
+  font-weight: 700;
+  height: var(--h-header);
+  left: auto !important;            /* ← crucial: remove any horiz. stick */
+}
+
+.c-analytics-table thead tr:nth-child(2) th { /* month row */
+  composes: c-cell--sticky-y;
+  top: var(--h-header);
+  height: 30px;
+  left: auto !important;
+}
+
+/* corner cells (squad / name headers) */
+.c-analytics-table thead th.c-cell--squad,
+.c-analytics-table thead th.c-cell--name {
+  composes: c-cell--sticky-both;
+}
+
+/* ========== year column labels (vertical only) ========== */
+.c-year-column {
+  font-weight: 700;
+  text-align: center;
+  left: auto !important;            /* no horizontal sticking */
+}
+
+/* remove obsolete hard‑coded left offsets that froze 2023 */
+.c-year-column:nth-of-type(3),
+.c-year-column:nth-of-type(4),
+.c-year-column:nth-of-type(5) { left: auto !important; }
+
+/* optional: thin vertical separator before every January */
+.c-analytics-table td[data-month="Jan"],
+.c-analytics-table th[data-month="Jan"] {
+  border-left: 2px solid var(--c-border);
+  padding-left: var(--space-sm);
+}
+
+/* ========== month cells ========== */
+.c-analytics-table tbody td {
+  border: 1px solid var(--c-border);
+  padding: .25rem .5rem;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* zebra & hover */
+.c-analytics-table tbody tr:nth-child(even) { background: rgba(0,0,0,.02); }
+.c-analytics-table tbody tr:hover           { background: rgba(0,123,255,.05); }
+
+/* ========== cell states ========== */
+.data-cell:hover        { background: rgba(0,123,255,.1); }
+.data-cell.empty        { background:#f8f9fa; color:#adb5bd; }
+.data-cell.current-month{ border:2px solid #007bff; }
+.value-drop             { color:#dc3545; }
+.zero-value             { color:#adb5bd; }
+.disabled-cell          { background:#e9ecef; color:#adb5bd; cursor:not-allowed; }
+
+/* ========== responsive tweaks ========== */
+@media (max-width:768px){
+  :root { --w-squad:80px; --w-name:120px; --w-month:50px; }
+
+  .c-analytics-table { font-size: var(--font-size-sm); }
+
+  .c-analytics-table thead tr:nth-child(2) th,
+  .c-analytics-table tbody td:not(.c-cell--sticky) {
+    width: var(--w-month); min-width:var(--w-month); max-width:var(--w-month);
+    font-size: var(--font-size-xs);
+  }
+}
+
+/* ========== WebKit tweak ========== */
+@supports (-webkit-overflow-scrolling: touch){
+  .c-table-container{ -webkit-overflow-scrolling:touch; }
+  .c-cell--sticky-x{ -webkit-transform:translateZ(0); }
+}
+
+/* ========== fallback for no‑sticky browsers ========== */
+@supports not (position: sticky){
+  .c-cell--sticky-x,
+  .c-cell--sticky-y,
+  .c-cell--sticky-both{ position:relative; top:auto; left:auto; }
+  .c-table-container{ overflow-x:visible; }
+}

@@ -1,41 +1,39 @@
 @php use App\Models\Project;use App\Models\Repository;
 /**
- * @var Repository $repository
- * @var Project $project
- */
+* @var Repository $repository
+* @var Project $project
+*/
 @endphp
 @extends('layout.base_layout')
 
 @section('head')
-    <link rel="stylesheet" href="{{asset('css/suites_tree.css')}}">
-
-    <link href="{{asset('editor/summernote-repo.css')}}" rel="stylesheet">
-    <script src="{{asset('editor/summernote-lite.min.js')}}"></script>
+    <link href="{{ asset_path('css/suites_tree.css') }}" rel="stylesheet">
+    <script src="{{ asset_path('editor/summernote-lite.min.js') }}"></script>
+    <link href="{{ asset_path('editor/summernote-repo.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
 
-    {{--    TEST SUITES TREE COLUMN--}}
+    {{-- TEST SUITES TREE COLUMN--}}
     <div class="col-3 shadow-sm" id="suites_tree_col">
 
         {{-- COLUMN header--}}
         <div class="border-bottom mt-2 pb-2 mb-2 d-flex justify-content-between">
-            <span class="fs-5">
+            <span class="fs-6">
                 <span class="text-muted">Repository:</span> {{$repository->title}}
             </span>
 
             <div>
                 @can('add_edit_test_suites')
                     <button id="add_root_suite_btn" class="btn btn-primary btn-sm" type="button" title="Add Test Suite"
-                            onclick="showSuiteForm('create')">
+                        onclick="showSuiteForm('create')">
                         <i class="bi bi-plus-lg"></i> Test Suite
                     </button>
                 @endcan
 
                 @can('add_edit_repositories')
                     <a href="{{route('repository_edit_page', [$project->id, $repository->id])}}"
-                       class="btn btn-sm btn-outline-dark me-1"
-                       title="Repository Settings">
+                        class="btn btn-sm btn-outline-dark me-1" title="Repository Settings">
                         <i class="bi bi-gear"></i>
                     </a>
                 @endcan
@@ -43,7 +41,7 @@
             </div>
         </div>
 
-        {{--        <button type="button" class="btn btn-outline-dark btn-sm w-100">ROOT</button>--}}
+        {{-- <button type="button" class="btn btn-outline-dark btn-sm w-100">ROOT</button>--}}
 
         <ul id="tree">
             <li></li>
@@ -61,13 +59,13 @@
                 <div>
                     <span class="fs-5 text-muted">Suite: </span>
                     <span id="test_cases_list_site_title" class="fs-5">
-                    Select Test Suite
-                </span>
+                        Select Test Suite
+                    </span>
                 </div>
 
                 @can('add_edit_test_cases')
                     <button class="btn btn-primary btn-sm mx-2" type="button" title="Add Test Case"
-                            onclick="loadTestCaseCreateForm()">
+                        onclick="loadTestCaseCreateForm()">
                         <i class="bi bi-plus-lg"></i> Test Case
                     </button>
                 @endcan
@@ -75,7 +73,7 @@
 
         </div>
 
-        <div id="test_cases_list">  {{--  js load --}}  </div>
+        <div id="test_cases_list"> {{-- js load --}} </div>
     </div>
 
     <div id="test_case_col" class="col-5 shadow-sm">
@@ -97,7 +95,7 @@
                 </div>
                 <div class="d-flex justify-content-end mb-3">
                     <button id="tsf_update_btn" type="button" class="btn btn-success mx-3" style="display: none"
-                            onclick="updateSuite()">Update
+                        onclick="updateSuite()">Update
                     </button>
                     <button id="tsf_create_btn" type="button" class="btn btn-success mx-3" onclick="createSuite()">
                         Create
@@ -115,7 +113,7 @@
         let repository_id = {{$repository->id}};
     </script>
 
-    <script src="{{asset('/js/repo/repository.js')}}"></script>
+    <script src="{{ asset_path('js/repo/repository.js') }}"></script>
 
     <script>
         $("#test_cases_list").sortable({
@@ -136,11 +134,11 @@
             $(".delete_suite_btn").remove();
         }
 
-        if({{$canEditSuites}} === 0) {
+        if ({{$canEditSuites}} === 0) {
             setTimeout(removeEditAndAddButtons, 1000);
         }
 
-        if({{$canDeleteSuites}} === 0) {
+        if ({{$canDeleteSuites}} === 0) {
             setTimeout(removeDeleteButtons, 1000);
         }
 

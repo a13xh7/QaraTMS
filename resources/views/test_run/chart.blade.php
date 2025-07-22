@@ -15,7 +15,12 @@
     </div>
 
     <div class="progress-bar bg-secondary" role="progressbar"
-         style="width: {{$testRun->getChartData()['not_tested'][1]}}%" title="Not Tested">
-        {{$testRun->getChartData()['not_tested'][0]}}
+         style="width: {{$testRun->getChartData()['todo'][1]}}%" title="To Do">
+        {{$testRun->getChartData()['todo'][0]}}
+    </div>
+
+    <div class="progress-bar bg-info" role="progressbar"
+         style="width: {{$testRun->getChartData()['skipped'][1]}}%" title="Skipped">
+        {{$testRun->getChartData()['skipped'][0]}}
     </div>
 </div>

@@ -32,7 +32,7 @@ function updateCasesOrder() {
 function getTestCaseDataFromForm() {
     let testCase = {};
 
-    testCase.id = $("#tce_case_id").val();
+    testCase.id = $("#tce_case_id").val() || $("#tce_case_id").html();
     testCase.title = $("#tce_title_input").val();
     testCase.suite_id = $("#tce_test_suite_select").val();
     testCase.automated = $("#tce_automated_select").val();
@@ -45,11 +45,12 @@ function getTestCaseDataFromForm() {
     $($(".step")).each(function (index) {
 
         if ($(this).find(".step_action").val() || $(this).find(".step_result").val()) {
-            testCase.data.steps[index] =
+            testCase.data.steps.push(
                 {
                     action: $(this).find(".step_action").val(),
                     result: $(this).find(".step_result").val()
-                };
+                }
+            )
         }
     });
     return testCase;
@@ -122,6 +123,35 @@ function updateTestCase() {
             let testCase = $.parseJSON(data.json);
             renderTestCase(testCase.id)
             loadCasesList(testCase.suite_id);
+        }
+    });
+}
+
+/****************************************************************************
+ * UPDATE TEST CASE FOR SHOW PAGE
+ ****************************************************************************/
+
+function updateTestCaseForShowPage() {
+    let updatingTestCase = getTestCaseDataFromForm();
+
+    if (!updatingTestCase.title) {
+        alert('Title is required');
+        return;
+    }
+
+    $.ajax({
+        type: "POST",
+        url: "/test-case/update",
+        data: {
+            'id': updatingTestCase.id,
+            'title': updatingTestCase.title,
+            'suite_id': updatingTestCase.suite_id,
+            'automated': updatingTestCase.automated,
+            'priority': updatingTestCase.priority,
+            'data': JSON.stringify(updatingTestCase.data)
+        },
+        success: function () {
+            window.location.href = window.location.href;
         }
     });
 }

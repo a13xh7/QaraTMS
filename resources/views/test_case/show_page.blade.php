@@ -1,5 +1,11 @@
 @extends('layout.base_layout')
 
+@section('head')
+    <link rel="stylesheet" href="{{asset('css/suites_tree.css')}}">
+    <link href="{{asset('editor/summernote-repo.css')}}" rel="stylesheet">
+    <script src="{{asset('editor/summernote-lite.min.js')}}"></script>
+@endsection
+
 @section('content')
 
     @include('layout.sidebar_nav')
@@ -33,7 +39,7 @@
             </h3>
 
             <button type="button" class="btn btn-outline-dark btn-sm mb-2"
-                    onclick="renderTestCaseEditForm({{$testCase->id}})">
+                    onclick="editTesCase()">
                 <i class="bi bi-pencil px-1"></i>
             </button>
 
@@ -57,7 +63,7 @@
 
                     @if(isset($data->steps) && !empty($data->steps))
                         <strong class="fs-5 pb-3">Steps</strong>
-                        <div class="row mb-3 border p-3 mt-1 rounded" id="steps_container">
+                        <div class="row mb-3 border p-3 rounded">
 
 
                             <div class="row step pb-2 mb-2">
@@ -96,11 +102,30 @@
                     @endif
 
                 </div>
-            </div>
+
+                </div>
+                    <div class="testCaseEditFormBox d-none">
+                    @include('test_case.edit_form', ["isShowPage" => true])
+                </div>
+
         </div>
 
     </div>
 @endsection
 
+@section('footer')
+    <script src="{{asset('/js/repo/case_crud.js')}}"></script>
+    <script src="{{asset('/js/repo/case_editor.js')}}"></script>
+    <script>
+        function editTesCase() {
+            renderEditors();
+            $('#test_case_content').addClass('d-none');
+            $('.testCaseEditFormBox').removeClass('d-none');
+        }
 
-
+        function cancelEditTestCase() {
+            $('#test_case_content').removeClass('d-none');
+            $('.testCaseEditFormBox').addClass('d-none');
+        }
+    </script>
+@endsection

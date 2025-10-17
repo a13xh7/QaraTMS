@@ -1,103 +1,244 @@
-# QaraTMS - Open Source Test Management System
+# QaraTMS - Sistema de Gestión de Pruebas de Código Abierto
 
-**QaraTMS** is an open source test management software for managing test suites, test cases, test plans, test runs and
-documentation.
+**QaraTMS** (también conocido como **TestFlow**) es un software de gestión de pruebas de código abierto moderno para administrar suites de pruebas, casos de prueba, planes de pruebas, ejecuciones de pruebas y documentación del proyecto.
 
-## Languages and Tools:
+## 🚀 Características Principales
+
+- ✨ **Interfaz Moderna**: Diseño inspirado en el template premium Sash con tema claro/oscuro
+- 🌐 **Multiidioma**: Soporte completo para Español e Inglés con cambio dinámico
+- 🎨 **Sistema de Temas**: Cambio automático entre tema claro, oscuro y automático (según preferencias del sistema)
+- 📱 **Responsive**: Completamente adaptativo para dispositivos móviles, tablets y escritorio
+- 🔒 **Gestión de Usuarios**: Sistema completo de autenticación y permisos
+- 📊 **Dashboard Avanzado**: Visualización de métricas y estadísticas de pruebas
+- 🔄 **Persistencia de Preferencias**: Las configuraciones del usuario se mantienen entre sesiones
+- ⚡ **Rendimiento Optimizado**: Interfaz rápida sin parpadeos ni cargas innecesarias
+
+## 🛠️ Tecnologías y Herramientas
 
 <a href="https://php.net/" title="PHP"><img src="https://github.com/get-icon/geticon/raw/master/icons/php.svg" alt="PHP" width="60px" height="60px"></a>
 <a href="https://laravel.com/" title="Laravel"><img src="https://github.com/get-icon/geticon/raw/master/icons/laravel.svg" alt="Laravel" width="60px" height="60px"></a>
+<a href="https://getbootstrap.com/" title="Bootstrap"><img src="https://github.com/get-icon/geticon/raw/master/icons/bootstrap.svg" alt="Bootstrap" width="60px" height="60px"></a>
 <a href="https://www.w3.org/TR/html5/" title="HTML5"><img src="https://github.com/get-icon/geticon/raw/master/icons/html-5.svg" alt="HTML5" width="60px" height="60px"></a>
 <a href="https://www.w3.org/TR/CSS/" title="CSS3"><img src="https://github.com/get-icon/geticon/raw/master/icons/css-3.svg" alt="CSS3" width="60px" height="60px"></a>
-<a href="https://jquery.com/" title="jQuery"><img src="https://github.com/get-icon/geticon/raw/master/icons/jquery-icon.svg" alt="jQuery" width="60px" height="60px"></a>
 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" title="JavaScript"><img src="https://github.com/get-icon/geticon/raw/master/icons/javascript.svg" alt="JavaScript" width="60px" height="60px"></a>
 
-## Getting Started
+### Stack Tecnológico
+- **Backend**: PHP 8.1+, Laravel Framework
+- **Frontend**: HTML5, CSS3, JavaScript ES6+, Bootstrap 5.3.3
+- **Base de Datos**: MySQL 8+ o SQLite
+- **Iconos**: Bootstrap Icons para una interfaz moderna y coherente
+- **Diseño**: Inspirado en template premium Sash con personalización completa
 
-- You need to have **php ^8.1**, **mysql-8** or **SQLite**, **composer** installed.
-- Pull the project from GitHub.
-- Create a database named `tms` using `utf8_general_ci`, or you can use SQLite.
-- Run `composer install` or `php composer.phar install`
-- Copy and rename the `.env.backup` file to `.env` and fill the database information.
-- Run `php artisan key:generate`
-- Run `php artisan migrate`
-- Run `php artisan db:seed --class=AdminSeeder` to create admin user and assign permissions.
-- Run `php artisan serve`
-- You can now access QaraTMS at **http://localhost**
-- Login with default email and password - **admin@admin.com** / **password**
-- Go to **Users** page and change default email and password.
+## 📋 Requisitos Previos
 
-If you are using SQLite:
+- **PHP** ^8.1
+- **MySQL** 8+ o **SQLite**
+- **Composer**
+- **Servidor Web** (Apache/Nginx) o usar el servidor integrado de Laravel
 
-* Create **database.sqlite** file in **./database** folder
-* Copy and rename the `.env_sqlite.backup` file to `.env` and fill the database information.
+## 🚀 Instalación Rápida
 
-### Generating Helper Sources for Project
+### Método Tradicional
 
-This project is configured to use the laravel-ide-helper. To generate the helper files run these commands:
+1. **Clonar el repositorio**
+   ```bash
+   git clone https://github.com/javiandgo/QaraTMS.git
+   cd QaraTMS
+   ```
 
-Windows:
+2. **Instalar dependencias**
+   ```bash
+   composer install
+   ```
 
+3. **Configurar base de datos**
+   - Crear base de datos `tms` con codificación `utf8_general_ci`
+   - O usar SQLite creando `database.sqlite` en la carpeta `./database`
+
+4. **Configuración del entorno**
+   ```bash
+   # Para MySQL
+   cp .env.backup .env
+   
+   # Para SQLite
+   cp .env_sqlite.backup .env
+   ```
+   
+   Editar `.env` con tu configuración de base de datos
+
+5. **Configuración inicial**
+   ```bash
+   php artisan key:generate
+   php artisan migrate
+   php artisan db:seed --class=AdminSeeder
+   ```
+
+6. **Iniciar servidor**
+   ```bash
+   php artisan serve
+   ```
+
+7. **Acceder a la aplicación**
+   - URL: **http://localhost:8000**
+   - Usuario: **admin@admin.com**
+   - Contraseña: **password**
+   
+   ⚠️ **Importante**: Cambia las credenciales por defecto en la sección **Usuarios**
+
+### 🐳 Instalación con Docker (Inicio Rápido)
+
+```bash
+# Hacer ejecutable el script
+sudo chmod +x docker-run.sh
+./docker-run.sh
+
+# O manualmente
+docker compose up -d --build
+docker exec app php artisan migrate
+docker exec app php artisan db:seed --class=AdminSeeder
+```
+
+Para configuración avanzada con Docker, consulta la [documentación extendida](DOCKER_README.md)
+
+## 🎯 Cómo Usar QaraTMS
+
+![Header de QaraTMS](public/img/header.jpg)
+
+### 1. 📁 Crear un Proyecto
+Comienza creando un proyecto que contendrá todos tus repositorios de pruebas.
+
+[![Captura de proyecto creado](public/img/5_small.png)](public/img/5.png)
+
+### 2. 🗂️ Crear Repositorio de Pruebas
+Los repositorios organizan tus suites y casos de prueba. Puedes crear múltiples repositorios para diferentes módulos (web, admin, API, móvil, etc.).
+
+[![Captura de repositorios](public/img/1_small.png)](public/img/1.png)
+
+### 3. ✅ Gestionar Casos de Prueba
+Añade suites de pruebas y casos de prueba detallados con pasos, datos esperados y categorización.
+
+[![Captura de gestión de casos](public/img/2_small.png)](public/img/2.png)
+
+### 4. 📋 Crear Plan de Pruebas
+Selecciona los casos de prueba específicos que necesitas ejecutar para una funcionalidad o versión.
+
+[![Captura de plan de pruebas](public/img/3_small.png)](public/img/3.png)
+
+### 5. ▶️ Ejecutar Pruebas
+Inicia ejecuciones de pruebas y registra resultados con estados: Aprobado, Fallido, Bloqueado, En Progreso.
+
+[![Captura de ejecución](public/img/4_small.png)](public/img/4.png)
+
+### 6. 📚 Documentación del Proyecto
+Módulo completo para gestionar la documentación de tu proyecto en un solo lugar.
+
+[![Captura de documentación](public/img/6_small.png)](public/img/6.png)
+
+## 🎨 Características de la Interfaz Moderna
+
+### 🌙 Sistema de Temas Avanzado
+- **Tema Automático**: Se adapta a las preferencias del sistema operativo
+- **Tema Claro**: Interfaz limpia y profesional para trabajo diurno
+- **Tema Oscuro**: Reduce la fatiga visual para trabajo nocturno
+- **Persistencia**: Las preferencias se mantienen entre sesiones
+- **Sin parpadeos**: Aplicación instantánea del tema al cargar
+
+### 🌐 Soporte Multiidioma
+- **Español**: Traducción completa de la interfaz
+- **Inglés**: Idioma original completamente funcional
+- **Cambio dinámico**: Sin necesidad de recargar la página
+- **Persistencia**: El idioma seleccionado se mantiene entre sesiones
+
+### 📱 Diseño Responsive
+- **Mobile First**: Optimizado para dispositivos móviles
+- **Tablets**: Experiencia adaptada para tablets
+- **Escritorio**: Aprovecha al máximo el espacio en pantallas grandes
+- **Navegación adaptativa**: Menús que se ajustan según el dispositivo
+
+## 🔧 Desarrollo y Contribución
+
+### Generar Archivos de Ayuda para el IDE
+
+Este proyecto está configurado para usar laravel-ide-helper. Para generar los archivos de ayuda:
+
+**Windows:**
 ```bash
 php artisan ide-helper:generate; php artisan ide-helper:models --write-mixin; php artisan ide-helper:meta; php artisan ide-helper:eloquent
 ```
 
-## Getting Started with docker-compose (quick start)
+**Linux/Mac:**
+```bash
+php artisan ide-helper:generate && php artisan ide-helper:models --write-mixin && php artisan ide-helper:meta && php artisan ide-helper:eloquent
+```
 
-- Install docker and docker-compose
-- Make docker-run.sh file executable `sudo chmod +x docker-run.sh` and run `./docker-run.sh `
-- Or `docker compose up -d --build` and on the first run or after clearing the database or its
-  volume `docker exec app php artisan migrate` and `docker exec app php artisan db:seed --class=AdminSeeder` to
-  create the admin user and assign permissions
+### Contribuir al Proyecto
 
-## Getting Started with docker-compose (extended)
+Por favor contribuye usando [GitHub Flow](https://guides.github.com/introduction/flow):
 
-- To access advanced configuration, refer to the [extended documentation](DOCKER_README.md)
+1. Crea una rama para tu feature: `git checkout -b feature/nueva-caracteristica`
+2. Haz commits con mensajes descriptivos
+3. Haz push de tu rama: `git push origin feature/nueva-caracteristica`
+4. [Abre un pull request](https://github.com/javiandgo/QaraTMS/compare)
 
-## How to use it
+### Actualizar Modelos
 
-![logo](public/img/header.jpg)
-
-1. Create a Project.<br>
-   [![screenshot of created project](public/img/5_small.png)](public/img/5.png)
-   <br><br>
-2. Create a Test Repository. Test suites and test cases are located inside test repositories.
-   You can create several test repositories for different project modules e.g. web, admin, API, etc.<br>
-   [![screenshot of created repositories](public/img/1_small.png)](public/img/1.png)
-   <br><br>
-3. Add test suites and test cases to the test repository.<br>
-   [![screenshot of test case management inside a repository](public/img/2_small.png)](public/img/2.png)
-   <br><br>
-4. Create a test plan and select the test cases you need to test.<br>
-   [![screenshot of a test plan](public/img/3_small.png)](public/img/3.png)
-   <br><br>
-5. Start new test run.<br>
-   [![screenshot of a test run](public/img/4_small.png)](public/img/4.png)
-   <br><br>
-6. Also, there is documentation module where you can store your project's documentation.<br>
-   [![screenshot of documentation module](public/img/6_small.png)](public/img/6.png)
-   <br><br>
-
-## Contributing
-
-Please contribute using [GitHub Flow](https://guides.github.com/introduction/flow). Create a branch, add commits,
-and [open a pull request](https://github.com/a13xh7/QaraTMS/compare).
-
-### Updating Models
-
-When a model is updated, the helper files for it must be regenerated to provide autocompletion inside the source code.
-To do so, run this command:
+Cuando actualices un modelo, regenera los archivos de ayuda:
 
 ```bash
 php artisan ide-helper:models -M
 ```
 
-### Running Tests
+### Ejecutar Pruebas
 
-Before running tests locally you need to initialize the testing environment database using
+Inicializa el entorno de testing:
 
 ```bash
 php artisan migrate --env=testing
+```
+
+Ejecuta las pruebas:
+
+```bash
+php artisan test
+```
+
+> El entorno `testing` se aplica automáticamente al ejecutar `php artisan test`, utilizando el archivo `.env.testing`
+
+#### Cobertura de Código
+
+Para evaluar la cobertura, instala xdebug con modo `coverage`:
+
+```bash
+php artisan test --coverage
+```
+
+## 🤝 Contribuyendo
+
+Contribuciones, issues y feature requests son bienvenidos! 
+
+Siéntete libre de:
+- 🐛 Reportar bugs
+- 💡 Sugerir nuevas características  
+- 🔀 Enviar pull requests
+- 📖 Mejorar la documentación
+- 🌐 Ayudar con traducciones
+
+## 📄 Licencia
+
+QaraTMS está licenciado bajo la licencia [MIT](https://choosealicense.com/licenses/mit/).
+
+---
+
+### 🙏 Agradecimientos
+
+- Inspirado en el template premium [Sash](https://sprukomarket.com/products/html/bootstrap/sash) para el diseño moderno
+- Comunidad de Laravel por el excelente framework
+- Bootstrap team por los componentes y iconos
+- Todos los contribuyentes que hacen posible este proyecto
+
+---
+
+**¿Te gusta QaraTMS?** ⭐ ¡Dale una estrella en GitHub!
 ```
 
 after that is done, you can run the tests using

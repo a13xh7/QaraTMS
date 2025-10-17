@@ -8,7 +8,7 @@
 
         <div class="border-bottom my-3">
             <h3 class="page_title">
-                Add Test Run
+                {{ __('ui.add_test_run') }}
             </h3>
         </div>
 
@@ -21,14 +21,14 @@
                     <input type="hidden" name="project_id" value="{{$project->id}}">
 
                     <div class="mb-3">
-                        <label for="title" class="form-label">Name</label>
-                        <input name="title" type="text" class="form-control" value="Test Run" required maxlength="100">
+                        <label for="title" class="form-label">{{ __('ui.name') }}</label>
+                        <input name="title" type="text" class="form-control" value="{{ __('ui.test_run_default_name') }}" placeholder="{{ __('ui.test_run_name_placeholder') }}" required maxlength="100">
                     </div>
 
                     <div class="mb-3">
-                        <label for="title" class="form-label">Select Test Plan</label>
+                        <label for="title" class="form-label">{{ __('ui.select_test_plan') }}</label>
                         <select name="test_plan_id" class="form-select" required>
-                            <option disabled selected value> -----</option>
+                            <option disabled selected value> {{ __('ui.select_option') }}</option>
 
                             @foreach($testPlans as $testPlan)
                                 <option value="{{$testPlan->id}}">{{$testPlan->title}}</option>
@@ -38,7 +38,7 @@
                     </div>
 
 
-                    <button type="submit" class="btn btn-success w-100"><b>Save</b></button>
+                    <button type="submit" class="btn btn-success w-100"><b>{{ __('ui.save') }}</b></button>
                 </form>
 
             </div>

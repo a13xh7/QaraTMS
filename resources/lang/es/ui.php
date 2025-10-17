@@ -84,4 +84,81 @@ return [
     
     // Time related
     'created_at_label' => 'creado el',
+    
+    // Forms and creation
+    'create_project' => 'Crear Proyecto',
+    'create_repository' => 'Crear Repositorio',
+    'create_test_plan' => 'Crear Plan de Prueba',
+    'create_test_run' => 'Crear Ejecución de Prueba',
+    'create_document' => 'Crear Documento',
+    'add_test_repository' => 'Agregar Repositorio de Pruebas',
+    'test_plan_default_name' => 'Plan de pruebas - :date',
+    'test_plan_name_placeholder' => 'Ingrese el nombre del plan de pruebas',
+    'select_test_cases' => 'Seleccionar Casos de Prueba',
+    'select_all' => 'Seleccionar Todo',
+    'deselect_all' => 'Deseleccionar Todo',
+    'no_whitespace_allowed' => 'Por favor no use espacios en blanco',
+    'max_symbols' => 'máx :count símbolos',
+    'add_test_run' => 'Agregar Ejecución de Pruebas',
+    'test_run_default_name' => 'Ejecución de Pruebas',
+    'test_run_name_placeholder' => 'Ingrese el nombre de la ejecución',
+    'create_user' => 'Crear Usuario',
+    'add_document' => 'Agregar Documento',
+    'parent' => 'Padre',
+    'root' => 'Raíz',
+    'document_title_placeholder' => 'Ingrese el título del documento',
+    'name_placeholder' => 'Nombre',
+    'email_placeholder' => 'Correo electrónico',
+    'password_placeholder' => 'Contraseña. Mín 6 símbolos',
+    
+    // Formatos de fecha
+    'date_format' => 'd/m/Y',
+    'datetime_format' => 'd/m/Y H:i',
+    'datetime_full_format' => 'd/m/Y H:i:s',
+    
+    // Pluralización
+    'test_suites_count' => '{0} Suites de Prueba|{1} Suite de Prueba|[2,*] Suites de Prueba',
+    'test_cases_count_short' => '{0} Casos de Prueba|{1} Caso de Prueba|[2,*] Casos de Prueba',
+    'automated_count' => '{0} Automatizados|{1} Automatizado|[2,*] Automatizados',
+    
+    // Form fields
+    'project_title' => 'Título del Proyecto',
+    'project_description' => 'Descripción del Proyecto',
+    'repository_title' => 'Título del Repositorio',
+    'repository_description' => 'Descripción del Repositorio',
+    'test_plan_title' => 'Título del Plan de Prueba',
+    'test_plan_description' => 'Descripción del Plan de Prueba',
+    'test_run_title' => 'Título de la Ejecución',
+    'document_title' => 'Título del Documento',
+    'document_content' => 'Contenido del Documento',
+    'select_repository' => 'Seleccionar Repositorio',
+    'select_test_plan' => 'Seleccionar Plan de Prueba',
+    'role' => 'Rol',
+    'confirm_password' => 'Confirmar Contraseña',
+    
+    // Placeholders and help text
+    'enter_title' => 'Ingrese título',
+    'enter_description' => 'Ingrese descripción',
+    'enter_name' => 'Ingrese nombre',
+    'enter_email' => 'Ingrese correo electrónico',
+    'enter_password' => 'Ingrese contraseña',
+    'optional' => 'Opcional',
+    'required' => 'Obligatorio',
+    
+    // Buttons
+    'create_button' => 'Crear',
+    'submit' => 'Enviar',
+    'reset' => 'Limpiar',
+    
+    // Count pluralization
+    'item' => 'elemento',
+    'items' => 'elementos',
+    'case' => 'caso',
+    'cases' => 'casos',
+    'plan' => 'plan',
+    'plans' => 'planes',
+    'run' => 'ejecución',
+    'runs' => 'ejecuciones',
+    'document_single' => 'documento',
+    'documents_plural' => 'documentos',
 ];

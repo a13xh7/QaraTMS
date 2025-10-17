@@ -39,12 +39,12 @@
 
 
                     <div class="form-group mb-3">
-                        <input name="name" type="text" placeholder="Name" class="form-control" required autofocus
+                        <input name="name" type="text" placeholder="{{ __('ui.name_placeholder') }}" class="form-control" required autofocus
                                value="{{$user->name}}">
                     </div>
 
                     <div class="form-group mb-3">
-                        <input name="email" type="text" placeholder="Email" class="form-control" required autofocus
+                        <input name="email" type="text" placeholder="{{ __('ui.email_placeholder') }}" class="form-control" required autofocus
                                value="{{$user->email}}">
                     </div>
 

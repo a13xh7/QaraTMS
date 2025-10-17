@@ -189,7 +189,7 @@
         </div>
         <div class="info-row">
             <div class="info-label">{{ __('ui.created_at') }}:</div>
-            <div class="info-value">{{ $testRun->created_at->format('Y-m-d H:i:s') }}</div>
+            <div class="info-value">{{ $testRun->created_at->format(__('ui.datetime_full_format')) }}</div>
         </div>
         <div class="info-row">
             <div class="info-label">{{ __('ui.total_test_cases') }}:</div>

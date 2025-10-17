@@ -49,9 +49,9 @@
 
                         <div class="d-flex justify-content-end border-top p-2">
                             <span class="text-muted">
-                                <b>{{ $repository->suitesCount() }}</b> Test Suites
-                                 | <b>{{ $repository->casesCount() }}</b> Test Cases
-                                  | <b>{{ $repository->automatedCasesCount() }}</b> Automated
+                                <b>{{ $repository->suitesCount() }}</b> {{ trans_choice('ui.test_suites_count', $repository->suitesCount()) }}
+                                 | <b>{{ $repository->casesCount() }}</b> {{ trans_choice('ui.test_cases_count_short', $repository->casesCount()) }}
+                                  | <b>{{ $repository->automatedCasesCount() }}</b> {{ trans_choice('ui.automated_count', $repository->automatedCasesCount()) }}
                              </span>
                         </div>
 

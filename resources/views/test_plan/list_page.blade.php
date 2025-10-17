@@ -40,7 +40,7 @@
                                      @endif {{ __('ui.test_cases_count') }}
                                  </span> |
                                 <span class="text-muted"
-                                      title="{{ __('ui.created_at_label') }}">{{$testPlan->created_at->format('d-m-Y')}} </span>
+                                      title="{{ __('ui.created_at_label') }}">{{$testPlan->created_at->format(__('ui.date_format'))}} </span>
                             </div>
                         </div>
 

@@ -36,11 +36,11 @@
                             <div class="d-flex align-items-center">
                                 <a href="{{route('test_run_export_pdf', [$project->id, $testRun->id])}}"
                                    class="btn btn-sm btn-outline-success me-2"
-                                   title="Export to PDF">
+                                   title="{{ __('ui.export_pdf') }}">
                                     <i class="bi bi-file-earmark-pdf"></i>
                                 </a>
                       <span class="text-muted"
-                          title="{{ __('ui.created') }}">{{$testRun->created_at->format('d-m-Y H:i')}} </span>
+                          title="{{ __('ui.created') }}">{{$testRun->created_at->format(__('ui.datetime_format'))}} </span>
                             </div>
                         </div>
 

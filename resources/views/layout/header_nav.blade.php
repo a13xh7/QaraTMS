@@ -33,7 +33,7 @@
                 @endif
             </div>
             <div class="d-flex justify-content-between align-items-center logout_block">
-                <a href="https://github.com/a13xh7/QaraTMS" target="_blank">
+                <a href="https://github.com/javiandgo/QaraTMS" target="_blank">
                     <img src="{{asset('img/github.png')}}" alt="" width="30px">
                 </a>
                 <form method="get" action="" class="ms-3">

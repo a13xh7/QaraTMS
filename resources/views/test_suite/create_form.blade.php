@@ -7,7 +7,7 @@
 
     <div class="mb-2">
         <label for="tse_title" class="form-label">Name</label>
-        <input id="tse_title" name="title" type="text" class="form-control" value="" placeholder="Name" required>
+        <input id="tse_title" name="title" type="text" class="form-control" value="" placeholder="{{ __('ui.name_placeholder') }}" required>
     </div>
 
     <div class="d-flex justify-content-end">

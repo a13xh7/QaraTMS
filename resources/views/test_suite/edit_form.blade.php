@@ -7,7 +7,7 @@
     <div class="mb-2">
         <label for="tse_title" class="form-label">Name</label>
         <input id="tse_title" name="title" type="text" class="form-control" value="{{$editableSuite->title}}"
-               placeholder="Name" required>
+               placeholder="{{ __('ui.name_placeholder') }}" required>
     </div>
 
     <div class="mb-2">

@@ -9,13 +9,13 @@
 
         <div class="border-bottom my-3">
             <h3 class="page_title">
-                Create Project
+                {{ __('ui.create_project') }}
             </h3>
         </div>
 
         @if ($errors->any())
             <div class="alert alert-danger">
-                <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                <strong>{{ __('ui.validation_error_title') }}</strong> {{ __('ui.validation_error_message') }}<br><br>
                 <ul>
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
@@ -30,21 +30,21 @@
                 @csrf
 
                 <div class="mb-3">
-                    <label for="title" class="form-label">Project Name</label>
-                    <input type="text" class="form-control" name="title" required maxlength="100">
+                    <label for="title" class="form-label">{{ __('ui.project_name') }}</label>
+                    <input type="text" class="form-control" name="title" placeholder="{{ __('ui.project_name_placeholder') }}" required maxlength="100">
                 </div>
 
                 <div class="mb-3">
-                    <label for="description" class="form-label">Description</label>
-                    <textarea class="form-control" name="description" maxlength="255"> </textarea>
+                    <label for="description" class="form-label">{{ __('ui.description') }}</label>
+                    <textarea class="form-control" name="description" placeholder="{{ __('ui.description_placeholder') }}" maxlength="255"> </textarea>
                 </div>
 
                 <button type="submit" class="btn btn-success px-5">
-                    Create
+                    {{ __('ui.create') }}
                 </button>
 
                 <a href="{{ url()->previous() }}" class="btn btn-outline-dark px-5 ms-2">
-                    <b>Cancel</b>
+                    <b>{{ __('ui.cancel') }}</b>
                 </a>
             </form>
         </div>

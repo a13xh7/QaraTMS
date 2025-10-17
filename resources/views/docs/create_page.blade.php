@@ -13,7 +13,7 @@
 
         <div class="border-bottom my-3">
             <h3 class="page_title">
-                Add Document
+                {{ __('ui.add_document') }}
             </h3>
         </div>
 
@@ -24,16 +24,16 @@
                 <input type="hidden" name="project_id" value="{{$project->id}}">
 
                 <div class="mb-3">
-                    <label for="title" class="form-label">Title</label>
-                    <input type="text" class="form-control" name="title" required maxlength="255">
+                    <label for="title" class="form-label">{{ __('ui.title') }}</label>
+                    <input type="text" class="form-control" name="title" placeholder="{{ __('ui.document_title_placeholder') }}" required maxlength="255">
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">Parent</label>
+                    <label class="form-label">{{ __('ui.parent') }}</label>
 
                     <select class="form-select" name="parent_id" id="parent_id">
 
-                        <option value="" selected>-- Root --</option>
+                        <option value="" selected>-- {{ __('ui.root') }} --</option>
 
                         @foreach($documents as $document)
                             @include('docs.selector_tree_item')
@@ -47,7 +47,7 @@
                 <textarea id="content" name="content"></textarea>
 
                 <button type="submit" id="submit_btn" class="btn btn-success px-5 mt-3">
-                    <b>Create</b>
+                    <b>{{ __('ui.create') }}</b>
                 </button>
 
                 <a href=" {{ url()->previous() }}" class="btn btn-outline-dark px-5 mt-3">

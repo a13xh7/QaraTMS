@@ -13,7 +13,7 @@
 
         <div class="border-bottom my-3">
             <h3 class="page_title">
-                Create user
+                {{ __('ui.create_user') }}
             </h3>
         </div>
 
@@ -36,24 +36,24 @@
 
 
                     <div class="form-group mb-3">
-                        <input name="name" type="text" placeholder="Name" class="form-control" required autofocus>
+                        <input name="name" type="text" placeholder="{{ __('ui.name_placeholder') }}" class="form-control" required autofocus>
                     </div>
 
                     <div class="form-group mb-3">
-                        <input name="email" type="text" placeholder="Email" class="form-control" required autofocus>
+                        <input name="email" type="text" placeholder="{{ __('ui.email_placeholder') }}" class="form-control" required autofocus>
                     </div>
 
                     <div class="form-group mb-3">
-                        <input name="password" type="password" placeholder="Password. Min 6 symbols"
+                        <input name="password" type="password" placeholder="{{ __('ui.password_placeholder') }}"
                                class="form-control" required>
                     </div>
 
                     <div class="d-flex justify-content-end">
 
-                        <button type="submit" class="btn btn-success px-5 mx-2">Create</button>
+                        <button type="submit" class="btn btn-success px-5 mx-2">{{ __('ui.create') }}</button>
 
                         <a href="{{ url()->previous() }}" class="btn btn-outline-dark px-5">
-                            <b>Cancel</b>
+                            <b>{{ __('ui.cancel') }}</b>
                         </a>
                     </div>
 

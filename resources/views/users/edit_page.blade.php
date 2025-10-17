@@ -25,7 +25,7 @@
 
             <div class="row m-0">
 
-                <div class="col p-3 shadow me-3">
+                <div class="col p-3 me-3">
 
                     @if ($errors->any())
                         <div class="alert alert-danger">
@@ -53,6 +53,24 @@
                                placeholder="{{ __('ui.password_hint') }}"
                                minlength="6" class="form-control">
                     </div>
+                    
+                    <div class="form-group mb-3">
+                        <label for="theme_preference" class="form-label">
+                            <i class="bi bi-palette"></i> {{ __('ui.theme_preference') }}
+                        </label>
+                        <select name="theme_preference" id="theme_preference" class="form-select">
+                            <option value="auto" {{ ($user->theme_preference ?? 'auto') == 'auto' ? 'selected' : '' }}>
+                                🌓 {{ __('ui.auto_theme') }} - {{ __('ui.theme_setting_description') }}
+                            </option>
+                            <option value="light" {{ ($user->theme_preference ?? 'auto') == 'light' ? 'selected' : '' }}>
+                                ☀️ {{ __('ui.light_theme') }}
+                            </option>
+                            <option value="dark" {{ ($user->theme_preference ?? 'auto') == 'dark' ? 'selected' : '' }}>
+                                🌙 {{ __('ui.dark_theme') }}
+                            </option>
+                        </select>
+                        <div class="form-text">{{ __('ui.theme_setting_description') }}</div>
+                    </div>
 
                     <div class="d-flex justify-content-end">
 
@@ -67,7 +85,7 @@
                 </div>
 
 
-                <div class="col p-3 shadow">
+                <div class="col p-3">
 
                     <h3>Permissions</h3>
 

@@ -12,7 +12,7 @@ return [
     'test_execution_summary' => 'Resumen de Ejecución',
     'success_rate' => 'Tasa de Éxito',
     'detailed_results' => 'Resultados Detallados de Casos',
-    
+
     // PDF Report specific translations
     'test_run_report' => 'Reporte de Ejecución de Prueba',
     'generated_on' => 'Generado el',
@@ -35,7 +35,7 @@ return [
     'executor' => 'Ejecutor',
     'user' => 'Usuario',
     'unknown_user' => 'Usuario Desconocido',
-    
+
     // Common actions
     'add_new' => 'Agregar Nuevo',
     'create' => 'Crear',
@@ -46,26 +46,26 @@ return [
     'settings' => 'Configuración',
     'repository_settings' => 'Configuración del Repositorio',
     'new' => 'Nuevo',
-    
+
     // Repository specific
     'repositories' => 'Repositorios',
     'add_repository' => 'Agregar Repositorio',
     'new_repository' => 'Nuevo Repositorio',
     'edit_repository' => 'Editar Repositorio',
-    
+
     // Test Plan specific
     'test_plans' => 'Planes de Prueba',
     'new_test_plan' => 'Nuevo Plan de Prueba',
     'edit_test_plan' => 'Editar Plan de Prueba',
     'test_cases_count' => 'casos de prueba',
-    
+
     // User specific
     'users' => 'Usuarios',
     'edit_user' => 'Editar Usuario',
     'create_user' => 'Crear Usuario',
     'new_password' => 'Nueva Contraseña',
     'password_hint' => 'Mín 6 símbolos. Deja el campo vacío si no quieres cambiar la contraseña',
-    
+
     // General
     'description' => 'Descripción',
     'title' => 'Título',
@@ -73,18 +73,18 @@ return [
     'email' => 'Correo Electrónico',
     'password' => 'Contraseña',
     'permissions' => 'Permisos',
-    
+
     // Documents
     'documents' => 'Documentos',
-    
+
     // Projects
     'projects' => 'Proyectos',
     'all_projects' => 'Todos los Proyectos',
     'create_new_project' => 'Crear nuevo proyecto',
-    
+
     // Time related
     'created_at_label' => 'creado el',
-    
+
     // Forms and creation
     'create_project' => 'Crear Proyecto',
     'create_repository' => 'Crear Repositorio',
@@ -110,17 +110,25 @@ return [
     'name_placeholder' => 'Nombre',
     'email_placeholder' => 'Correo electrónico',
     'password_placeholder' => 'Contraseña. Mín 6 símbolos',
-    
+
     // Formatos de fecha
     'date_format' => 'd/m/Y',
     'datetime_format' => 'd/m/Y H:i',
     'datetime_full_format' => 'd/m/Y H:i:s',
-    
+
     // Pluralización
     'test_suites_count' => '{0} Suites de Prueba|{1} Suite de Prueba|[2,*] Suites de Prueba',
     'test_cases_count_short' => '{0} Casos de Prueba|{1} Caso de Prueba|[2,*] Casos de Prueba',
     'automated_count' => '{0} Automatizados|{1} Automatizado|[2,*] Automatizados',
-    
+
+    // Sistema de Temas
+    'toggle_theme' => 'Cambiar Tema',
+    'auto_theme' => 'Auto',
+    'light_theme' => 'Claro',
+    'dark_theme' => 'Oscuro',
+    'theme_preference' => 'Preferencia de Tema',
+    'theme_setting_description' => 'Elige tu tema preferido. Auto seguirá la configuración de tu sistema.',
+
     // Form fields
     'project_title' => 'Título del Proyecto',
     'project_description' => 'Descripción del Proyecto',
@@ -135,7 +143,7 @@ return [
     'select_test_plan' => 'Seleccionar Plan de Prueba',
     'role' => 'Rol',
     'confirm_password' => 'Confirmar Contraseña',
-    
+
     // Placeholders and help text
     'enter_title' => 'Ingrese título',
     'enter_description' => 'Ingrese descripción',
@@ -144,12 +152,12 @@ return [
     'enter_password' => 'Ingrese contraseña',
     'optional' => 'Opcional',
     'required' => 'Obligatorio',
-    
+
     // Buttons
     'create_button' => 'Crear',
     'submit' => 'Enviar',
     'reset' => 'Limpiar',
-    
+
     // Count pluralization
     'item' => 'elemento',
     'items' => 'elementos',

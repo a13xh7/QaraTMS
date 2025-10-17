@@ -185,12 +185,12 @@ class TestRunController extends Controller
 
         $testCasesIds = explode(',', $testPlan->data);
         $testCases = TestCase::whereIn('id', $testCasesIds)->get();
-        
+
         $results = $testRun->getResults();
         $chartData = $testRun->getChartData();
 
         // Helper function to convert status number to text
-        $getStatusText = function($status) {
+        $getStatusText = function ($status) {
             switch ($status) {
                 case TestRunCaseStatus::PASSED:
                     return 'PASSED';
@@ -209,7 +209,7 @@ class TestRunController extends Controller
         foreach ($testCases as $testCase) {
             $suite = Suite::find($testCase->suite_id);
             $status = $results[$testCase->id] ?? TestRunCaseStatus::NOT_TESTED;
-            
+
             $testCasesWithResults[] = [
                 'id' => $testCase->id,
                 'title' => $testCase->title,
@@ -233,9 +233,9 @@ class TestRunController extends Controller
         ];
 
         $pdf = PDF::loadView('test_run.pdf_report', $data);
-        
+
         $filename = 'TestRun_' . $testRun->id . '_' . date('Y-m-d_H-i-s') . '.pdf';
-        
+
         return $pdf->download($filename);
     }
 }

@@ -89,7 +89,6 @@ class TestRun extends Model
             } elseif ($status == TestRunCaseStatus::NOT_TESTED) {
                 $notTested++;
             }
-
         }
 
         // [number, percent]

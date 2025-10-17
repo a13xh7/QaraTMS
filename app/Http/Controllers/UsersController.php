@@ -52,7 +52,8 @@ class UsersController extends Controller
         $newUser = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password)
+            'password' => Hash::make($request->password),
+            'theme_preference' => $request->theme_preference ?? 'auto'
         ]);
 
         $this->setPermissions($request, $newUser);
@@ -71,12 +72,20 @@ class UsersController extends Controller
 
         $request->validate([
             'name' => 'required',
-            'email' => 'required|unique:users,email,'.$user->id
+            'email' => 'required|unique:users,email,' . $user->id
         ]);
 
 
         $user->name = $request->name;
         $user->email = $request->email;
+
+        // Update theme preference if provided
+        if ($request->has('theme_preference')) {
+            $request->validate([
+                'theme_preference' => 'in:auto,light,dark'
+            ]);
+            $user->theme_preference = $request->theme_preference;
+        }
 
         if ($request->password) {
             $user->password = Hash::make($request->password);

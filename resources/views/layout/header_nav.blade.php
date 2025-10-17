@@ -36,6 +36,12 @@
                 <a href="https://github.com/a13xh7/QaraTMS" target="_blank">
                     <img src="{{asset('img/github.png')}}" alt="" width="30px">
                 </a>
+                <form method="get" action="" class="ms-3">
+                    <select name="lang" onchange="this.form.submit()" class="form-select form-select-sm">
+                        <option value="en" {{ app()->getLocale() == 'en' ? 'selected' : '' }}>English</option>
+                        <option value="es" {{ app()->getLocale() == 'es' ? 'selected' : '' }}>Español</option>
+                    </select>
+                </form>
                 @if(Route::currentRouteName() == 'repository_show_page')
                     <a href="{{route('logout')}}" class="nav-link text-white" style="padding-left: 10px;">
                         <i class="bi bi-box-arrow-in-left"></i>&nbsp;<b>{{__('Logout')}}</b>

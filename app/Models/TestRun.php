@@ -11,6 +11,31 @@ use Illuminate\Database\Eloquent\Model;
  */
 class TestRun extends Model
 {
+    protected $fillable = ['title', 'test_plan_id', 'project_id', 'user_id', 'data'];
+
+    /**
+     * Get the user who created this test run
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get the test plan associated with this test run
+     */
+    public function testPlan()
+    {
+        return $this->belongsTo(TestPlan::class);
+    }
+
+    /**
+     * Get the project associated with this test run
+     */
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
+    }
     /*
      * Data format
      *

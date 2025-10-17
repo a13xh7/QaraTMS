@@ -31,26 +31,28 @@ $.getScript("/js/repo/tree.js", function () {
 function loadCasesList(id) {
     activeTreeSuiteItem.setId(id);
 
-    Cookies.set('lastSelectedSuite', id);
+    Cookies.set("lastSelectedSuite", id);
 
     // Add selected class
-    $('#tree .branch-wrapper').removeClass("selected");
+    $("#tree .branch-wrapper").removeClass("selected");
     activeTreeSuiteItem.addSelectedClass();
 
-    $('#test_cases_list_site_title').text(activeTreeSuiteItem.getTitle()); // set title in test cases list area
-    $('#test_cases_list').load(`/tscl/${activeTreeSuiteItem.getId()}`, function () {
-    }); // load test cases
+    $("#test_cases_list_site_title").text(activeTreeSuiteItem.getTitle()); // set title in test cases list area
+    $("#test_cases_list").load(
+        `/tscl/${activeTreeSuiteItem.getId()}`,
+        function () {}
+    ); // load test cases
 }
 
 /**************************************************
  * Collapse / expand test cases list
  **************************************************/
 function expandCasesList() {
-    $('#test_cases_list_col').addClass('col-9').removeClass('col')
+    $("#test_cases_list_col").addClass("col-9").removeClass("col");
 }
 
 function collapseCasesList() {
-    $('#test_cases_list_col').addClass('col').removeClass('col-9')
+    $("#test_cases_list_col").addClass("col").removeClass("col-9");
 }
 
 /**************************************************
@@ -58,10 +60,10 @@ function collapseCasesList() {
  *  to prevent ajax errors, double input
  **************************************************/
 
-$("body").on('click', 'button', function () {
-    let button = $(this).prop('disabled', true);
+$("body").on("click", "button", function () {
+    let button = $(this).prop("disabled", true);
     setTimeout(function () {
-        button.prop('disabled', false);
+        button.prop("disabled", false);
     }, 250);
 });
 
@@ -69,10 +71,10 @@ $("body").on('click', 'button', function () {
  * Collapse / expand children
  **************************************************/
 
-$('body').on("click", "#toogle_collaple_expand", function (e) {
-    let suite_id = $(this).parent().parent().parent().parent().data('mid');
+$("body").on("click", "#toogle_collaple_expand", function (e) {
+    let suite_id = $(this).parent().parent().parent().parent().data("mid");
 
-    rec(suite_id)
+    rec(suite_id);
 });
 
 function rec(suite_id) {
@@ -84,11 +86,7 @@ function rec(suite_id) {
         child_li.show();
     }
 
-    if ($(`li[data-pid='${child_li.attr('data-mid')}']`).length > 0) {
-        rec(child_li.attr('data-mid'))
+    if ($(`li[data-pid='${child_li.attr("data-mid")}']`).length > 0) {
+        rec(child_li.attr("data-mid"));
     }
 }
-
-
-
-

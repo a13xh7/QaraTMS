@@ -8,7 +8,9 @@ use App\Models\Suite;
 use App\Models\TestCase;
 use App\Models\TestPlan;
 use App\Models\TestRun;
+use App\Enums\TestRunCaseStatus;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class TestRunController extends Controller
 {
@@ -111,6 +113,7 @@ class TestRunController extends Controller
         $testRun->title = $request->title;
         $testRun->test_plan_id = $request->test_plan_id;
         $testRun->project_id = $request->project_id;
+        $testRun->user_id = auth()->id(); // Asignar el usuario actual
         $testRun->data = $testRun->getInitialData();
         $testRun->save();
 
@@ -167,5 +170,72 @@ class TestRunController extends Controller
 
         return view('test_run.chart')
             ->with('testRun', $testRun);
+    }
+
+    /*****************************************
+     *  PDF EXPORT
+     *****************************************/
+
+    public function exportToPdf($project_id, $test_run_id)
+    {
+        $project = Project::findOrFail($project_id);
+        $testRun = TestRun::with('user')->findOrFail($test_run_id); // Cargar la relación user
+        $testPlan = TestPlan::findOrFail($testRun->test_plan_id);
+        $repository = Repository::findOrFail($testPlan->repository_id);
+
+        $testCasesIds = explode(',', $testPlan->data);
+        $testCases = TestCase::whereIn('id', $testCasesIds)->get();
+        
+        $results = $testRun->getResults();
+        $chartData = $testRun->getChartData();
+
+        // Helper function to convert status number to text
+        $getStatusText = function($status) {
+            switch ($status) {
+                case TestRunCaseStatus::PASSED:
+                    return 'PASSED';
+                case TestRunCaseStatus::FAILED:
+                    return 'FAILED';
+                case TestRunCaseStatus::BLOCKED:
+                    return 'BLOCKED';
+                case TestRunCaseStatus::NOT_TESTED:
+                default:
+                    return 'NOT_TESTED';
+            }
+        };
+
+        // Preparar datos para el PDF
+        $testCasesWithResults = [];
+        foreach ($testCases as $testCase) {
+            $suite = Suite::find($testCase->suite_id);
+            $status = $results[$testCase->id] ?? TestRunCaseStatus::NOT_TESTED;
+            
+            $testCasesWithResults[] = [
+                'id' => $testCase->id,
+                'title' => $testCase->title,
+                'suite_name' => $suite ? $suite->title : 'N/A',
+                'status' => $getStatusText($status),
+                'priority' => $testCase->priority ?? 'Medium',
+            ];
+        }
+
+        $data = [
+            'project' => $project,
+            'testRun' => $testRun,
+            'testPlan' => $testPlan,
+            'repository' => $repository,
+            'testCases' => $testCasesWithResults,
+            'chartData' => $chartData,
+            'totalCases' => count($testCasesWithResults),
+            'generatedAt' => now()->format('Y-m-d H:i:s'),
+            'currentLocale' => app()->getLocale(),
+            'executor' => $testRun->user // Información del usuario ejecutor
+        ];
+
+        $pdf = PDF::loadView('test_run.pdf_report', $data);
+        
+        $filename = 'TestRun_' . $testRun->id . '_' . date('Y-m-d_H-i-s') . '.pdf';
+        
+        return $pdf->download($filename);
     }
 }

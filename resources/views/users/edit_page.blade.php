@@ -14,7 +14,7 @@
 
         <div class="border-bottom my-3">
             <h3 class="page_title">
-                Edit user
+                {{ __('ui.edit_user') }}
             </h3>
         </div>
 
@@ -50,13 +50,13 @@
 
                     <div class="form-group mb-3">
                         <input name="password" type="password"
-                               placeholder="New Password. Min 6 symbols. Leave field empty if you don't want to change password"
+                               placeholder="{{ __('ui.password_hint') }}"
                                minlength="6" class="form-control">
                     </div>
 
                     <div class="d-flex justify-content-end">
 
-                        <button type="submit" class="btn btn-warning px-5 mx-2">Update</button>
+                        <button type="submit" class="btn btn-warning px-5 mx-2">{{ __('ui.save') }}</button>
 
                         <a href="{{ url()->previous() }}" class="btn btn-outline-dark px-5">
                             <b>Cancel</b>

@@ -56,6 +56,7 @@ class Kernel extends HttpKernel
             StartSession::class,
             ShareErrorsFromSession::class,
             VerifyCsrfToken::class,
+            \App\Http\Middleware\SetLocale::class,
             SubstituteBindings::class,
         ],
 

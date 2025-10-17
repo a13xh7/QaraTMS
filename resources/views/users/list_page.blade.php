@@ -13,11 +13,11 @@
 
         <div class="border-bottom my-3">
             <h3 class="page_title">
-                Users
+                {{ __('ui.users') }}
 
                 @can('manage_users')
                     <a class="mx-3" href="{{route('users_create_page')}}">
-                        <button type="button" class="btn btn-sm btn-primary"><i class="bi bi-plus-lg"></i> Add User
+                        <button type="button" class="btn btn-sm btn-primary"><i class="bi bi-plus-lg"></i> {{ __('ui.create_user') }}
                         </button>
                     </a>
                 @endcan
@@ -38,7 +38,7 @@
 
                             <a href="{{route('users_edit_page', $user->id)}}" class="btn btn-sm btn-outline-dark">
                                 <i class="bi bi-pencil"></i>
-                                Edit
+                                {{ __('ui.edit') }}
                             </a>
 
 
@@ -47,7 +47,7 @@
                                 <input type="hidden" name="user_id" value="{{$user->id}}">
                                 <button type="submit" class="btn btn-sm btn-outline-danger me-3 ms-2">
                                     <i class="bi bi-x-lg"></i>
-                                    Delete
+                                    {{ __('ui.delete') }}
                                 </button>
                             </form>
                         </div>

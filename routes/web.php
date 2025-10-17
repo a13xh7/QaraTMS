@@ -205,6 +205,11 @@ Route::middleware(['auth'])->group(function () {
         ->where('test_run_id', '[0-9]+')
         ->name("test_run_edit_page");
 
+    Route::get('/project/{project_id}/test-run/{test_run_id}/export-pdf', [TestRunController::class, 'exportToPdf'])
+        ->where('project_id', '[0-9]+')
+        ->where('test_run_id', '[0-9]+')
+        ->name("test_run_export_pdf");
+
     // TEST case html block
     Route::get('/trc/{test_run_id}/{test_case_id}', [TestRunController::class, 'loadTestCase'])
         ->where('test_run_id', '[0-9]+')

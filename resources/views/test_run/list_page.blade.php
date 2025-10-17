@@ -8,11 +8,11 @@
 
         <div class="border-bottom my-3">
             <h3 class="page_title">
-                Test Runs
+                {{ __('ui.test_runs') }}
 
                 @can('add_edit_test_runs')
                     <a class="mx-3" href="{{route("test_run_create_page", $project->id)}}">
-                        <button type="button" class="btn btn-sm btn-primary"><i class="bi bi-plus-lg"></i> New Test Run
+                        <button type="button" class="btn btn-sm btn-primary"><i class="bi bi-plus-lg"></i> {{ __('ui.new_test_run') }}
                         </button>
                     </a>
                 @endcan
@@ -33,9 +33,14 @@
                                 </a>
                             </div>
 
-                            <div>
-                                <span class="text-muted"
-                                      title="created at">{{$testRun->created_at->format('d-m-Y H:i')}} </span>
+                            <div class="d-flex align-items-center">
+                                <a href="{{route('test_run_export_pdf', [$project->id, $testRun->id])}}"
+                                   class="btn btn-sm btn-outline-success me-2"
+                                   title="Export to PDF">
+                                    <i class="bi bi-file-earmark-pdf"></i>
+                                </a>
+                      <span class="text-muted"
+                          title="{{ __('ui.created') }}">{{$testRun->created_at->format('d-m-Y H:i')}} </span>
                             </div>
                         </div>
 

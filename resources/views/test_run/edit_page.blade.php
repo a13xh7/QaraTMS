@@ -9,7 +9,7 @@
         <div class="d-flex justify-content-between border-bottom my-3">
 
             <h3 class="page_title">
-                Edit Test Run
+                {{ __('ui.edit') }} {{ __('ui.test_run') }}
                 <i class="bi bi-arrow-right-short text-muted"></i>
                 {{$testRun->title}}
             </h3>
@@ -23,7 +23,7 @@
 
                         <button type="submit" class="btn btn-sm  btn-danger">
                             <i class="bi bi-trash3"></i>
-                            Delete
+                            {{ __('ui.delete') }}
                         </button>
                     </form>
                 @endcan
@@ -57,11 +57,11 @@
 
 
                 <button type="submit" class="btn btn-warning px-5 me-2">
-                    <b>Update</b>
+                    <b>{{ __('ui.save') }}</b>
                 </button>
 
                 <a href=" {{ url()->previous() }}" class="btn btn-outline-dark px-5">
-                    <b>Cancel</b>
+                    <b>{{ __('ui.cancel') }}</b>
                 </a>
             </form>
         </div>

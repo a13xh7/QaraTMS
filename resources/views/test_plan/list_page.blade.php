@@ -9,11 +9,11 @@
 
         <div class="border-bottom my-3">
             <h3 class="page_title">
-                Test Plans
+                {{ __('ui.test_plans') }}
 
                 @can('add_edit_test_plans')
                     <a class="mx-3" href="{{route("test_plan_create_page", $project->id)}}">
-                        <button type="button" class="btn btn-sm btn-primary"><i class="bi bi-plus-lg"></i> New Test Plan
+                        <button type="button" class="btn btn-sm btn-primary"><i class="bi bi-plus-lg"></i> {{ __('ui.new_test_plan') }}
                         </button>
                     </a>
                 @endcan
@@ -37,10 +37,10 @@
                                          <b>{{count(explode("," , $testPlan->data))}}</b>
                                      @else
                                          0
-                                     @endif test cases
+                                     @endif {{ __('ui.test_cases_count') }}
                                  </span> |
                                 <span class="text-muted"
-                                      title="created at">{{$testPlan->created_at->format('d-m-Y')}} </span>
+                                      title="{{ __('ui.created_at_label') }}">{{$testPlan->created_at->format('d-m-Y')}} </span>
                             </div>
                         </div>
 

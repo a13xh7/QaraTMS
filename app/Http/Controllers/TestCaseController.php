@@ -105,6 +105,25 @@ class TestCaseController extends Controller
             ->with('data', $data);
     }
 
+    public function showEditPage($test_case_id)
+    {
+        $testCase = TestCase::findOrFail($test_case_id);
+        $data = json_decode($testCase->data);
+
+        $parentTestSuite = Suite::findOrFail($testCase->suite_id);
+        $repository = Repository::findOrFail($parentTestSuite->repository_id);
+        $project = Project::findOrFail($repository->project_id);
+
+        return view('test_case.edit_page')
+            ->with('project', $project)
+            ->with('repository', $repository)
+            ->with('parentTestSuite', $parentTestSuite)
+            ->with('testCase', $testCase)
+            ->with('data', $data);
+    }
+
+
+
     public function loadCreateForm($repository_id, $parent_test_suite_id = null)
     {
         if ($parent_test_suite_id != null) {
@@ -131,7 +150,7 @@ class TestCaseController extends Controller
         $repository = Repository::findOrFail($parentTestSuite->repository_id);
         $project = Project::findOrFail($repository->project_id);
 
-        return view('test_case.show_form')
+        return view('test_case.show_side_right')
             ->with('project', $project)
             ->with('repository', $repository)
             ->with('parentTestSuite', $parentTestSuite)

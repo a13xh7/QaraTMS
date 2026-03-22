@@ -6,8 +6,8 @@
         </div>
 
         <div>
-            <button href="button" class="btn btn-outline-dark btn-sm" onclick="closeTestCaseEditor()">
-                <i class="bi bi-x-lg"></i> <b>Cancel</b>
+            <button href="button" class="btn btn-outline-dark btn-sm" onclick="closeTestCaseOverlayModal()">
+                <i class="bi bi-x-lg"></i>
             </button>
         </div>
     </div>
@@ -115,16 +115,17 @@
         </div>
     </div>
 
-    <div id="test_case_editor_footer" class="col-5 d-flex justify-content-between border-top pt-2">
-        <div class="col">
+    {{-- FOOTER --}}
+    <div id="test_case_editor_footer" class="d-flex justify-content-between border-top mt-2 pt-2 mb-2">
+
+        <div>
             <button type="button" class="btn btn-primary" onclick="addStep()">
                 <i class="bi bi-plus-circle"></i>
                 Add Step
             </button>
         </div>
 
-        <div class="col d-flex justify-content-end pe-3">
-
+        <div>
             <button id="tce_save_btn" type="button" class="btn btn-success me-3" onclick="createTestCase()">
                 Create
             </button>
@@ -133,6 +134,7 @@
                 Create and add another
             </button>
         </div>
+
     </div>
 
 </div>

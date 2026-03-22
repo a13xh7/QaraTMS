@@ -96,6 +96,7 @@ code {
 
 #test_case_overlay_data {
     /*max-height: 90vh;*/
+    /*height: 90vh;*/
     margin-top: 30px;
     max-width: 70vw;
     padding: 10px 30px 30px 30px;
@@ -109,6 +110,10 @@ code {
     border: 1px solid rgba(0, 0, 0, 0.175);
     border-radius: 0.5rem;
     outline: 0;
+}
+
+.test_case_overlay_modal {
+
 }
 
 /*************************************************************************************
@@ -141,8 +146,8 @@ header a{
 .sidebar {
     background: #193654;
     color: white !important;
-    width: 200px;
-    min-width: 200px;
+    /*width: 200px;*/
+    /*min-width: 200px;*/
 }
 
 .sidebar_project_title {
@@ -198,8 +203,12 @@ Scrollbar
 
 .selected {
     border: 1px solid rgba(25, 54, 84, 0.22) !important;
-    background: #edf7fb !important;
     border-radius: 3px;
+    background: #edf7fb !important;
+}
+
+.selected-test-case {
+      background: #edf7fb !important;
 }
 
 /****************************************************
@@ -214,16 +223,16 @@ Scrollbar
     overflow-y: scroll;
 }
 
+#test_cases_list::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+}
+
 .test_case_clickable_area {
     width: 100%;
     cursor: pointer;
     padding-top: 7px;
     padding-bottom: 7px;
-}
-
-.test_case_controls {
-    min-width: 70px;
-    padding-top: 7px;
 }
 
 .test_case:hover {
@@ -238,6 +247,8 @@ Scrollbar
 .test_case_controls {
     opacity: var(--test_case_controls_opacity);
     transition: 0.3s;
+    min-width: 90px;
+    padding-top: 7px;
 }
 
 /****************************************************
@@ -259,7 +270,6 @@ Scrollbar
 }
 
 #test_case_editor_footer {
-    position: absolute;
     bottom: 10px;
 }
 

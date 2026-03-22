@@ -7,7 +7,7 @@
     <div class="col">
         <div class="page_title border-bottom my-3 d-flex justify-content-between">
             <h3 class="page_title">
-                {{__('Dashboard of project')}}: <span class="badge bg-primary text-wrap">{{$project->title}}</span>
+                {{__('Project Dashboard')}}: <b class="text-capitalize">{{$project->title}}</b>
             </h3>
             <div>
                 @can('add_edit_projects')

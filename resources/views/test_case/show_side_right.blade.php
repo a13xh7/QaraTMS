@@ -2,7 +2,6 @@
 
     <div class="d-flex justify-content-between border-bottom mt-2 pb-2 mb-2">
 
-
         <div style="min-width: 140px">
 
             @if($testCase->priority == \App\Enums\CasePriority::LOW)
@@ -26,6 +25,7 @@
                     {{$repository->prefix}}-<span id="tce_case_id">{{$testCase->id}}</span>
                 </a>
             </u>
+
         </div>
 
         <input type="hidden" id="tce_suite_id" value="{{$testCase->suite_id}}">
@@ -47,7 +47,7 @@
                 <i class="bi bi-arrows-angle-expand"></i>
             </button>
 
-            <button href="button" class="btn btn-outline-dark btn-sm" onclick="closeTestCaseEditor()">
+            <button href="button" class="btn btn-outline-dark btn-sm" onclick="closeTestCaseSideRightView()">
                 <i class="bi bi-x-lg"></i>
             </button>
 
@@ -71,7 +71,7 @@
             @if(isset($data->steps) && !empty($data->steps))
                 <strong class="fs-5 pb-3">Steps</strong>
 
-                <div class="row mt-1 mb-3 border p-3 rounded" id="steps_container">
+                <div class="row mt-1 mb-3 border p-3 rounded">
 
                     <div class="row step pb-2 mb-2">
                         <div class="col-6">

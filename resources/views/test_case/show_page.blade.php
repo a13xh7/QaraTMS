@@ -38,11 +38,9 @@
 
             </h3>
 
-            <button type="button" class="btn btn-outline-dark btn-sm mb-2"
-                    onclick="editTesCase()">
-                <i class="bi bi-pencil px-1"></i>
-            </button>
-
+            <a type="button" href="/test-case/edit/{{$testCase->id}}" class="btn btn-outline-dark btn-sm mb-2">
+                <i class="bi bi-pencil px-1"></i> Edit
+            </a>
         </div>
 
         <div id="test_case_editor">
@@ -103,29 +101,11 @@
 
                 </div>
 
-                </div>
-                    <div class="testCaseEditFormBox d-none">
-                    @include('test_case.edit_form', ["isShowPage" => true])
-                </div>
-
         </div>
 
     </div>
 @endsection
 
 @section('footer')
-    <script src="{{asset('/js/repo/case_crud.js')}}"></script>
-    <script src="{{asset('/js/repo/case_editor.js')}}"></script>
-    <script>
-        function editTesCase() {
-            renderEditors();
-            $('#test_case_content').addClass('d-none');
-            $('.testCaseEditFormBox').removeClass('d-none');
-        }
-
-        function cancelEditTestCase() {
-            $('#test_case_content').removeClass('d-none');
-            $('.testCaseEditFormBox').addClass('d-none');
-        }
-    </script>
+    <script src="{{asset('/js/repo/test_case.js')}}"></script>
 @endsection

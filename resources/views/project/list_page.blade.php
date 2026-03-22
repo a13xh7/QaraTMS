@@ -8,7 +8,7 @@
                 @can('add_edit_projects')
                     <a href="{{route("project_create_page")}}">
                         <button type="button" class="btn btn-primary"><i class="bi bi-plus-lg"></i>
-                            {{ __('Create new project') }}
+                            {{ __('Create New Project') }}
                         </button>
                     </a>
                 @endcan
@@ -26,6 +26,7 @@
                             <p class="card-text">{{$project->description}}</p>
                         </div>
                         <ul class="list-group list-group-flush">
+
                             <li class="list-group-item">
                                 <a href="{{route("repository_list_page", $project->id)}}">
                                     <i class="bi bi-server"></i>
@@ -35,6 +36,17 @@
                                     {{$project->repositoriesCount()}}
                                 </span>
                             </li>
+
+                            <li class="list-group-item">
+                                {{ __('Test Suites') }}: <span
+                                        class="badge bg-secondary">{{$project->suitesCount()}}</span>
+                            </li>
+
+                            <li class="list-group-item">
+                                {{ __('Test Cases') }}: <span
+                                        class="badge bg-secondary">{{$project->casesCount()}}</span>
+                            </li>
+
                             <li class="list-group-item">
                                 <a href="{{route("test_plan_list_page", $project->id)}}">
                                     <i class="bi bi-journals"></i> {{ __('Test Plans') }}
@@ -43,26 +55,21 @@
                                     {{$project->testPlansCount()}}
                                 </span>
                             </li>
+
                             <li class="list-group-item">
                                 <a href="{{route("test_run_list_page", $project->id)}}">
                                     <i class="bi bi-play-circle"></i> {{ __('Test Runs') }}
                                 </a>
                                 <span class="badge bg-secondary">{{$project->testRunsCount()}}</span>
                             </li>
+
                             <li class="list-group-item">
                                 <a href="{{route("project_documents_list_page", $project->id)}}">
                                     <i class="bi bi-file-text-fill"></i> {{ __('Documents') }}
                                     <span class="badge bg-secondary">{{$project->documentsCount()}}</span>
                                 </a>
                             </li>
-                            <li class="list-group-item">
-                                {{ __('Test Suites') }}: <span
-                                        class="badge bg-secondary">{{$project->suitesCount()}}</span>
-                            </li>
-                            <li class="list-group-item">
-                                {{ __('Test Cases') }}: <span
-                                        class="badge bg-secondary">{{$project->casesCount()}}</span>
-                            </li>
+
                         </ul>
                     </div>
                 </div>

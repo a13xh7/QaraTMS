@@ -1,0 +1,445 @@
+/****************************************************************************
+ * TEST CASE - editor
+ ****************************************************************************/
+
+let summernoteEditor;
+
+function renderSummerNoteEditors() {
+    summernoteEditor = $('.editor_textarea').summernote({
+            minHeight: null,             // set minimum height of editor
+            maxHeight: null,             // set maximum height of editor
+            focus: true,                // set focus to editable area after initializing summernote
+
+            toolbar: [
+                ['style', ['style', 'bold', 'italic', 'underline', 'clear']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['picture'],
+                ['view', ['codeview']]
+            ]
+        },
+    );
+
+    $('.editor_textarea').removeClass('editor_textarea');
+}
+
+/****************************************************************************
+ * Update test case order
+ ****************************************************************************/
+
+$("#test_cases_list").sortable({
+    update: function (e, u) {
+        updateCasesOrder();
+    }
+});
+
+function updateCasesOrder() {
+    var order = [];
+    $('#test_cases_list .test_case').each(function (index, element) {
+        order.push({
+            id: $(this).attr('data-case_id'),
+            order: index + 1
+        });
+    });
+    console.log(order);
+
+    $.ajax({
+        url: "/tcuo",
+        type: 'post',
+        data: {
+            order: order
+        },
+        success: function (result) {
+        }
+    });
+}
+
+/****************************************************************************
+ * Get data from CREATE and UPDATE test case form. Save data in object
+ ****************************************************************************/
+
+function getTestCaseDataFromForm() {
+    let testCase = {};
+
+    testCase.id = $("#tce_case_id").val() || $("#tce_case_id").html();
+    testCase.title = $("#tce_title_input").val();
+    testCase.suite_id = $("#tce_test_suite_select").val();
+    testCase.automated = $("#tce_automated_select").val();
+    testCase.priority = $("#tce_priority_select").val();
+
+    testCase.data = {};
+    testCase.data['preconditions'] = $("#tce_preconditions_input").val();
+    testCase.data.steps = [];
+
+    $($(".step")).each(function (index) {
+
+        if ($(this).find(".step_action").val() || $(this).find(".step_result").val()) {
+            testCase.data.steps.push(
+                {
+                    action: $(this).find(".step_action").val(),
+                    result: $(this).find(".step_result").val()
+                }
+            )
+        }
+    });
+    return testCase;
+}
+
+/****************************************************************************
+ * CREATE TEST CASE - server returns:
+ *      test case tree html element
+ *      json of created test case
+ ****************************************************************************/
+
+function createTestCase(addAnother = false) {
+    let newTestCase = getTestCaseDataFromForm();
+
+    if (!newTestCase.title) {
+        alert('Title is required');
+        return;
+    }
+
+    $.ajax({
+        type: "POST",
+        url: "/test-case/create",
+        data: {
+            'title': newTestCase.title,
+            'suite_id': newTestCase.suite_id,
+            'automated': newTestCase.automated,
+            'priority': newTestCase.priority,
+            'order': $('.test_case').length + 1,
+            'data': JSON.stringify(newTestCase.data)
+        },
+
+        success: function (data) {  // response is case html and json
+            let testCase = $.parseJSON(data.json);
+
+            if (addAnother) {
+                closeTestCaseOverlayModal();
+
+                setTimeout(() => {
+                    renderTestCaseCreateForm();
+                }, 300)
+               // renderTestCaseCreateForm();
+            } else {
+                closeTestCaseOverlayModal();
+                renderTestCaseSideRight(testCase.id)
+            }
+
+            loadCasesList(testCase.suite_id);
+        }
+    });
+}
+
+/****************************************************************************
+ * EDIT / UPDATE TEST CASE
+ ****************************************************************************/
+
+function updateTestCase() {
+    let updatingTestCase = getTestCaseDataFromForm();
+
+    if (!updatingTestCase.title) {
+        alert('Title is required');
+        return;
+    }
+
+    $.ajax({
+        type: "POST",
+        url: "/test-case/update",
+        data: {
+            'id': updatingTestCase.id,
+            'title': updatingTestCase.title,
+            'suite_id': updatingTestCase.suite_id,
+            'automated': updatingTestCase.automated,
+            'priority': updatingTestCase.priority,
+            'data': JSON.stringify(updatingTestCase.data)
+        },
+        success: function (data) {  // response is case html and json
+            let testCase = $.parseJSON(data.json);
+            renderTestCaseSideRight(testCase.id)
+            loadCasesList(testCase.suite_id);
+            closeTestCaseOverlayModal();
+        }
+    });
+}
+
+/****************************************************************************
+ * UPDATE TEST CASE FOR SHOW PAGE
+ ****************************************************************************/
+
+function updateTestCaseForShowPage() {
+
+    let updatingTestCase = getTestCaseDataFromForm();
+
+    if (!updatingTestCase.title) {
+        alert('Title is required');
+        return;
+    }
+
+    $.ajax({
+        type: "POST",
+        url: "/test-case/update",
+        data: {
+            'id': updatingTestCase.id,
+            'title': updatingTestCase.title,
+            'suite_id': updatingTestCase.suite_id,
+            'automated': updatingTestCase.automated,
+            'priority': updatingTestCase.priority,
+            'data': JSON.stringify(updatingTestCase.data)
+        },
+        success: function () {
+            // window.location.href = window.location.href;
+            window.location.href = `/test-case/${updatingTestCase.id}`;
+        }
+    });
+}
+
+/****************************************************************************
+ * DELETE TEST CASE - delete from list
+ ****************************************************************************/
+function deleteTestCase(id) {
+    // if (!confirm('Are you sure?')) {
+    //     return;
+    // }
+    $.ajax({
+        url: "/test-case/delete",
+        method: "POST",
+        data: {
+            "id": id,
+        },
+        success: function (data) {
+            $("[data-case_id=" + id + "]").remove();
+
+            if ($('#tce_case_id').val() == id || $('#tce_case_id').text() == id) {
+                closeTestCaseSideRightView();
+            }
+        }
+    });
+}
+
+
+
+
+/****************************************************************************
+ * TEST CASE AREA in repository. Load TEST CASE forms
+ ****************************************************************************/
+
+let testCaseAreaLocator = "#test_case_area";
+let testCaseOverlayModalLocator = "#test_case_overlay";
+let testCaseOverlayModalContentLocator = "#test_case_overlay_data";
+
+function showTestCaseOverlayModal() {
+    $(testCaseOverlayModalLocator).modal('show');
+}
+
+function closeTestCaseOverlayModal() {
+    $(testCaseOverlayModalLocator).modal('hide');
+    closeTestCaseSideRightView();
+}
+
+function renderTestCaseCreateForm() {
+    if ($('#tree li').length <= 0) {
+        alert('Create at least one test suite.')
+        return;
+    }
+
+    let url = activeTreeSuiteItem.getId() == null ? `/tc/create/${repository_id}` : `/tc/create/${repository_id}/${activeTreeSuiteItem.getId()}`;
+
+    $(testCaseOverlayModalContentLocator).load(url, function () {
+        renderSummerNoteEditors();
+        showTestCaseOverlayModal();
+    });
+
+    //
+    // $(`.test_case`).removeClass("selected-test-case");
+    // $(`.test_case[data-case_id='${test_case_id}']`).addClass('selected-test-case');
+}
+
+function renderTestCaseEditForm(test_case_id) {
+    let url = `/tc/${test_case_id}/edit`;
+
+    $(testCaseOverlayModalContentLocator).load(url, function () {
+        oldParentId = $("#tccf_test_suite_select").val();
+        renderSummerNoteEditors();
+        showTestCaseOverlayModal();
+    });
+}
+
+function renderTestCaseEditFormOnPage(test_case_id) {
+    let url = `/tc/${test_case_id}/edit`;
+
+    $("#test_case_editor").load(url, function () {
+        oldParentId = $("#tccf_test_suite_select").val();
+        renderSummerNoteEditors();
+        showTestCaseOverlayModal();
+    });
+}
+
+
+function renderTestCaseSideRight(test_case_id) {
+    $(testCaseAreaLocator).load(`/tc/${test_case_id}`, function () {
+
+        $(`.test_case`).removeClass("selected-test-case");
+        $(`.test_case[data-case_id='${test_case_id}']`).addClass('selected-test-case');
+
+        collapseCasesList();
+    });
+}
+
+function renderTestCaseOverlay(test_case_id) {
+    $('#test_case_overlay_data').load(`/test-case-overlay/${test_case_id}`, function () {
+
+        $(`.test_case`).removeClass("selected-test-case");
+        $(`.test_case[data-case_id='${test_case_id}']`).addClass('selected-test-case');
+
+        $("#test_case_overlay").modal('show');
+
+    });
+}
+
+let oldParentId = '';
+
+
+
+function closeTestCaseSideRightView() {
+    $('#test_case_editor').remove();
+    expandCasesList();
+}
+
+
+
+function isTestCaseCreateOrEditFormLoaded() {
+    return $("#tce_title_input").length > 0;
+}
+
+function isTestCaseViewFormLoaded() {
+    return $("#tce_suite_id").length > 0;
+}
+
+
+/****************************************************************************
+ * STEPS
+ * Add step - append step html to steps container
+ * remove step - update step indexes after that
+ * swap steps
+ ****************************************************************************/
+
+$.fn.swapWith = function (to) {
+    return this.each(function () {
+        var copy_to = $(to).clone(true);
+        var copy_from = $(this).clone(true);
+        $(to).replaceWith(copy_from);
+        $(this).replaceWith(copy_to);
+    });
+};
+
+function addStep() {
+    let stepNumber = $('.step').length + 1;
+    renderStep(stepNumber)
+    renderSummerNoteEditors();
+}
+
+function addStepForShowPage() {
+    let stepNumber = $('#steps_container .step').length + 1;
+    renderStepForShowPage(stepNumber)
+    renderSummerNoteEditors();
+}
+
+function removeStep(btn) {
+    $(btn).parent().parent().remove();
+    updateStepsNumbers();
+}
+
+function stepUp(btn) {
+    let step = $(btn).parent().parent();
+    let previousStep = step.prev();
+
+    if (previousStep.is('.step')) {
+        step.swapWith(previousStep);
+        updateStepsNumbers();
+    }
+}
+
+function stepDown(btn) {
+    let step = $(btn).parent().parent();
+    let nextStep = step.next();
+
+    if (nextStep.is('.step')) {
+        step.swapWith(nextStep);
+        updateStepsNumbers();
+    }
+}
+
+function updateStepsNumbers() {
+    $($(".step_number")).each(function (index) {
+        let text = index + 1;
+        $(this).text(text)
+    });
+}
+
+/*
+ * STEP HTML - is used in test case viewer create and update forms
+ */
+
+function renderStep(stepNumber) {
+    let stepHtml = `
+    <div class="row m-0 mt-2 p-0 step">
+        <div class="col-auto p-0 d-flex flex-column align-items-center">
+            <span class="fs-5 step_number">${stepNumber}</span>
+
+            <button type="button" class="btn btn-outline btn-sm step_delete_btn px-1 py-0" onclick="stepUp(this)">
+                <i class="bi bi-arrow-up-circle"></i>
+            </button>
+
+            <button type="button" class="btn btn-outline-danger btn-sm step_delete_btn px-1 py-0" onclick="removeStep(this)">
+                <i class="bi bi-x-circle"></i>
+            </button>
+
+            <button type="button" class="btn btn-outline btn-sm step_delete_btn px-1 py-0" onclick="stepDown(this)">
+                <i class="bi bi-arrow-down-circle"></i>
+            </button>
+        </div>
+
+        <div class="col p-0 px-1 test_case_step">
+            <textarea class="editor_textarea form-control border-secondary step_action" rows="2"></textarea>
+        </div>
+        <div class="col p-0 test_case_step">
+            <textarea class="editor_textarea form-control border-secondary step_result" rows="2"></textarea>
+        </div>
+    </div>`;
+
+    $("#steps_container").append(stepHtml)
+}
+
+function renderStepForShowPage(stepNumber) {
+    let stepHtml = `
+    <div class="row m-0 mt-2 p-0 step">
+        <div class="col-auto p-0 d-flex flex-column align-items-center">
+            <span class="fs-5 step_number">${stepNumber}</span>
+
+            <button type="button" class="btn btn-outline btn-sm step_delete_btn px-1 py-0" onclick="stepUp(this)">
+                <i class="bi bi-arrow-up-circle"></i>
+            </button>
+
+            <button type="button" class="btn btn-outline-danger btn-sm step_delete_btn px-1 py-0" onclick="removeStep(this)">
+                <i class="bi bi-x-circle"></i>
+            </button>
+
+            <button type="button" class="btn btn-outline btn-sm step_delete_btn px-1 py-0" onclick="stepDown(this)">
+                <i class="bi bi-arrow-down-circle"></i>
+            </button>
+        </div>
+
+        <div class="col p-0 px-1">
+            <textarea class="editor_textarea form-control border-secondary step_action" rows="2"></textarea>
+        </div>
+        <div class="col p-0">
+            <textarea class="editor_textarea form-control border-secondary step_result" rows="2"></textarea>
+        </div>
+    </div>`;
+
+    $("#steps_container").append(stepHtml)
+}
+
+

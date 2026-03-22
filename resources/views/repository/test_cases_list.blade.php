@@ -6,11 +6,11 @@
 @endphp
 @foreach($testCases as $testCase)
 
-    <div id="{{$testCase->id}}" class="test_case border-bottom d-flex ps-1  justify-content-between"
+    <div id="{{$testCase->id}}" class="test_case border-bottom d-flex ps-1 justify-content-between"
          data-case_id="{{$testCase->id}}">
 
         <div class="d-flex justify-content-start test_case_clickable_area"
-             onclick="renderTestCase('{{$testCase->id}}')">
+             onclick="renderTestCaseSideRight('{{$testCase->id}}')">
             <div class="me-1 test_case_info">
 
                 @if($testCase->priority == CasePriority::MEDIUM)
@@ -30,25 +30,25 @@
                     </span>
 
                 <u class="text-primary under">
-                    <a href="{{route('test_case_show_page', $testCase->id)}}" target="_blank">{{$repository->prefix}}
-                        -{{$testCase->id}}
+                    <a href="{{route('test_case_show_page', $testCase->id)}}" target="_blank">
+                        {{$repository->prefix}}-{{$testCase->id}}
                     </a>
-
-{{--                    <button type="button" class="btn btn-outline-dark" onclick="renderTestCaseOverlay('{{$testCase->id}}')">--}}
-{{--                        {{$repository->prefix}}-<span id="tce_case_id">{{$testCase->id}}</span>--}}
-{{--                    </button>--}}
                 </u>
             </div>
 
             <div class="test_case_title">
                 <span>{{$testCase->title}}</span>
             </div>
+
         </div>
 
         <div class="test_case_controls">
+            <button class="btn py-0 px-1" type="button" title="Edit" onclick="renderTestCaseOverlay('{{$testCase->id}}')">
+                <i class="bi bi-arrows-angle-expand"></i>
+            </button>
+
             @can('add_edit_test_cases')
-                <button class="btn py-0 px-1" type="button" title="Edit"
-                            onclick="renderTestCaseEditForm('{{$testCase->id}}')">
+                <button class="btn py-0 px-1" type="button" title="Edit" onclick="renderTestCaseEditForm('{{$testCase->id}}')">
                     <i class="bi bi-pencil"></i>
                 </button>
             @endcan
@@ -59,6 +59,7 @@
                 </button>
             @endcan
         </div>
+
 
     </div>
 

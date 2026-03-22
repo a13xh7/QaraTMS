@@ -165,13 +165,13 @@ summary {
     border-radius: 3px;
     min-height: 20px;
     position: relative;
-    padding: 3px 0 3px 5px;
     height: auto;
     gap: 12px;
 
     /*line-height: 2.3076923;*/
     overflow: hidden;
     word-wrap: break-word;
+    padding: 3px 5px;
 }
 
 .tree-branch > .contents .branch-wrapper .left-sidebar {

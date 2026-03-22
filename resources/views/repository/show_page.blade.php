@@ -2,8 +2,10 @@
 /**
  * @var Repository $repository
  * @var Project $project
+ *
  */
 @endphp
+
 @extends('layout.base_layout')
 
 @section('head')
@@ -15,20 +17,21 @@
 
 @section('content')
 
+    @include('layout.sidebar_nav')
+
     {{--    TEST SUITES TREE COLUMN--}}
-    <div class="col-3 shadow-sm" id="suites_tree_col">
+    <div class="col-2 shadow-sm" id="suites_tree_col">
 
         {{-- COLUMN header--}}
         <div class="border-bottom mt-2 pb-2 mb-2 d-flex justify-content-between">
-            <span class="fs-5">
-                <span class="text-muted">Repository:</span> {{$repository->title}}
-            </span>
+
+            <span class="fs-5">{{$repository->title}}</span>
 
             <div>
                 @can('add_edit_test_suites')
                     <button id="add_root_suite_btn" class="btn btn-primary btn-sm" type="button" title="Add Test Suite"
                             onclick="showSuiteForm('create')">
-                        <i class="bi bi-plus-lg"></i> Test Suite
+                        <i class="bi bi-plus-lg"></i> Create Test Suite
                     </button>
                 @endcan
 
@@ -43,46 +46,52 @@
             </div>
         </div>
 
-        {{--        <button type="button" class="btn btn-outline-dark btn-sm w-100">ROOT</button>--}}
-
+        {{-- TEST SUITES JS tree--}}
         <ul id="tree">
             <li></li>
         </ul>
 
     </div>
 
+    {{--    TEST CASES LIST COLUMN--}}
 
     <div id="test_cases_list_col" class="col-9 shadow-sm">
+
         {{-- COLUMN header--}}
         <div class="border-bottom mt-2 pb-2 ">
-
-            <div class="d-flex justify-content-between">
-
-                <div>
-                    <span class="fs-5 text-muted">Suite: </span>
-                    <span id="test_cases_list_site_title" class="fs-5">
-                    Select Test Suite
-                </span>
-                </div>
+            <div class="d-flex">
 
                 @can('add_edit_test_cases')
-                    <button class="btn btn-primary btn-sm mx-2" type="button" title="Add Test Case"
-                            onclick="loadTestCaseCreateForm()">
-                        <i class="bi bi-plus-lg"></i> Test Case
+                    <button class="btn btn-primary btn-sm me-2" type="button" title="Add Test Case"
+                            onclick="renderTestCaseCreateForm()">
+                        <i class="bi bi-plus-lg"></i> Create Test Case
                     </button>
                 @endcan
-            </div>
 
+                <div>
+                    <span class="fs-5 text-muted">Test Suite: </span>
+                    <span id="test_cases_list_site_title" class="fs-5">
+                        Select Test Suite
+                    </span>
+                </div>
+
+            </div>
         </div>
 
-        <div id="test_cases_list">  {{--  js load --}}  </div>
+        {{-- TEST CASES List --}}
+        <div id="test_cases_list">
+            {{--  js ajax load --}}
+        </div>
+
     </div>
 
-    <div id="test_case_col" class="col-5 shadow-sm">
+    {{--    TEST CASE Viewer column--}}
+
+    <div id="test_case_col" class="col shadow-sm">
         <div id="test_case_area"></div>
     </div>
 
-
+    {{--    CREATE TEST SUITE FORM OVERLAY --}}
     <div id="test_suite_form_overlay" class="overlay" style="display: none">
         <div class="card position-absolute top-50 start-50 translate-middle border-secondary" style="width: 500px">
             <form class="px-5 pt-3">
@@ -107,6 +116,21 @@
             </form>
         </div>
     </div>
+
+
+    {{--    CREATE TEST CASE FORM OVERLAY --}}
+
+    <div id="test_case_overlay"
+         class="test_case_overlay_modal modal fade"
+         tabindex="-1" style="display: none;" aria-hidden="true"
+         data-bs-backdrop="static" data-bs-keyboard="false">
+
+        <div class="modal-dialog modal-xl" id="test_case_overlay_data">
+
+        </div>
+
+    </div>
+
 @endsection
 
 
@@ -143,6 +167,20 @@
         if({{$canDeleteSuites}} === 0) {
             setTimeout(removeDeleteButtons, 1000);
         }
+
+
+        {{--const testSuite = @json(request('test_suite'));--}}
+        {{--const testCase = @json(request('test_case'));--}}
+
+        {{--document.addEventListener("DOMContentLoaded", function () {--}}
+        {{--    if (testSuite) {--}}
+        {{--        loadCasesList(testSuite);--}}
+        {{--    }--}}
+
+        {{--    if (testCase) {--}}
+        {{--        renderTestCaseOverlay(testCase);--}}
+        {{--    }--}}
+        {{--});--}}
 
     </script>
 

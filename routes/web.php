@@ -149,6 +149,7 @@ Route::middleware(['auth'])->group(function () {
         ->where('test_case_id', '[0-9]+')
         ->name('test_case_show_page');
 
+    Route::get('/test-case/edit/{test_case_id}', [TestCaseController::class, 'showEditPage'])->name('test_case_edit_page');
 
     Route::post('/test-case/create', [TestCaseController::class, 'store'])->name("test_case_create");
     Route::post('/test-case/update', [TestCaseController::class, 'update'])->name("test_case_update");

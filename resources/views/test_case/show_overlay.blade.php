@@ -36,7 +36,7 @@
             <h5>{{$testCase->title}}</h5>
         </div>
 
-        <button href="button" class="btn btn-outline-dark btn-sm" onclick="closeTestCaseOverlay()">
+        <button href="button" class="btn btn-outline-dark btn-sm" onclick="closeTestCaseOverlayModal()">
             <i class="bi bi-x-lg"></i>
         </button>
 
@@ -100,5 +100,8 @@
     </div>
 
 </div>
+
+
+
 
 

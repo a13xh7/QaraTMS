@@ -3,15 +3,15 @@
  *************************************************/
 
 $.getScript("/js/repo/tree.js", function () {
-    $.getScript("/js/repo/suites_tree_and_crud.js", function () {
-        $.getScript("/js/repo/case_crud.js", function () {
+    $.getScript("/js/repo/test_suite_tree_crud.js", function () {
+        $.getScript("/js/repo/test_case.js", function () {
             /**************************************************
              * RENDER SUITES TREE
              * and select first available suite
              * when all scripts are loaded
              *************************************************/
 
-            $.getScript("/js/repo/case_editor.js", function () {
+            $.getScript("/js/repo/test_case.js", function () {
                 try {
                     loadSuitesTree();
                 } catch (e) {
@@ -88,7 +88,3 @@ function rec(suite_id) {
         rec(child_li.attr('data-mid'))
     }
 }
-
-
-
-

@@ -1,13 +1,41 @@
-<div class="col-auto sidebar shadow-sm">
+<div class="col-1 sidebar shadow-sm">
+
     <div style="margin-top: 20px;">
+
         @if(isset($project))
-            <a href="{{route("project_show_page", $project->id)}}" class="nav-link text-white sidebar_project_title">
-                <i class="bi bi-kanban-fill"></i>&nbsp;{{$project->title}}
-            </a>
+            <div class="d-flex align-items-center">
+                <!-- Квадратный аватар -->
+                <div class="bg-primary text-white d-flex align-items-center justify-content-center rounded-2 me-2 text-uppercase"
+                     style="width: 36px; height: 36px; min-width: 36px; font-size: 0.85rem; font-weight: 600;">
+                    {{mb_substr($project->title, 0, 2)}}
+                </div>
+
+                <!-- Название проекта -->
+                <a href="{{route("project_show_page", $project->id)}}" class="nav-link text-white sidebar_project_title text-capitalize">
+                    {{$project->title}}
+                </a>
+            </div>
+
             <hr>
+
+            <a href="{{route("project_show_page", $project->id)}}" class="nav-link text-white sidebar_project_title">
+                <i class="bi bi-kanban-fill"></i>&nbsp;Dashboard
+            </a>
+
+            <hr>
+
             <a href="{{route("repository_list_page", $project->id)}}" class="nav-link text-white menu_link">
                 <i class="bi bi-server"></i>&nbsp;{{__('Repositories')}}
             </a>
+
+            <ul>
+                @foreach($project->repositories as $repository)
+                    <li>
+                        <a class="link-light" href="{{ route('repository_show_page', [$project->id, $repository->id]) }}">{{$repository->title}}</a>
+                    </li>
+                @endforeach
+            </ul>
+
             <a href="{{route("test_plan_list_page", $project->id)}}" class="nav-link text-white menu_link">
                 <i class="bi bi-journals"></i>&nbsp;{{__('Test Plans')}}
             </a>
@@ -19,8 +47,9 @@
             </a>
             <hr>
         @endif
+
         <a href="{{route("project_list_page")}}" class="nav-link text-white menu_link">
-            <i class="bi bi-diagram-3-fill"></i>&nbsp;{{__('All projects')}}
+            <i class="bi bi-diagram-3-fill"></i>&nbsp;{{__('Projects')}}
         </a>
         <a href="{{route('users_list_page')}}" class="nav-link text-white">
             <i class="bi bi-people-fill"></i>&nbsp;{{__('Users')}}
@@ -29,5 +58,7 @@
         <a href="{{route('logout')}}" class="nav-link text-white">
             <i class="bi bi-box-arrow-in-left"></i>&nbsp;<b>{{__('Logout')}}</b>
         </a>
+
     </div>
+
 </div>

@@ -6,8 +6,8 @@
         </div>
 
         <div>
-            <button href="button" class="btn btn-outline-dark btn-sm" onclick="{{$isShowPage ?? false ? "cancelEditTestCase()" : "renderTestCase($testCase->id)"}}">
-                <i class="bi bi-x-lg"></i> <b>Cancel</b>
+            <button id="test_case_edit_button" class="btn btn-outline-dark btn-sm" onclick="closeTestCaseOverlayModal()">
+                <i class="bi bi-x-lg"></i>  <b>Cancel</b>
             </button>
         </div>
     </div>
@@ -184,41 +184,26 @@
         </div>
     </div>
 
-    @if ($isShowPage ?? false)
 
-        <div class="col-12 d-flex justify-content-end border-top pt-2 mb-5">
+    {{-- FOOTER --}}
 
-            <button type="button" class="btn btn-primary px-5" onclick="addStepForShowPage()">
+    <div id="test_case_editor_footer" class="d-flex justify-content-between border-top mt-2 pt-2 mb-2">
+
+        <div>
+            <button type="button" class="btn btn-primary" onclick="addStep()">
                 <i class="bi bi-plus-circle"></i>
                 Add Step
             </button>
-
-            <div class="col d-flex justify-content-end pe-3">
-                <button id="tce_save_btn" type="button" class="btn btn-warning px-5 mx-3 me-3" onclick="updateTestCaseForShowPage()">
-                    <i class="bi bi-save"></i>
-                    Update Test Case
-                </button>
-            </div>
         </div>
 
-    @else
-
-        <div id="test_case_editor_footer" class="col-5 d-flex justify-content-end border-top pt-2">
-
-            <button type="button" class="btn btn-primary px-5" onclick="addStep()">
-                <i class="bi bi-plus-circle"></i>
-                Add Step
+        <div>
+            <button id="tce_save_btn" type="button" class="btn btn-warning px-5 mx-3 me-3" onclick="updateTestCase()">
+                <i class="bi bi-save"></i>
+                Update Test Case
             </button>
-
-            <div class="col d-flex justify-content-end pe-3">
-                <button id="tce_save_btn" type="button" class="btn btn-warning px-5 mx-3 me-3" onclick="updateTestCase()">
-                    <i class="bi bi-save"></i>
-                    Update Test Case
-                </button>
-            </div>
         </div>
-        
-    @endif
+
+    </div>
 
 </div>
 

@@ -10,12 +10,12 @@
             <h3 class="page_title">
                 Test Runs
 
-                @can('add_edit_test_runs')
-                    <a class="mx-3" href="{{route("test_run_create_page", $project->id)}}">
-                        <button type="button" class="btn btn-sm btn-primary"><i class="bi bi-plus-lg"></i> New Test Run
-                        </button>
-                    </a>
-                @endcan
+{{--                @can('add_edit_test_runs')--}}
+{{--                    <a class="mx-3" href="{{route("test_run_create_page", $project->id)}}">--}}
+{{--                        <button type="button" class="btn btn-sm btn-primary"><i class="bi bi-plus-lg"></i> New Test Run--}}
+{{--                        </button>--}}
+{{--                    </a>--}}
+{{--                @endcan--}}
 
             </h3>
         </div>

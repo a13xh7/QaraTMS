@@ -14,7 +14,7 @@ documentation.
 
 ## Getting Started
 
-- You need to have **php ^8.1**, **mysql-8** or **SQLite**, **composer** installed.
+- You need to have **php ^8.3**, **mysql-8** or **SQLite**, **composer** installed.
 - Pull the project from GitHub.
 - Create a database named `tms` using `utf8_general_ci`, or you can use SQLite.
 - Run `composer install` or `php composer.phar install`

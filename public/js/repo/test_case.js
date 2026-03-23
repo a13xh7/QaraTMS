@@ -218,9 +218,6 @@ function deleteTestCase(id) {
     });
 }
 
-
-
-
 /****************************************************************************
  * TEST CASE AREA in repository. Load TEST CASE forms
  ****************************************************************************/
@@ -235,7 +232,6 @@ function showTestCaseOverlayModal() {
 
 function closeTestCaseOverlayModal() {
     $(testCaseOverlayModalLocator).modal('hide');
-    closeTestCaseSideRightView();
 }
 
 function renderTestCaseCreateForm() {

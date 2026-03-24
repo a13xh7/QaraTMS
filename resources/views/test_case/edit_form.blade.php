@@ -108,7 +108,7 @@
 
                     @foreach($data->steps as $id => $step)
 
-                        <div class="row m-0 mt-2 p-0 step">
+                        <div class="row m-0 mt-2 p-0 test_case_editor_step">
                             <div class="col-auto p-0 d-flex flex-column align-items-center">
                                 <span class="fs-5 step_number">{{$id+1}}</span>
 

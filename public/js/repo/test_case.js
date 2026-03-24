@@ -2,6 +2,8 @@
  * TEST CASE - editor
  ****************************************************************************/
 
+let stepLocator = ".test_case_editor_step";
+let stepClass = "test_case_editor_step";
 let summernoteEditor;
 
 function renderSummerNoteEditors() {
@@ -72,17 +74,37 @@ function getTestCaseDataFromForm() {
     testCase.data['preconditions'] = $("#tce_preconditions_input").val();
     testCase.data.steps = [];
 
-    $($(".step")).each(function (index) {
+    // $($(".step")).each(function (index) {
+    //
+    //     if ($(this).find(".step_action").val() || $(this).find(".step_result").val()) {
+    //         testCase.data.steps.push(
+    //             {
+    //                 action: $(this).find(".step_action").val(),
+    //                 result: $(this).find(".step_result").val()
+    //             }
+    //         )
+    //     }
+    // });
 
-        if ($(this).find(".step_action").val() || $(this).find(".step_result").val()) {
-            testCase.data.steps.push(
-                {
-                    action: $(this).find(".step_action").val(),
-                    result: $(this).find(".step_result").val()
-                }
-            )
+    $(stepLocator).each(function (index) {
+        // Получаем реальный HTML-код из редакторов
+        let actionContent = $(this).find(".step_action").summernote('code');
+        let resultContent = $(this).find(".step_result").summernote('code');
+
+        // Summernote имеет одну особенность: пустой редактор часто возвращает '<p><br></p>'
+        // Поэтому нам нужно проверять не только на пустоту, но и на этот дефолтный тег
+        let isActionEmpty = !actionContent || actionContent === '<p><br></p>';
+        let isResultEmpty = !resultContent || resultContent === '<p><br></p>';
+
+        // Если хотя бы одно из полей не пустое — пушим в массив
+        if (!isActionEmpty || !isResultEmpty) {
+            testCase.data.steps.push({
+                action: actionContent,
+                result: resultContent
+            });
         }
     });
+
     return testCase;
 }
 
@@ -331,7 +353,7 @@ $.fn.swapWith = function (to) {
 };
 
 function addStep() {
-    let stepNumber = $('.step').length + 1;
+    let stepNumber = $(stepLocator).length + 1;
     renderStep(stepNumber)
     renderSummerNoteEditors();
 }
@@ -351,7 +373,7 @@ function stepUp(btn) {
     let step = $(btn).parent().parent();
     let previousStep = step.prev();
 
-    if (previousStep.is('.step')) {
+    if (previousStep.is(stepLocator)) {
         step.swapWith(previousStep);
         updateStepsNumbers();
     }
@@ -361,7 +383,7 @@ function stepDown(btn) {
     let step = $(btn).parent().parent();
     let nextStep = step.next();
 
-    if (nextStep.is('.step')) {
+    if (nextStep.is(stepLocator)) {
         step.swapWith(nextStep);
         updateStepsNumbers();
     }
@@ -380,7 +402,7 @@ function updateStepsNumbers() {
 
 function renderStep(stepNumber) {
     let stepHtml = `
-    <div class="row m-0 mt-2 p-0 step">
+    <div class="row m-0 mt-2 p-0 ${stepClass}">
         <div class="col-auto p-0 d-flex flex-column align-items-center">
             <span class="fs-5 step_number">${stepNumber}</span>
 
@@ -410,7 +432,7 @@ function renderStep(stepNumber) {
 
 function renderStepForShowPage(stepNumber) {
     let stepHtml = `
-    <div class="row m-0 mt-2 p-0 step">
+    <div class="row m-0 mt-2 p-0 ${stepClass}">
         <div class="col-auto p-0 d-flex flex-column align-items-center">
             <span class="fs-5 step_number">${stepNumber}</span>
 

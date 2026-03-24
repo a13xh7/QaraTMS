@@ -2,27 +2,42 @@
  * LOAD SCRIPTS
  *************************************************/
 
-$.getScript("/js/repo/tree.js", function () {
-    $.getScript("/js/repo/test_suite_tree_crud.js", function () {
-        $.getScript("/js/repo/test_case.js", function () {
-            /**************************************************
-             * RENDER SUITES TREE
-             * and select first available suite
-             * when all scripts are loaded
-             *************************************************/
+// $.getScript("/js/repo/tree.js", function () {
+//     $.getScript("/js/repo/test_suite_tree_crud.js", function () {
+//         $.getScript("/js/repo/test_case.js", function () {
+//             /**************************************************
+//              * RENDER SUITES TREE
+//              * and select first available suite
+//              * when all scripts are loaded
+//              *************************************************/
+//
+//             $.getScript("/js/repo/test_case.js", function () {
+//                 try {
+//                     loadSuitesTree();
+//                 } catch (e) {
+//                     setTimeout(function () {
+//                         loadSuitesTree();
+//                     }, 1000);
+//                 }
+//             });
+//         });
+//     });
+// });
 
-            $.getScript("/js/repo/test_case.js", function () {
-                try {
-                    loadSuitesTree();
-                } catch (e) {
-                    setTimeout(function () {
-                        loadSuitesTree();
-                    }, 1000);
-                }
-            });
+(async function initRepoScripts() {
+    try {
+        await $.getScript("/js/repo/tree.js");
+        await $.getScript("/js/repo/test_suite_tree_crud.js");
+        await $.getScript("/js/repo/test_case.js");
+
+        $(function () {
+            loadSuitesTree();
         });
-    });
-});
+
+    } catch (error) {
+        console.error("JS scripts loading error", error);
+    }
+})();
 
 /**************************************************
  * Click on test suite - load suite test cases
